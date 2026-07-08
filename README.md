@@ -7,10 +7,10 @@ It is currently in **PoC** stage.
 ## Features (PoC)
 
 - Uses Grok via the raw xAI API
-- Optional Tero-MCP integration for codebase-aware context
+- Tero-MCP integration for codebase-aware context (enabled by default)
 - Event-driven architecture (easy to extend with new interfaces)
 - Basic iterative agent loop with feedback support
-- CLI interface (TUI foundation started)
+- CLI + functional TUI
 
 ## Installation (Development)
 
@@ -30,12 +30,14 @@ pip install -e ".[tui]"
 ```bash
 export XAI_API_KEY="your-xai-key"
 
-# Basic usage
-cabal-devmelopner "Improve the public API of the compiler frontend"
+# CLI
+cabal-devmelopner "Improve the public API of the compiler frontend"   # Tero context enabled by default
 
-# With Tero context
-cabal-devmelopner "Review recent changes to the type checker" --use-tero
+# TUI
+cabal-devmelopner-tui
 ```
+
+Tero-MCP context is **enabled by default**. Use `USE_TERO=false` to disable it.
 
 ## Architecture Notes
 
