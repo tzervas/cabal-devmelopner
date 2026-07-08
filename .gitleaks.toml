@@ -1,0 +1,19 @@
+# Gitleaks configuration for cabal-devmelopner
+# https://github.com/gitleaks/gitleaks
+
+[extend]
+useDefault = true
+
+# Add any project-specific rules or allowlists below if needed
+# Example:
+# [[rules]]
+# id = "custom-rule"
+# description = "..."
+# regex = "..."
+# tags = ["key", "secret"]
+
+[allowlist]
+paths = [
+  '''.*/testdata/.*''',
+  '''.*/fixtures/.*''',
+]
