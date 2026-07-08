@@ -10,11 +10,17 @@ authors = [
 license = { text = "MIT" }
 dependencies = []
 
+[tool.uv]
+managed = true
+python-preference = "only-managed"
+default-groups = ["dev"]
+
 [project.optional-dependencies]
 tui = ["textual>=0.80.0"]
 
 [project.scripts]
 cabal-devmelopner = "cabal_devmelopner.cli:main"
+cabal-devmelopner-tui = "cabal_devmelopner.tui.app:main"
 
 [build-system]
 requires = ["hatchling"]
