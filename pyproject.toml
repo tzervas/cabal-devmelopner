@@ -15,6 +15,14 @@ managed = true
 python-preference = "only-managed"
 default-groups = ["dev"]
 
+[dependency-groups]
+dev = [
+    "ruff>=0.5.0",
+    "mypy>=1.11",
+    "pytest>=8.3",
+    "textual-dev>=0.80",
+]
+
 [project.optional-dependencies]
 tui = ["textual>=0.80.0"]
 
