@@ -31,16 +31,8 @@ class TeroMCPClient:
         token: str | None = None,
         project_path: str | Path | None = None,
     ) -> None:
-        project = Path(
-            project_path
-            or os.environ.get("TERO_MCP_PROJECT")
-            or _DEFAULT_TERO_PROJECT
-        )
-        index = Path(
-            index_path
-            or os.environ.get("TERO_INDEX_PATH")
-            or _DEFAULT_INDEX
-        )
+        project = Path(project_path or os.environ.get("TERO_MCP_PROJECT") or _DEFAULT_TERO_PROJECT)
+        index = Path(index_path or os.environ.get("TERO_INDEX_PATH") or _DEFAULT_INDEX)
         self.token = token or os.environ.get("TERO_TOKEN") or _DEFAULT_TOKEN
         self.env = {
             **os.environ,

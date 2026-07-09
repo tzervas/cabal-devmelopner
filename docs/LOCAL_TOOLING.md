@@ -126,3 +126,11 @@ Branch/in-flight detail from the 2026-07-08 audit lives in session notes (`/tmp/
 ## Per-repo Tero indices
 
 Each sibling MCP repo (and this one) commits `docs/tero-index/` for local `tero-mcp-lite`. Regenerate with `python3 ../tero-mcp/scripts/generate_lite_index.py --root $(pwd)`.
+
+## Local CI parity
+
+```bash
+./scripts/check.sh
+```
+
+See [LOCAL_CHECKS.md](LOCAL_CHECKS.md). Remote GitHub Actions are **manual only** (`workflow_dispatch`).

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 from cabal_devmelopner.core.types import Task
 
@@ -28,7 +28,9 @@ def build_prompt(
         for i, fb in enumerate(feedback, 1):
             parts.append(f"\nAttempt {i} feedback:\n{fb.strip()}")
 
-        parts.append("\nPlease fix the issues from the previous attempts and provide an improved solution.")
+        parts.append(
+            "\nPlease fix the issues from the previous attempts and provide an improved solution."
+        )
 
     parts.append("\nPlease provide a clear, well-structured response.")
 
