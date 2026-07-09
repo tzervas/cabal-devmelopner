@@ -1,8 +1,14 @@
 """Basic Tero-MCP client (PoC).
 
-Talks to `tero-mcp-lite` over stdio JSON-RPC 2.0. Defaults point at the sibling
-checkout at `../tero-mcp` and the Mycelium corpus index at
-`../mycelium/docs/tero-index/index.json` (override via env / constructor args).
+Talks to `tero-mcp-lite` over stdio JSON-RPC 2.0. 
+
+Default resolution (in priority):
+1. TERO_INDEX_PATH / explicit index_path
+2. Local repo docs/tero-index/index.json (walk up from cwd to find git root or use CWD)
+3. Sibling layout fallback (for legacy mycelium-centric use; mycelium is isolated)
+
+This makes any project with a committed docs/tero-index "ready" for cabal-devmelopner
+when you run the agent inside (or pointed at) that project tree.
 """
 
 from __future__ import annotations
@@ -13,11 +19,28 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-# Sibling layout under ~/git: cabal-devmelopner | tero-mcp | mycelium
+# Sibling layout under ~/git (legacy)
 _GIT_ROOT = Path(__file__).resolve().parents[4]
 _DEFAULT_TERO_PROJECT = _GIT_ROOT / "tero-mcp"
-_DEFAULT_INDEX = _GIT_ROOT / "mycelium" / "docs" / "tero-index" / "index.json"
+_LEGACY_MYCELIUM_INDEX = _GIT_ROOT / "mycelium" / "docs" / "tero-index" / "index.json"
 _DEFAULT_TOKEN = "local-dev"
+
+
+def _find_local_tero_index(start: Path | None = None) -> Path | None:
+    """Walk upward from start (or cwd) looking for a git repo with docs/tero-index/index.json."""
+    p = (start or Path.cwd()).resolve()
+    for _ in range(8):  # bound the walk
+        cand = p / "docs" / "tero-index" / "index.json"
+        if cand.is_file():
+            return cand
+        if (p / ".git").exists():
+            # stop at git root even if no index here
+            break
+        parent = p.parent
+        if parent == p:
+            break
+        p = parent
+    return None
 
 
 class TeroMCPClient:
@@ -32,7 +55,17 @@ class TeroMCPClient:
         project_path: str | Path | None = None,
     ) -> None:
         project = Path(project_path or os.environ.get("TERO_MCP_PROJECT") or _DEFAULT_TERO_PROJECT)
-        index = Path(index_path or os.environ.get("TERO_INDEX_PATH") or _DEFAULT_INDEX)
+        env_index = os.environ.get("TERO_INDEX_PATH")
+        explicit = Path(index_path) if index_path else None
+
+        if explicit:
+            index = explicit
+        elif env_index:
+            index = Path(env_index)
+        else:
+            local = _find_local_tero_index()
+            index = local if local else _LEGACY_MYCELIUM_INDEX
+
         self.token = token or os.environ.get("TERO_TOKEN") or _DEFAULT_TOKEN
         self.env = {
             **os.environ,

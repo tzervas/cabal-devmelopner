@@ -1,8 +1,14 @@
 # Agent notes — cabal-devmelopner
 
-## Tero (documentation / corpus context)
+## Tero (documentation / corpus context) — now dynamic over tero-rs
 
-Use **Tero** for cited lookups over the corpus index before guessing from memory or grepping the whole tree. Full project guide (including **cold-start install** when a session has no server): **[docs/TERO.md](docs/TERO.md)**.
+Use **Tero** (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query/explain/maintenance) is **dynamically discovered** at runtime via `--describe`. Python renders (loose hints + early schema validation + rich errors); Rust backend ensures strict validation + execution + Layer-2 when gated.
+
+Prefer tero before greps. Full guide: **[docs/TERO.md](docs/TERO.md)**. Categories help smart scoping (e.g. query tools for cross-repo relevant knowledge without bloat).
+
+See workspace vision for common memory (tero + context-mcp + memory-gate-rs), local llama.cpp/GPU, cross-repo scoped reuse, token optimization.
+
+**Kickoff framework**: root `.claude/kickoffs/cab.md` + `wsfull.md` owns the work here. Use fresh `/kickoff cab`. Apply partial mycelium workflow (dev-workflow, tero-first with categories, guards, wave). Local `.claude/kickoffs/README.md`.
 
 ### Prefer
 

@@ -69,13 +69,13 @@ Override any of these with environment variables (see below). Paths are resolved
 | Variable | Role | Default (when unset) |
 |----------|------|----------------------|
 | `TERO_MCP_PROJECT` | Path to the `tero-mcp` uv project | `<git-parent>/tero-mcp` |
-| `TERO_INDEX_PATH` | Path to `index.json` | `<git-parent>/mycelium/docs/tero-index/index.json` |
+| `TERO_INDEX_PATH` | Path to `index.json` | auto: nearest `docs/tero-index/index.json` walking up from cwd (or legacy mycelium) |
 | `TERO_TOKENS` | Server auth table (`token:scope` list) | `{TERO_TOKEN}:refresh` → `local-dev:refresh` |
 | `TERO_TOKEN` | Per-call bearer passed as tool arg `token` | `local-dev` |
 | `USE_TERO` | TUI only: enable Tero when `true` | `false` |
 | `XAI_API_KEY` | xAI API key for the agent (unrelated to Tero auth) | — |
 
----
+**Auto local index:** cabal-devmelopner now prefers a `docs/tero-index/index.json` found by walking up from the current working directory (stops at git root). This means any project that has run the tero generator and committed its index is immediately ready — just `cd project-with-tero-index; uv run cabal-devmelopner "..." --use-tero` (or set USE_TERO for TUI). No manual env needed for local work. Legacy mycelium fallback only if nothing local found (mycelium is isolated from this workspace coordination).
 
 ## Using Tero from cabal-devmelopner
 

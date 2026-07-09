@@ -11,17 +11,17 @@
       "file": "AGENTS.md",
       "line": 1,
       "tag": "Empirical/Declared",
-      "summary": "Use Tero for cited lookups over the corpus index before guessing from memory or grepping the whole tree. Full project guide (including cold-start install when…"
+      "summary": "Use Tero (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query…"
     },
     {
-      "anchor": "agents--tero-documentation-corpus-context",
+      "anchor": "agents--tero-documentation-corpus-context-now-dynamic-over-tero-rs",
       "family": "doc",
       "kind": "section",
-      "title": "Tero (documentation / corpus context)",
+      "title": "Tero (documentation / corpus context) — now dynamic over tero-rs",
       "file": "AGENTS.md",
       "line": 3,
       "tag": "Empirical/Declared",
-      "summary": "Use Tero for cited lookups over the corpus index before guessing from memory or grepping the whole tree. Full project guide (including cold-start install when…"
+      "summary": "Use Tero (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query…"
     },
     {
       "anchor": "agents--prefer",
@@ -29,7 +29,7 @@
       "kind": "section",
       "title": "Prefer",
       "file": "AGENTS.md",
-      "line": 7,
+      "line": 13,
       "tag": "Empirical/Declared",
       "summary": "1. textsearch / querybyid / querybykind via the tero MCP server (when registered in Grok)."
     },
@@ -39,7 +39,7 @@
       "kind": "section",
       "title": "Subagents and multi-repo excavation (required when Tero is available)",
       "file": "AGENTS.md",
-      "line": 13,
+      "line": 19,
       "tag": "Empirical/Declared",
       "summary": "Sibling-tool investigations, readiness audits, and design waves are harder if agents only ls/grep checkouts. Every agent that excavates (orchestrator and leaf…"
     },
@@ -49,7 +49,7 @@
       "kind": "section",
       "title": "Tero excavation (do this before deep filesystem greps)",
       "file": "AGENTS.md",
-      "line": 27,
+      "line": 33,
       "tag": "Empirical/Declared",
       "summary": "You have access to the tero MCP server (tools tero). Use it to excavate project"
     },
@@ -59,7 +59,7 @@
       "kind": "section",
       "title": "If this session has no `tero__*` tools",
       "file": "AGENTS.md",
-      "line": 46,
+      "line": 52,
       "tag": "Empirical/Declared",
       "summary": "Sessions only pick up MCP servers registered before launch (or after /mcps → r). Quick path:"
     },
@@ -69,7 +69,7 @@
       "kind": "other",
       "title": "1) One-time: sibling package + index (adjust GIT_PARENT)",
       "file": "AGENTS.md",
-      "line": 51,
+      "line": 57,
       "tag": "Empirical/Declared",
       "summary": "export GITPARENT=\"${GITPARENT:-$HOME/git}\""
     },
@@ -79,7 +79,7 @@
       "kind": "other",
       "title": "2) Register (user scope → ~/.grok/config.toml)",
       "file": "AGENTS.md",
-      "line": 56,
+      "line": 62,
       "tag": "Empirical/Declared",
       "summary": "grok mcp add tero \\"
     },
@@ -89,7 +89,7 @@
       "kind": "other",
       "title": "3) Verify, then new session (or /mcps → r if already inside TUI)",
       "file": "AGENTS.md",
-      "line": 63,
+      "line": 69,
       "tag": "Empirical/Declared",
       "summary": "grok mcp doctor tero   # handshake OK, 9 tools"
     },
@@ -99,7 +99,7 @@
       "kind": "section",
       "title": "Grok MCP (when available)",
       "file": "AGENTS.md",
-      "line": 69,
+      "line": 75,
       "tag": "Empirical/Declared",
       "summary": "- Server name: tero → tools namespaced tero…"
     },
@@ -109,7 +109,7 @@
       "kind": "section",
       "title": "This repo’s agent CLI/TUI",
       "file": "AGENTS.md",
-      "line": 94,
+      "line": 100,
       "tag": "Empirical/Declared",
       "summary": "Independent of Grok MCP registration:"
     },
@@ -1099,7 +1099,8 @@
       "title": "Environment variables",
       "file": "docs/TERO.md",
       "line": 67,
-      "tag": "Empirical/Declared"
+      "tag": "Empirical/Declared",
+      "summary": "Auto local index: cabal-devmelopner now prefers a docs/tero-index/index.json found by walking up from the current working directory (stops at git root). This m…"
     },
     {
       "anchor": "tero--using-tero-from-cabal-devmelopner",
