@@ -54,7 +54,7 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 | **PROD-3** | Agent swarm / wave execution |
 | **PROD-4** | Security-wrapped tools |
 | **PROD-5** | Resource management |
-| **PROD-6** | True RAG / embeddings (beyond Layer-1 index) |
+| **PROD-6** | True RAG / embeddings — prefer **context-mcp efficient legitimate RAG** (once shipped) and/or Tero L2; never pseudo-embed path |
 
 ---
 
