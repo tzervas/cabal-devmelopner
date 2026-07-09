@@ -35,7 +35,7 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 
 | ID | GH | Title | Description | Acceptance |
 |----|-----|--------|-------------|------------|
-| **MVP-1** | [#8](https://github.com/tzervas/cabal-devmelopner/issues/8) | Minimal tool use | Read file, list dir, run tests | Tool loop + TOOL_CALL / TOOL_RESULT events |
+| **MVP-1** | [#8](https://github.com/tzervas/cabal-devmelopner/issues/8) | Minimal tool use | Read file, list dir, run tests | Tool loop + TOOL_CALL / TOOL_RESULT events (started chore/mvp1-tools-start: host+loop+tests; see appended status) |
 | **MVP-2** | — | Config system | Model, iterations, Tero paths, workspace | Documented precedence (file / env / flags) |
 | **MVP-3** | — | Runtime dependencies | `dependencies = []` | Core + optional extras correct for install story |
 | **MVP-4** | [#7](https://github.com/tzervas/cabal-devmelopner/issues/7) | CI: pytest | Only gitleaks today | `uv run pytest` on PR to `dev`/`main` |
@@ -75,6 +75,15 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 
 - Implementing the fixes above
 - Changing runtime behavior (except via future code PRs)
+
+## MVP-1 minimal tools started (chore/mvp1-tools-start appended 2026-07-09)
+- Per plan.md p2 (cabal-poc-mvp): B1 tool host v0 (read/list/run + TOOL_* via EventBus) + B2 loop (model propose/execute/re-prompt) + tero/W2 integrate.
+- Landed minimal: core/tools.py impl + parse, agent wiring (opt-in --use-tools), cli flag+handlers, prompt tool instr, basic tests (parse/host/agent-loop).
+- Still MVP start: no config, limited safety/allow, single tool per turn, no B4 verify yet (iteration remains single-shot until B2+B4).
+- Tero-first (script "MVP-1|tool|read_file" + MCP), append-only, branch from main, hygiene + update-tero post.
+- Marks MVP-1 in progress (see ROADMAP Wave B, PHASE MVP).
+- Cross-cites: plan.md cabal section, roadmap--wave-b..., phase--mvp..., agents (this), wsfull-wave-2026-07-09-compact.md.
+- Tero cite expected post update-tero: openissues--mvp-1... + chore/mvp1...
 
 ## Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2)
 - POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now `cabal-devmelopner-tui` has main(); TUI imports/uses core.types.Task).

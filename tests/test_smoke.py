@@ -2,6 +2,7 @@
 
 from cabal_devmelopner.core.agent import SimpleAgent
 from cabal_devmelopner.core.events import EventBus, EventType
+from cabal_devmelopner.core.tools import ToolHost, parse_tool_call
 from cabal_devmelopner.core.types import Task
 from cabal_devmelopner.providers.base import Provider
 
@@ -128,3 +129,94 @@ def test_provider_error_emits_and_refusal():
     assert "Provider error" in str(errs[0].get("error", ""))
     assert resp.kind == "refusal"
     assert "Provider failed" in resp.answer
+
+
+# --- MVP-1 tools tests (B1/B2 start) ---
+
+
+def test_parse_tool_call_basic():
+    """MVP-1: parser recognizes the call tool ... with ... is ... format."""
+    tc = parse_tool_call("call tool read_file with path is src/cabal_devmelopner/core/agent.py")
+    assert tc is not None
+    assert tc.name == "read_file"
+    assert tc.args.get("path") == "src/cabal_devmelopner/core/agent.py"
+
+    tc2 = parse_tool_call("call tool list_dir with path is .")
+    assert tc2 and tc2.name == "list_dir"
+
+    tc3 = parse_tool_call("I will call tool run_command with command is python -m pytest -q")
+    assert tc3 and tc3.name == "run_command"
+
+
+def test_tool_host_read_list_local(tmp_path, monkeypatch):
+    """MVP-1: ToolHost confined to root, emits events, read/list work on real files."""
+    bus = EventBus()
+    calls = []
+    results = []
+    bus.subscribe(EventType.TOOL_CALL, lambda e: calls.append(e.payload))
+    bus.subscribe(EventType.TOOL_RESULT, lambda e: results.append(e.payload))
+
+    # write a temp file under tmp as workspace
+    f = tmp_path / "README.md"
+    f.write_text("hello tools\nline2")
+    host = ToolHost(event_bus=bus, workspace_root=str(tmp_path))
+
+    out = host.read_file("README.md")
+    assert "hello tools" in out
+    assert len(calls) >= 1 and calls[-1]["name"] == "read_file"
+    assert len(results) >= 1 and results[-1]["success"] is True
+
+    outd = host.list_dir(".")
+    assert "f/README.md" in outd or "README.md" in outd  # our format has f/
+    assert any(r["name"] == "list_dir" for r in results)
+
+
+def test_tool_host_run_allowlisted_and_blocks():
+    """MVP-1: run_command allowlist + blocks unsafe; emits."""
+    bus = EventBus()
+    host = ToolHost(event_bus=bus, workspace_root=".")
+    res = host.run_command("echo MVP-1-safe")
+    assert "MVP-1-safe" in res
+    bad = host.run_command("rm -rf /")
+    assert "not in allowlist" in bad or "unsafe" in bad
+
+
+class ToolUsingMockProvider(Provider):
+    """Mock that returns a tool call first, then a final answer on 2nd call."""
+
+    def __init__(self):
+        self.call_count = 0
+
+    def complete(self, prompt: str, **kwargs):
+        self.call_count += 1
+        if self.call_count == 1:
+            return "call tool list_dir with path is ."
+        return "Final answer after tool: done."
+
+    def name(self):
+        return "ToolMock"
+
+
+def test_agent_tools_loop_emits_and_reprompts():
+    """MVP-1 basic: agent with tools_enabled parses, executes via host, emits TOOL_*, re-prompts, returns final."""
+    bus = EventBus()
+    tool_calls = []
+    tool_results = []
+    bus.subscribe(EventType.TOOL_CALL, lambda e: tool_calls.append(e.payload.get("name")))
+    bus.subscribe(EventType.TOOL_RESULT, lambda e: tool_results.append(e.payload.get("name")))
+
+    provider = ToolUsingMockProvider()
+    agent = SimpleAgent(
+        provider=provider,
+        event_bus=bus,
+        tools_enabled=True,
+        workspace_root=".",
+    )
+    task = Task(id="tool-1", description="list files then conclude", max_iterations=3)
+    resp = agent.run_structured(task)
+
+    assert provider.call_count >= 2  # tool + final
+    assert "list_dir" in tool_calls
+    assert "list_dir" in tool_results
+    assert resp.kind == "answer"
+    assert "done" in resp.answer or "Final" in resp.answer
