@@ -122,3 +122,7 @@ Branch/in-flight detail from the 2026-07-08 audit lives in session notes (`/tmp/
 - [TERO.md](TERO.md) — Tero L1 vs everything else  
 - [AGENTS.md](../AGENTS.md) — subagent Tero excavation checklist  
 - DN-87 honesty: never claim improved-on-RAG without Empirical measurement (mycelium corpus)
+
+## Per-repo Tero indices
+
+Each sibling MCP repo (and this one) commits `docs/tero-index/` for local `tero-mcp-lite`. Regenerate with `python3 ../tero-mcp/scripts/generate_lite_index.py --root $(pwd)`.
