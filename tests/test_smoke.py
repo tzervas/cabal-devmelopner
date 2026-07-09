@@ -1,9 +1,5 @@
 """Basic smoke tests for cabal-devmelopner PoC."""
 
-from unittest.mock import MagicMock, patch
-
-import pytest
-
 from cabal_devmelopner.core.agent import SimpleAgent
 from cabal_devmelopner.core.types import Task
 from cabal_devmelopner.providers.base import Provider

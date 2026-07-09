@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Any
-
 from cabal_devmelopner.core.events import EventBus
 from cabal_devmelopner.core.prompt import build_prompt
 from cabal_devmelopner.core.types import EventType, Task
