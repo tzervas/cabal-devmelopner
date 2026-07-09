@@ -19,10 +19,12 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from cabal_devmelopner.core.schemas import Citation, StructuredResponse
+
 # Sibling layout under ~/git (legacy)
 _GIT_ROOT = Path(__file__).resolve().parents[4]
 _DEFAULT_TERO_PROJECT = _GIT_ROOT / "tero-mcp"
-_LEGACY_MYCELIUM_INDEX = _GIT_ROOT / "mycelium" / "docs" / "tero-index" / "index.json"
+_LEGACY_MYCELIUM_INDEX = _GIT_ROOT / "isolated" / "mycelium" / "docs" / "tero-index" / "index.json"
 _DEFAULT_TOKEN = "local-dev"
 
 
@@ -161,3 +163,43 @@ class TeroMCPClient:
 
     def identify(self) -> dict[str, Any]:
         return self.call_tool("identify", {})
+
+    def text_search_structured(self, query: str, limit: int = 10) -> StructuredResponse:
+        """StructuredResponse wrapper over text_search.
+
+        Returns kind=answer (or refusal) with citations populated from tero.
+        lang_refs / extended left for higher facade (mint) to fill for lang-docs + RAG.
+        This is the schematized path used by agent orchestration for efficiency.
+        """
+        raw = self.text_search(query, limit=limit)
+        if raw.get("kind") == "refusal" or "error" in raw:
+            msg = raw.get("message") or raw.get("error") or "no citable results"
+            return StructuredResponse.refusal(str(msg), extended={"raw": raw})
+
+        items = raw.get("items") or []
+        cits: list[Citation] = []
+        for r in items:
+            cits.append(
+                Citation(
+                    id=r.get("id") or r.get("anchor") or "unknown",
+                    anchor=r.get("anchor"),
+                    file=r.get("file"),
+                    line=r.get("line"),
+                    title=r.get("title"),
+                    summary=r.get("summary"),
+                    source="tero",
+                )
+            )
+
+        answer_text = "\n".join(
+            f"[{c.id}] {c.title or ''}: {c.summary or ''} ({c.file or ''}:{c.line or ''})"
+            for c in cits[:3]
+        ) or "See citations."
+
+        return StructuredResponse(
+            kind="answer",
+            answer=answer_text,
+            citations=cits,
+            explain=raw.get("explain"),
+            extended={"raw": raw},
+        )

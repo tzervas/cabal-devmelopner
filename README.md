@@ -60,13 +60,12 @@ Full setup (env vars, **cold-start Grok MCP install** when a session lacks `tero
 ## Running
 
 ```bash
-export XAI_API_KEY="your-xai-key"
+# Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas)
+uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b
 
-# CLI
-uv run cabal-devmelopner "Improve the public API of the compiler frontend"
-
-# CLI with Tero context
-uv run cabal-devmelopner "Improve the public API of the compiler frontend" --use-tero
+# Frontier explicit
+export XAI_API_KEY=...
+uv run cabal-devmelopner "High-level orch review" --provider xai --model grok-4.5 --use-tero
 
 # TUI (intended entrypoint — currently fails until POC-1 lands)
 uv run cabal-devmelopner-tui

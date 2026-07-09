@@ -321,27 +321,27 @@
       "file": "README.md",
       "line": 60,
       "tag": "Empirical/Declared",
-      "summary": "export XAIAPIKEY=\"your-xai-key\""
+      "summary": "uv run cabal-devmelopner \"Refactor using memory-gate + tero\" --use-tero --local-model qwen2.5-coder:7b"
     },
     {
-      "anchor": "readme--cli",
+      "anchor": "readme--local-self-hosted-default-gpu-on-5080-full-pipeline-with-tero-w2-schemas",
       "family": "doc",
       "kind": "other",
-      "title": "CLI",
+      "title": "Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas)",
       "file": "README.md",
-      "line": 65,
+      "line": 63,
       "tag": "Empirical/Declared",
-      "summary": "uv run cabal-devmelopner \"Improve the public API of the compiler frontend\""
+      "summary": "uv run cabal-devmelopner \"Refactor using memory-gate + tero\" --use-tero --local-model qwen2.5-coder:7b"
     },
     {
-      "anchor": "readme--cli-with-tero-context",
+      "anchor": "readme--frontier-explicit",
       "family": "doc",
       "kind": "other",
-      "title": "CLI with Tero context",
+      "title": "Frontier explicit",
       "file": "README.md",
-      "line": 68,
+      "line": 66,
       "tag": "Empirical/Declared",
-      "summary": "uv run cabal-devmelopner \"Improve the public API of the compiler frontend\" --use-tero"
+      "summary": "export XAIAPIKEY=..."
     },
     {
       "anchor": "readme--tui-intended-entrypoint-currently-fails-until-poc-1-lands",
@@ -349,7 +349,7 @@
       "kind": "other",
       "title": "TUI (intended entrypoint — currently fails until POC-1 lands)",
       "file": "README.md",
-      "line": 71,
+      "line": 70,
       "tag": "Empirical/Declared",
       "id": "POC-1",
       "summary": "uv run cabal-devmelopner-tui"
@@ -360,7 +360,7 @@
       "kind": "other",
       "title": "TUI with Tero (once entrypoint is fixed)",
       "file": "README.md",
-      "line": 74,
+      "line": 73,
       "tag": "Empirical/Declared",
       "summary": "USETERO=true uv run cabal-devmelopner-tui"
     },
@@ -370,7 +370,7 @@
       "kind": "section",
       "title": "Architecture Notes",
       "file": "README.md",
-      "line": 83,
+      "line": 82,
       "tag": "Empirical/Declared",
       "summary": "- EventBus: Central communication mechanism (producer/consumer model)"
     },
@@ -380,7 +380,7 @@
       "kind": "section",
       "title": "Documentation",
       "file": "README.md",
-      "line": 90,
+      "line": 89,
       "tag": "Empirical/Declared"
     },
     {
@@ -389,7 +389,7 @@
       "kind": "section",
       "title": "Development Phases",
       "file": "README.md",
-      "line": 102,
+      "line": 101,
       "tag": "Empirical/Declared",
       "summary": "See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed."
     },
@@ -399,7 +399,7 @@
       "kind": "section",
       "title": "License",
       "file": "README.md",
-      "line": 106,
+      "line": 105,
       "tag": "Empirical/Declared",
       "summary": "MIT"
     },

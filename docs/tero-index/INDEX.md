@@ -44,15 +44,15 @@
 | `readme--2.-clone-and-enter-the-repo` | other | — | 2. Clone and enter the repo | `README.md:35` | — | cd cabal-devmelopner |
 | `readme--3.-sync-environment` | other | — | 3. Sync environment | `README.md:38` | — | uv sync --all-extras |
 | `readme--tero-optional-for-corpus-context` | section | — | Tero (optional, for corpus context) | `README.md:42` | — | Tero is opt-in. Defaults expect sibling checkouts next to this repo: |
-| `readme--running` | section | — | Running | `README.md:60` | — | export XAIAPIKEY="your-xai-key" |
-| `readme--cli` | other | — | CLI | `README.md:65` | — | uv run cabal-devmelopner "Improve the public API of the compiler frontend" |
-| `readme--cli-with-tero-context` | other | — | CLI with Tero context | `README.md:68` | — | uv run cabal-devmelopner "Improve the public API of the compiler frontend" --use-tero |
-| `readme--tui-intended-entrypoint-currently-fails-until-poc-1-lands` | other | POC-1 | TUI (intended entrypoint — currently fails until POC-1 lands) | `README.md:71` | — | uv run cabal-devmelopner-tui |
-| `readme--tui-with-tero-once-entrypoint-is-fixed` | other | — | TUI with Tero (once entrypoint is fixed) | `README.md:74` | — | USETERO=true uv run cabal-devmelopner-tui |
-| `readme--architecture-notes` | section | — | Architecture Notes | `README.md:83` | — | - EventBus: Central communication mechanism (producer/consumer model) |
-| `readme--documentation` | section | — | Documentation | `README.md:90` | — | — |
-| `readme--development-phases` | section | — | Development Phases | `README.md:102` | — | See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed. |
-| `readme--license` | section | — | License | `README.md:106` | — | MIT |
+| `readme--running` | section | — | Running | `README.md:60` | — | uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b |
+| `readme--local-self-hosted-default-gpu-on-5080-full-pipeline-with-tero-w2-schemas` | other | — | Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas) | `README.md:63` | — | uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b |
+| `readme--frontier-explicit` | other | — | Frontier explicit | `README.md:66` | — | export XAIAPIKEY=... |
+| `readme--tui-intended-entrypoint-currently-fails-until-poc-1-lands` | other | POC-1 | TUI (intended entrypoint — currently fails until POC-1 lands) | `README.md:70` | — | uv run cabal-devmelopner-tui |
+| `readme--tui-with-tero-once-entrypoint-is-fixed` | other | — | TUI with Tero (once entrypoint is fixed) | `README.md:73` | — | USETERO=true uv run cabal-devmelopner-tui |
+| `readme--architecture-notes` | section | — | Architecture Notes | `README.md:82` | — | - EventBus: Central communication mechanism (producer/consumer model) |
+| `readme--documentation` | section | — | Documentation | `README.md:89` | — | — |
+| `readme--development-phases` | section | — | Development Phases | `README.md:101` | — | See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed. |
+| `readme--license` | section | — | License | `README.md:105` | — | MIT |
 | `intentandgapanalysis` | section | — | Intent and Gap Analysis | `docs/INTENT_AND_GAP_ANALYSIS.md:1` | Living document — update when PoC exit criteria or architecture change. | Baseline: dev (includes Tero docs/client commit 32d30d3) |
 | `intentandgapanalysis--1.-stated-intent` | section | — | 1. Stated intent | `docs/INTENT_AND_GAP_ANALYSIS.md:11` | — | Core principles: repo-agnostic · extensible communications · strong Tero integration · clean architecture. |
 | `intentandgapanalysis--2.-current-implementation-snapshot` | section | — | 2. Current implementation (snapshot) | `docs/INTENT_AND_GAP_ANALYSIS.md:24` | — | Approximate application size: ~550+ LOC under src/cabaldevmelopner/. |

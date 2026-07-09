@@ -325,6 +325,7 @@ print(r.get('kind'), len(r.get('items') or []))
 - [x] `TeroMCPClient` one-shot stdio client with token + envelope unwrap
 - [x] Agent injects `text_search` hits into the prompt when enabled
 - [x] CLI `--use-tero` and TUI `USE_TERO=true`
+- [x] Structured Prompt/Response schemas (core/schemas.py) + text_search_structured + run_structured (enables lang_refs, orchestration optionals, clean tero memory for dual-index + agent layers)
 - [ ] Long-lived MCP session (shared process, tool discovery framework)
 - [ ] Configurable index per-repo without sibling layout assumptions
 - [ ] Layer-2 / embeddings / RAG (Production roadmap — see `PHASE.md`)
