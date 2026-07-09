@@ -178,3 +178,25 @@ All per AGENTS, wsfull-wave-2026-07-09-compact.md, dev-workflow. Tero cite: agen
 - Follows exactly: AGENTS (Tero excavation block, prefer tero before greps, subagent rules, dev-workflow, guards, append-only, update this+tero+kickoffs), hygiene, C0/M1 honesty. No overclaim.
 - Tero cite: agents--poc6-iteration... + plan refs. Post: re-run update-tero + text_search "POC-6".
 
+### MVP-1 minimal tools start (chore/mvp1-tools-start appended 2026-07-09)
+- Task: start MVP-1 per plan.md p2 cabal-poc-mvp (parallel to w2): B1 tool host v0 (read_file/list_dir/run_command allowlisted + TOOL_* events), B2 loop (model propose/execute/re-prompt limited), integrate tero/W2.
+- Tero-first (script + MCP): /root/git/scripts/tero.sh cabal-devmelopner text_search "MVP-1|tool|read_file" (refusals pre + hits on mvp/tool sections in docs); tero__identify, tero__text_search "MVP-1 tools B1..." (workspacecabal... + roadmap mvp + phase mvp + openissues p2); repeated before branch/edits/greps.
+- Read (after tero): plan.md (cabal MVP B1/B2), agent.py/event.py/types.py/schemas.py (W2 StructuredResponse + pre-existing TOOL_*), test_smoke.py, cli.py, prompt.py, ROADMAP/OPEN_ISSUES/PHASE/AGENTS.
+- Branch: git checkout -b chore/mvp1-tools-start (from main, per task; guard respected).
+- Impl (minimal):
+  - New: core/tools.py (ToolHost, parse_tool_call, safe read/list/run_command w/ allowlist, emit TOOL_CALL/RESULT, get_descriptions, confine to workspace_root).
+  - agent.py: import, __init__ (tools_enabled, ToolHost), run_structured loop (parse after gen, exec+feedback+continue for re-prompt if tool; compat !tools path + early return preserved; W2/tero unchanged).
+  - prompt.py: always-inject tool format/desc (MVP start) so model can propose; StructuredPrompt used.
+  - cli.py: --use-tools flag, subscribe TOOL_* (print), pass to agent + workspace_root="".
+  - tests: parse, host (tmp+allow), agent tools loop (mock tool-then-final, asserts events + multi-call + final resp).
+- Docs (append-only + targeted): ROADMAP (new MVP-1 section + B table context), OPEN_ISSUES (MVP-1 row + new status append), PHASE (MVP bullet + append), AGENTS (this).
+- Hygiene: will run scripts/check.sh (ruff/pytest), update-tero.sh cabal-devmelopner.
+- Land: commit -S, PR if, --no-ff to dev then main, propagate pulls, reindex tero.
+- Verify per task: cabal --use-tools runs (emits, acts on read/list), tero hits post, tests green (incl new).
+- Follows: AGENTS (Tero excavation block in this, prefer tero, dev-workflow, guards, append-only, update this+tero+kickoffs after), C0 (events never silent), M1/W2 (Structured + facade untouched).
+- Cross-cites: plan.md, roadmap--wave-b-minimum..., openissues--mvp-1..., phase--mvp..., workspacecabalteroreadiness (prior), wsfull-wave-2026-07-09-compact.md, prior agents--poc6...
+- Tero cite: agents--mvp1-tools-start-2026-07-09 (post update-tero.sh).
+- Note: this starts MVP-1 (parallel w2); POC-6 still single-shot honest until B4 verify. No overclaim on full iter.
+
+Follow AGENTS exactly on future changes.
+

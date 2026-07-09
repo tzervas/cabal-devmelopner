@@ -16,6 +16,7 @@ from collections.abc import Sequence
 from typing import Any
 
 from cabal_devmelopner.core.schemas import MemoryContext, StructuredPrompt
+from cabal_devmelopner.core.tools import get_tool_descriptions
 from cabal_devmelopner.core.types import Task
 
 SYSTEM_PROMPT = """You are an expert software engineering agent in a sophisticated multi-repo workspace.
@@ -79,8 +80,9 @@ def build_structured_prompt(
             )
         )
 
+    system = SYSTEM_PROMPT.strip() + "\n\n" + get_tool_descriptions()
     return StructuredPrompt(
-        system=SYSTEM_PROMPT.strip(),
+        system=system,
         task=task.description.strip(),
         memory_contexts=contexts,
         feedback=list(feedback or []),

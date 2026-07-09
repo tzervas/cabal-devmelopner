@@ -67,7 +67,7 @@ See compact, readiness, PR for details. Update docs + tero before land.
 - Improved agent loop with real verification/feedback
 - Basic support for running as a long-lived process
 - Packaging and easy installation (`uv tool install`)
-- Minimal tool use so the agent can act on a codebase (see MVP-1)
+- Minimal tool use so the agent can act on a codebase (see MVP-1; started in chore/mvp1-tools-start: read_file/list_dir/run_command allowlisted + loop + TOOL_* events + --use-tools)
 
 ### Exit Criteria
 
@@ -107,6 +107,16 @@ See compact, readiness, PR for details. Update docs + tero before land.
 - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture.
 - Security and resource management concerns should be considered from MVP onward, even if full implementation lands in Production.
 - Prefer updating checkboxes here when code lands; keep narrative detail in the intent/gap analysis.
+
+## MVP-1 tools start (appended 2026-07-09, chore/mvp1-tools-start per plan.md p2)
+- Started B1 (tool host v0 in core/tools.py: read/list/run allowlisted, emit TOOL_*) + B2 (agent loop detect/execute/feedback re-prompt).
+- Wired --use-tools (cli), tool instr in prompts (with tero/W2), basic tests, events visible.
+- Agent still single-shot when !tools (honest); full iter feedback + verify deferred (B4).
+- Followed: Tero-first (script + mcp identify/search), append-only, branch from main, dev-workflow/guards.
+- Update-tero + hygiene after; land --no-ff dev/main + propagate.
+- Cites: plan.md (B1/B2 + integrate tero/W2), ROADMAP Wave B, OPEN_ISSUES MVP-1, AGENTS.md, wsfull-wave-2026-07-09-compact.md.
+- Status: MVP-1 minimal tools in progress (functional core); see ROADMAP for B3+.
+- Tero cite post: phase--mvp-1-tools-start... + openissues etc.
 
 ### Appended: W2 + C0 fix for PR#12 (2026-07-09)
 - W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green).
