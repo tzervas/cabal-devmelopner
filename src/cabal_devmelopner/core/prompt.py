@@ -32,6 +32,7 @@ Core capabilities (use them intelligently, scoped to relevance):
 Always cite sources, minimize tokens, scope context, prefer local efficient paths. Emit parseable citations + optional orchestration hints when relevant.
 """
 
+
 def build_prompt(
     task: Task,
     feedback: Sequence[str] | None = None,

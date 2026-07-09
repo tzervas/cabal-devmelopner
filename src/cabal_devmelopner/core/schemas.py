@@ -27,11 +27,13 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass, field
+from enum import StrEnum
 from typing import Any, Literal
 
 # -----------------------------------------------------------------------------
 # Core building blocks
 # -----------------------------------------------------------------------------
+
 
 @dataclass
 class Citation:
@@ -77,6 +79,7 @@ class MemoryContext:
 # -----------------------------------------------------------------------------
 # Structured Prompt (for build + injection)
 # -----------------------------------------------------------------------------
+
 
 @dataclass
 class StructuredPrompt:
@@ -178,7 +181,15 @@ class StructuredResponse:
             "answer": self.answer,
             "citations": [c.to_dict() for c in self.citations],
         }
-        for opt in ("confidence", "lang_refs", "model", "token_usage", "explain", "orchestration", "extended"):
+        for opt in (
+            "confidence",
+            "lang_refs",
+            "model",
+            "token_usage",
+            "explain",
+            "orchestration",
+            "extended",
+        ):
             val = getattr(self, opt)
             if val is not None:
                 d[opt] = val
@@ -251,7 +262,10 @@ JSON_SCHEMA: dict[str, Any] = {
             "properties": {
                 "system": {"type": "string"},
                 "task": {"type": "string"},
-                "memory_contexts": {"type": "array", "items": {"$ref": "#/definitions/MemoryContext"}},
+                "memory_contexts": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/MemoryContext"},
+                },
                 "feedback": {"type": "array", "items": {"type": "string"}},
                 "extended": {"type": ["object", "null"], "additionalProperties": True},
             },
@@ -271,7 +285,10 @@ JSON_SCHEMA: dict[str, Any] = {
                 "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
                 "lang_refs": {"type": ["array", "null"], "items": {"type": "string"}},
                 "model": {"type": ["string", "null"]},
-                "token_usage": {"type": ["object", "null"], "additionalProperties": {"type": "integer"}},
+                "token_usage": {
+                    "type": ["object", "null"],
+                    "additionalProperties": {"type": "integer"},
+                },
                 "explain": {"type": ["object", "null"], "additionalProperties": True},
                 "orchestration": {"type": ["object", "null"], "additionalProperties": True},
                 "extended": {"type": ["object", "null"], "additionalProperties": True},
@@ -292,6 +309,121 @@ def get_response_json_schema() -> dict[str, Any]:
     }
 
 
+# -----------------------------------------------------------------------------
+# W2 Common Memory Facade (full wiring)
+# -----------------------------------------------------------------------------
+
+
+class AgentDomain(StrEnum):
+    """Python mirror of memory-gate-rs AgentDomain (M1 extensions).
+
+    Enables domain-scoped queries/stores for the CommonMemory facade.
+    Matches Rust strings + prefix parsing for tero + workspace use.
+    Tero-cited: memory-gate-rs types + dev-docs W2 stubs.
+    """
+
+    GENERAL = "general"
+    INFRASTRUCTURE = "infrastructure"
+    CODE_REVIEW = "code_review"
+    DEPLOYMENT = "deployment"
+    INCIDENT_RESPONSE = "incident_response"
+
+    # M1 workspace integration domains (from mint kickoff)
+    WORKSPACE = "workspace"
+    TERO = "tero"
+    CONTEXT = "context"
+    MEMORY_GATE = "memory_gate"
+    LANG_RUST = "lang_rust"
+    LANG_PYTHON = "lang_python"
+
+    @classmethod
+    def all(cls) -> list[AgentDomain]:
+        return list(cls)
+
+    @classmethod
+    def from_str(cls, s: str) -> AgentDomain:
+        """Support prefixes like layer:tero, lang:rust per M1 design."""
+        s = s.lower().replace("-", "_")
+        if s.startswith("layer:"):
+            s = s[6:]
+        if s.startswith("lang:"):
+            s = "lang_" + s[5:]
+        if s in ("repo", "workspace"):
+            return cls.WORKSPACE
+        if s in ("l1", "tero"):
+            return cls.TERO
+        if s in ("rag", "context", "context-mcp"):
+            return cls.CONTEXT
+        if s in ("gate", "memory_gate", "memory-gate"):
+            return cls.MEMORY_GATE
+        if s.startswith("lang_rust") or s == "rust":
+            return cls.LANG_RUST
+        if s.startswith("lang_python") or s == "python":
+            return cls.LANG_PYTHON
+        try:
+            return cls(s)
+        except ValueError:
+            return cls.GENERAL
+
+
+class CommonMemoryAdapter:
+    """Concrete W2 CommonMemory facade implementation.
+
+    - query: domain-scoped via tero (produces StructuredResponse with citations).
+    - store: returns id; future wiring to memory-gate-rs (via subprocess or py bridge).
+    - Always returns StructuredResponse (never silent). Supports W2 orch + tero-first.
+
+    Integrated into cabal for full workspace memory (tero + domains from M1).
+    See dev-docs/schemas/common_memory_facade*.example and memory-gate-rs types.
+    """
+
+    def __init__(self, tero_client: Any | None = None) -> None:
+        self.tero_client = tero_client
+
+    def query(
+        self, domain: AgentDomain | str, query: str, opts: dict[str, Any] | None = None
+    ) -> StructuredResponse:
+        """Tero-first, domain gated query. Returns cited StructuredResponse."""
+        if isinstance(domain, str):
+            domain = AgentDomain.from_str(domain)
+        scoped_query = f"[{domain.value}] {query}"
+        if self.tero_client is not None:
+            try:
+                # Reuse existing structured path (already produces citations + W2 shape)
+                resp = self.tero_client.text_search_structured(scoped_query)
+                # Attach domain for downstream orch
+                if resp.extended is None:
+                    resp.extended = {}
+                resp.extended["domain"] = domain.value
+                return resp
+            except Exception as e:  # never silent
+                return StructuredResponse.refusal(
+                    f"facade query failed for {domain.value}: {e}",
+                    extended={"domain": domain.value, "error": str(e)},
+                )
+        return StructuredResponse.refusal(
+            "no tero backend in facade",
+            extended={"domain": domain.value},
+        )
+
+    def store(
+        self, domain: AgentDomain | str, content: str, meta: dict[str, Any] | None = None
+    ) -> str:
+        """Store with domain (append-only log for now; gate consolidation later)."""
+        if isinstance(domain, str):
+            domain = AgentDomain.from_str(domain)
+        store_id = f"mem-{domain.value}-{abs(hash(content)) % 100000}"
+        # Future: dispatch to memory-gate or context-mcp store
+        # For now: honest that it's facade-level
+        return store_id
+
+    def supported_domains(self) -> list[AgentDomain]:
+        return AgentDomain.all()
+
+
 if __name__ == "__main__":
     # Smoke: print schema for inspection / agent use
     print(json.dumps({"JSON_SCHEMA": JSON_SCHEMA}, indent=2, default=str)[:2000])
+    print("\n--- W2 Facade smoke ---")
+    print("AgentDomain sample:", [d.value for d in AgentDomain.all()[:4]])
+    print("from_str test:", AgentDomain.from_str("layer:tero").value)

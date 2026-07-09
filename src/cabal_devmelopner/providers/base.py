@@ -78,9 +78,7 @@ class LocalOllamaProvider(Provider):
             payload["format"] = "json"
 
         data = json.dumps(payload).encode()
-        req = urllib.request.Request(
-            url, data=data, headers={"Content-Type": "application/json"}
-        )
+        req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
 
         try:
             with urllib.request.urlopen(req, timeout=300) as resp:  # local can be slower

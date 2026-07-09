@@ -22,13 +22,42 @@ def main() -> None:
         epilog="Example: cabal-devmelopner 'Improve error handling in the compiler' --use-tero",
     )
     parser.add_argument("task", nargs="?", help="Task description")
-    parser.add_argument("--model", default=None, help="Model name (xai default: grok-4.5; local default from --local-model)")
-    parser.add_argument("--provider", choices=["xai", "local-ollama"], default="local-ollama", help="Provider: local-ollama (default, self-hosted GPU) or xai")
-    parser.add_argument("--local-model", default="llama3.2", help="Model for local-ollama (e.g. qwen2.5:7b, deepseek-coder:6.7b, llama3.1). Ensure pulled in Ollama.")
-    parser.add_argument("--temperature", type=float, default=0.2, help="Sampling temp (lower for coding/reliable)")
-    parser.add_argument("--max-tokens", type=int, default=2048, help="Max completion tokens (keep modest for local context)")
-    parser.add_argument("--use-tero", action="store_true", help="Enable Tero-MCP context retrieval (dynamic Rust surface + citations)")
-    parser.add_argument("--structured", action="store_true", default=True, help="Use StructuredResponse path (W2 schemas, citations, orchestration hints)")
+    parser.add_argument(
+        "--model",
+        default=None,
+        help="Model name (xai default: grok-4.5; local default from --local-model)",
+    )
+    parser.add_argument(
+        "--provider",
+        choices=["xai", "local-ollama"],
+        default="local-ollama",
+        help="Provider: local-ollama (default, self-hosted GPU) or xai",
+    )
+    parser.add_argument(
+        "--local-model",
+        default="llama3.2",
+        help="Model for local-ollama (e.g. qwen2.5:7b, deepseek-coder:6.7b, llama3.1). Ensure pulled in Ollama.",
+    )
+    parser.add_argument(
+        "--temperature", type=float, default=0.2, help="Sampling temp (lower for coding/reliable)"
+    )
+    parser.add_argument(
+        "--max-tokens",
+        type=int,
+        default=2048,
+        help="Max completion tokens (keep modest for local context)",
+    )
+    parser.add_argument(
+        "--use-tero",
+        action="store_true",
+        help="Enable Tero-MCP context retrieval (dynamic Rust surface + citations)",
+    )
+    parser.add_argument(
+        "--structured",
+        action="store_true",
+        default=True,
+        help="Use StructuredResponse path (W2 schemas, citations, orchestration hints)",
+    )
     args = parser.parse_args()
 
     if not args.task:
@@ -51,7 +80,9 @@ def main() -> None:
             temperature=args.temperature,
             max_tokens=args.max_tokens,
         )
-        print(f"Using LOCAL self-hosted provider: {provider.name()} on GPU (RTX 5080+). Ollama server must be up (http://localhost:11434). Prefer for leaves/efficient work.")
+        print(
+            f"Using LOCAL self-hosted provider: {provider.name()} on GPU (RTX 5080+). Ollama server must be up (http://localhost:11434). Prefer for leaves/efficient work."
+        )
     event_bus = EventBus()
 
     # Simple event handlers for CLI output
@@ -66,7 +97,9 @@ def main() -> None:
 
     # A2: surface errors (POC-8); also task start for visibility
     def on_error(event):
-        print(f"[ERROR] {event.payload.get('error', '')} (source={event.payload.get('source','?')})")
+        print(
+            f"[ERROR] {event.payload.get('error', '')} (source={event.payload.get('source', '?')})"
+        )
 
     def on_task_started(event):
         print(f"[Task] {event.payload.get('description', '')} (id={event.payload.get('task_id')})")
@@ -83,7 +116,9 @@ def main() -> None:
         max_iterations=3,
     )
 
-    print(f"Running task with {provider.name()} (local GPU/optimizations enabled where applicable, tero for scoped cross-repo memory)...\n")
+    print(
+        f"Running task with {provider.name()} (local GPU/optimizations enabled where applicable, tero for scoped cross-repo memory)...\n"
+    )
     # Use structured path (applies schemas for memory + future orchestration efficiency)
     structured: StructuredResponse = agent.run_structured(task)
     print("\n--- StructuredResponse (schema v1, answer + citations + optionals) ---")

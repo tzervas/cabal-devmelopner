@@ -10,7 +10,12 @@ from typing import Any
 
 from cabal_devmelopner.core.events import EventBus
 from cabal_devmelopner.core.prompt import build_structured_prompt
-from cabal_devmelopner.core.schemas import MemoryContext, StructuredResponse
+from cabal_devmelopner.core.schemas import (
+    AgentDomain,
+    CommonMemoryAdapter,
+    MemoryContext,
+    StructuredResponse,
+)
 from cabal_devmelopner.core.types import EventType, Task
 from cabal_devmelopner.mcp.tero_client import TeroMCPClient
 from cabal_devmelopner.providers.base import Provider
@@ -34,6 +39,9 @@ class SimpleAgent:
         self.provider = provider
         self.event_bus = event_bus or EventBus()
         self.tero_client = tero_client
+        self.facade: CommonMemoryAdapter | None = (
+            CommonMemoryAdapter(tero_client) if tero_client else None
+        )
 
     def run(self, task: Task) -> str:
         """Run the agent loop. Returns raw text (compat). Prefer run_structured for schema use."""
@@ -62,9 +70,40 @@ class SimpleAgent:
                 message=f"Iteration {iteration}/{task.max_iterations}",
             )
 
-            # Pull tero context as typed MemoryContext + StructuredResponse (schema path)
+            # Pull via W2 CommonMemory facade (domain TERO) -- full integration.
+            # Domain-scoped, always StructuredResponse + citations. Legacy fallback kept.
             mem_contexts = []
-            if self.tero_client:
+            sresp: StructuredResponse | None = None
+            if getattr(self, "facade", None):
+                try:
+                    sresp = self.facade.query(AgentDomain.TERO, task.description, {"limit": 5})
+                    if not sresp.is_refusal() and sresp.citations:
+                        mem_contexts.append(
+                            MemoryContext(
+                                source="tero",
+                                domain=AgentDomain.TERO.value,
+                                citations=sresp.citations,
+                                items=[],
+                            )
+                        )
+                        last_resp = StructuredResponse(
+                            kind="answer",
+                            answer="",
+                            citations=sresp.citations,
+                            lang_refs=sresp.lang_refs,
+                            explain=sresp.explain,
+                            extended={"facade_domain": AgentDomain.TERO.value},
+                        )
+                except Exception as e:
+                    # A2/POC-8 + C0 honesty: surface errors, never silent
+                    self.event_bus.emit_simple(
+                        EventType.ERROR,
+                        error=f"CommonMemory facade error: {e}",
+                        source="facade",
+                        task_id=task.id,
+                    )
+            elif self.tero_client:
+                # legacy direct (compat during transition to facade)
                 try:
                     sresp = self.tero_client.text_search_structured(task.description, limit=5)
                     if not sresp.is_refusal() and sresp.citations:
@@ -83,7 +122,6 @@ class SimpleAgent:
                             explain=sresp.explain,
                         )
                 except Exception as e:
-                    # A2/POC-4: surface instead of silent pass; TUI/CLI listen for ERROR
                     self.event_bus.emit_simple(
                         EventType.ERROR,
                         error=f"Tero client error: {e}",
@@ -105,10 +143,12 @@ class SimpleAgent:
                 # Structured providers can also receive format hints.
                 call_kwargs: dict[str, Any] = {}
                 if "local" in getattr(self.provider, "name", lambda: "")().lower():
-                    call_kwargs.update({
-                        "temperature": getattr(self.provider, "temperature", 0.2),
-                        "max_tokens": getattr(self.provider, "max_tokens", 2048),
-                    })
+                    call_kwargs.update(
+                        {
+                            "temperature": getattr(self.provider, "temperature", 0.2),
+                            "max_tokens": getattr(self.provider, "max_tokens", 2048),
+                        }
+                    )
                 raw = self.provider.complete(prompt_text, **call_kwargs)
             except Exception as e:
                 # A2/POC-8: emit ERROR on provider failure (never silent); surface to UIs

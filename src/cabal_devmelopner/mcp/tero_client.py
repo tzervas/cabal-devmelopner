@@ -1,6 +1,6 @@
 """Basic Tero-MCP client (PoC).
 
-Talks to `tero-mcp-lite` over stdio JSON-RPC 2.0. 
+Talks to `tero-mcp-lite` over stdio JSON-RPC 2.0.
 
 Default resolution (in priority):
 1. TERO_INDEX_PATH / explicit index_path
@@ -191,10 +191,13 @@ class TeroMCPClient:
                 )
             )
 
-        answer_text = "\n".join(
-            f"[{c.id}] {c.title or ''}: {c.summary or ''} ({c.file or ''}:{c.line or ''})"
-            for c in cits[:3]
-        ) or "See citations."
+        answer_text = (
+            "\n".join(
+                f"[{c.id}] {c.title or ''}: {c.summary or ''} ({c.file or ''}:{c.line or ''})"
+                for c in cits[:3]
+            )
+            or "See citations."
+        )
 
         return StructuredResponse(
             kind="answer",
