@@ -134,6 +134,16 @@
       "summary": "- CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract…"
     },
     {
+      "anchor": "agents--pr12-reviewmerge-agent-2026-07-09-appended",
+      "family": "doc",
+      "kind": "section",
+      "title": "PR#12 Review+Merge Agent (2026-07-09 appended)",
+      "file": "AGENTS.md",
+      "line": 142,
+      "tag": "Empirical/Declared",
+      "summary": "- Tero-first (MCP + script): teroidentify + textsearch \"cabal W2 facade\" \"C0 PR#12\" \"dev-docs wsfull-wave-2026-07-09-compact\" (hits: workspacecabalteroreadines…"
+    },
+    {
       "anchor": "phase",
       "family": "doc",
       "kind": "section",

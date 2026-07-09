@@ -46,3 +46,15 @@ Tero-first: ./scripts/tero.sh cabal-devmelopner text_search "facade" etc. See de
 - Then merge up + propagate pulls to core (dev/main) lowers.
 - Swarm used for broad disjoint repo tasks.
 - See wsfull.md + private-docs/analyses/ for status. All append-only, tero-cited, guards.
+
+## Review+Merge Complete (2026-07-09, dedicated agent)
+
+- Tero-first executed (MCP tero__* + /root/git/scripts/tero.sh for "cabal W2 facade" "C0" "PR#12"; cited dev-docs/wsfull-wave-2026-07-09-compact.md + WORKSPACE_CABAL_TERO_READINESS.md).
+- pr-review rubric applied: T2; full report posted as gh comment on #12; PR body edited.
+- No Critical blockers (C0 resolved: agent.py + schemas.py + test green; W2 StructuredResponse contract holds).
+- Merge: gh pr merge 12 (MERGED).
+- Post-steps executed on dev: update-tero.sh (150 items), hygiene (ruff + pytest 6/6 green).
+- This file + AGENTS.md + cab.md (root) appended (append-only).
+- re-ran update-tero.sh cabal-devmelopner.
+- Status: PR#12 + review+merge landed. Cites: agents--pr12-review-merge-2026-07-09 (AGENTS.md), workspacecabalteroreadiness sections.
+

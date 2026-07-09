@@ -138,3 +138,23 @@ Update this file + kickoffs + tero after any changes. Tero-first always (use scr
 - After: will run update-tero.sh cabal-devmelopner ; commit to branch (included in PR#12); then pr-review + merge.
 
 Tero-first + update-tero after all doc edits. Guards respected.
+
+## PR#12 Review+Merge Agent (2026-07-09 appended)
+
+- Tero-first (MCP + script): tero__identify + text_search "cabal W2 facade" "C0 PR#12" "dev-docs wsfull-wave-2026-07-09-compact" (hits: workspacecabalteroreadiness--w2-facade-cabal-integration-post-wsfull-wave-2026-07-09-compact line~103, agents--post-c0-fix-for-pr12-2026-07-09-appended:129, phase--appended-w2-c0-fix-for-pr12-2026-07-09 etc). /root/git/scripts/tero.sh also run (150 items scanned).
+- pr-review/SKILL.md + _shared/review-rubric.md read. Triage: T2 (18 files, +1361 LOC, honesty/C0 surface, W2 contract touch in schemas/agent).
+- Diff: gh pr diff 12 + git diff f2c0bef^..7c7e47e . Intent from body: W2 facade+AgentDomain wiring, StructuredResponse, C0 fix.
+- Checklist (grounded file:line):
+  - Correctness: facade returns always StructuredResponse (refusal on err, schemas.py:399); agent emits ERROR on is_refusal() (agent.py:85-98 "CommonMemory facade error") + except path. test_tero_error_emits_event + provider test pass (.venv/bin/python -m pytest green).
+  - Honesty/C0: no silent (removed old except:pass); ERROR on facade/tero/provider errs. W2: StructuredResponse always kind+answer or explicit refusal (is_refusal, refusal()).
+  - M1/W2: AgentDomain (schemas.py:317) mirrors memory-gate (prefix from_str for TERO/CONTEXT/MEMORY_GATE/LANG_* etc); CommonMemoryAdapter (369) domain query + citations + StructuredResponse.
+  - dev-workflow/guards/append-only/hygiene/tero: branch cab/a1-a3 (pre), append sections in AGENTS/README/ROADMAP/PHASE/INTENT/TERO/kickoffs, ruff+checks pass, update-tero included (150 items).
+  - Recent commit 7c7e47e (C0 fix + test) included in PR tip.
+- Report per rubric §4 emitted + posted as gh pr comment (https://github.com/tzervas/cabal-devmelopner/pull/12#issuecomment-4925135941). PR body edited to note C0+review+ cites.
+- Merged: gh pr merge 12 (state MERGED).
+- Post-merge: git checkout dev; (pull attempted); /root/git/scripts/update-tero.sh cabal-devmelopner; hygiene (ruff+6 tests green).
+- Updated remaining: appended this section (AGENTS.md) + note to cab.md (root .claude); re-ran update-tero.
+- No blockers. Status: landed. Use: uv run cabal-devmelopner "..." --use-tero --local-model.
+
+All per AGENTS, wsfull-wave-2026-07-09-compact.md, dev-workflow. Tero cite: agents--pr12-review-merge-2026-07-09.
+
