@@ -34,8 +34,8 @@ As part of wsfull PR process:
 
 See compact, readiness, PR for details. Update docs + tero before land.
 - [x] Basic prompt construction
-- [~] Tero-MCP client integration — *opt-in client + docs; requires sibling `tero-mcp` + index (see [docs/TERO.md](docs/TERO.md)); errors still swallowed (POC-4)*
-- [~] Minimal TUI foundation — *UI present; console entrypoint broken (`main` missing, POC-1)*
+- [~] Tero-MCP client integration — *opt-in client + docs + W2 facade (CommonMemoryAdapter + AgentDomain); requires sibling `tero-mcp` + local index (see [docs/TERO.md](docs/TERO.md)); errors now surfaced via EventBus.ERROR (C0/POC-4 fixed in PR#12; facade returns explicit refusal per W2 contract)*
+- [~] Minimal TUI foundation — *UI present + functional entrypoint (A1); uses real Task dataclass (POC-3/A2); error surfacing (A3) — fixed in PR#12 (cab/a1-a3-tui-errors-tests); still PoC surface (full features in Wave B)*
 - [x] Basic documentation and usage examples ([README](README.md), [docs/TERO.md](docs/TERO.md), [AGENTS.md](AGENTS.md), intent/gap docs)
 - [ ] PoC testing and stabilization (POC-7)
 
@@ -48,9 +48,9 @@ See compact, readiness, PR for details. Update docs + tero before land.
 | Can run `cabal-devmelopner "some task"` and get useful output from Grok | **Partial** — single-shot completion; no repo edits |
 | Architecture is clean and extensible | **Directional** — seams in place |
 | Tero-MCP can be called from the agent | **Conditional** — `--use-tero` / `USE_TERO=true` with sibling layout |
-| TUI launches via documented entrypoints | **Not met** — fix POC-1 |
+| TUI launches via documented entrypoints | **Met (PoC)** — `cabal-devmelopner-tui` entrypoint + Task wiring fixed in PR#12 (A1-A3/POC-1/POC-3); full TUI polish later |
 
-**PoC not exited** until P0 entrypoint is fixed and testing/stabilization is honest about remaining partials.
+**PoC not exited** until iteration/feedback (POC-6) and testing/stabilization (POC-7) are honest; TUI entrypoint (POC-1) + Tero error surfacing (POC-4) addressed in PR#12. See wsfull-wave-2026-07-09-compact.md and WORKSPACE_CABAL_TERO_READINESS.md.
 
 ---
 
@@ -113,3 +113,10 @@ See compact, readiness, PR for details. Update docs + tero before land.
 - Part of cab branch PR#12 to dev. Docs/AGENTS/kickoffs updated per process.
 - After tero update + checks: pr-review (rubric adapted for workspace tero/W2/C0/M1/guards) + merge.
 - Tero-cited from wsfull compact + readiness (see dev-docs). dev-workflow + guards followed.
+
+### Honest PoC status alignment (chore/honest-docs-post-w2, 2026-07-09)
+- Updated lagging PoC bullets + exit criteria for TUI (now entrypoint + Task met post A1-A3) and Tero error handling (C0/POC-4 addressed, facade path).
+- Iteration (POC-6) remains scaffold-only (always early return on iter 1); tests expanded (POC-7/A5 partial progress, 6+ smoke incl error paths) but stabilization open.
+- Cross-cites: wsfull-wave-2026-07-09-compact.md (W2, C0/M1, PR#12, A1-A3), WORKSPACE_CABAL_TERO_READINESS.md (facade integration post-wave), AGENTS.md (post C0 + PR#12 review-merge).
+- Append-only + tero-first (MCP text_search "W2 Facade"/"C0"/"wsfull-wave"); no code changes. See ROADMAP/INTENT/OPEN_ISSUES for parallel updates. Process: main pull, branch, edits, check.sh --quick, signed commit, PR to main.
+- Tero cite ref: agents--pr12-review-merge-2026-07-09 + workspacecabalteroreadiness sections. Guards/dev-workflow followed.

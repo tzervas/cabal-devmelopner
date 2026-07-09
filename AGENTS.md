@@ -158,3 +158,11 @@ Tero-first + update-tero after all doc edits. Guards respected.
 
 All per AGENTS, wsfull-wave-2026-07-09-compact.md, dev-workflow. Tero cite: agents--pr12-review-merge-2026-07-09.
 
+### Honest docs closure (chore/honest-docs-post-w2, 2026-07-09 appended)
+- Tero-first (MCP identify + text_search "W2 Facade"|"C0"|"POC"|"wsfull-wave" + cite reads of dev-docs/waves/* + WORKSPACE... before greps/edits). Read cited + PHASE/OPEN_ISSUES/ROADMAP/INTENT/AGENTS/README.
+- Aligned lagging PoC/TUI/Tero/iteration status text (checkboxes, tables, narrative) across PHASE/ROADMAP/OPEN_ISSUES/INTENT/README to match post-PR#12 code reality (A1-A3 + C0 facade ERROR landed+merged; iteration partial).
+- Append-only sections + targeted accuracy fixes (conservative: no overclaim on iteration/tests/TUI polish).
+- Cross-cites wsfull-wave-2026-07-09-compact.md, WORKSPACE_CABAL_TERO_READINESS.md, PR#12.
+- Process: main pull; git checkout -b chore/honest-docs-post-w2; edits; scripts/check.sh --quick; commit -S; push + gh pr --base main.
+- After: update-tero.sh cabal-devmelopner; hygiene. Tero cite for this: agents--pr12-review-merge-2026-07-09 + workspacecabalteroreadiness--*. Follow AGENTS dev-workflow, branch-guard, append-only. Update this + kickoffs + tero on changes.
+
