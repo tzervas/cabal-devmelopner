@@ -118,6 +118,9 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 | B6 | **TUI v1** | Status, log stream, task input, cancel; fix threading vs EventBus |
 | B7 | **Streaming** | Provider stream → PROGRESS/partial events → TUI/CLI |
 | B8 | **Session transcript** | Append JSONL per run under `.cabal/` or user config path |
+| B9 | **context-mcp (optional)** | Session store sidecar only — **not RAG** (see [LOCAL_TOOLING.md](LOCAL_TOOLING.md#context-mcp-not-legitimate-rag-binding-honesty)) |
+
+**context-mcp constraint:** today it uses **hash pseudo-embeddings** + LRU/`sled` KV — useful scratch memory, **not** comparable to legitimate embed→vector-store RAG. Cabal must not market or depend on it as RAG until real models + real vector retrieval land upstream (or Tero L2 / PROD-6 takes that role).
 
 **Exit:** One developer can point cabal at a repo, enable Tero, run a task that reads files and runs tests, and see a useful result without hand-copying model output.
 
@@ -154,7 +157,8 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 | D4 | **Discord control plane** | Submit tasks, monitor, approve |
 | D5 | **Security tool wrappers** | Hardwired allowlists; optional Security MCP; gitleaks-aligned |
 | D6 | **Tero Layer-2 consumer** | Only when M-1018 / full tero ships Empirical gains; until then stay L1 |
-| D7 | **Persistent multi-session state** | Resume swarms, budgets, audit log |
+| D6b | **Real RAG (if not Tero L2)** | Only if context-mcp (or successor) ships **real embeddings + vector store** and passes an Empirical eval — **pseudo-embeddings do not count** |
+| D7 | **Persistent multi-session state** | Resume swarms, budgets, audit log (JSONL and/or context-mcp **as KV session store**, not as RAG) |
 
 **Exit:** PHASE Production exit criteria.
 

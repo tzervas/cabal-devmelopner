@@ -92,6 +92,7 @@ USE_TERO=true uv run cabal-devmelopner-tui
 | Doc | Contents |
 |-----|----------|
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Full product plan: waves, PR DAG, corpus alignment |
+| [docs/LOCAL_TOOLING.md](docs/LOCAL_TOOLING.md) | Sibling MCP/tools readiness (incl. context-mcp ≠ RAG) |
 | [docs/INTENT_AND_GAP_ANALYSIS.md](docs/INTENT_AND_GAP_ANALYSIS.md) | Product intent vs current reality |
 | [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md) | P0–P3 backlog from the analysis |
 | [docs/TERO.md](docs/TERO.md) | Tero-MCP setup, env, Grok tools, agent client |
