@@ -55,7 +55,7 @@ cd ../tero-mcp && uv sync   # once
 export TERO_TOKENS='local-dev:refresh'
 ```
 
-Full setup (env vars, Grok MCP registration, tools, troubleshooting): **[docs/TERO.md](docs/TERO.md)**.
+Full setup (env vars, **cold-start Grok MCP install** when a session lacks `tero`, tools, troubleshooting): **[docs/TERO.md](docs/TERO.md)**.
 
 ## Running
 

@@ -129,17 +129,66 @@ client.call_tool("query_by_kind", {"value": "rfc"})
 
 ## Using Tero from Grok (MCP)
 
-Register the server once (user scope example):
+There are **two** ways work hits Tero:
+
+| Path | When |
+|------|------|
+| **Grok session MCP** (`tero__*` tools) | Interactive Grok/Build sessions with the server registered |
+| **In-repo agent client** (`TeroMCPClient`) | `cabal-devmelopner --use-tero` / `USE_TERO=true` |
+
+They share the same `tero-mcp-lite` binary and index, but registration is independent. A working CLI `--use-tero` does **not** automatically expose `tero__*` tools in Grok, and vice versa.
+
+### Cold start: session has no `tero` server yet
+
+Use this when `search_tool` finds no `tero__*` tools, `grok mcp list` omits `tero`, or a new machine/session never registered the server.
+
+**1. Prerequisites on disk** (one-time)
 
 ```bash
-grok mcp add tero \
-  -e TERO_TOKENS=local-dev:refresh \
-  -e TERO_INDEX_PATH=/path/to/mycelium/docs/tero-index/index.json \
-  -- uv run --project /path/to/tero-mcp tero-mcp-lite \
-       --index /path/to/mycelium/docs/tero-index/index.json
+# Install uv if needed: https://docs.astral.sh/uv/
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Shared parent (example: ~/git or /root/git)
+export GIT_PARENT="${GIT_PARENT:-$HOME/git}"
+mkdir -p "$GIT_PARENT"
+cd "$GIT_PARENT"
+
+# Clone tero-mcp if missing (use your real remote)
+# git clone <tero-mcp-url> tero-mcp
+cd tero-mcp && uv sync && cd ..
+
+# Index: Mycelium-shaped example (or generate per tero-mcp/GENERATING-AN-INDEX.md)
+# Expect: $GIT_PARENT/mycelium/docs/tero-index/index.json
+test -f "$GIT_PARENT/mycelium/docs/tero-index/index.json" \
+  || { echo "Missing index.json — set TERO_INDEX_PATH or build an index"; exit 1; }
 ```
 
-Or edit `~/.grok/config.toml`:
+**2. Register the MCP server with Grok** (user scope → `~/.grok/config.toml`)
+
+```bash
+export GIT_PARENT="${GIT_PARENT:-$HOME/git}"
+export TERO_INDEX="$GIT_PARENT/mycelium/docs/tero-index/index.json"
+export TERO_PROJECT="$GIT_PARENT/tero-mcp"
+
+grok mcp add tero \
+  -e "TERO_TOKENS=local-dev:refresh" \
+  -e "TERO_INDEX_PATH=$TERO_INDEX" \
+  -- uv run --project "$TERO_PROJECT" tero-mcp-lite \
+       --index "$TERO_INDEX"
+```
+
+Project-scoped alternative (commit-friendly; keep secrets as env refs):
+
+```bash
+cd /path/to/cabal-devmelopner   # or any project root
+grok mcp add tero --scope project \
+  -e "TERO_TOKENS=local-dev:refresh" \
+  -e "TERO_INDEX_PATH=$TERO_INDEX" \
+  -- uv run --project "$TERO_PROJECT" tero-mcp-lite \
+       --index "$TERO_INDEX"
+```
+
+**3. Equivalent `~/.grok/config.toml` block** (if you prefer editing by hand)
 
 ```toml
 [mcp_servers.tero]
@@ -156,13 +205,40 @@ TERO_TOKENS = "local-dev:refresh"
 TERO_INDEX_PATH = "/path/to/mycelium/docs/tero-index/index.json"
 ```
 
-Verify:
+Replace `/path/to/...` with absolute paths on your machine (e.g. `/root/git/...` or `$HOME/git/...`).
+
+**4. Verify outside any chat session**
 
 ```bash
-grok mcp doctor tero   # expect: handshake OK, 9 tools
+grok mcp list
+grok mcp doctor tero   # expect: command found, handshake OK, 9 tools
 ```
 
-If tools are missing mid-session: `/mcps` → **`r`** (refresh), or start a new session.
+**5. Make tools visible in the session**
+
+MCP config is loaded when the session starts. After `grok mcp add` or editing `config.toml`:
+
+| Situation | What to do |
+|-----------|------------|
+| **Server never registered** | Register (step 2), then **start a new Grok session** so tools attach at launch |
+| **Config changed mid-session** | In the TUI: `/mcps` → press **`r`** (refresh). If tools still missing, exit and relaunch |
+| **Server disabled** | `/mcps` → select `tero` → Space to enable, or set `enabled = true` in config |
+| **Doctor fails** | Fix paths/tokens (table below), re-run `grok mcp doctor tero`, then refresh/relaunch |
+
+Do **not** expect `tero__*` tools to appear mid-session without refresh or relaunch after a cold install.
+
+**6. First tool call checklist**
+
+```text
+search_tool query="tero identify"
+use_tool tero__identify  { "token": "local-dev" }
+```
+
+Every Tero tool requires `"token"` matching an entry in `TERO_TOKENS` (local default: `local-dev`).
+
+### Already registered (warm path)
+
+If `grok mcp doctor tero` is healthy but a given session still lacks tools: `/mcps` → **`r`**, or start a new session. Tool names are always namespaced: `tero__text_search`, `tero__query_by_id`, etc. Discover schemas with `search_tool`, then call via `use_tool`.
 
 ### Tools (all require `token`)
 
@@ -221,11 +297,13 @@ print(r.get('kind'), len(r.get('items') or []))
 
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
-| Server exits 78 / “no tokens” | `TERO_TOKENS` unset | Export `TERO_TOKENS='local-dev:refresh'` |
-| Exit 66 / load error | Bad or missing `index.json` | Set `TERO_INDEX_PATH` to a real index |
-| `uv` / project not found | `tero-mcp` not cloned or wrong path | Set `TERO_MCP_PROJECT` |
+| Server exits 78 / “no tokens” | `TERO_TOKENS` unset | Export `TERO_TOKENS='local-dev:refresh'` (and set the same in MCP `env`) |
+| Exit 66 / load error | Bad or missing `index.json` | Set `TERO_INDEX_PATH` / `--index` to a real index |
+| `uv` / project not found | `tero-mcp` not cloned or wrong path | `uv sync` in tero-mcp; fix `--project` path |
 | Auth error on `tools/call` | Token not in table or missing arg | Pass `"token": "local-dev"`; match `TERO_TOKENS` |
-| Grok has no `tero__*` tools | MCP not reloaded | `grok mcp doctor tero`; `/mcps` → `r` or new session |
+| **Session never had `tero__*` tools** | Server not registered at launch | Follow [cold start](#cold-start-session-has-no-tero-server-yet); **new session** after `grok mcp add` |
+| Grok mid-session missing tools | Config changed / not refreshed | `grok mcp doctor tero`; `/mcps` → `r` or relaunch |
+| `doctor` handshake fails | Bad command, env, or index | Fix paths; run the smoke test below outside Grok |
 | Empty / refusal `kind` | No citable match | Broaden query; try `query_by_id` / `query_by_kind` |
 | Stale index after doc edits | Index not regenerated | Rebuild index, then `refresh` (or restart server) |
 

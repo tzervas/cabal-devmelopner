@@ -34,6 +34,7 @@ Approximate application size: ~550+ LOC under `src/cabal_devmelopner/`.
 | Agent loop | **Scaffold** | Multi-iteration structure exists; **always returns after iteration 1** |
 | Tero-MCP client | **PoC client** | Sibling-layout defaults (`../tero-mcp`, Mycelium index); one-shot stdio; token + envelope parse |
 | Tero usage in agent | **Wired (opt-in)** | CLI `--use-tero` / TUI `USE_TERO=true`; failures swallowed |
+| Tero as Grok MCP | **Documented** | Session tools (`tero__*`) require `grok mcp add` + launch/refresh; cold-start install in [TERO.md](TERO.md) |
 | TUI | **Partial / broken entrypoint** | UI code exists; console script `main` missing (`ImportError`) |
 | Docs | **Improved** | README, PHASE, `docs/TERO.md`, `AGENTS.md` |
 | Tests | **Smoke only** | Two tests; both pass |
