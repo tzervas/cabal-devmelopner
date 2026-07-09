@@ -144,6 +144,27 @@
       "summary": "- Tero-first (MCP + script): teroidentify + textsearch \"cabal W2 facade\" \"C0 PR#12\" \"dev-docs wsfull-wave-2026-07-09-compact\" (hits: workspacecabalteroreadines…"
     },
     {
+      "anchor": "agents--honest-docs-closure-chore-honest-docs-post-w2-2026-07-09-appended",
+      "family": "doc",
+      "kind": "section",
+      "title": "Honest docs closure (chore/honest-docs-post-w2, 2026-07-09 appended)",
+      "file": "AGENTS.md",
+      "line": 161,
+      "tag": "Empirical/Declared",
+      "summary": "- Tero-first (MCP identify + textsearch \"W2 Facade\"|\"C0\"|\"POC\"|\"wsfull-wave\" + cite reads of dev-docs/waves/ + WORKSPACE... before greps/edits). Read cited + P…"
+    },
+    {
+      "anchor": "agents--poc-6-iteration-documented-single-shot-chore-poc6-iteration-honesty-appended-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "POC-6 iteration documented single-shot (chore/poc6-iteration-honesty appended 2026-07-09)",
+      "file": "AGENTS.md",
+      "line": 169,
+      "tag": "Empirical/Declared",
+      "id": "POC-6",
+      "summary": "- Tero-first (required): /root/git/scripts/tero.sh cabal-devmelopner textsearch \"POC-6|iteration\" (refusal, 156 rows, no prior match); re-ran for \"POC\",\"plan\",…"
+    },
+    {
       "anchor": "phase",
       "family": "doc",
       "kind": "section",
@@ -191,7 +212,7 @@
       "file": "PHASE.md",
       "line": 44,
       "tag": "Empirical/Declared",
-      "summary": "PoC not exited until P0 entrypoint is fixed and testing/stabilization is honest about remaining partials."
+      "summary": "PoC not exited until testing/stabilization (POC-7) are honest; iteration/feedback (POC-6) is now documented as single-shot (honest deferral to MVP/tools per pl…"
     },
     {
       "anchor": "phase--mvp-phase",
@@ -272,6 +293,27 @@
       "line": 111,
       "tag": "Empirical/Declared",
       "summary": "- W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green)."
+    },
+    {
+      "anchor": "phase--honest-poc-status-alignment-chore-honest-docs-post-w2-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Honest PoC status alignment (chore/honest-docs-post-w2, 2026-07-09)",
+      "file": "PHASE.md",
+      "line": 117,
+      "tag": "Empirical/Declared",
+      "summary": "- Updated lagging PoC bullets + exit criteria for TUI (now entrypoint + Task met post A1-A3) and Tero error handling (C0/POC-4 addressed, facade path)."
+    },
+    {
+      "anchor": "phase--poc-6-iteration-honesty-chore-poc6-iteration-honesty-per-plan.md-p2",
+      "family": "doc",
+      "kind": "section",
+      "title": "POC-6 iteration honesty (chore/poc6-iteration-honesty, per plan.md p2)",
+      "file": "PHASE.md",
+      "line": 124,
+      "tag": "Empirical/Declared",
+      "id": "POC-6",
+      "summary": "- Decision: Document POC-6 as single-shot (honest); defer full multi-iteration feedback + verification loop to MVP/tools (Wave B: B2/B4 etc). Matches code real…"
     },
     {
       "anchor": "readme",
@@ -394,21 +436,20 @@
       "summary": "export XAIAPIKEY=..."
     },
     {
-      "anchor": "readme--tui-intended-entrypoint-currently-fails-until-poc-1-lands",
+      "anchor": "readme--tui-entrypoint-fixed-pr12-a1-poc-surface",
       "family": "doc",
       "kind": "other",
-      "title": "TUI (intended entrypoint — currently fails until POC-1 lands)",
+      "title": "TUI (entrypoint fixed PR#12 A1; PoC surface)",
       "file": "README.md",
       "line": 70,
       "tag": "Empirical/Declared",
-      "id": "POC-1",
       "summary": "uv run cabal-devmelopner-tui"
     },
     {
-      "anchor": "readme--tui-with-tero-once-entrypoint-is-fixed",
+      "anchor": "readme--tui-with-tero",
       "family": "doc",
       "kind": "other",
-      "title": "TUI with Tero (once entrypoint is fixed)",
+      "title": "TUI with Tero",
       "file": "README.md",
       "line": 73,
       "tag": "Empirical/Declared",
@@ -563,14 +604,14 @@
       "summary": "Intent: coding assistance that acts on repositories."
     },
     {
-      "anchor": "intentandgapanalysis--4.2-tui-entrypoint-broken-p0",
+      "anchor": "intentandgapanalysis--4.2-tui-entrypoint-p0-addressed-pr12",
       "family": "doc",
       "kind": "section",
-      "title": "4.2 TUI entrypoint broken (P0)",
+      "title": "4.2 TUI entrypoint (P0 — addressed PR#12)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
       "line": 106,
       "tag": "Empirical/Declared",
-      "summary": "cabal-devmelopner-tui → ImportError: cannot import name 'main'"
+      "summary": "Entrypoint now present (def main() + main guard in app.py; console script wired). TUI uses real Task dataclass (POC-3). Error events wired (A3)."
     },
     {
       "anchor": "intentandgapanalysis--4.3-tero-improved-but-incomplete",
@@ -578,7 +619,7 @@
       "kind": "section",
       "title": "4.3 Tero: improved but incomplete",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 114,
+      "line": 112,
       "tag": "Empirical/Declared",
       "summary": "Landed improvements (dev): sibling defaults, env overrides, token auth, MCP content envelope unwrap, items-based agent formatting, docs/TERO.md."
     },
@@ -588,7 +629,7 @@
       "kind": "section",
       "title": "4.4 Agent loop does not iterate",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 128,
+      "line": 126,
       "tag": "Empirical/Declared",
       "summary": "if iteration == 1:"
     },
@@ -598,7 +639,7 @@
       "kind": "section",
       "title": "4.5 Empty runtime dependencies",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 138,
+      "line": 136,
       "tag": "Empirical/Declared",
       "summary": "dependencies = []"
     },
@@ -608,19 +649,19 @@
       "kind": "section",
       "title": "4.6 TUI bypasses `Task` type",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 146,
+      "line": 144,
       "tag": "Empirical/Declared",
       "summary": "Duck-typed type(\"Task\", (), {...})() instead of Task dataclass."
     },
     {
-      "anchor": "intentandgapanalysis--4.7-status-drift-pre-this-docs-update",
+      "anchor": "intentandgapanalysis--4.7-status-drift-pre-updates",
       "family": "doc",
       "kind": "section",
-      "title": "4.7 Status drift (pre this docs update)",
+      "title": "4.7 Status drift (pre updates)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 150,
+      "line": 148,
       "tag": "Empirical/Declared",
-      "summary": "PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-iteration remained nominal. Prefer checkboxes that match [OPENISSUES.md](OPENISSUES.…"
+      "summary": "Prior docs lagged post-code (e.g. \"broken\" after A1-A3 in PR#12). This + parallel edits in PHASE/ROADMAP/OPENISSUES close the honesty gap (chore/honest-docs-po…"
     },
     {
       "anchor": "intentandgapanalysis--5.-secondary-structural-gaps",
@@ -628,7 +669,7 @@
       "kind": "section",
       "title": "5. Secondary / structural gaps",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 156,
+      "line": 154,
       "tag": "Empirical/Declared"
     },
     {
@@ -637,7 +678,7 @@
       "kind": "section",
       "title": "6. What is solid (keep)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 172,
+      "line": 170,
       "tag": "Empirical/Declared",
       "summary": "- Clear phase model (PoC → MVP → Production)"
     },
@@ -647,7 +688,7 @@
       "kind": "section",
       "title": "7. Gap map by phase",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 185,
+      "line": 183,
       "tag": "Empirical/Declared",
       "summary": "INTENT                          CURRENT STATE"
     },
@@ -657,9 +698,9 @@
       "kind": "section",
       "title": "8. Recommended priority (close PoC honestly)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 207,
+      "line": 205,
       "tag": "Empirical/Declared",
-      "summary": "1. POC-1 Fix TUI main entrypoint (+ optional main)."
+      "summary": "1. POC-6 (documented) Iteration/feedback documented as single-shot (plan.md p2 decision); early-return on iter=1 is now honest (defer full to MVP/tools). PHASE…"
     },
     {
       "anchor": "intentandgapanalysis--9.-bottom-line",
@@ -667,7 +708,7 @@
       "kind": "section",
       "title": "9. Bottom line",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 221,
+      "line": 218,
       "tag": "Empirical/Declared",
       "summary": "Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context."
     },
@@ -677,9 +718,30 @@
       "kind": "section",
       "title": "Appended post-W2 facade + C0 (2026-07-09, PR#12 process)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 230,
+      "line": 227,
       "tag": "Empirical/Declared",
       "summary": "- W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory."
+    },
+    {
+      "anchor": "intentandgapanalysis--honest-status-alignment-chore-honest-docs-post-w2-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Honest status alignment (chore/honest-docs-post-w2, 2026-07-09)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 233,
+      "tag": "Empirical/Declared",
+      "summary": "- Fixed lagging text in PoC snapshot/checklist/gaps/priority/bottom-line (TUI entrypoint/POC-1/3, Tero C0/POC-4 now accurate per merged code; iteration kept pa…"
+    },
+    {
+      "anchor": "intentandgapanalysis--poc-6-single-shot-documented-chore-poc6-iteration-honesty-append-only",
+      "family": "doc",
+      "kind": "section",
+      "title": "POC-6 single-shot documented (chore/poc6-iteration-honesty, append-only)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 239,
+      "tag": "Empirical/Declared",
+      "id": "POC-6",
+      "summary": "- Updated recommended priority, bottom-line reality, PoC gaps note: POC-6 closed as \"document or implement\" via honest documentation of single-shot."
     },
     {
       "anchor": "localchecks",
@@ -948,6 +1010,27 @@
       "summary": "- Implementing the fixes above"
     },
     {
+      "anchor": "openissues--status-alignment-post-w2-c0-pr12-appended-2026-07-09-chore-honest-docs-post-w2",
+      "family": "doc",
+      "kind": "section",
+      "title": "Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2)",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 79,
+      "tag": "Empirical/Declared",
+      "summary": "- POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now cabal-devmelopner-tui has main(); TUI imports/uses core.types.Task)."
+    },
+    {
+      "anchor": "openissues--poc-6-documented-as-single-shot-chore-poc6-iteration-honesty-appended",
+      "family": "doc",
+      "kind": "section",
+      "title": "POC-6 documented as single-shot (chore/poc6-iteration-honesty appended)",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 88,
+      "tag": "Empirical/Declared",
+      "id": "POC-6",
+      "summary": "- Per plan.md (cabal section priority 2, \"cabal-poc-mvp POC-6\"): decide/document as single-shot (honest, defer full feedback to MVP/tools). Matches agent.py re…"
+    },
+    {
       "anchor": "roadmap",
       "family": "doc",
       "kind": "note",
@@ -976,7 +1059,7 @@
       "file": "docs/ROADMAP.md",
       "line": 32,
       "tag": "Empirical/Declared",
-      "summary": "PoC exit requires P0 TUI launch + honest tests/stabilization. MVP exit requires tools + verification + usable TUI/config. Production is multi-agent + security…"
+      "summary": "PoC exit requires honest tests/stabilization (POC-7); iteration (POC-6) now documented single-shot (honest, per plan.md p2 deferral to MVP/tools); TUI launch (…"
     },
     {
       "anchor": "roadmap--3.-architecture-target-incremental",
@@ -1161,6 +1244,27 @@
       "line": 312,
       "tag": "Empirical/Declared",
       "summary": "- Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG)."
+    },
+    {
+      "anchor": "roadmap--honest-docs-update-chore-honest-docs-post-w2",
+      "family": "doc",
+      "kind": "section",
+      "title": "Honest docs update (chore/honest-docs-post-w2)",
+      "file": "docs/ROADMAP.md",
+      "line": 319,
+      "tag": "Empirical/Declared",
+      "summary": "- Aligned lagging current-position table + Wave A exit text post-PR#12 merges (TUI entrypoint now accurate; POC-1/3/4 closed in code)."
+    },
+    {
+      "anchor": "roadmap--poc-6-documented-single-shot-chore-poc6-iteration-honesty-per-plan.md-p2",
+      "family": "doc",
+      "kind": "section",
+      "title": "POC-6 documented single-shot (chore/poc6-iteration-honesty per plan.md p2)",
+      "file": "docs/ROADMAP.md",
+      "line": 326,
+      "tag": "Empirical/Declared",
+      "id": "POC-6",
+      "summary": "- A6 marked documented single-shot; footnote updated; exit/position text revised for honesty (no longer requires POC-6 for PoC exit)."
     },
     {
       "anchor": "tero",

@@ -36,11 +36,11 @@ It is **not** Mycelium’s ADK phylum (RFC-0023 / M-671) and **not** mycelium-te
 | CLI + xAI one-shot | Works |
 | EventBus + Provider ABC | Seams ready |
 | Tero client + docs + Grok cold-start | Usable with siblings; opt-in |
-| TUI | Code present; **entrypoint broken** (POC-1) |
+| TUI | Code present + entrypoint works (A1/POC-1 + POC-3 fixed PR#12); PoC surface |
 | Agent loop | Single-shot; multi-iteration dead (POC-6) |
 | Tools / verify / multi-agent | Not started |
 
-**PoC exit** requires P0 TUI launch + honest tests/stabilization. **MVP exit** requires tools + verification + usable TUI/config. **Production** is multi-agent + security + resources.
+**PoC exit** requires honest tests/stabilization (POC-7); iteration (POC-6) now documented single-shot (honest, per plan.md p2 deferral to MVP/tools); TUI launch (POC-1) + Tero error surfacing (POC-4) addressed in PR#12 (A1-A3). **MVP exit** requires tools + verification + usable TUI/config. **Production** is multi-agent + security + resources. Cross-cite wsfull-wave-2026-07-09-compact.md + plan.md.
 
 Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 
@@ -94,13 +94,13 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 | A3 | Surface Tero failures (events/log) | #4 POC-4 | — |
 | A4 | ERROR events on provider failure | POC-8 | — |
 | A5 | Expand smoke tests | #6 POC-7 | A1–A4 preferred |
-| A6 | Multi-iteration honesty | #5 POC-6 | product choice* |
+| A6 | Multi-iteration honesty | #5 POC-6 | documented single-shot (plan.md p2; defer to MVP/tools) |
 | A7 | pytest CI workflow | #7 MVP-4 | A5 |
 | A8 | Runtime deps honesty (`textual` extra) | MVP-3 | — |
 
-\* **A6 choice:** either (i) document single-shot and keep PHASE `[~]`, or (ii) one cheap verification signal (e.g. non-empty + optional self-check prompt) before exit. Prefer (i) until tools exist, then real feedback in Wave B.
+\* **A6 (POC-6):** documented as single-shot per plan.md (cabal-poc-mvp priority 2) + decision in chore/poc6-iteration-honesty. Keep PHASE `[~]` for iteration (scaffold only); full feedback/verify loop deferred until tools + Wave B (B2/B4). See wsfull-wave-2026-07-09-compact.md.
 
-**Exit:** `uv run cabal-devmelopner-tui` works; `pytest` green in CI; PHASE PoC partials only for intentional deferrals.
+**Exit:** `uv run cabal-devmelopner-tui` works (A1 landed PR#12); `pytest` green in CI (A5 partial); PHASE PoC partials only for intentional deferrals (e.g. POC-6). A1/A2/A3 + C0 facade error path completed in PR#12 (cab/a1-a3-tui-errors-tests). See wsfull-wave-2026-07-09-compact.md.
 
 ---
 
@@ -315,3 +315,18 @@ Local product docs: PHASE, INTENT_AND_GAP_ANALYSIS, OPEN_ISSUES, TERO.
 - Doc updates + kickoffs + AGENTS + tero reindex part of PR process.
 - Next: pr-review (one agent, adapted rubric), merge to dev, then main + pull-down propagate.
 - Grounded in wsfull-wave-2026-07-09-compact.md (Tero: workspacecabalteroreadiness sections), dev-workflow, guards.
+
+### Honest docs update (chore/honest-docs-post-w2)
+- Aligned lagging current-position table + Wave A exit text post-PR#12 merges (TUI entrypoint now accurate; POC-1/3/4 closed in code).
+- POC-6 (iteration) kept as partial per reality (early-return in agent loop).
+- Cross-cites wsfull-wave-2026-07-09-compact.md + WORKSPACE_CABAL_TERO_READINESS.md + PR#12. Append-only section.
+- Tero-first queries ("W2 Facade", "C0", "wsfull-wave") + cited reads before edits. No src changes. See PHASE/OPEN_ISSUES/INTENT for matching.
+- Follows: main pull, chore branch, check.sh, signed commit, PR to main. Tero cite: agents--pr12-review-merge-2026-07-09.
+
+### POC-6 documented single-shot (chore/poc6-iteration-honesty per plan.md p2)
+- A6 marked documented single-shot; footnote updated; exit/position text revised for honesty (no longer requires POC-6 for PoC exit).
+- Decision: single-shot is the honest state; full iteration/feedback + verify deferred until tools land (MVP-1, Wave B B4 verification hook).
+- Cross-cites: plan.md (cabal section §1: "POC-6 (P1)... document single-shot (honest)..."; "Start with POC-6 decision"), wsfull-wave-2026-07-09-compact.md, PHASE.md (updated), WORKSPACE_CABAL_TERO_READINESS.md, AGENTS.md.
+- Tero-first (script text_search "POC|plan|wsfull" + MCP identify) + cited reads of plan + prior phase/intent hits before edits. Refusals on exact "POC-6" pre this (expected).
+- Append-only + targeted accuracy. Branch from main. Will run update-tero post.
+- Tero cite post: roadmap--wave-a... + new section. Follows dev-workflow/append-only/guards.

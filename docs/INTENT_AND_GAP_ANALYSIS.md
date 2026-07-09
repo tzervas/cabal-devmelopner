@@ -46,9 +46,9 @@ Approximate application size: ~550+ LOC under `src/cabal_devmelopner/`.
 | Prompt builder | **Minimal** | Task + optional context + feedback strings |
 | Agent loop | **Scaffold** | Multi-iteration structure exists; **always returns after iteration 1** |
 | Tero-MCP client | **PoC client** | Sibling-layout defaults (`../tero-mcp`, Mycelium index); one-shot stdio; token + envelope parse |
-| Tero usage in agent | **Wired (opt-in)** | CLI `--use-tero` / TUI `USE_TERO=true`; failures swallowed |
+| Tero usage in agent | **Wired (opt-in + W2 facade)** | CLI `--use-tero` / TUI `USE_TERO=true`; facade (CommonMemoryAdapter) primary; failures emit ERROR (C0/POC-4 fixed PR#12) |
 | Tero as Grok MCP | **Documented** | Session tools (`tero__*`) require `grok mcp add` + launch/refresh; cold-start install in [TERO.md](TERO.md) |
-| TUI | **Partial / broken entrypoint** | UI code exists; console script `main` missing (`ImportError`) |
+| TUI | **PoC complete entrypoint (PR#12)** | main() + real Task (A1/A2/POC-1/3); error handlers; full polish later (Wave B) |
 | Docs | **Improved** | README, PHASE, `docs/TERO.md`, `AGENTS.md` |
 | Tests | **Smoke only** | Two tests; both pass |
 | CI | **Partial** | Gitleaks only; no pytest/ruff/mypy gates |
@@ -77,7 +77,7 @@ There is **no tool-use loop**, no filesystem edits, no shell execution, no verif
 | Iterative agent + feedback | **Partial** | Feedback path is effectively dead code |
 | Basic prompt construction | **Done** | Thin |
 | Tero-MCP client integration | **Partial → usable with siblings** | Client improved; needs external `tero-mcp` + index; still one-shot MCP |
-| Minimal TUI foundation | **Partial** | Code present; **entrypoint broken** |
+| Minimal TUI foundation | **Partial (entrypoint landed)** | Code + main() + Task wiring (PR#12 A1-A3); still PoC (no full status etc) |
 | Docs / usage examples | **Mostly done** | Tero documented; this analysis closes status honesty |
 | PoC testing & stabilization | **Open** | Smoke only |
 
@@ -103,13 +103,11 @@ There is **no tool-use loop**, no filesystem edits, no shell execution, no verif
 - No verification (tests, linters, human review hooks)
 - `EventType.TOOL_CALL`, `TOOL_RESULT`, `NEEDS_HUMAN_INPUT` defined but unused
 
-### 4.2 TUI entrypoint broken (P0)
+### 4.2 TUI entrypoint (P0 — addressed PR#12)
 
-```text
-cabal-devmelopner-tui → ImportError: cannot import name 'main'
-```
+Entrypoint now present (`def main()` + `__main__` guard in app.py; console script wired). TUI uses real `Task` dataclass (POC-3). Error events wired (A3). 
 
-`pyproject.toml` → `cabal_devmelopner.tui.app:main`, but `app.py` has no `main()` and no `__main__` guard. README’s recommended TUI path fails.
+Still PoC-grade: limited widgets, no full live status polish (Wave B). README TUI path now functional (once XAI etc configured). See A1-A3 in PR#12 + wsfull compact.
 
 ### 4.3 Tero: improved but incomplete
 
@@ -121,7 +119,7 @@ cabal-devmelopner-tui → ImportError: cannot import name 'main'
 |-------|--------|
 | External dependency | Requires sibling `tero-mcp` + index (e.g. Mycelium); not vendored |
 | Protocol | One process / one `tools/call`; no `initialize` / session / tool discovery |
-| Silent failure | Agent `except Exception: pass` hides Tero errors |
+| Silent failure | Addressed for facade path (C0): agent emits ERROR on is_refusal() + except (see agent.py:80-118); legacy compat note |
 | Product scope | Corpus/docs index — not full codebase RAG |
 | Docs overclaim risk | PHASE checkbox “done” implies more completeness than out-of-the-box UX |
 
@@ -147,9 +145,9 @@ Textual is only under optional extra `tui`. Local setup uses `--all-extras`; bar
 
 Duck-typed `type("Task", (), {...})()` instead of `Task` dataclass.
 
-### 4.7 Status drift (pre this docs update)
+### 4.7 Status drift (pre updates)
 
-PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-iteration remained nominal. Prefer checkboxes that match [OPEN_ISSUES.md](OPEN_ISSUES.md).
+Prior docs lagged post-code (e.g. "broken" after A1-A3 in PR#12). This + parallel edits in PHASE/ROADMAP/OPEN_ISSUES close the honesty gap (chore/honest-docs-post-w2). Prefer matching OPEN_ISSUES + cites to wsfull-wave-2026-07-09-compact.md. Multi-iteration still nominal (see 4.4).
 
 ---
 
@@ -188,7 +186,7 @@ PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-itera
                     INTENT                          CURRENT STATE
 PoC ────────────────────────────────────────────────────────────
   CLI + xAI                                       mostly done
-  TUI foundation                                  code yes; entrypoint broken
+  TUI foundation                                  code + entrypoint + Task (PR#12); PoC surface
   Tero-MCP basic                                  client+docs; needs siblings
   Real iteration / feedback                       early-return
   Stabilization / tests                           smoke only
@@ -206,13 +204,12 @@ Production ───────────────────────
 
 ## 8. Recommended priority (close PoC honestly)
 
-1. **POC-1** Fix TUI `main` entrypoint (+ optional `__main__`).
-2. **POC-3** TUI constructs real `Task`.
-3. **POC-6** Either implement one verification/feedback path or document single-shot and adjust PHASE wording.
-4. **POC-4 / POC-5** Surface Tero errors; document failure modes; consider session MCP later.
-5. **POC-7** Expand tests (EventBus, prompt, Tero error paths, CLI without live API).
-6. **MVP-3 / MVP-4** Runtime deps honesty + pytest CI.
-7. **MVP-1** Minimal tools so the product matches “development agent.”
+1. **POC-6** (documented) Iteration/feedback documented as single-shot (plan.md p2 decision); early-return on iter=1 is now honest (defer full to MVP/tools). PHASE/ROADMAP/OPEN_ISSUES updated. See appended section.
+2. **POC-7** (in progress) Expand tests (EventBus/prompt/Tero+provider errs done post PR#12; CI next).
+3. **POC-5/9** Tero: one-shot vs session; zero-config messages.
+4. **MVP-3 / MVP-4** Runtime deps + pytest CI.
+5. **MVP-1** Minimal tools...
+(POC-1/3/4/8 addressed in PR#12 A1-A3 + C0; see appended + OPEN_ISSUES status.)
 
 Details: [OPEN_ISSUES.md](OPEN_ISSUES.md).
 
@@ -222,7 +219,7 @@ Details: [OPEN_ISSUES.md](OPEN_ISSUES.md).
 
 **Intent:** long-running, repo-agnostic **development agent** with event-driven UIs and strong Tero context.
 
-**Reality:** early **architecture PoC** with a working CLI→xAI path, improved opt-in Tero client/docs, event seams, and an incomplete TUI — **not yet** a development agent (no tools/verification) and **not yet** a polished PoC exit (broken TUI entrypoint, nominal multi-iteration).
+**Reality:** early **architecture PoC** with working CLI→xAI, W2 CommonMemory facade + tero (AgentDomain), opt-in + Grok MCP Tero, event seams, TUI entrypoint+Task+errors fixed (PR#12 A1-A3/C0) — **not yet** a development agent (no tools/verification) and **not yet** a polished PoC exit (iteration POC-6 documented as single-shot per plan.md, tests/CI partial).
 
 **Largest honesty gap:** claiming full TUI / iterative agent completion ahead of behavior.  
 **Largest product gap:** no tools or verification, so the system cannot act on a codebase.
@@ -232,3 +229,17 @@ Details: [OPEN_ISSUES.md](OPEN_ISSUES.md).
 - C0 blocker fixed: tero errors now emit ERROR events (never silent) when using facade path.
 - Updated docs, AGENTS, kickoffs, tero index as required. See wsfull-wave compact + readiness for citations and full state.
 - Enables PR review/merge, up-merge, propagate. All per dev-workflow, tero-first, append-only.
+
+### Honest status alignment (chore/honest-docs-post-w2, 2026-07-09)
+- Fixed lagging text in PoC snapshot/checklist/gaps/priority/bottom-line (TUI entrypoint/POC-1/3, Tero C0/POC-4 now accurate per merged code; iteration kept partial).
+- Cross-cites: wsfull-wave-2026-07-09-compact.md (W2 facade, A1-A3, C0 fix, PR#12), WORKSPACE_CABAL_TERO_READINESS.md (post-wave integration), PHASE/ROADMAP/OPEN_ISSUES/AGENTS (appends).
+- Tero-first (MCP: text_search "W2 Facade" "C0" "POC" "wsfull-wave"; identify + cited reads of dev-docs) before any edits. Append-only edits. Process followed exactly (main pull, branch chore/honest-docs-post-w2, check.sh, signed commit, gh pr to main).
+- Tero cite example: workspacecabalteroreadiness--w2-facade-cabal-integration-post-wsfull-wave-2026-07-09-compact + agents--post-c0-fix-for-pr12-2026-07-09-appended. No code touched. Hygiene via check --quick.
+
+### POC-6 single-shot documented (chore/poc6-iteration-honesty, append-only)
+- Updated recommended priority, bottom-line reality, PoC gaps note: POC-6 closed as "document or implement" via honest documentation of single-shot.
+- Decision (plan.md): document as single-shot (honest); defer full feedback to MVP/tools. Code in agent.py (run_structured) + comment reflects PoC first-success path.
+- Cross-cites: plan.md (cabal-poc-mvp: "POC-6 (P1)... document single-shot (honest, defer full feedback to MVP/tools)"), wsfull-wave-2026-07-09-compact.md, PHASE.md (deliverables/exit updated), ROADMAP.md (A6), OPEN_ISSUES.md (status), AGENTS.md (this tranche).
+- Tero-first: /root/git/scripts/tero.sh cabal-devmelopner text_search "POC-6|iteration" (refusal pre), "POC" (20+ hits on prior honest sections + phase-- etc); MCP tero__identify + text_search; read cited files.
+- Append-only + targeted. Branch: chore/poc6-iteration-honesty (from main). No src edits. After: check, update-tero, land.
+- Tero cite post-update: intentandgapanalysis--* + new section. Follow AGENTS (tero excavation, dev-workflow, guards, append-only).
