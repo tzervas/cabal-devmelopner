@@ -18,6 +18,21 @@ For honest status vs intent (including known P0/P1 gaps), see **[docs/INTENT_AND
 - [x] Event/communication system (producer/consumer model)
 - [x] xAI provider (raw API)
 - [~] Improved agent loop with iteration + feedback — *loop scaffold only; always returns after first generation (see POC-6)*
+
+## Recent Wave Updates (W2 Facade + Integration, 2026-07-09)
+
+As part of wsfull PR process:
+- W2 CommonMemory facade implementation + AgentDomain M1 (mirror memory-gate-rs): CommonMemoryAdapter + Structured* W2 schemas (Citation/MemoryContext/StructuredResponse etc) in schemas.py.
+- Wiring in agent: facade.query(AgentDomain.TERO..) drives memory + structured in run_structured (C0 honesty, error surfacing).
+- PR #12 (cab/a1-a3-tui-errors-tests): facade + A1-A3 TUI/errors/tests + wiring + doc updates (AGENTS, README, docs/ROADMAP, INTENT_AND_GAP_ANALYSIS, TERO, PHASE, .claude/kickoffs/README.md) + tero reindex.
+- Integration via cabal + tero (local index), hygiene, C0 (honesty gate), M1 domains.
+- Kickoffs, agent context (AGENTS.md), claude files updated to latest (facade/W2 refs, tero-first, dev-workflow, branch/worktree guards).
+- Docs + tero updated as part of PR process; run update-tero after edits.
+- See wsfull-wave-2026-07-09-compact.md (W2, local-ollama+tero+W2 pipeline, parameterized hygiene/security-scan/codegen, leaf C0/M1), WORKSPACE_CABAL_TERO_READINESS.md (facade cabal integration, tero readiness).
+- Review via adapted pr-review skill (tero citations, W2 schemas/StructuredResponse, CommonMemory facade, C0 gate, M1, dev-workflow, guards, hygiene/security, append-only, tero-first); merge if +ve.
+- Tero-first, dev-workflow, guards followed for changes.
+
+See compact, readiness, PR for details. Update docs + tero before land.
 - [x] Basic prompt construction
 - [~] Tero-MCP client integration — *opt-in client + docs; requires sibling `tero-mcp` + index (see [docs/TERO.md](docs/TERO.md)); errors still swallowed (POC-4)*
 - [~] Minimal TUI foundation — *UI present; console entrypoint broken (`main` missing, POC-1)*
@@ -92,3 +107,9 @@ For honest status vs intent (including known P0/P1 gaps), see **[docs/INTENT_AND
 - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture.
 - Security and resource management concerns should be considered from MVP onward, even if full implementation lands in Production.
 - Prefer updating checkboxes here when code lands; keep narrative detail in the intent/gap analysis.
+
+### Appended: W2 + C0 fix for PR#12 (2026-07-09)
+- W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green).
+- Part of cab branch PR#12 to dev. Docs/AGENTS/kickoffs updated per process.
+- After tero update + checks: pr-review (rubric adapted for workspace tero/W2/C0/M1/guards) + merge.
+- Tero-cited from wsfull compact + readiness (see dev-docs). dev-workflow + guards followed.

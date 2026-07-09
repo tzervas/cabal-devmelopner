@@ -162,6 +162,22 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 
 **Exit:** PHASE Production exit criteria.
 
+## Wave Updates (W2 Facade + Cabal Integration, 2026-07-09)
+
+As part of wsfull PR process and doc/tero updates:
+
+- W2 CommonMemory facade implementation + AgentDomain M1: CommonMemoryAdapter (query returns cited StructuredResponse; domains TERO etc), Structured* W2 schemas in core/schemas.py (codegen'd from dev-docs/schemas/).
+- Wiring in agent (prompt/agent/tero_client): facade primary for tero queries + memory_contexts in run_structured; supports W2 orch.
+- PR #12 (cab/a1-a3-tui-errors-tests → dev): facade, A1-A3 (TUI/errors/tests), integration, doc updates (incl. this, AGENTS, INTENT, PHASE, TERO, README, .claude/kickoffs/README.md), tero reindex.
+- Kickoffs, agent context (AGENTS.md), claude files updated to latest (facade, W2 schemas, tero-first, dev-workflow, branch/worktree guards, hygiene, C0/M1).
+- Tero indexes run post-docs (via /root/git/scripts/update-tero.sh cabal-devmelopner), committed to PR.
+- Integration via cabal, tero: local tero discovery; full workspace targets per WORKSPACE_CABAL_TERO_READINESS.md; hygiene/security applied.
+- Reviews via pr-review skill (adapted: emphasize tero citations, W2/StructuredResponse, CommonMemory facade, C0 honesty gate, M1 domains from memory-gate, dev-workflow, guards, hygiene/security, append-only, tero-first, parameterized skills); if positive no critical blockers, merge with gh pr merge --auto.
+- State from wsfull-wave-2026-07-09-compact.md (deliverables: W2 facade, C0/M1 leafs, local models, skills, hygiene), WORKSPACE_CABAL_TERO_READINESS.md (W2 facade cabal integration post-wave, parameterization).
+- Docs + tero always updated in PR process (tero-first before edits). Gaps in OPEN_ISSUES. Follow dev-workflow for authoring.
+
+See AGENTS.md for tero-first + facade usage.
+
 ---
 
 ## 5. Dependency graph (high level)
@@ -292,3 +308,10 @@ Each PR should be independently mergeable to `dev`. Suggested titles match GitHu
 | E22-1 | Security scanning toolkit epic | Security direction |
 
 Local product docs: PHASE, INTENT_AND_GAP_ANALYSIS, OPEN_ISSUES, TERO.
+
+### Appended: PR#12 W2 facade + C0 resolution (2026-07-09)
+- Integrated W2 schemas (Structured*, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORY_GATE/LANG_*).
+- Agent uses facade for tero-first context in StructuredResponse. C0 fix: ERROR emitted on facade tero fails.
+- Doc updates + kickoffs + AGENTS + tero reindex part of PR process.
+- Next: pr-review (one agent, adapted rubric), merge to dev, then main + pull-down propagate.
+- Grounded in wsfull-wave-2026-07-09-compact.md (Tero: workspacecabalteroreadiness sections), dev-workflow, guards.

@@ -325,8 +325,20 @@ print(r.get('kind'), len(r.get('items') or []))
 - [x] `TeroMCPClient` one-shot stdio client with token + envelope unwrap
 - [x] Agent injects `text_search` hits into the prompt when enabled
 - [x] CLI `--use-tero` and TUI `USE_TERO=true`
+- [x] Structured Prompt/Response schemas (core/schemas.py) + text_search_structured + run_structured (enables lang_refs, orchestration optionals, clean tero memory for dual-index + agent layers)
 - [ ] Long-lived MCP session (shared process, tool discovery framework)
 - [ ] Configurable index per-repo without sibling layout assumptions
 - [ ] Layer-2 / embeddings / RAG (Production roadmap — see `PHASE.md`)
 
 Upstream package: sibling **`tero-mcp`** (`tero-mcp-lite`). Full Rust stack: Mycelium `mycelium-tero` / `tero-mcp` binary (DN-87).
+
+### W2 Facade Updates (2026-07-09 PR process)
+Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDomain (M1 from memory-gate-rs) + returns W2 StructuredResponse (with citations, never silent refusals per DN-87). Wired in SimpleAgent.run_structured (core/agent.py) for TERO domain; legacy compat. 
+Docs (TERO, AGENTS, ROADMAP, INTENT, PHASE, README, .claude/kickoffs/README.md) + tero index updated as part of PR #12 (cab/a1-a3-tui-errors-tests). 
+Run /root/git/scripts/update-tero.sh cabal-devmelopner after doc changes. See facade+schemas in core/schemas.py, integration in WORKSPACE_CABAL_TERO_READINESS.md + wsfull-wave-2026-07-09-compact.md.
+Tero-first, dev-workflow, guards enforced. Parameterized skills + hygiene used. C0/M1 applied.
+
+### Post C0 Fix (2026-07-09)
+- After facade wiring, tero error path now guarantees ERROR event emission in agent (C0 never-silent) when facade returns refusal.
+- Test updated and passes. Part of PR#12 updates. Tero index will reflect after regen.
+- See AGENTS.md Post C0 Fix section + wsfull compact for details/cites.
