@@ -10,7 +10,7 @@ It is currently in **PoC** stage. Status is intentionally conservative: see the 
 - Optional **Tero-MCP** integration for cited corpus context (docs, decisions, issues) — requires sibling setup
 - Event-driven architecture (easy to extend with new interfaces)
 - Agent loop scaffold (today: single-shot generation; multi-iteration not yet real)
-- CLI works; TUI code exists (**entrypoint currently broken** — tracked as POC-1)
+- CLI works; TUI code + entrypoint works (POC-1/POC-3 fixed in PR#12 cab/a1-a3); still PoC surface (see docs)
 
 > **Not yet:** file/tools loop, verification, multi-agent, or zero-config Tero.
 
@@ -67,10 +67,10 @@ uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-
 export XAI_API_KEY=...
 uv run cabal-devmelopner "High-level orch review" --provider xai --model grok-4.5 --use-tero
 
-# TUI (intended entrypoint — currently fails until POC-1 lands)
+# TUI (entrypoint fixed PR#12 A1; PoC surface)
 uv run cabal-devmelopner-tui
 
-# TUI with Tero (once entrypoint is fixed)
+# TUI with Tero
 USE_TERO=true uv run cabal-devmelopner-tui
 ```
 

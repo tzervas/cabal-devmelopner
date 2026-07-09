@@ -3,13 +3,13 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-09.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 151
+- **Items:** 156
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (151 entries)
+## doc (156 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -27,11 +27,12 @@
 | `agents--latest-state-w2-facade-integration-2026-07-09` | section | — | Latest State (W2 Facade + Integration, 2026-07-09) | `AGENTS.md:112` | — | - W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO,… |
 | `agents--post-c0-fix-for-pr12-2026-07-09-appended` | section | — | Post C0 Fix for PR#12 (2026-07-09, appended) | `AGENTS.md:129` | — | - CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract… |
 | `agents--pr12-reviewmerge-agent-2026-07-09-appended` | section | — | PR#12 Review+Merge Agent (2026-07-09 appended) | `AGENTS.md:142` | — | - Tero-first (MCP + script): teroidentify + textsearch "cabal W2 facade" "C0 PR#12" "dev-docs wsfull-wave-2026-07-09-compact" (hits: workspacecabalteroreadines… |
+| `agents--honest-docs-closure-chore-honest-docs-post-w2-2026-07-09-appended` | section | — | Honest docs closure (chore/honest-docs-post-w2, 2026-07-09 appended) | `AGENTS.md:161` | — | - Tero-first (MCP identify + textsearch "W2 Facade"\|"C0"\|"POC"\|"wsfull-wave" + cite reads of dev-docs/waves/ + WORKSPACE... before greps/edits). Read cited + P… |
 | `phase` | section | — | cabal-devmelopner — Development Phases | `PHASE.md:1` | — | This document tracks the phased development of cabal-devmelopner. |
 | `phase--poc-phase-current` | section | — | PoC Phase (Current) | `PHASE.md:11` | — | Goal: Validate core architecture and get a working, extensible agent. |
 | `phase--deliverables` | section | — | Deliverables | `PHASE.md:15` | — | - [x] Project skeleton + installable CLI |
 | `phase--recent-wave-updates-w2-facade-integration-2026-07-09` | section | — | Recent Wave Updates (W2 Facade + Integration, 2026-07-09) | `PHASE.md:22` | — | As part of wsfull PR process: |
-| `phase--exit-criteria` | section | — | Exit Criteria | `PHASE.md:44` | — | PoC not exited until P0 entrypoint is fixed and testing/stabilization is honest about remaining partials. |
+| `phase--exit-criteria` | section | — | Exit Criteria | `PHASE.md:44` | — | PoC not exited until iteration/feedback (POC-6) and testing/stabilization (POC-7) are honest; TUI entrypoint (POC-1) + Tero error surfacing (POC-4) addressed i… |
 | `phase--mvp-phase` | section | — | MVP Phase | `PHASE.md:57` | — | Goal: Make cabal-devmelopner a practical daily co-dev tool. |
 | `phase--key-features` | section | — | Key Features | `PHASE.md:61` | — | - Full-featured TUI (status, progress, logs, task management) |
 | `phase--exit-criteria-2` | section | — | Exit Criteria | `PHASE.md:72` | — | - Comfortable to use for real development work. |
@@ -40,6 +41,7 @@
 | `phase--exit-criteria-3` | section | — | Exit Criteria | `PHASE.md:97` | — | - Can reliably run long development sessions with minimal human intervention. |
 | `phase--notes` | section | — | Notes | `PHASE.md:105` | — | - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture. |
 | `phase--appended-w2-c0-fix-for-pr12-2026-07-09` | section | — | Appended: W2 + C0 fix for PR#12 (2026-07-09) | `PHASE.md:111` | — | - W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green). |
+| `phase--honest-poc-status-alignment-chore-honest-docs-post-w2-2026-07-09` | section | — | Honest PoC status alignment (chore/honest-docs-post-w2, 2026-07-09) | `PHASE.md:117` | — | - Updated lagging PoC bullets + exit criteria for TUI (now entrypoint + Task met post A1-A3) and Tero error handling (C0/POC-4 addressed, facade path). |
 | `readme` | other | — | cabal-devmelopner | `README.md:1` | — | cabal-devmelopner is a repo-agnostic development agent designed for long-running, high-quality coding assistance. |
 | `readme--features-poc` | section | — | Features (PoC) | `README.md:7` | — | - Uses Grok via the raw xAI API |
 | `readme--setup-recommended-uv` | section | — | Setup (Recommended: UV) | `README.md:17` | — | This project uses uv for Python version management, dependency resolution, and running. |
@@ -52,8 +54,8 @@
 | `readme--running` | section | — | Running | `README.md:60` | — | uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b |
 | `readme--local-self-hosted-default-gpu-on-5080-full-pipeline-with-tero-w2-schemas` | other | — | Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas) | `README.md:63` | — | uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b |
 | `readme--frontier-explicit` | other | — | Frontier explicit | `README.md:66` | — | export XAIAPIKEY=... |
-| `readme--tui-intended-entrypoint-currently-fails-until-poc-1-lands` | other | POC-1 | TUI (intended entrypoint — currently fails until POC-1 lands) | `README.md:70` | — | uv run cabal-devmelopner-tui |
-| `readme--tui-with-tero-once-entrypoint-is-fixed` | other | — | TUI with Tero (once entrypoint is fixed) | `README.md:73` | — | USETERO=true uv run cabal-devmelopner-tui |
+| `readme--tui-entrypoint-fixed-pr12-a1-poc-surface` | other | — | TUI (entrypoint fixed PR#12 A1; PoC surface) | `README.md:70` | — | uv run cabal-devmelopner-tui |
+| `readme--tui-with-tero` | other | — | TUI with Tero | `README.md:73` | — | USETERO=true uv run cabal-devmelopner-tui |
 | `readme--architecture-notes` | section | — | Architecture Notes | `README.md:82` | — | - EventBus: Central communication mechanism (producer/consumer model) |
 | `readme--documentation` | section | — | Documentation | `README.md:89` | — | — |
 | `readme--development-phases` | section | — | Development Phases | `README.md:101` | — | See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed. |
@@ -69,18 +71,19 @@
 | `intentandgapanalysis--poc-exit-criteria` | section | — | PoC exit criteria | `docs/INTENT_AND_GAP_ANALYSIS.md:84` | — | — |
 | `intentandgapanalysis--4.-critical-gaps` | section | — | 4. Critical gaps | `docs/INTENT_AND_GAP_ANALYSIS.md:94` | — | Intent: coding assistance that acts on repositories. |
 | `intentandgapanalysis--4.1-not-a-development-agent-yet` | section | — | 4.1 Not a development agent yet | `docs/INTENT_AND_GAP_ANALYSIS.md:96` | — | Intent: coding assistance that acts on repositories. |
-| `intentandgapanalysis--4.2-tui-entrypoint-broken-p0` | section | — | 4.2 TUI entrypoint broken (P0) | `docs/INTENT_AND_GAP_ANALYSIS.md:106` | — | cabal-devmelopner-tui → ImportError: cannot import name 'main' |
-| `intentandgapanalysis--4.3-tero-improved-but-incomplete` | section | — | 4.3 Tero: improved but incomplete | `docs/INTENT_AND_GAP_ANALYSIS.md:114` | — | Landed improvements (dev): sibling defaults, env overrides, token auth, MCP content envelope unwrap, items-based agent formatting, docs/TERO.md. |
-| `intentandgapanalysis--4.4-agent-loop-does-not-iterate` | section | — | 4.4 Agent loop does not iterate | `docs/INTENT_AND_GAP_ANALYSIS.md:128` | — | if iteration == 1: |
-| `intentandgapanalysis--4.5-empty-runtime-dependencies` | section | — | 4.5 Empty runtime dependencies | `docs/INTENT_AND_GAP_ANALYSIS.md:138` | — | dependencies = [] |
-| `intentandgapanalysis--4.6-tui-bypasses-task-type` | section | — | 4.6 TUI bypasses `Task` type | `docs/INTENT_AND_GAP_ANALYSIS.md:146` | — | Duck-typed type("Task", (), {...})() instead of Task dataclass. |
-| `intentandgapanalysis--4.7-status-drift-pre-this-docs-update` | section | — | 4.7 Status drift (pre this docs update) | `docs/INTENT_AND_GAP_ANALYSIS.md:150` | — | PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-iteration remained nominal. Prefer checkboxes that match [OPENISSUES.md](OPENISSUES.… |
-| `intentandgapanalysis--5.-secondary-structural-gaps` | section | — | 5. Secondary / structural gaps | `docs/INTENT_AND_GAP_ANALYSIS.md:156` | — | — |
-| `intentandgapanalysis--6.-what-is-solid-keep` | section | — | 6. What is solid (keep) | `docs/INTENT_AND_GAP_ANALYSIS.md:172` | — | - Clear phase model (PoC → MVP → Production) |
-| `intentandgapanalysis--7.-gap-map-by-phase` | section | — | 7. Gap map by phase | `docs/INTENT_AND_GAP_ANALYSIS.md:185` | — | INTENT                          CURRENT STATE |
-| `intentandgapanalysis--8.-recommended-priority-close-poc-honestly` | section | — | 8. Recommended priority (close PoC honestly) | `docs/INTENT_AND_GAP_ANALYSIS.md:207` | — | 1. POC-1 Fix TUI main entrypoint (+ optional main). |
-| `intentandgapanalysis--9.-bottom-line` | section | — | 9. Bottom line | `docs/INTENT_AND_GAP_ANALYSIS.md:221` | — | Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context. |
-| `intentandgapanalysis--appended-post-w2-facade-c0-2026-07-09-pr12-process` | section | — | Appended post-W2 facade + C0 (2026-07-09, PR#12 process) | `docs/INTENT_AND_GAP_ANALYSIS.md:230` | — | - W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory. |
+| `intentandgapanalysis--4.2-tui-entrypoint-p0-addressed-pr12` | section | — | 4.2 TUI entrypoint (P0 — addressed PR#12) | `docs/INTENT_AND_GAP_ANALYSIS.md:106` | — | Entrypoint now present (def main() + main guard in app.py; console script wired). TUI uses real Task dataclass (POC-3). Error events wired (A3). |
+| `intentandgapanalysis--4.3-tero-improved-but-incomplete` | section | — | 4.3 Tero: improved but incomplete | `docs/INTENT_AND_GAP_ANALYSIS.md:112` | — | Landed improvements (dev): sibling defaults, env overrides, token auth, MCP content envelope unwrap, items-based agent formatting, docs/TERO.md. |
+| `intentandgapanalysis--4.4-agent-loop-does-not-iterate` | section | — | 4.4 Agent loop does not iterate | `docs/INTENT_AND_GAP_ANALYSIS.md:126` | — | if iteration == 1: |
+| `intentandgapanalysis--4.5-empty-runtime-dependencies` | section | — | 4.5 Empty runtime dependencies | `docs/INTENT_AND_GAP_ANALYSIS.md:136` | — | dependencies = [] |
+| `intentandgapanalysis--4.6-tui-bypasses-task-type` | section | — | 4.6 TUI bypasses `Task` type | `docs/INTENT_AND_GAP_ANALYSIS.md:144` | — | Duck-typed type("Task", (), {...})() instead of Task dataclass. |
+| `intentandgapanalysis--4.7-status-drift-pre-updates` | section | — | 4.7 Status drift (pre updates) | `docs/INTENT_AND_GAP_ANALYSIS.md:148` | — | Prior docs lagged post-code (e.g. "broken" after A1-A3 in PR#12). This + parallel edits in PHASE/ROADMAP/OPENISSUES close the honesty gap (chore/honest-docs-po… |
+| `intentandgapanalysis--5.-secondary-structural-gaps` | section | — | 5. Secondary / structural gaps | `docs/INTENT_AND_GAP_ANALYSIS.md:154` | — | — |
+| `intentandgapanalysis--6.-what-is-solid-keep` | section | — | 6. What is solid (keep) | `docs/INTENT_AND_GAP_ANALYSIS.md:170` | — | - Clear phase model (PoC → MVP → Production) |
+| `intentandgapanalysis--7.-gap-map-by-phase` | section | — | 7. Gap map by phase | `docs/INTENT_AND_GAP_ANALYSIS.md:183` | — | INTENT                          CURRENT STATE |
+| `intentandgapanalysis--8.-recommended-priority-close-poc-honestly` | section | — | 8. Recommended priority (close PoC honestly) | `docs/INTENT_AND_GAP_ANALYSIS.md:205` | — | 1. POC-6 (remaining) Document or implement iteration/feedback (still early-return on iter=1); adjust PHASE if needed. |
+| `intentandgapanalysis--9.-bottom-line` | section | — | 9. Bottom line | `docs/INTENT_AND_GAP_ANALYSIS.md:218` | — | Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context. |
+| `intentandgapanalysis--appended-post-w2-facade-c0-2026-07-09-pr12-process` | section | — | Appended post-W2 facade + C0 (2026-07-09, PR#12 process) | `docs/INTENT_AND_GAP_ANALYSIS.md:227` | — | - W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory. |
+| `intentandgapanalysis--honest-status-alignment-chore-honest-docs-post-w2-2026-07-09` | section | — | Honest status alignment (chore/honest-docs-post-w2, 2026-07-09) | `docs/INTENT_AND_GAP_ANALYSIS.md:233` | — | - Fixed lagging text in PoC snapshot/checklist/gaps/priority/bottom-line (TUI entrypoint/POC-1/3, Tero C0/POC-4 now accurate per merged code; iteration kept pa… |
 | `localchecks` | section | — | Local checks (CI parity) | `docs/LOCAL_CHECKS.md:1` | — | GitHub Actions workflows in this repo are manual only (workflowdispatch). |
 | `localchecks--run-everything-the-remote-job-would-run` | section | — | Run everything the remote job would run | `docs/LOCAL_CHECKS.md:6` | — | ./scripts/check.sh |
 | `localchecks--tero-index` | section | — | Tero index | `docs/LOCAL_CHECKS.md:19` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root "$(pwd)" |
@@ -108,9 +111,10 @@
 | `openissues--p3-production-oriented-track-only` | section | — | P3 — Production-oriented (track only) | `docs/OPEN_ISSUES.md:48` | — | — |
 | `openissues--suggested-github-issue-titles` | section | — | Suggested GitHub issue titles | `docs/OPEN_ISSUES.md:61` | — | 1. [P0] Fix cabal-devmelopner-tui entrypoint (missing main) |
 | `openissues--out-of-scope-for-the-docs-pr-that-added-this-file` | section | — | Out of scope for the docs PR that added this file | `docs/OPEN_ISSUES.md:74` | — | - Implementing the fixes above |
+| `openissues--status-alignment-post-w2-c0-pr12-appended-2026-07-09-chore-honest-docs-post-w2` | section | — | Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2) | `docs/OPEN_ISSUES.md:79` | — | - POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now cabal-devmelopner-tui has main(); TUI imports/uses core.types.Task). |
 | `roadmap` | note | — | cabal-devmelopner — Product Roadmap | `docs/ROADMAP.md:1` | Plan (2026-07-08) | Status: Plan (2026-07-08) |
 | `roadmap--1.-north-star` | section | — | 1. North star | `docs/ROADMAP.md:11` | — | cabal-devmelopner is a repo-agnostic development agent: long-running, event-driven, multi-surface (CLI / TUI / future Discord), with strong Tero integration fo… |
-| `roadmap--2.-current-position-summary` | section | — | 2. Current position (summary) | `docs/ROADMAP.md:32` | — | PoC exit requires P0 TUI launch + honest tests/stabilization. MVP exit requires tools + verification + usable TUI/config. Production is multi-agent + security… |
+| `roadmap--2.-current-position-summary` | section | — | 2. Current position (summary) | `docs/ROADMAP.md:32` | — | PoC exit requires honest tests/stabilization + iteration (POC-6); TUI launch (POC-1) + Tero error surfacing (POC-4) addressed in PR#12 (A1-A3). MVP exit requir… |
 | `roadmap--3.-architecture-target-incremental` | section | — | 3. Architecture target (incremental) | `docs/ROADMAP.md:49` | — | ┌─────────────┐  ┌─────────────┐  ┌──────────────┐ |
 | `roadmap--4.-waves` | section | — | 4. Waves | `docs/ROADMAP.md:84` | — | Goal: Documented entrypoints work; status docs match code; minimal regression net. |
 | `roadmap--wave-a-poc-close-out-make-claims-true` | section | — | Wave A — PoC close-out (make claims true) | `docs/ROADMAP.md:86` | — | Goal: Documented entrypoints work; status docs match code; minimal regression net. |
@@ -130,6 +134,7 @@
 | `roadmap--10.-success-metrics-lightweight` | section | — | 10. Success metrics (lightweight) | `docs/ROADMAP.md:288` | — | — |
 | `roadmap--11.-references-tero-cited` | section | — | 11. References (Tero-cited) | `docs/ROADMAP.md:298` | — | Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO. |
 | `roadmap--appended-pr12-w2-facade-c0-resolution-2026-07-09` | section | — | Appended: PR#12 W2 facade + C0 resolution (2026-07-09) | `docs/ROADMAP.md:312` | — | - Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG). |
+| `roadmap--honest-docs-update-chore-honest-docs-post-w2` | section | — | Honest docs update (chore/honest-docs-post-w2) | `docs/ROADMAP.md:319` | — | - Aligned lagging current-position table + Wave A exit text post-PR#12 merges (TUI entrypoint now accurate; POC-1/3/4 closed in code). |
 | `tero` | section | — | Tero-MCP integration | `docs/TERO.md:1` | — | [Tero](https://github.com/tzervas) is a Layer-1 corpus index query surface: cited lookups over docs, decisions, issues, changelog entries, and skills. cabal-de… |
 | `tero--what-tero-is-and-is-not` | section | — | What Tero is (and is not) | `docs/TERO.md:9` | — | Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth. |
 | `tero--expected-sibling-layout` | section | — | Expected sibling layout | `docs/TERO.md:22` | — | Defaults assume a shared parent directory (e.g. ~/git or /root/git): |

@@ -75,3 +75,12 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 
 - Implementing the fixes above
 - Changing runtime behavior (except via future code PRs)
+
+## Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2)
+- POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now `cabal-devmelopner-tui` has main(); TUI imports/uses core.types.Task).
+- POC-4 (Tero errors silent): addressed by C0 fix + A3 (agent now emits EventType.ERROR "CommonMemory facade error..." on facade refusal or except; test_tero_error_emits_event asserts). Facade keeps W2 "always StructuredResponse" (incl refusal); agent owns observability.
+- POC-8 (provider ERROR): covered in test_provider_error_emits_and_refusal + agent emit.
+- POC-7 (tests): expanded (now covers EventBus, Task, tero+provider error paths; 6 tests green post PR#12).
+- POC-2/5/6/9 remain open (Tero docs honesty, one-shot MCP, multi-iter dead code, zero-config).
+- Conservative: P0/P1 lists above left as backlog reference; resolved items noted here. Cross-cite wsfull-wave-2026-07-09-compact.md §Swarm + PR#12, WORKSPACE_CABAL_TERO_READINESS.md, AGENTS.md (post-c0-fix + review-merge).
+- Tero-first (text_search W2/C0/POC + query hits), append-only, no code edits. Update-tero/checks after. See ROADMAP Wave A for execution history.
