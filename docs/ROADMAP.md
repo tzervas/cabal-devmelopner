@@ -25,6 +25,8 @@ It is **not** Mycelium’s ADK phylum (RFC-0023 / M-671) and **not** mycelium-te
 
 **Honesty rule (from DN-87 §6):** Layer-1 answers with citations only; improved-on-RAG stays aspirational until measured. Cabal must not claim “true RAG” before PROD-6.
 
+**Agent excavation rule:** Orchestrators and leaf subagents investigating siblings or designing features **use Tero first** (see [AGENTS.md](../AGENTS.md#subagents-and-multi-repo-excavation-required-when-tero-is-available) and [TERO.md](TERO.md#subagents-must-excavate-with-tero-too)). Inject the checklist into every subagent prompt; do not assume children discover MCP tools on their own.
+
 ---
 
 ## 2. Current position (summary)

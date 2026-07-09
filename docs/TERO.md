@@ -240,6 +240,17 @@ Every Tero tool requires `"token"` matching an entry in `TERO_TOKENS` (local def
 
 If `grok mcp doctor tero` is healthy but a given session still lacks tools: `/mcps` → **`r`**, or start a new session. Tool names are always namespaced: `tero__text_search`, `tero__query_by_id`, etc. Discover schemas with `search_tool`, then call via `use_tool`.
 
+### Subagents must excavate with Tero too
+
+When an orchestrator spawns leaf agents to investigate sibling tools (MCP servers, security wrappers, wave patterns, etc.):
+
+1. **Register Tero before the wave** so children inherit a session with `tero__*` tools (or re-register and relaunch if tools were missing).
+2. **Inject the excavation checklist** from [`AGENTS.md`](../AGENTS.md#subagents-and-multi-repo-excavation-required-when-tero-is-available) into every subagent prompt — do not rely on “the child will remember.”
+3. Leaves should **Tero-search the target name + domain keywords**, follow `query_by_id` / `cross_ref` on hits, then open citations, then inspect the local git checkout.
+4. Orchestrator synthesizes leaf reports and may re-query Tero for ids the leaves discovered.
+
+Cabal’s own future multi-agent waves should follow the same rule: **Tero for corpus memory, tools for code, never either alone.**
+
 ### Tools (all require `token`)
 
 | Tool | Arguments (plus `token`) | Purpose |
