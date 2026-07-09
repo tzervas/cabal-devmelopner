@@ -108,3 +108,33 @@ USE_TERO=true uv run cabal-devmelopner-tui
 ```
 
 Env overrides: `TERO_MCP_PROJECT`, `TERO_INDEX_PATH`, `TERO_TOKENS`, `TERO_TOKEN` (defaults assume `../tero-mcp` and `../mycelium/docs/tero-index/index.json` under the same git parent).
+
+## Latest State (W2 Facade + Integration, 2026-07-09)
+
+- W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO, CONTEXT, MEMORY_GATE, LANG_RUST, LANG_PYTHON, WORKSPACE, INFRASTRUCTURE etc.) landed in core/schemas.py (from codegen + dev-docs/schemas/common_memory_facade + W2-STRUCTURED-SCHEMAS.md).
+- Wired in agent: SimpleAgent (core/agent.py) uses self.facade.query(AgentDomain.TERO, ...) in run_structured to drive memory_contexts + last StructuredResponse (W2: StructuredResponse with citations, MemoryContext, explain); StructuredPrompt for prompt builder. Legacy tero_client path compat preserved. Errors via EventBus (never silent, C0).
+- Supports domains for scoped: TERO (primary), CONTEXT, MEMORY_GATE, LANG_*, WORKSPACE etc. for cabal integration.
+- PR #12: cab/a1-a3-tui-errors-tests → dev (facade + wiring + A1-A3 TUI/errors/tests + docs + tero).
+- Integration via cabal, tero: tero_client auto-discovers local docs/tero-index; facade primary for queries in agent; full workspace (dev-docs readiness post wsfull).
+- Hygiene, C0/M1: applied per leaf (C0 honesty gate on context-mcp, M1 on memory-gate); cabal: ruff, checks, parameterized hygiene/security.
+- Kickoffs, agent context (this AGENTS.md), claude files (.claude/kickoffs/README.md) updated to latest: facade refs, W2 schemas/StructuredResponse, tero-first, dev-workflow, branch/worktree guards, append-only.
+- Use: `uv run cabal-devmelopner "..." --use-tero --local-model ...` (prefers local-ollama + tero + W2 Structured); TUI with USE_TERO.
+- Docs (AGENTS, README, ROADMAP, INTENT_AND_GAP_ANALYSIS, TERO, PHASE, kickoffs) + tero updated as part of PR process.
+- See: wsfull-wave-2026-07-09-compact.md (deliverables: W2, local models, hygiene, C0/M1, parameterized skills), WORKSPACE_CABAL_TERO_READINESS.md (facade integration, tero indexing, dev branches).
+- Tero-first, dev-workflow, guards (branch-guard, worktree-guard) followed. After edits: hygiene --reload, update-tero.sh, tero search.
+- Next: PR review (pr-review skill adapted), merge --auto if no blockers, propagate.
+
+Update this file + kickoffs + tero after any changes. Tero-first always (use script or MCP). Cite tero: e.g. agents--latest-state-w2-facade-integration-2026-07-09.
+
+## Post C0 Fix for PR#12 (2026-07-09, appended)
+
+- CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract + W2 honesty), but agent.run_structured did not surface to EventBus.ERROR when facade path used (because query never raised; legacy elif unreachable since __init__ wires facade from tero_client).
+- Fix (C0 "never silent" + POC-4/A3): in agent.py, after facade.query, if sresp.is_refusal() then emit EventType.ERROR with "CommonMemory facade error: ..." using detail from extended["error"] or answer. This ensures observability for tero fails (UIs, tests, logs) while facade keeps "always StructuredResponse" contract.
+- Updated test_tero_error_emits_event (tests/test_smoke.py): now asserts "CommonMemory facade error" / "facade query failed"; docstring updated to reflect facade+agent responsibility for ERROR emit.
+- Verified: direct pytest equiv + ruff format/lint + checks pass (test_tero_error_emits_event + provider error path both green).
+- This closes the last C0 violation in the facade wiring tranche. PR#12 now clean for re-review/merge.
+- Tero cites (from prior): workspacecabalteroreadiness--w2-structured-schemas-orch-started-2026-07-08 etc. See dev-docs/waves/wsfull-wave-2026-07-09-compact.md §Post-Review + swarm status.
+- Followed: dev-workflow (small targeted edit + test first), append-only, branch-guard (on cab/...), tero-first (cited before edit).
+- After: will run update-tero.sh cabal-devmelopner ; commit to branch (included in PR#12); then pr-review + merge.
+
+Tero-first + update-tero after all doc edits. Guards respected.

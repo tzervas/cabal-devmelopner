@@ -13,6 +13,7 @@ from textual.widgets import Button, Footer, Header, Input, RichLog, Static
 
 from cabal_devmelopner.core.agent import SimpleAgent
 from cabal_devmelopner.core.events import Event, EventBus, EventType
+from cabal_devmelopner.core.types import Task
 from cabal_devmelopner.mcp.tero_client import TeroMCPClient
 from cabal_devmelopner.providers.xai import XaiProvider
 
@@ -105,9 +106,12 @@ class CabalDevmelopnerTUI(App):
         if not self.agent:
             return
         try:
-            task = type(
-                "Task", (), {"id": "tui-task", "description": task_description, "max_iterations": 3}
-            )()
+            # Use real Task dataclass (POC-3); was duck-type before A1/A2.
+            task = Task(
+                id="tui-task",
+                description=task_description,
+                max_iterations=3,
+            )
             result = self.agent.run(task)
             self.call_from_thread(
                 self.log_widget.write, f"\n[bold green]=== Final Result ===[/]\n{result}"
@@ -134,3 +138,13 @@ class CabalDevmelopnerTUI(App):
     def _on_error(self, event: Event) -> None:
         err = event.payload.get("error", "Unknown error")
         self.call_from_thread(self.log_widget.write, f"[bold red]Error:[/] {err}")
+
+
+def main() -> None:
+    """Entrypoint for `cabal-devmelopner-tui` console script (A1/POC-1)."""
+    app = CabalDevmelopnerTUI()
+    app.run()
+
+
+if __name__ == "__main__":
+    main()

@@ -60,13 +60,12 @@ Full setup (env vars, **cold-start Grok MCP install** when a session lacks `tero
 ## Running
 
 ```bash
-export XAI_API_KEY="your-xai-key"
+# Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas)
+uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b
 
-# CLI
-uv run cabal-devmelopner "Improve the public API of the compiler frontend"
-
-# CLI with Tero context
-uv run cabal-devmelopner "Improve the public API of the compiler frontend" --use-tero
+# Frontier explicit
+export XAI_API_KEY=...
+uv run cabal-devmelopner "High-level orch review" --provider xai --model grok-4.5 --use-tero
 
 # TUI (intended entrypoint — currently fails until POC-1 lands)
 uv run cabal-devmelopner-tui
@@ -106,3 +105,24 @@ See [PHASE.md](PHASE.md) for the roadmap. PoC is **not exited** until P0 TUI ent
 ## License
 
 MIT
+
+## Latest Wave (W2 + Facade, PR process)
+
+W2 CommonMemoryAdapter + AgentDomain (M1) fully wired in core/schemas.py + agent.py (run_structured uses facade for tero domain queries, StructuredResponse + citations). Legacy compat + provider opts.
+
+C0 critical fixed (2026-07-09): facade errors now cause agent to emit EventBus ERROR (never silent) even on explicit refusal return; test updated + passes.
+
+See AGENTS.md for full, dev-docs/waves/wsfull-wave-2026-07-09-compact.md (Tero cite: workspacecabalteroreadiness--wave-2026-07-09-complete-compacted-for-context-optimization), WORKSPACE_CABAL_TERO_READINESS.md.
+
+Part of PR#12. After doc/tero updates + checks, pr-review (adapted rubric: tero-first, W2, C0, M1, guards, hygiene) + merge if clean.
+
+## Post-fix append (C0 resolved) 2026-07-09
+
+- W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (run_structured uses facade for TERO-domain tero queries + W2 StructuredResponse/Prompt with citations).
+- PR #12 (cab/a1-a3-tui-errors-tests) includes facade, A1-A3 (TUI entry/errors/tests), wiring, doc updates (AGENTS/ROADMAP/INTENT/TERO/PHASE/kickoffs/README), tero re-index.
+- Integration: cabal + tero (local index auto-discover), hygiene, C0 (honesty gate), M1 domains. See dev-docs/WORKSPACE_CABAL_TERO_READINESS.md + waves/wsfull-wave-2026-07-09-compact.md .
+- Kickoffs/agent/claude files updated (tero-first, dev-workflow, guards, facade/W2 refs).
+- Tero index + docs updated as part of PR; run update-tero.sh after edits.
+- Prefer: local-ollama + --use-tero + W2 structured (full pipeline). Follow tero-first, hygiene, security, branch/worktree guards, dev-workflow (append-only).
+
+Docs + tero always updated in PR process. See AGENTS.md for agent context. Tero cites: readme--latest-wave-w2-facade-pr-process .

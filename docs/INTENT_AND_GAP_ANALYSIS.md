@@ -19,6 +19,19 @@ This document records product **intent**, **current implementation reality**, an
 
 **Core principles:** repo-agnostic · extensible communications · strong Tero integration · clean architecture.
 
+## Recent Updates (W2 + Facade, as of PR process 2026-07-09)
+
+- W2 schemas + CommonMemory facade implementation landed in core/schemas.py: StructuredResponse/Prompt (W2), Citation, MemoryContext, AgentDomain (M1 mirror from memory-gate-rs: TERO/CONTEXT/MEMORY_GATE/LANG_*/WORKSPACE etc with from_str prefix), CommonMemoryAdapter (query -> StructuredResponse w/ cites, store stub).
+- Wiring in agent (core/agent.py): facade now drives TERO mem_contexts + structured resp in run_structured (C0 honesty: errors surfaced via EventBus, never silent).
+- Integration via cabal + tero (auto local index), hygiene, C0/M1 (ctx feature/ctx-c0-honesty, mint feature/mint-m1-domain-facade).
+- Docs (this, PHASE, ROADMAP, AGENTS, kickoffs/README.md, TERO, README) updated with facade, W2 schemas/StructuredResponse, PR #12, tero, dev-workflow/guards refs.
+- Kickoffs, agent context (AGENTS.md), claude files updated to latest (facade/W2, tero-first, guards).
+- Tero indexes refreshed post-doc changes (update-tero.sh); included in PR #12.
+- PR #12 (cab/a1-a3-tui-errors-tests branch) for review (pr-review skill adapted: tero cites, W2/ facade, C0 gate, M1 domains from memory-gate, dev-workflow, branch/worktree guards, hygiene/security, append-only, tero-first) then merge.
+- See wsfull-wave-2026-07-09-compact.md (W2, local models, parameterized skills, leaf reviews), WORKSPACE_CABAL_TERO_READINESS.md (facade + cabal integration, tero readiness, dev branches).
+
+Update docs + tero as part of PRs. Gaps tracked in OPEN_ISSUES. Tero-first.
+
 ---
 
 ## 2. Current implementation (snapshot)
@@ -213,3 +226,9 @@ Details: [OPEN_ISSUES.md](OPEN_ISSUES.md).
 
 **Largest honesty gap:** claiming full TUI / iterative agent completion ahead of behavior.  
 **Largest product gap:** no tools or verification, so the system cannot act on a codebase.
+
+### Appended post-W2 facade + C0 (2026-07-09, PR#12 process)
+- W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory.
+- C0 blocker fixed: tero errors now emit ERROR events (never silent) when using facade path.
+- Updated docs, AGENTS, kickoffs, tero index as required. See wsfull-wave compact + readiness for citations and full state.
+- Enables PR review/merge, up-merge, propagate. All per dev-workflow, tero-first, append-only.

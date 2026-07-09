@@ -114,6 +114,26 @@
       "summary": "Independent of Grok MCP registration:"
     },
     {
+      "anchor": "agents--latest-state-w2-facade-integration-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Latest State (W2 Facade + Integration, 2026-07-09)",
+      "file": "AGENTS.md",
+      "line": 112,
+      "tag": "Empirical/Declared",
+      "summary": "- W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO,…"
+    },
+    {
+      "anchor": "agents--post-c0-fix-for-pr12-2026-07-09-appended",
+      "family": "doc",
+      "kind": "section",
+      "title": "Post C0 Fix for PR#12 (2026-07-09, appended)",
+      "file": "AGENTS.md",
+      "line": 129,
+      "tag": "Empirical/Declared",
+      "summary": "- CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract…"
+    },
+    {
       "anchor": "phase",
       "family": "doc",
       "kind": "section",
@@ -144,12 +164,22 @@
       "summary": "- [x] Project skeleton + installable CLI"
     },
     {
+      "anchor": "phase--recent-wave-updates-w2-facade-integration-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Recent Wave Updates (W2 Facade + Integration, 2026-07-09)",
+      "file": "PHASE.md",
+      "line": 22,
+      "tag": "Empirical/Declared",
+      "summary": "As part of wsfull PR process:"
+    },
+    {
       "anchor": "phase--exit-criteria",
       "family": "doc",
       "kind": "section",
       "title": "Exit Criteria",
       "file": "PHASE.md",
-      "line": 29,
+      "line": 44,
       "tag": "Empirical/Declared",
       "summary": "PoC not exited until P0 entrypoint is fixed and testing/stabilization is honest about remaining partials."
     },
@@ -159,7 +189,7 @@
       "kind": "section",
       "title": "MVP Phase",
       "file": "PHASE.md",
-      "line": 42,
+      "line": 57,
       "tag": "Empirical/Declared",
       "summary": "Goal: Make cabal-devmelopner a practical daily co-dev tool."
     },
@@ -169,7 +199,7 @@
       "kind": "section",
       "title": "Key Features",
       "file": "PHASE.md",
-      "line": 46,
+      "line": 61,
       "tag": "Empirical/Declared",
       "summary": "- Full-featured TUI (status, progress, logs, task management)"
     },
@@ -179,7 +209,7 @@
       "kind": "section",
       "title": "Exit Criteria",
       "file": "PHASE.md",
-      "line": 57,
+      "line": 72,
       "tag": "Empirical/Declared",
       "summary": "- Comfortable to use for real development work."
     },
@@ -189,7 +219,7 @@
       "kind": "section",
       "title": "Production Phase",
       "file": "PHASE.md",
-      "line": 65,
+      "line": 80,
       "tag": "Empirical/Declared",
       "summary": "Goal: Robust, scalable, multi-agent development system."
     },
@@ -199,7 +229,7 @@
       "kind": "section",
       "title": "Key Features",
       "file": "PHASE.md",
-      "line": 69,
+      "line": 84,
       "tag": "Empirical/Declared",
       "summary": "- Multi-provider support (xAI, Claude, others)"
     },
@@ -209,7 +239,7 @@
       "kind": "section",
       "title": "Exit Criteria",
       "file": "PHASE.md",
-      "line": 82,
+      "line": 97,
       "tag": "Empirical/Declared",
       "summary": "- Can reliably run long development sessions with minimal human intervention."
     },
@@ -219,9 +249,19 @@
       "kind": "section",
       "title": "Notes",
       "file": "PHASE.md",
-      "line": 90,
+      "line": 105,
       "tag": "Empirical/Declared",
       "summary": "- All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture."
+    },
+    {
+      "anchor": "phase--appended-w2-c0-fix-for-pr12-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Appended: W2 + C0 fix for PR#12 (2026-07-09)",
+      "file": "PHASE.md",
+      "line": 111,
+      "tag": "Empirical/Declared",
+      "summary": "- W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green)."
     },
     {
       "anchor": "readme",
@@ -321,27 +361,27 @@
       "file": "README.md",
       "line": 60,
       "tag": "Empirical/Declared",
-      "summary": "export XAIAPIKEY=\"your-xai-key\""
+      "summary": "uv run cabal-devmelopner \"Refactor using memory-gate + tero\" --use-tero --local-model qwen2.5-coder:7b"
     },
     {
-      "anchor": "readme--cli",
+      "anchor": "readme--local-self-hosted-default-gpu-on-5080-full-pipeline-with-tero-w2-schemas",
       "family": "doc",
       "kind": "other",
-      "title": "CLI",
+      "title": "Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas)",
       "file": "README.md",
-      "line": 65,
+      "line": 63,
       "tag": "Empirical/Declared",
-      "summary": "uv run cabal-devmelopner \"Improve the public API of the compiler frontend\""
+      "summary": "uv run cabal-devmelopner \"Refactor using memory-gate + tero\" --use-tero --local-model qwen2.5-coder:7b"
     },
     {
-      "anchor": "readme--cli-with-tero-context",
+      "anchor": "readme--frontier-explicit",
       "family": "doc",
       "kind": "other",
-      "title": "CLI with Tero context",
+      "title": "Frontier explicit",
       "file": "README.md",
-      "line": 68,
+      "line": 66,
       "tag": "Empirical/Declared",
-      "summary": "uv run cabal-devmelopner \"Improve the public API of the compiler frontend\" --use-tero"
+      "summary": "export XAIAPIKEY=..."
     },
     {
       "anchor": "readme--tui-intended-entrypoint-currently-fails-until-poc-1-lands",
@@ -349,7 +389,7 @@
       "kind": "other",
       "title": "TUI (intended entrypoint — currently fails until POC-1 lands)",
       "file": "README.md",
-      "line": 71,
+      "line": 70,
       "tag": "Empirical/Declared",
       "id": "POC-1",
       "summary": "uv run cabal-devmelopner-tui"
@@ -360,7 +400,7 @@
       "kind": "other",
       "title": "TUI with Tero (once entrypoint is fixed)",
       "file": "README.md",
-      "line": 74,
+      "line": 73,
       "tag": "Empirical/Declared",
       "summary": "USETERO=true uv run cabal-devmelopner-tui"
     },
@@ -370,7 +410,7 @@
       "kind": "section",
       "title": "Architecture Notes",
       "file": "README.md",
-      "line": 83,
+      "line": 82,
       "tag": "Empirical/Declared",
       "summary": "- EventBus: Central communication mechanism (producer/consumer model)"
     },
@@ -380,7 +420,7 @@
       "kind": "section",
       "title": "Documentation",
       "file": "README.md",
-      "line": 90,
+      "line": 89,
       "tag": "Empirical/Declared"
     },
     {
@@ -389,7 +429,7 @@
       "kind": "section",
       "title": "Development Phases",
       "file": "README.md",
-      "line": 102,
+      "line": 101,
       "tag": "Empirical/Declared",
       "summary": "See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed."
     },
@@ -399,9 +439,29 @@
       "kind": "section",
       "title": "License",
       "file": "README.md",
-      "line": 106,
+      "line": 105,
       "tag": "Empirical/Declared",
       "summary": "MIT"
+    },
+    {
+      "anchor": "readme--latest-wave-w2-facade-pr-process",
+      "family": "doc",
+      "kind": "section",
+      "title": "Latest Wave (W2 + Facade, PR process)",
+      "file": "README.md",
+      "line": 109,
+      "tag": "Empirical/Declared",
+      "summary": "W2 CommonMemoryAdapter + AgentDomain (M1) fully wired in core/schemas.py + agent.py (runstructured uses facade for tero domain queries, StructuredResponse + ci…"
+    },
+    {
+      "anchor": "readme--post-fix-append-c0-resolved-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Post-fix append (C0 resolved) 2026-07-09",
+      "file": "README.md",
+      "line": 119,
+      "tag": "Empirical/Declared",
+      "summary": "- W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (runstructured uses facad…"
     },
     {
       "anchor": "intentandgapanalysis",
@@ -425,12 +485,22 @@
       "summary": "Core principles: repo-agnostic · extensible communications · strong Tero integration · clean architecture."
     },
     {
+      "anchor": "intentandgapanalysis--recent-updates-w2-facade-as-of-pr-process-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Recent Updates (W2 + Facade, as of PR process 2026-07-09)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 22,
+      "tag": "Empirical/Declared",
+      "summary": "- W2 schemas + CommonMemory facade implementation landed in core/schemas.py: StructuredResponse/Prompt (W2), Citation, MemoryContext, AgentDomain (M1 mirror fr…"
+    },
+    {
       "anchor": "intentandgapanalysis--2.-current-implementation-snapshot",
       "family": "doc",
       "kind": "section",
       "title": "2. Current implementation (snapshot)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 24,
+      "line": 37,
       "tag": "Empirical/Declared",
       "summary": "Approximate application size: ~550+ LOC under src/cabaldevmelopner/."
     },
@@ -440,7 +510,7 @@
       "kind": "section",
       "title": "Architecture (as implemented)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 44,
+      "line": 57,
       "tag": "Empirical/Declared",
       "summary": "CLI / TUI  →  SimpleAgent  →  Provider.complete(prompt)"
     },
@@ -450,7 +520,7 @@
       "kind": "section",
       "title": "3. PoC checklist: intent vs reality",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 57,
+      "line": 70,
       "tag": "Empirical/Declared"
     },
     {
@@ -459,7 +529,7 @@
       "kind": "section",
       "title": "PoC exit criteria",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 71,
+      "line": 84,
       "tag": "Empirical/Declared"
     },
     {
@@ -468,7 +538,7 @@
       "kind": "section",
       "title": "4. Critical gaps",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 81,
+      "line": 94,
       "tag": "Empirical/Declared",
       "summary": "Intent: coding assistance that acts on repositories."
     },
@@ -478,7 +548,7 @@
       "kind": "section",
       "title": "4.1 Not a development agent yet",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 83,
+      "line": 96,
       "tag": "Empirical/Declared",
       "summary": "Intent: coding assistance that acts on repositories."
     },
@@ -488,7 +558,7 @@
       "kind": "section",
       "title": "4.2 TUI entrypoint broken (P0)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 93,
+      "line": 106,
       "tag": "Empirical/Declared",
       "summary": "cabal-devmelopner-tui → ImportError: cannot import name 'main'"
     },
@@ -498,7 +568,7 @@
       "kind": "section",
       "title": "4.3 Tero: improved but incomplete",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 101,
+      "line": 114,
       "tag": "Empirical/Declared",
       "summary": "Landed improvements (dev): sibling defaults, env overrides, token auth, MCP content envelope unwrap, items-based agent formatting, docs/TERO.md."
     },
@@ -508,7 +578,7 @@
       "kind": "section",
       "title": "4.4 Agent loop does not iterate",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 115,
+      "line": 128,
       "tag": "Empirical/Declared",
       "summary": "if iteration == 1:"
     },
@@ -518,7 +588,7 @@
       "kind": "section",
       "title": "4.5 Empty runtime dependencies",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 125,
+      "line": 138,
       "tag": "Empirical/Declared",
       "summary": "dependencies = []"
     },
@@ -528,7 +598,7 @@
       "kind": "section",
       "title": "4.6 TUI bypasses `Task` type",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 133,
+      "line": 146,
       "tag": "Empirical/Declared",
       "summary": "Duck-typed type(\"Task\", (), {...})() instead of Task dataclass."
     },
@@ -538,7 +608,7 @@
       "kind": "section",
       "title": "4.7 Status drift (pre this docs update)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 137,
+      "line": 150,
       "tag": "Empirical/Declared",
       "summary": "PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-iteration remained nominal. Prefer checkboxes that match [OPENISSUES.md](OPENISSUES.…"
     },
@@ -548,7 +618,7 @@
       "kind": "section",
       "title": "5. Secondary / structural gaps",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 143,
+      "line": 156,
       "tag": "Empirical/Declared"
     },
     {
@@ -557,7 +627,7 @@
       "kind": "section",
       "title": "6. What is solid (keep)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 159,
+      "line": 172,
       "tag": "Empirical/Declared",
       "summary": "- Clear phase model (PoC → MVP → Production)"
     },
@@ -567,7 +637,7 @@
       "kind": "section",
       "title": "7. Gap map by phase",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 172,
+      "line": 185,
       "tag": "Empirical/Declared",
       "summary": "INTENT                          CURRENT STATE"
     },
@@ -577,7 +647,7 @@
       "kind": "section",
       "title": "8. Recommended priority (close PoC honestly)",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 194,
+      "line": 207,
       "tag": "Empirical/Declared",
       "summary": "1. POC-1 Fix TUI main entrypoint (+ optional main)."
     },
@@ -587,9 +657,19 @@
       "kind": "section",
       "title": "9. Bottom line",
       "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
-      "line": 208,
+      "line": 221,
       "tag": "Empirical/Declared",
       "summary": "Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context."
+    },
+    {
+      "anchor": "intentandgapanalysis--appended-post-w2-facade-c0-2026-07-09-pr12-process",
+      "family": "doc",
+      "kind": "section",
+      "title": "Appended post-W2 facade + C0 (2026-07-09, PR#12 process)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 230,
+      "tag": "Empirical/Declared",
+      "summary": "- W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory."
     },
     {
       "anchor": "localchecks",
@@ -949,12 +1029,22 @@
       "summary": "Goal: Coordinated agents with safe concurrency; security load-bearing."
     },
     {
+      "anchor": "roadmap--wave-updates-w2-facade-cabal-integration-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave Updates (W2 Facade + Cabal Integration, 2026-07-09)",
+      "file": "docs/ROADMAP.md",
+      "line": 165,
+      "tag": "Empirical/Declared",
+      "summary": "As part of wsfull PR process and doc/tero updates:"
+    },
+    {
       "anchor": "roadmap--5.-dependency-graph-high-level",
       "family": "doc",
       "kind": "section",
       "title": "5. Dependency graph (high level)",
       "file": "docs/ROADMAP.md",
-      "line": 167,
+      "line": 183,
       "tag": "Empirical/Declared",
       "summary": "Wave A (PoC honest)"
     },
@@ -964,7 +1054,7 @@
       "kind": "section",
       "title": "6. PR Plan (incremental, reviewable)",
       "file": "docs/ROADMAP.md",
-      "line": 186,
+      "line": 202,
       "tag": "Empirical/Declared",
       "summary": "Each PR should be independently mergeable to dev. Suggested titles match GitHub issues where they exist."
     },
@@ -974,7 +1064,7 @@
       "kind": "section",
       "title": "Wave A",
       "file": "docs/ROADMAP.md",
-      "line": 190,
+      "line": 206,
       "tag": "Empirical/Declared"
     },
     {
@@ -983,7 +1073,7 @@
       "kind": "section",
       "title": "Wave B",
       "file": "docs/ROADMAP.md",
-      "line": 202,
+      "line": 218,
       "tag": "Empirical/Declared"
     },
     {
@@ -992,7 +1082,7 @@
       "kind": "section",
       "title": "Wave C",
       "file": "docs/ROADMAP.md",
-      "line": 215,
+      "line": 231,
       "tag": "Empirical/Declared"
     },
     {
@@ -1001,7 +1091,7 @@
       "kind": "section",
       "title": "Wave D",
       "file": "docs/ROADMAP.md",
-      "line": 224,
+      "line": 240,
       "tag": "Empirical/Declared"
     },
     {
@@ -1010,7 +1100,7 @@
       "kind": "section",
       "title": "7. Key decisions",
       "file": "docs/ROADMAP.md",
-      "line": 236,
+      "line": 252,
       "tag": "Empirical/Declared"
     },
     {
@@ -1019,7 +1109,7 @@
       "kind": "section",
       "title": "8. Open questions (need maintainer input)",
       "file": "docs/ROADMAP.md",
-      "line": 251,
+      "line": 267,
       "tag": "Empirical/Declared",
       "summary": "1. Default tool allowlist — shell unrestricted vs allowlist-only from day one? (Recommend allowlist-only.)"
     },
@@ -1029,7 +1119,7 @@
       "kind": "section",
       "title": "9. Suggested near-term execution order (next 2 weeks)",
       "file": "docs/ROADMAP.md",
-      "line": 261,
+      "line": 277,
       "tag": "Empirical/Declared",
       "summary": "1. Land docs PR #1 (intent/gap + cold-start) if not merged."
     },
@@ -1039,7 +1129,7 @@
       "kind": "section",
       "title": "10. Success metrics (lightweight)",
       "file": "docs/ROADMAP.md",
-      "line": 272,
+      "line": 288,
       "tag": "Empirical/Declared"
     },
     {
@@ -1048,9 +1138,19 @@
       "kind": "section",
       "title": "11. References (Tero-cited)",
       "file": "docs/ROADMAP.md",
-      "line": 282,
+      "line": 298,
       "tag": "Empirical/Declared",
       "summary": "Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO."
+    },
+    {
+      "anchor": "roadmap--appended-pr12-w2-facade-c0-resolution-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Appended: PR#12 W2 facade + C0 resolution (2026-07-09)",
+      "file": "docs/ROADMAP.md",
+      "line": 312,
+      "tag": "Empirical/Declared",
+      "summary": "- Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG)."
     },
     {
       "anchor": "tero",
@@ -1329,6 +1429,26 @@
       "line": 323,
       "tag": "Empirical/Declared",
       "summary": "- [x] TeroMCPClient one-shot stdio client with token + envelope unwrap"
+    },
+    {
+      "anchor": "tero--w2-facade-updates-2026-07-09-pr-process",
+      "family": "doc",
+      "kind": "section",
+      "title": "W2 Facade Updates (2026-07-09 PR process)",
+      "file": "docs/TERO.md",
+      "line": 335,
+      "tag": "Empirical/Declared",
+      "summary": "Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDomain (M1 from memory-gate-rs) + returns W2 StructuredResponse (with citations,…"
+    },
+    {
+      "anchor": "tero--post-c0-fix-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Post C0 Fix (2026-07-09)",
+      "file": "docs/TERO.md",
+      "line": 341,
+      "tag": "Empirical/Declared",
+      "summary": "- After facade wiring, tero error path now guarantees ERROR event emission in agent (C0 never-silent) when facade returns refusal."
     },
     {
       "anchor": "readme-2",
