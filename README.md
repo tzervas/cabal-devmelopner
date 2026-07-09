@@ -12,32 +12,47 @@ It is currently in **PoC** stage.
 - Basic iterative agent loop with feedback support
 - CLI + functional TUI
 
-## Installation (Development)
+## Setup (Recommended: UV)
+
+This project uses `uv` for Python version management, dependency resolution, and running.
+
+### One-command setup (Ubuntu / WSL / macOS / Linux)
 
 ```bash
+git clone https://github.com/tzervas/cabal-devmelopner.git
 cd cabal-devmelopner
-pip install -e .
+./setup.sh
 ```
 
-For TUI support:
+### Manual setup
 
 ```bash
-pip install -e ".[tui]"
+# 1. Install uv if you don't have it
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 2. Clone and enter the repo
+cd cabal-devmelopner
+
+# 3. Sync environment
+uv sync --all-extras
 ```
 
-## Usage
+## Running
 
 ```bash
 export XAI_API_KEY="your-xai-key"
 
 # CLI
-cabal-devmelopner "Improve the public API of the compiler frontend"   # Tero context enabled by default
+uv run cabal-devmelopner "Improve the public API of the compiler frontend"
 
-# TUI
-cabal-devmelopner-tui
+# TUI (recommended way)
+uv run cabal-devmelopner-tui
+
+# Or directly with the module
+uv run python -m cabal_devmelopner.tui.app
 ```
 
-Tero-MCP context is **enabled by default**. Use `USE_TERO=false` to disable it.
+Tero-MCP context is **enabled by default**. Set `USE_TERO=false` to disable it.
 
 ## Architecture Notes
 
