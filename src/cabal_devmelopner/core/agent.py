@@ -52,10 +52,13 @@ class SimpleAgent:
             if self.tero_client:
                 try:
                     search_result = self.tero_client.text_search(task.description, limit=5)
-                    if "results" in search_result:
+                    items = search_result.get("items") or []
+                    if items:
                         tero_context = "\n".join(
-                            f"- {r.get('title', '')}: {r.get('summary', '')}"
-                            for r in search_result["results"][:3]
+                            f"- [{r.get('id') or r.get('anchor', '')}] "
+                            f"{r.get('title', '')}: {r.get('summary') or ''} "
+                            f"({r.get('file', '')}:{r.get('line', '')})"
+                            for r in items[:3]
                         )
                 except Exception:
                     pass  # Fail gracefully in PoC

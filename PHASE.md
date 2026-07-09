@@ -14,15 +14,15 @@ This document tracks the phased development of `cabal-devmelopner`.
 - [x] xAI provider (raw API)
 - [x] Improved agent loop with iteration + feedback
 - [x] Basic prompt construction
-- [ ] Tero-MCP client integration (basic usage in agent)
-- [ ] Minimal TUI foundation
-- [ ] Basic documentation and usage examples
+- [x] Tero-MCP client integration (basic usage in agent) — see [docs/TERO.md](docs/TERO.md)
+- [x] Minimal TUI foundation
+- [x] Basic documentation and usage examples ([docs/TERO.md](docs/TERO.md), [AGENTS.md](AGENTS.md), README)
 - [ ] PoC testing and stabilization
 
 **Exit Criteria**:
 - Can run `cabal-devmelopner "some task"` and get useful output from Grok.
 - Architecture is clean and extensible.
-- Tero-MCP can be called from the agent.
+- Tero-MCP can be called from the agent (`--use-tero` / `USE_TERO=true`).
 
 ---
 
