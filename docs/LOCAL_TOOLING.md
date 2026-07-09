@@ -23,52 +23,82 @@ This document records **honest readiness** for wiring siblings into cabal-devmel
 
 ---
 
-## context-mcp: not legitimate RAG (binding honesty)
+## context-mcp: not legitimate RAG yet — and **must become** efficient legitimate RAG
 
-**Claim to avoid:** “context-mcp is production RAG / real embeddings.”  
-**Code truth (verify in `context-mcp` checkout):**
+**Product need (maintainer):** context-mcp **requires** efficient, **legitimate** RAG — not pseudo-similarity theater. That is an **upstream requirement** on the `context-mcp` repo before cabal (or any agent) may treat it as a RAG backend.
 
-### Embeddings
+**Claim to avoid today:** “context-mcp is production RAG / real embeddings.”  
+**Code truth today (verify in `context-mcp` checkout):**
+
+### Embeddings (gap)
 
 - Retrieval “semantic” path in `src/rag.rs` uses **`text_to_pseudo_embedding`**: word-hash + sin features into a 64-d vector, then cosine.
 - Source comments and `eprintln!` state this is **demonstration only** and **does not provide real semantic meaning**.
-- The optional `QuantizedEmbeddingGenerator` / ternary / RVQ stack is **quantization plumbing**; the live RAG path still falls through to **pseudo-embeddings** unless a real model is wired.
-- `CHANGELOG_TERNARY_EMBEDDINGS.md` lists **“Integrate real embedding models”** as open and still notes pseudo-embeddings — treat “production-ready embeddings” language in that changelog as **overclaim** relative to the active retrieve path.
+- The optional `QuantizedEmbeddingGenerator` / ternary / RVQ stack is **quantization / efficiency plumbing** — valuable *after* real vectors exist; it does **not** replace a real embedder.
+- `CHANGELOG_TERNARY_EMBEDDINGS.md` lists **“Integrate real embedding models”** as open — treat “production-ready embeddings” language as **overclaim** relative to the active retrieve path.
 
-### Storage
+### Storage (gap)
 
-| Layer | Reality |
-|-------|---------|
+| Layer | Reality today |
+|-------|----------------|
 | Hot path | In-memory **LRU** (`lru` crate) |
-| Optional disk | **`sled`** under feature `persistence` — KV persistence of context records, **not** a vector DB |
-| Not present | Dedicated vector index (HNSW/IVF), embedding model weights, ANN service, citation-grade corpus index |
+| Optional disk | **`sled`** under feature `persistence` — KV of context records, **not** a vector index |
+| Not present | Real embed model I/O, ANN/HNSW (or equivalent), durable embedding cache, retrieval eval harness |
 
-So: **structured session store + filters/tags/temporal scores + optional disk**, with a **placeholder similarity** channel. That is useful agent **scratch memory**, not comparable to:
+So today: **structured session store + filters/tags/temporal scores + optional disk**, with a **placeholder similarity** channel. Useful agent **scratch memory**, **not** legitimate RAG.
 
-- commercial/open **RAG** (chunk → real embed model → vector store → retrieve → ground), or  
-- **Tero L1** (deterministic corpus index + mandatory citations), or  
-- **Tero L2 / M-1018** (Empirical-gated semantic memory on mycelium-tero).
+### Definition of “efficient legitimate RAG” (exit for this gap)
+
+Upstream context-mcp is **RAG-ready** only when **all** of the following hold:
+
+1. **Real embeddings** — pluggable embedder (local and/or API) producing dense (or agreed sparse) vectors with documented dims/model id; **no silent fallback** to hash pseudo-vectors when semantic mode is on (fail closed or explicit `semantic=off`).
+2. **Real vector storage / retrieval** — index suited to scale (ANN or honest exact search with documented limits); embeddings persisted with items; rebuild/reindex story.
+3. **Efficiency** — batch embed, cache-by-content-hash, quantized path *optional and measured* (ternary/RVQ may land here **after** baseline dense is correct); p95 latency budgets documented for local use.
+4. **Retrieval API honesty** — tools/scores distinguish keyword/metadata rank vs semantic rank; never label pseudo scores as “semantic.”
+5. **Empirical gate** — small eval set (questions → expected context ids) with precision/recall or nDCG vs keyword baseline; **no “improved RAG” claim without numbers** (same honesty posture as DN-87 / Tero L2).
+6. **Secure local defaults** — stdio or loopback; no unauthenticated public bind; no secrets in stored contexts by default.
+
+Until then, context-mcp remains **session memory MCP**, not RAG.
+
+### Split of roles (do not collapse)
+
+| System | Role |
+|--------|------|
+| **Tero L1** | Cited **corpus** memory (docs/decisions/issues) |
+| **Tero L2** (future) | Corpus semantic layer (Empirical-gated) |
+| **context-mcp (today)** | **Session / run** scratch store |
+| **context-mcp (required future)** | Efficient **legitimate RAG** over agent/session (and optionally project) context **plus** honest session KV |
+
+Cabal may use **both**: Tero for project truth, context-mcp for runtime/session RAG **after** the exit criteria above.
 
 ### Cabal integration rules
 
 1. **Wave B:** default session history = **JSONL** (B8). Do **not** depend on context-mcp for “RAG quality.”
 2. **Wave B/C:** optional context-mcp sidecar for store/get/query by **id, tags, domain, time** — document as **session memory**, never “RAG.”
-3. **PROD-6 / “true RAG”:** either  
-   - wait for real embeddings + real vector storage in context-mcp (or a successor), **with** an Empirical eval, or  
-   - consume **Tero L2** when M-1018-class work is honest, or  
-   - a third package — but **do not** rebrand pseudo-embeddings as RAG in cabal docs/UI.
-4. **dev-mcp** inventory text that calls context-mcp “production-ready lightweight RAG” should be treated as **stale marketing**; prefer this file + context-mcp’s own “What it is not” sections when they exist.
+3. **PROD-6 / “true RAG” via context-mcp:** blocked on upstream meeting **Definition of efficient legitimate RAG** above. Alternatives: Tero L2 when honest, or another package — **never** rebrand pseudo-embeddings as RAG in cabal docs/UI.
+4. **dev-mcp** “production-ready lightweight RAG” for context-mcp = **stale**; fix upstream inventory when refreshing dev-mcp.
 
 ### Readiness for cabal (context-mcp only)
 
 | Surface | Ready? |
 |---------|--------|
 | MCP CRUD / temporal session store | **Partial–yes** (stdio sidecar) |
-| Package as “RAG backend” | **No** |
-| Compare quality to legitimate RAG | **No** — gap is product-blocking for that claim |
+| Package as “RAG backend” | **No** — **required future**, not optional nicety |
+| Compare quality to legitimate RAG | **No** — product-blocking gap |
 | Wire as security-critical memory | **No** until auth + real retrieval eval |
 
-**Upstream polish (context-mcp repo, not cabal):** plug a real embedder (or explicit “disabled semantic” mode with no fake scores); separate APIs so pseudo similarity cannot be mistaken for semantic; vector-capable store or honest “no vector search”; kill overclaims in README/changelog/crates keywords (`rag`).
+### Upstream work (context-mcp repo — track there)
+
+Suggested issue themes (file on `tzervas/context-mcp`):
+
+1. `[P0] Real embedder interface + kill silent pseudo-embedding in semantic mode`  
+2. `[P0] Vector store / ANN (or bounded exact) + persist embeddings with items`  
+3. `[P1] Content-hash embed cache + batch embed`  
+4. `[P1] Retrieval eval harness (baseline vs semantic)`  
+5. `[P2] Quantization path (ternary/RVQ) as efficiency layer on real vectors only`  
+6. `[P2] Docs: remove RAG overclaims until eval passes`  
+
+Cabal tracks consumption only: [OPEN_ISSUES.md](OPEN_ISSUES.md) MVP-7 / PROD-6; [ROADMAP.md](ROADMAP.md) D6b.
 
 ---
 

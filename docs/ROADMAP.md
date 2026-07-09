@@ -118,9 +118,9 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 | B6 | **TUI v1** | Status, log stream, task input, cancel; fix threading vs EventBus |
 | B7 | **Streaming** | Provider stream → PROGRESS/partial events → TUI/CLI |
 | B8 | **Session transcript** | Append JSONL per run under `.cabal/` or user config path |
-| B9 | **context-mcp (optional)** | Session store sidecar only — **not RAG** (see [LOCAL_TOOLING.md](LOCAL_TOOLING.md#context-mcp-not-legitimate-rag-binding-honesty)) |
+| B9 | **context-mcp (optional)** | Session store sidecar only — **not RAG** (see [LOCAL_TOOLING.md](LOCAL_TOOLING.md#context-mcp-not-legitimate-rag-yet--and-must-become-efficient-legitimate-rag)) |
 
-**context-mcp constraint:** today it uses **hash pseudo-embeddings** + LRU/`sled` KV — useful scratch memory, **not** comparable to legitimate embed→vector-store RAG. Cabal must not market or depend on it as RAG until real models + real vector retrieval land upstream (or Tero L2 / PROD-6 takes that role).
+**context-mcp product need:** **efficient legitimate RAG is required** on that project (real embedder + vector retrieval + eval) — not optional polish. Today: hash pseudo-embeddings + LRU/`sled` KV only. Cabal uses it as session memory until that exit criteria lands; PROD-6 may then consume it as RAG (or Tero L2). Details: [LOCAL_TOOLING.md](LOCAL_TOOLING.md).
 
 **Exit:** One developer can point cabal at a repo, enable Tero, run a task that reads files and runs tests, and see a useful result without hand-copying model output.
 

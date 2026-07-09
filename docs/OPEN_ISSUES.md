@@ -41,7 +41,7 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 | **MVP-4** | [#7](https://github.com/tzervas/cabal-devmelopner/issues/7) | CI: pytest | Only gitleaks today | `uv run pytest` on PR to `dev`/`main` |
 | **MVP-5** | — | Streaming | Blocking completions only | Progressive CLI/TUI output |
 | **MVP-6** | — | Session / history | Fully isolated runs | Persist or export transcripts (JSONL first; context-mcp optional as **session KV**, not RAG) |
-| **MVP-7** | — | Do not treat context-mcp as RAG | Pseudo-embeddings + sled/LRU only | Docs/UI never claim RAG; see [LOCAL_TOOLING.md](LOCAL_TOOLING.md#context-mcp-not-legitimate-rag-binding-honesty) |
+| **MVP-7** | — | Do not treat context-mcp as RAG until legitimate | Pseudo-embeddings + sled/LRU only today; **efficient real RAG is a required upstream goal** | Cabal docs/UI never claim RAG; track upstream embedder+vector+eval; see [LOCAL_TOOLING.md](LOCAL_TOOLING.md) |
 
 ---
 
