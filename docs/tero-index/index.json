@@ -1,0 +1,1254 @@
+{
+  "generated": "Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-09.",
+  "item_tag": "Empirical/Declared",
+  "siblings": [],
+  "items": [
+    {
+      "anchor": "agents",
+      "family": "doc",
+      "kind": "section",
+      "title": "Agent notes — cabal-devmelopner",
+      "file": "AGENTS.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "Use Tero for cited lookups over the corpus index before guessing from memory or grepping the whole tree. Full project guide (including cold-start install when…"
+    },
+    {
+      "anchor": "agents--tero-documentation-corpus-context",
+      "family": "doc",
+      "kind": "section",
+      "title": "Tero (documentation / corpus context)",
+      "file": "AGENTS.md",
+      "line": 3,
+      "tag": "Empirical/Declared",
+      "summary": "Use Tero for cited lookups over the corpus index before guessing from memory or grepping the whole tree. Full project guide (including cold-start install when…"
+    },
+    {
+      "anchor": "agents--prefer",
+      "family": "doc",
+      "kind": "section",
+      "title": "Prefer",
+      "file": "AGENTS.md",
+      "line": 7,
+      "tag": "Empirical/Declared",
+      "summary": "1. textsearch / querybyid / querybykind via the tero MCP server (when registered in Grok)."
+    },
+    {
+      "anchor": "agents--subagents-and-multi-repo-excavation-required-when-tero-is-available",
+      "family": "doc",
+      "kind": "section",
+      "title": "Subagents and multi-repo excavation (required when Tero is available)",
+      "file": "AGENTS.md",
+      "line": 13,
+      "tag": "Empirical/Declared",
+      "summary": "Sibling-tool investigations, readiness audits, and design waves are harder if agents only ls/grep checkouts. Every agent that excavates (orchestrator and leaf…"
+    },
+    {
+      "anchor": "agents--tero-excavation-do-this-before-deep-filesystem-greps",
+      "family": "doc",
+      "kind": "section",
+      "title": "Tero excavation (do this before deep filesystem greps)",
+      "file": "AGENTS.md",
+      "line": 27,
+      "tag": "Empirical/Declared",
+      "summary": "You have access to the tero MCP server (tools tero). Use it to excavate project"
+    },
+    {
+      "anchor": "agents--if-this-session-has-no-tero-tools",
+      "family": "doc",
+      "kind": "section",
+      "title": "If this session has no `tero__*` tools",
+      "file": "AGENTS.md",
+      "line": 46,
+      "tag": "Empirical/Declared",
+      "summary": "Sessions only pick up MCP servers registered before launch (or after /mcps → r). Quick path:"
+    },
+    {
+      "anchor": "agents--1-one-time-sibling-package-index-adjust-gitparent",
+      "family": "doc",
+      "kind": "other",
+      "title": "1) One-time: sibling package + index (adjust GIT_PARENT)",
+      "file": "AGENTS.md",
+      "line": 51,
+      "tag": "Empirical/Declared",
+      "summary": "export GITPARENT=\"${GITPARENT:-$HOME/git}\""
+    },
+    {
+      "anchor": "agents--2-register-user-scope-.grok-config.toml",
+      "family": "doc",
+      "kind": "other",
+      "title": "2) Register (user scope → ~/.grok/config.toml)",
+      "file": "AGENTS.md",
+      "line": 56,
+      "tag": "Empirical/Declared",
+      "summary": "grok mcp add tero \\"
+    },
+    {
+      "anchor": "agents--3-verify-then-new-session-or-mcps-r-if-already-inside-tui",
+      "family": "doc",
+      "kind": "other",
+      "title": "3) Verify, then new session (or /mcps → r if already inside TUI)",
+      "file": "AGENTS.md",
+      "line": 63,
+      "tag": "Empirical/Declared",
+      "summary": "grok mcp doctor tero   # handshake OK, 9 tools"
+    },
+    {
+      "anchor": "agents--grok-mcp-when-available",
+      "family": "doc",
+      "kind": "section",
+      "title": "Grok MCP (when available)",
+      "file": "AGENTS.md",
+      "line": 69,
+      "tag": "Empirical/Declared",
+      "summary": "- Server name: tero → tools namespaced tero…"
+    },
+    {
+      "anchor": "agents--this-repos-agent-cli-tui",
+      "family": "doc",
+      "kind": "section",
+      "title": "This repo’s agent CLI/TUI",
+      "file": "AGENTS.md",
+      "line": 94,
+      "tag": "Empirical/Declared",
+      "summary": "Independent of Grok MCP registration:"
+    },
+    {
+      "anchor": "phase",
+      "family": "doc",
+      "kind": "section",
+      "title": "cabal-devmelopner — Development Phases",
+      "file": "PHASE.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "This document tracks the phased development of cabal-devmelopner."
+    },
+    {
+      "anchor": "phase--poc-phase-current",
+      "family": "doc",
+      "kind": "section",
+      "title": "PoC Phase (Current)",
+      "file": "PHASE.md",
+      "line": 11,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Validate core architecture and get a working, extensible agent."
+    },
+    {
+      "anchor": "phase--deliverables",
+      "family": "doc",
+      "kind": "section",
+      "title": "Deliverables",
+      "file": "PHASE.md",
+      "line": 15,
+      "tag": "Empirical/Declared",
+      "summary": "- [x] Project skeleton + installable CLI"
+    },
+    {
+      "anchor": "phase--exit-criteria",
+      "family": "doc",
+      "kind": "section",
+      "title": "Exit Criteria",
+      "file": "PHASE.md",
+      "line": 29,
+      "tag": "Empirical/Declared",
+      "summary": "PoC not exited until P0 entrypoint is fixed and testing/stabilization is honest about remaining partials."
+    },
+    {
+      "anchor": "phase--mvp-phase",
+      "family": "doc",
+      "kind": "section",
+      "title": "MVP Phase",
+      "file": "PHASE.md",
+      "line": 42,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Make cabal-devmelopner a practical daily co-dev tool."
+    },
+    {
+      "anchor": "phase--key-features",
+      "family": "doc",
+      "kind": "section",
+      "title": "Key Features",
+      "file": "PHASE.md",
+      "line": 46,
+      "tag": "Empirical/Declared",
+      "summary": "- Full-featured TUI (status, progress, logs, task management)"
+    },
+    {
+      "anchor": "phase--exit-criteria-2",
+      "family": "doc",
+      "kind": "section",
+      "title": "Exit Criteria",
+      "file": "PHASE.md",
+      "line": 57,
+      "tag": "Empirical/Declared",
+      "summary": "- Comfortable to use for real development work."
+    },
+    {
+      "anchor": "phase--production-phase",
+      "family": "doc",
+      "kind": "section",
+      "title": "Production Phase",
+      "file": "PHASE.md",
+      "line": 65,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Robust, scalable, multi-agent development system."
+    },
+    {
+      "anchor": "phase--key-features-2",
+      "family": "doc",
+      "kind": "section",
+      "title": "Key Features",
+      "file": "PHASE.md",
+      "line": 69,
+      "tag": "Empirical/Declared",
+      "summary": "- Multi-provider support (xAI, Claude, others)"
+    },
+    {
+      "anchor": "phase--exit-criteria-3",
+      "family": "doc",
+      "kind": "section",
+      "title": "Exit Criteria",
+      "file": "PHASE.md",
+      "line": 82,
+      "tag": "Empirical/Declared",
+      "summary": "- Can reliably run long development sessions with minimal human intervention."
+    },
+    {
+      "anchor": "phase--notes",
+      "family": "doc",
+      "kind": "section",
+      "title": "Notes",
+      "file": "PHASE.md",
+      "line": 90,
+      "tag": "Empirical/Declared",
+      "summary": "- All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture."
+    },
+    {
+      "anchor": "readme",
+      "family": "doc",
+      "kind": "other",
+      "title": "cabal-devmelopner",
+      "file": "README.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "cabal-devmelopner is a repo-agnostic development agent designed for long-running, high-quality coding assistance."
+    },
+    {
+      "anchor": "readme--features-poc",
+      "family": "doc",
+      "kind": "section",
+      "title": "Features (PoC)",
+      "file": "README.md",
+      "line": 7,
+      "tag": "Empirical/Declared",
+      "summary": "- Uses Grok via the raw xAI API"
+    },
+    {
+      "anchor": "readme--setup-recommended-uv",
+      "family": "doc",
+      "kind": "section",
+      "title": "Setup (Recommended: UV)",
+      "file": "README.md",
+      "line": 17,
+      "tag": "Empirical/Declared",
+      "summary": "This project uses uv for Python version management, dependency resolution, and running."
+    },
+    {
+      "anchor": "readme--one-command-setup-ubuntu-wsl-macos-linux",
+      "family": "doc",
+      "kind": "section",
+      "title": "One-command setup (Ubuntu / WSL / macOS / Linux)",
+      "file": "README.md",
+      "line": 21,
+      "tag": "Empirical/Declared",
+      "summary": "git clone https://github.com/tzervas/cabal-devmelopner.git"
+    },
+    {
+      "anchor": "readme--manual-setup",
+      "family": "doc",
+      "kind": "section",
+      "title": "Manual setup",
+      "file": "README.md",
+      "line": 29,
+      "tag": "Empirical/Declared",
+      "summary": "curl -LsSf https://astral.sh/uv/install.sh | sh"
+    },
+    {
+      "anchor": "readme--1.-install-uv-if-you-dont-have-it",
+      "family": "doc",
+      "kind": "other",
+      "title": "1. Install uv if you don't have it",
+      "file": "README.md",
+      "line": 32,
+      "tag": "Empirical/Declared",
+      "summary": "curl -LsSf https://astral.sh/uv/install.sh | sh"
+    },
+    {
+      "anchor": "readme--2.-clone-and-enter-the-repo",
+      "family": "doc",
+      "kind": "other",
+      "title": "2. Clone and enter the repo",
+      "file": "README.md",
+      "line": 35,
+      "tag": "Empirical/Declared",
+      "summary": "cd cabal-devmelopner"
+    },
+    {
+      "anchor": "readme--3.-sync-environment",
+      "family": "doc",
+      "kind": "other",
+      "title": "3. Sync environment",
+      "file": "README.md",
+      "line": 38,
+      "tag": "Empirical/Declared",
+      "summary": "uv sync --all-extras"
+    },
+    {
+      "anchor": "readme--tero-optional-for-corpus-context",
+      "family": "doc",
+      "kind": "section",
+      "title": "Tero (optional, for corpus context)",
+      "file": "README.md",
+      "line": 42,
+      "tag": "Empirical/Declared",
+      "summary": "Tero is opt-in. Defaults expect sibling checkouts next to this repo:"
+    },
+    {
+      "anchor": "readme--running",
+      "family": "doc",
+      "kind": "section",
+      "title": "Running",
+      "file": "README.md",
+      "line": 60,
+      "tag": "Empirical/Declared",
+      "summary": "export XAIAPIKEY=\"your-xai-key\""
+    },
+    {
+      "anchor": "readme--cli",
+      "family": "doc",
+      "kind": "other",
+      "title": "CLI",
+      "file": "README.md",
+      "line": 65,
+      "tag": "Empirical/Declared",
+      "summary": "uv run cabal-devmelopner \"Improve the public API of the compiler frontend\""
+    },
+    {
+      "anchor": "readme--cli-with-tero-context",
+      "family": "doc",
+      "kind": "other",
+      "title": "CLI with Tero context",
+      "file": "README.md",
+      "line": 68,
+      "tag": "Empirical/Declared",
+      "summary": "uv run cabal-devmelopner \"Improve the public API of the compiler frontend\" --use-tero"
+    },
+    {
+      "anchor": "readme--tui-intended-entrypoint-currently-fails-until-poc-1-lands",
+      "family": "doc",
+      "kind": "other",
+      "title": "TUI (intended entrypoint — currently fails until POC-1 lands)",
+      "file": "README.md",
+      "line": 71,
+      "tag": "Empirical/Declared",
+      "id": "POC-1",
+      "summary": "uv run cabal-devmelopner-tui"
+    },
+    {
+      "anchor": "readme--tui-with-tero-once-entrypoint-is-fixed",
+      "family": "doc",
+      "kind": "other",
+      "title": "TUI with Tero (once entrypoint is fixed)",
+      "file": "README.md",
+      "line": 74,
+      "tag": "Empirical/Declared",
+      "summary": "USETERO=true uv run cabal-devmelopner-tui"
+    },
+    {
+      "anchor": "readme--architecture-notes",
+      "family": "doc",
+      "kind": "section",
+      "title": "Architecture Notes",
+      "file": "README.md",
+      "line": 83,
+      "tag": "Empirical/Declared",
+      "summary": "- EventBus: Central communication mechanism (producer/consumer model)"
+    },
+    {
+      "anchor": "readme--documentation",
+      "family": "doc",
+      "kind": "section",
+      "title": "Documentation",
+      "file": "README.md",
+      "line": 90,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "readme--development-phases",
+      "family": "doc",
+      "kind": "section",
+      "title": "Development Phases",
+      "file": "README.md",
+      "line": 102,
+      "tag": "Empirical/Declared",
+      "summary": "See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed."
+    },
+    {
+      "anchor": "readme--license",
+      "family": "doc",
+      "kind": "section",
+      "title": "License",
+      "file": "README.md",
+      "line": 106,
+      "tag": "Empirical/Declared",
+      "summary": "MIT"
+    },
+    {
+      "anchor": "intentandgapanalysis",
+      "family": "doc",
+      "kind": "section",
+      "title": "Intent and Gap Analysis",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "status": "Living document — update when PoC exit criteria or architecture change.",
+      "summary": "Baseline: dev (includes Tero docs/client commit 32d30d3)"
+    },
+    {
+      "anchor": "intentandgapanalysis--1.-stated-intent",
+      "family": "doc",
+      "kind": "section",
+      "title": "1. Stated intent",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 11,
+      "tag": "Empirical/Declared",
+      "summary": "Core principles: repo-agnostic · extensible communications · strong Tero integration · clean architecture."
+    },
+    {
+      "anchor": "intentandgapanalysis--2.-current-implementation-snapshot",
+      "family": "doc",
+      "kind": "section",
+      "title": "2. Current implementation (snapshot)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 24,
+      "tag": "Empirical/Declared",
+      "summary": "Approximate application size: ~550+ LOC under src/cabaldevmelopner/."
+    },
+    {
+      "anchor": "intentandgapanalysis--architecture-as-implemented",
+      "family": "doc",
+      "kind": "section",
+      "title": "Architecture (as implemented)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 44,
+      "tag": "Empirical/Declared",
+      "summary": "CLI / TUI  →  SimpleAgent  →  Provider.complete(prompt)"
+    },
+    {
+      "anchor": "intentandgapanalysis--3.-poc-checklist-intent-vs-reality",
+      "family": "doc",
+      "kind": "section",
+      "title": "3. PoC checklist: intent vs reality",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 57,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "intentandgapanalysis--poc-exit-criteria",
+      "family": "doc",
+      "kind": "section",
+      "title": "PoC exit criteria",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 71,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "intentandgapanalysis--4.-critical-gaps",
+      "family": "doc",
+      "kind": "section",
+      "title": "4. Critical gaps",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 81,
+      "tag": "Empirical/Declared",
+      "summary": "Intent: coding assistance that acts on repositories."
+    },
+    {
+      "anchor": "intentandgapanalysis--4.1-not-a-development-agent-yet",
+      "family": "doc",
+      "kind": "section",
+      "title": "4.1 Not a development agent yet",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 83,
+      "tag": "Empirical/Declared",
+      "summary": "Intent: coding assistance that acts on repositories."
+    },
+    {
+      "anchor": "intentandgapanalysis--4.2-tui-entrypoint-broken-p0",
+      "family": "doc",
+      "kind": "section",
+      "title": "4.2 TUI entrypoint broken (P0)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 93,
+      "tag": "Empirical/Declared",
+      "summary": "cabal-devmelopner-tui → ImportError: cannot import name 'main'"
+    },
+    {
+      "anchor": "intentandgapanalysis--4.3-tero-improved-but-incomplete",
+      "family": "doc",
+      "kind": "section",
+      "title": "4.3 Tero: improved but incomplete",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 101,
+      "tag": "Empirical/Declared",
+      "summary": "Landed improvements (dev): sibling defaults, env overrides, token auth, MCP content envelope unwrap, items-based agent formatting, docs/TERO.md."
+    },
+    {
+      "anchor": "intentandgapanalysis--4.4-agent-loop-does-not-iterate",
+      "family": "doc",
+      "kind": "section",
+      "title": "4.4 Agent loop does not iterate",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 115,
+      "tag": "Empirical/Declared",
+      "summary": "if iteration == 1:"
+    },
+    {
+      "anchor": "intentandgapanalysis--4.5-empty-runtime-dependencies",
+      "family": "doc",
+      "kind": "section",
+      "title": "4.5 Empty runtime dependencies",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 125,
+      "tag": "Empirical/Declared",
+      "summary": "dependencies = []"
+    },
+    {
+      "anchor": "intentandgapanalysis--4.6-tui-bypasses-task-type",
+      "family": "doc",
+      "kind": "section",
+      "title": "4.6 TUI bypasses `Task` type",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 133,
+      "tag": "Empirical/Declared",
+      "summary": "Duck-typed type(\"Task\", (), {...})() instead of Task dataclass."
+    },
+    {
+      "anchor": "intentandgapanalysis--4.7-status-drift-pre-this-docs-update",
+      "family": "doc",
+      "kind": "section",
+      "title": "4.7 Status drift (pre this docs update)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 137,
+      "tag": "Empirical/Declared",
+      "summary": "PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-iteration remained nominal. Prefer checkboxes that match [OPENISSUES.md](OPENISSUES.…"
+    },
+    {
+      "anchor": "intentandgapanalysis--5.-secondary-structural-gaps",
+      "family": "doc",
+      "kind": "section",
+      "title": "5. Secondary / structural gaps",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 143,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "intentandgapanalysis--6.-what-is-solid-keep",
+      "family": "doc",
+      "kind": "section",
+      "title": "6. What is solid (keep)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 159,
+      "tag": "Empirical/Declared",
+      "summary": "- Clear phase model (PoC → MVP → Production)"
+    },
+    {
+      "anchor": "intentandgapanalysis--7.-gap-map-by-phase",
+      "family": "doc",
+      "kind": "section",
+      "title": "7. Gap map by phase",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 172,
+      "tag": "Empirical/Declared",
+      "summary": "INTENT                          CURRENT STATE"
+    },
+    {
+      "anchor": "intentandgapanalysis--8.-recommended-priority-close-poc-honestly",
+      "family": "doc",
+      "kind": "section",
+      "title": "8. Recommended priority (close PoC honestly)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 194,
+      "tag": "Empirical/Declared",
+      "summary": "1. POC-1 Fix TUI main entrypoint (+ optional main)."
+    },
+    {
+      "anchor": "intentandgapanalysis--9.-bottom-line",
+      "family": "doc",
+      "kind": "section",
+      "title": "9. Bottom line",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 208,
+      "tag": "Empirical/Declared",
+      "summary": "Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context."
+    },
+    {
+      "anchor": "localtooling",
+      "family": "doc",
+      "kind": "section",
+      "title": "Local sibling tooling (MCP / packages)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "status": "Living notes (2026-07-08)",
+      "summary": "Status: Living notes (2026-07-08)"
+    },
+    {
+      "anchor": "localtooling--inventory-typical-parent-dir",
+      "family": "doc",
+      "kind": "section",
+      "title": "Inventory (typical parent dir)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 11,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "localtooling--context-mcp-not-legitimate-rag-yet-and-must-become-efficient-legitimate-rag",
+      "family": "doc",
+      "kind": "section",
+      "title": "context-mcp: not legitimate RAG yet — and **must become** efficient legitimate RAG",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 26,
+      "tag": "Empirical/Declared",
+      "summary": "Product need (maintainer): context-mcp requires efficient, legitimate RAG — not pseudo-similarity theater. That is an upstream requirement on the context-mcp r…"
+    },
+    {
+      "anchor": "localtooling--embeddings-gap",
+      "family": "doc",
+      "kind": "section",
+      "title": "Embeddings (gap)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 33,
+      "tag": "Empirical/Declared",
+      "summary": "- Retrieval “semantic” path in src/rag.rs uses texttopseudoembedding: word-hash + sin features into a 64-d vector, then cosine."
+    },
+    {
+      "anchor": "localtooling--storage-gap",
+      "family": "doc",
+      "kind": "section",
+      "title": "Storage (gap)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 40,
+      "tag": "Empirical/Declared",
+      "summary": "So today: structured session store + filters/tags/temporal scores + optional disk, with a placeholder similarity channel. Useful agent scratch memory, not legi…"
+    },
+    {
+      "anchor": "localtooling--definition-of-efficient-legitimate-rag-exit-for-this-gap",
+      "family": "doc",
+      "kind": "section",
+      "title": "Definition of “efficient legitimate RAG” (exit for this gap)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 50,
+      "tag": "Empirical/Declared",
+      "summary": "Upstream context-mcp is RAG-ready only when all of the following hold:"
+    },
+    {
+      "anchor": "localtooling--split-of-roles-do-not-collapse",
+      "family": "doc",
+      "kind": "section",
+      "title": "Split of roles (do not collapse)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 63,
+      "tag": "Empirical/Declared",
+      "summary": "Cabal may use both: Tero for project truth, context-mcp for runtime/session RAG after the exit criteria above."
+    },
+    {
+      "anchor": "localtooling--cabal-integration-rules",
+      "family": "doc",
+      "kind": "section",
+      "title": "Cabal integration rules",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 74,
+      "tag": "Empirical/Declared",
+      "summary": "1. Wave B: default session history = JSONL (B8). Do not depend on context-mcp for “RAG quality.”"
+    },
+    {
+      "anchor": "localtooling--readiness-for-cabal-context-mcp-only",
+      "family": "doc",
+      "kind": "section",
+      "title": "Readiness for cabal (context-mcp only)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 81,
+      "tag": "Empirical/Declared",
+      "summary": "Suggested issue themes (file on tzervas/context-mcp):"
+    },
+    {
+      "anchor": "localtooling--upstream-work-context-mcp-repo-track-there",
+      "family": "doc",
+      "kind": "section",
+      "title": "Upstream work (context-mcp repo — track there)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 90,
+      "tag": "Empirical/Declared",
+      "summary": "Suggested issue themes (file on tzervas/context-mcp):"
+    },
+    {
+      "anchor": "localtooling--other-siblings-one-liners",
+      "family": "doc",
+      "kind": "section",
+      "title": "Other siblings (one-liners)",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 105,
+      "tag": "Empirical/Declared",
+      "summary": "Branch/in-flight detail from the 2026-07-08 audit lives in session notes (/tmp/investigate-.md); re-run with Tero-first leaf prompts when refreshing."
+    },
+    {
+      "anchor": "localtooling--related",
+      "family": "doc",
+      "kind": "section",
+      "title": "Related",
+      "file": "docs/LOCAL_TOOLING.md",
+      "line": 119,
+      "tag": "Empirical/Declared",
+      "summary": "- [ROADMAP.md](ROADMAP.md) — waves and PR plan"
+    },
+    {
+      "anchor": "openissues",
+      "family": "doc",
+      "kind": "section",
+      "title": "Open issues backlog (from intent / gap analysis)",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "Derived from [INTENTANDGAPANALYSIS.md](INTENTANDGAPANALYSIS.md). Execution order, waves, and PR DAG: [ROADMAP.md](ROADMAP.md). Use this file as a checklist for…"
+    },
+    {
+      "anchor": "openissues--p0-fix-before-claiming-a-working-tui",
+      "family": "doc",
+      "kind": "section",
+      "title": "P0 — Fix before claiming a working TUI",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 11,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "openissues--p1-poc-exit-criteria",
+      "family": "doc",
+      "kind": "section",
+      "title": "P1 — PoC exit criteria",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 21,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "openissues--p2-toward-a-useful-development-agent-mvp",
+      "family": "doc",
+      "kind": "section",
+      "title": "P2 — Toward a useful development agent / MVP",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 34,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "openissues--p3-production-oriented-track-only",
+      "family": "doc",
+      "kind": "section",
+      "title": "P3 — Production-oriented (track only)",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 48,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "openissues--suggested-github-issue-titles",
+      "family": "doc",
+      "kind": "section",
+      "title": "Suggested GitHub issue titles",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 61,
+      "tag": "Empirical/Declared",
+      "summary": "1. [P0] Fix cabal-devmelopner-tui entrypoint (missing main)"
+    },
+    {
+      "anchor": "openissues--out-of-scope-for-the-docs-pr-that-added-this-file",
+      "family": "doc",
+      "kind": "section",
+      "title": "Out of scope for the docs PR that added this file",
+      "file": "docs/OPEN_ISSUES.md",
+      "line": 74,
+      "tag": "Empirical/Declared",
+      "summary": "- Implementing the fixes above"
+    },
+    {
+      "anchor": "roadmap",
+      "family": "doc",
+      "kind": "note",
+      "title": "cabal-devmelopner — Product Roadmap",
+      "file": "docs/ROADMAP.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "status": "Plan (2026-07-08)",
+      "summary": "Status: Plan (2026-07-08)"
+    },
+    {
+      "anchor": "roadmap--1.-north-star",
+      "family": "doc",
+      "kind": "section",
+      "title": "1. North star",
+      "file": "docs/ROADMAP.md",
+      "line": 11,
+      "tag": "Empirical/Declared",
+      "summary": "cabal-devmelopner is a repo-agnostic development agent: long-running, event-driven, multi-surface (CLI / TUI / future Discord), with strong Tero integration fo…"
+    },
+    {
+      "anchor": "roadmap--2.-current-position-summary",
+      "family": "doc",
+      "kind": "section",
+      "title": "2. Current position (summary)",
+      "file": "docs/ROADMAP.md",
+      "line": 32,
+      "tag": "Empirical/Declared",
+      "summary": "PoC exit requires P0 TUI launch + honest tests/stabilization. MVP exit requires tools + verification + usable TUI/config. Production is multi-agent + security…"
+    },
+    {
+      "anchor": "roadmap--3.-architecture-target-incremental",
+      "family": "doc",
+      "kind": "section",
+      "title": "3. Architecture target (incremental)",
+      "file": "docs/ROADMAP.md",
+      "line": 49,
+      "tag": "Empirical/Declared",
+      "summary": "┌─────────────┐  ┌─────────────┐  ┌──────────────┐"
+    },
+    {
+      "anchor": "roadmap--4.-waves",
+      "family": "doc",
+      "kind": "section",
+      "title": "4. Waves",
+      "file": "docs/ROADMAP.md",
+      "line": 84,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Documented entrypoints work; status docs match code; minimal regression net."
+    },
+    {
+      "anchor": "roadmap--wave-a-poc-close-out-make-claims-true",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave A — PoC close-out (make claims true)",
+      "file": "docs/ROADMAP.md",
+      "line": 86,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Documented entrypoints work; status docs match code; minimal regression net."
+    },
+    {
+      "anchor": "roadmap--wave-b-minimum-useful-agent-mvp-core",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave B — Minimum useful agent (MVP core)",
+      "file": "docs/ROADMAP.md",
+      "line": 107,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Agent can act on a repo with Tero-assisted context and a real loop."
+    },
+    {
+      "anchor": "roadmap--wave-c-daily-co-dev-polish-mvp-complete",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave C — Daily co-dev polish (MVP complete)",
+      "file": "docs/ROADMAP.md",
+      "line": 131,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Comfortable daily driver."
+    },
+    {
+      "anchor": "roadmap--wave-d-multi-agent-production-shape",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave D — Multi-agent & production shape",
+      "file": "docs/ROADMAP.md",
+      "line": 148,
+      "tag": "Empirical/Declared",
+      "summary": "Goal: Coordinated agents with safe concurrency; security load-bearing."
+    },
+    {
+      "anchor": "roadmap--5.-dependency-graph-high-level",
+      "family": "doc",
+      "kind": "section",
+      "title": "5. Dependency graph (high level)",
+      "file": "docs/ROADMAP.md",
+      "line": 167,
+      "tag": "Empirical/Declared",
+      "summary": "Wave A (PoC honest)"
+    },
+    {
+      "anchor": "roadmap--6.-pr-plan-incremental-reviewable",
+      "family": "doc",
+      "kind": "section",
+      "title": "6. PR Plan (incremental, reviewable)",
+      "file": "docs/ROADMAP.md",
+      "line": 186,
+      "tag": "Empirical/Declared",
+      "summary": "Each PR should be independently mergeable to dev. Suggested titles match GitHub issues where they exist."
+    },
+    {
+      "anchor": "roadmap--wave-a",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave A",
+      "file": "docs/ROADMAP.md",
+      "line": 190,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "roadmap--wave-b",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave B",
+      "file": "docs/ROADMAP.md",
+      "line": 202,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "roadmap--wave-c",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave C",
+      "file": "docs/ROADMAP.md",
+      "line": 215,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "roadmap--wave-d",
+      "family": "doc",
+      "kind": "section",
+      "title": "Wave D",
+      "file": "docs/ROADMAP.md",
+      "line": 224,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "roadmap--7.-key-decisions",
+      "family": "doc",
+      "kind": "section",
+      "title": "7. Key decisions",
+      "file": "docs/ROADMAP.md",
+      "line": 236,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "roadmap--8.-open-questions-need-maintainer-input",
+      "family": "doc",
+      "kind": "section",
+      "title": "8. Open questions (need maintainer input)",
+      "file": "docs/ROADMAP.md",
+      "line": 251,
+      "tag": "Empirical/Declared",
+      "summary": "1. Default tool allowlist — shell unrestricted vs allowlist-only from day one? (Recommend allowlist-only.)"
+    },
+    {
+      "anchor": "roadmap--9.-suggested-near-term-execution-order-next-2-weeks",
+      "family": "doc",
+      "kind": "section",
+      "title": "9. Suggested near-term execution order (next 2 weeks)",
+      "file": "docs/ROADMAP.md",
+      "line": 261,
+      "tag": "Empirical/Declared",
+      "summary": "1. Land docs PR #1 (intent/gap + cold-start) if not merged."
+    },
+    {
+      "anchor": "roadmap--10.-success-metrics-lightweight",
+      "family": "doc",
+      "kind": "section",
+      "title": "10. Success metrics (lightweight)",
+      "file": "docs/ROADMAP.md",
+      "line": 272,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "roadmap--11.-references-tero-cited",
+      "family": "doc",
+      "kind": "section",
+      "title": "11. References (Tero-cited)",
+      "file": "docs/ROADMAP.md",
+      "line": 282,
+      "tag": "Empirical/Declared",
+      "summary": "Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO."
+    },
+    {
+      "anchor": "tero",
+      "family": "doc",
+      "kind": "section",
+      "title": "Tero-MCP integration",
+      "file": "docs/TERO.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "[Tero](https://github.com/tzervas) is a Layer-1 corpus index query surface: cited lookups over docs, decisions, issues, changelog entries, and skills. cabal-de…"
+    },
+    {
+      "anchor": "tero--what-tero-is-and-is-not",
+      "family": "doc",
+      "kind": "section",
+      "title": "What Tero is (and is not)",
+      "file": "docs/TERO.md",
+      "line": 9,
+      "tag": "Empirical/Declared",
+      "summary": "Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth."
+    },
+    {
+      "anchor": "tero--expected-sibling-layout",
+      "family": "doc",
+      "kind": "section",
+      "title": "Expected sibling layout",
+      "file": "docs/TERO.md",
+      "line": 22,
+      "tag": "Empirical/Declared",
+      "summary": "Defaults assume a shared parent directory (e.g. ~/git or /root/git):"
+    },
+    {
+      "anchor": "tero--prerequisites",
+      "family": "doc",
+      "kind": "section",
+      "title": "Prerequisites",
+      "file": "docs/TERO.md",
+      "line": 37,
+      "tag": "Empirical/Declared",
+      "summary": "1. Python ≥ 3.11 for tero-mcp-lite (this project targets 3.14 via uv)."
+    },
+    {
+      "anchor": "tero--environment-variables",
+      "family": "doc",
+      "kind": "section",
+      "title": "Environment variables",
+      "file": "docs/TERO.md",
+      "line": 67,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "tero--using-tero-from-cabal-devmelopner",
+      "family": "doc",
+      "kind": "section",
+      "title": "Using Tero from cabal-devmelopner",
+      "file": "docs/TERO.md",
+      "line": 80,
+      "tag": "Empirical/Declared",
+      "summary": "export XAIAPIKEY=\"your-xai-key\""
+    },
+    {
+      "anchor": "tero--cli-opt-in-flag",
+      "family": "doc",
+      "kind": "section",
+      "title": "CLI (opt-in flag)",
+      "file": "docs/TERO.md",
+      "line": 82,
+      "tag": "Empirical/Declared",
+      "summary": "export XAIAPIKEY=\"your-xai-key\""
+    },
+    {
+      "anchor": "tero--optional-overrides",
+      "family": "doc",
+      "kind": "other",
+      "title": "optional overrides:",
+      "file": "docs/TERO.md",
+      "line": 86,
+      "tag": "Empirical/Declared",
+      "summary": "uv run cabal-devmelopner \"Improve error handling in the compiler frontend\" --use-tero"
+    },
+    {
+      "anchor": "tero--export-teromcpproject-path-to-tero-mcp",
+      "family": "doc",
+      "kind": "other",
+      "title": "export TERO_MCP_PROJECT=/path/to/tero-mcp",
+      "file": "docs/TERO.md",
+      "line": 87,
+      "tag": "Empirical/Declared",
+      "summary": "uv run cabal-devmelopner \"Improve error handling in the compiler frontend\" --use-tero"
+    },
+    {
+      "anchor": "tero--export-teroindexpath-path-to-index.json",
+      "family": "doc",
+      "kind": "other",
+      "title": "export TERO_INDEX_PATH=/path/to/index.json",
+      "file": "docs/TERO.md",
+      "line": 88,
+      "tag": "Empirical/Declared",
+      "summary": "uv run cabal-devmelopner \"Improve error handling in the compiler frontend\" --use-tero"
+    },
+    {
+      "anchor": "tero--export-terotokenslocal-devrefresh",
+      "family": "doc",
+      "kind": "other",
+      "title": "export TERO_TOKENS='local-dev:refresh'",
+      "file": "docs/TERO.md",
+      "line": 89,
+      "tag": "Empirical/Declared",
+      "summary": "uv run cabal-devmelopner \"Improve error handling in the compiler frontend\" --use-tero"
+    },
+    {
+      "anchor": "tero--tui-opt-in-env",
+      "family": "doc",
+      "kind": "section",
+      "title": "TUI (opt-in env)",
+      "file": "docs/TERO.md",
+      "line": 96,
+      "tag": "Empirical/Declared",
+      "summary": "export XAIAPIKEY=\"your-xai-key\""
+    },
+    {
+      "anchor": "tero--what-the-agent-does-with-results",
+      "family": "doc",
+      "kind": "section",
+      "title": "What the agent does with results",
+      "file": "docs/TERO.md",
+      "line": 104,
+      "tag": "Empirical/Declared",
+      "summary": "On each iteration (when a client is configured), SimpleAgent:"
+    },
+    {
+      "anchor": "tero--client-api-in-process",
+      "family": "doc",
+      "kind": "section",
+      "title": "Client API (in-process)",
+      "file": "docs/TERO.md",
+      "line": 114,
+      "tag": "Empirical/Declared",
+      "summary": "from cabaldevmelopner.mcp.teroclient import TeroMCPClient"
+    },
+    {
+      "anchor": "tero--using-tero-from-grok-mcp",
+      "family": "doc",
+      "kind": "section",
+      "title": "Using Tero from Grok (MCP)",
+      "file": "docs/TERO.md",
+      "line": 130,
+      "tag": "Empirical/Declared",
+      "summary": "There are two ways work hits Tero:"
+    },
+    {
+      "anchor": "tero--cold-start-session-has-no-tero-server-yet",
+      "family": "doc",
+      "kind": "section",
+      "title": "Cold start: session has no `tero` server yet",
+      "file": "docs/TERO.md",
+      "line": 141,
+      "tag": "Empirical/Declared",
+      "summary": "Use this when searchtool finds no tero tools, grok mcp list omits tero, or a new machine/session never registered the server."
+    },
+    {
+      "anchor": "tero--install-uv-if-needed-https-docs.astral.sh-uv",
+      "family": "doc",
+      "kind": "other",
+      "title": "Install uv if needed: https://docs.astral.sh/uv/",
+      "file": "docs/TERO.md",
+      "line": 148,
+      "tag": "Empirical/Declared",
+      "summary": "curl -LsSf https://astral.sh/uv/install.sh | sh"
+    },
+    {
+      "anchor": "tero--shared-parent-example-git-or-root-git",
+      "family": "doc",
+      "kind": "other",
+      "title": "Shared parent (example: ~/git or /root/git)",
+      "file": "docs/TERO.md",
+      "line": 151,
+      "tag": "Empirical/Declared",
+      "summary": "export GITPARENT=\"${GITPARENT:-$HOME/git}\""
+    },
+    {
+      "anchor": "tero--clone-tero-mcp-if-missing-use-your-real-remote",
+      "family": "doc",
+      "kind": "other",
+      "title": "Clone tero-mcp if missing (use your real remote)",
+      "file": "docs/TERO.md",
+      "line": 156,
+      "tag": "Empirical/Declared",
+      "summary": "cd tero-mcp && uv sync && cd .."
+    },
+    {
+      "anchor": "tero--git-clone-tero-mcp-url-tero-mcp",
+      "family": "doc",
+      "kind": "other",
+      "title": "git clone <tero-mcp-url> tero-mcp",
+      "file": "docs/TERO.md",
+      "line": 157,
+      "tag": "Empirical/Declared",
+      "summary": "cd tero-mcp && uv sync && cd .."
+    },
+    {
+      "anchor": "tero--index-mycelium-shaped-example-or-generate-per-tero-mcp-generating-an-index.md",
+      "family": "doc",
+      "kind": "other",
+      "title": "Index: Mycelium-shaped example (or generate per tero-mcp/GENERATING-AN-INDEX.md)",
+      "file": "docs/TERO.md",
+      "line": 160,
+      "tag": "Empirical/Declared",
+      "summary": "test -f \"$GITPARENT/mycelium/docs/tero-index/index.json\" \\"
+    },
+    {
+      "anchor": "tero--expect-gitparent-mycelium-docs-tero-index-index.json",
+      "family": "doc",
+      "kind": "other",
+      "title": "Expect: $GIT_PARENT/mycelium/docs/tero-index/index.json",
+      "file": "docs/TERO.md",
+      "line": 161,
+      "tag": "Empirical/Declared",
+      "summary": "test -f \"$GITPARENT/mycelium/docs/tero-index/index.json\" \\"
+    },
+    {
+      "anchor": "tero--already-registered-warm-path",
+      "family": "doc",
+      "kind": "section",
+      "title": "Already registered (warm path)",
+      "file": "docs/TERO.md",
+      "line": 239,
+      "tag": "Empirical/Declared",
+      "summary": "If grok mcp doctor tero is healthy but a given session still lacks tools: /mcps → r, or start a new session. Tool names are always namespaced: terotextsearch,…"
+    },
+    {
+      "anchor": "tero--subagents-must-excavate-with-tero-too",
+      "family": "doc",
+      "kind": "section",
+      "title": "Subagents must excavate with Tero too",
+      "file": "docs/TERO.md",
+      "line": 243,
+      "tag": "Empirical/Declared",
+      "summary": "When an orchestrator spawns leaf agents to investigate sibling tools (MCP servers, security wrappers, wave patterns, etc.):"
+    },
+    {
+      "anchor": "tero--tools-all-require-token",
+      "family": "doc",
+      "kind": "section",
+      "title": "Tools (all require `token`)",
+      "file": "docs/TERO.md",
+      "line": 254,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "tero--manual-smoke-test-no-grok",
+      "family": "doc",
+      "kind": "section",
+      "title": "Manual smoke test (no Grok)",
+      "file": "docs/TERO.md",
+      "line": 282,
+      "tag": "Empirical/Declared",
+      "summary": "cd /path/to/tero-mcp"
+    },
+    {
+      "anchor": "tero--troubleshooting",
+      "family": "doc",
+      "kind": "section",
+      "title": "Troubleshooting",
+      "file": "docs/TERO.md",
+      "line": 307,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "tero--status-poc",
+      "family": "doc",
+      "kind": "section",
+      "title": "Status (PoC)",
+      "file": "docs/TERO.md",
+      "line": 323,
+      "tag": "Empirical/Declared",
+      "summary": "- [x] TeroMCPClient one-shot stdio client with token + envelope unwrap"
+    }
+  ],
+  "flagged": []
+}

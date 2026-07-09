@@ -2,15 +2,17 @@
 
 **cabal-devmelopner** is a repo-agnostic development agent designed for long-running, high-quality coding assistance.
 
-It is currently in **PoC** stage.
+It is currently in **PoC** stage. Status is intentionally conservative: see the [intent and gap analysis](docs/INTENT_AND_GAP_ANALYSIS.md).
 
 ## Features (PoC)
 
 - Uses Grok via the raw xAI API
-- Optional **Tero-MCP** integration for cited corpus context (docs, decisions, issues)
+- Optional **Tero-MCP** integration for cited corpus context (docs, decisions, issues) — requires sibling setup
 - Event-driven architecture (easy to extend with new interfaces)
-- Basic iterative agent loop with feedback support
-- CLI + functional TUI
+- Agent loop scaffold (today: single-shot generation; multi-iteration not yet real)
+- CLI works; TUI code exists (**entrypoint currently broken** — tracked as POC-1)
+
+> **Not yet:** file/tools loop, verification, multi-agent, or zero-config Tero.
 
 ## Setup (Recommended: UV)
 
@@ -53,7 +55,7 @@ cd ../tero-mcp && uv sync   # once
 export TERO_TOKENS='local-dev:refresh'
 ```
 
-Full setup (env vars, Grok MCP registration, tools, troubleshooting): **[docs/TERO.md](docs/TERO.md)**.
+Full setup (env vars, **cold-start Grok MCP install** when a session lacks `tero`, tools, troubleshooting): **[docs/TERO.md](docs/TERO.md)**.
 
 ## Running
 
@@ -66,14 +68,11 @@ uv run cabal-devmelopner "Improve the public API of the compiler frontend"
 # CLI with Tero context
 uv run cabal-devmelopner "Improve the public API of the compiler frontend" --use-tero
 
-# TUI (recommended way)
+# TUI (intended entrypoint — currently fails until POC-1 lands)
 uv run cabal-devmelopner-tui
 
-# TUI with Tero
+# TUI with Tero (once entrypoint is fixed)
 USE_TERO=true uv run cabal-devmelopner-tui
-
-# Or directly with the module
-uv run python -m cabal_devmelopner.tui.app
 ```
 
 | Surface | How to enable Tero |
@@ -92,13 +91,17 @@ uv run python -m cabal_devmelopner.tui.app
 
 | Doc | Contents |
 |-----|----------|
+| [docs/ROADMAP.md](docs/ROADMAP.md) | Full product plan: waves, PR DAG, corpus alignment |
+| [docs/LOCAL_TOOLING.md](docs/LOCAL_TOOLING.md) | Sibling MCP/tools readiness (incl. context-mcp ≠ RAG) |
+| [docs/INTENT_AND_GAP_ANALYSIS.md](docs/INTENT_AND_GAP_ANALYSIS.md) | Product intent vs current reality |
+| [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md) | P0–P3 backlog from the analysis |
 | [docs/TERO.md](docs/TERO.md) | Tero-MCP setup, env, Grok tools, agent client |
 | [AGENTS.md](AGENTS.md) | Short agent-session notes for Tero lookups |
-| [PHASE.md](PHASE.md) | PoC → MVP → Production roadmap |
+| [PHASE.md](PHASE.md) | PoC → MVP → Production roadmap (honest checkboxes) |
 
 ## Development Phases
 
-See `PHASE.md` for the current roadmap (PoC → MVP → Production).
+See [PHASE.md](PHASE.md) for the roadmap. PoC is **not exited** until P0 TUI entrypoint and basic stabilization items are addressed.
 
 ## License
 
