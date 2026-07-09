@@ -126,6 +126,18 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 
 **Maps to PHASE MVP:** tools, verification, config, long-lived-ish TUI, packaging prep.
 
+## MVP-1 tools start (chore/mvp1-tools-start, 2026-07-09 appended)
+- B1: core/tools.py (ToolHost + read_file/list_dir/run_command allowlisted + parse + events TOOL_CALL/RESULT).
+- B2: wired in agent.py (tools_enabled flag, loop detect/parse/execute/feedback re-prompt limited _max_tool_steps; compat non-tool path preserved).
+- CLI: --use-tools flag + event subs + pass to SimpleAgent.
+- Prompt: tool format + get_tool_descriptions injected (integrates tero/W2 Structured in same path).
+- Tests: parse, host fs/run safety, agent tool loop (mock propose+final).
+- Docs updated append-only (this, OPEN_ISSUES, PHASE, AGENTS).
+- Tero-first (script + mcp), branch chore/mvp1-tools-start from main, hygiene next, land per dev-workflow.
+- Verify: uv run ... --use-tools works (emits, acts), pytest new tests green.
+- Cross-cite: plan.md §1 (B1 tool host v0 + B2 loop + integrate tero/W2), wsfull compact, WORKSPACE..., prior agents--pr12...
+- Status: MVP-1 started (minimal functional). Full B3+ (config/verify) later. No overclaim.
+
 ---
 
 ### Wave C — Daily co-dev polish (MVP complete)

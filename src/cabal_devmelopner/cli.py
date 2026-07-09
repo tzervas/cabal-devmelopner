@@ -53,6 +53,11 @@ def main() -> None:
         help="Enable Tero-MCP context retrieval (dynamic Rust surface + citations)",
     )
     parser.add_argument(
+        "--use-tools",
+        action="store_true",
+        help="Enable MVP-1 minimal tools (read_file, list_dir, run_command allowlisted; emits TOOL_*; B1/B2)",
+    )
+    parser.add_argument(
         "--structured",
         action="store_true",
         default=True,
@@ -107,17 +112,38 @@ def main() -> None:
     event_bus.subscribe(EventType.ERROR, on_error)
     event_bus.subscribe(EventType.TASK_STARTED, on_task_started)
 
+    # MVP-1: subscribe TOOL events for visibility (B1)
+    def on_tool_call(event):
+        print(f"[TOOL_CALL] {event.payload.get('name')} args={event.payload.get('args')}")
+
+    def on_tool_result(event):
+        out = str(event.payload.get("output", ""))[:200]
+        print(
+            f"[TOOL_RESULT] {event.payload.get('name')} success={event.payload.get('success')}: {out}..."
+        )
+
+    event_bus.subscribe(EventType.TOOL_CALL, on_tool_call)
+    event_bus.subscribe(EventType.TOOL_RESULT, on_tool_result)
+
     tero_client = TeroMCPClient() if args.use_tero else None
-    agent = SimpleAgent(provider=provider, event_bus=event_bus, tero_client=tero_client)
+    agent = SimpleAgent(
+        provider=provider,
+        event_bus=event_bus,
+        tero_client=tero_client,
+        tools_enabled=args.use_tools,
+        workspace_root=".",  # MVP-1: cwd (future: from config)
+    )
 
     task = Task(
         id="cli-task-1",
         description=args.task,
-        max_iterations=3,
+        max_iterations=5,  # allow room for tool steps + final
     )
 
+    tools_note = " +tools" if args.use_tools else ""
+    tero_note = " +tero" if args.use_tero else ""
     print(
-        f"Running task with {provider.name()} (local GPU/optimizations enabled where applicable, tero for scoped cross-repo memory)...\n"
+        f"Running task with {provider.name()}{tools_note}{tero_note} (MVP-1 tools when enabled; tero/W2 for memory)...\n"
     )
     # Use structured path (applies schemas for memory + future orchestration efficiency)
     structured: StructuredResponse = agent.run_structured(task)
