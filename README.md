@@ -105,3 +105,14 @@ See [PHASE.md](PHASE.md) for the roadmap. PoC is **not exited** until P0 TUI ent
 ## License
 
 MIT
+
+## Latest Wave (W2 + Facade, PR process)
+
+- W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (run_structured uses facade for TERO-domain tero queries + W2 StructuredResponse/Prompt with citations).
+- PR #12 (cab/a1-a3-tui-errors-tests) includes facade, A1-A3 (TUI entry/errors/tests), wiring, doc updates (AGENTS/ROADMAP/INTENT/TERO/PHASE/kickoffs/README), tero re-index.
+- Integration: cabal + tero (local index auto-discover), hygiene, C0 (honesty gate), M1 domains. See dev-docs/WORKSPACE_CABAL_TERO_READINESS.md + waves/wsfull-wave-2026-07-09-compact.md .
+- Kickoffs/agent/claude files updated (tero-first, dev-workflow, guards, facade/W2 refs).
+- Tero index + docs updated as part of PR; run update-tero.sh after edits.
+- Prefer: local-ollama + --use-tero + W2 structured (full pipeline). Follow tero-first, hygiene, security, branch/worktree guards, dev-workflow (append-only).
+
+Docs + tero always updated in PR process. See AGENTS.md for agent context. Tero cites: readme--latest-wave-w2-facade-pr-process .

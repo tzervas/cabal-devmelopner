@@ -331,3 +331,9 @@ print(r.get('kind'), len(r.get('items') or []))
 - [ ] Layer-2 / embeddings / RAG (Production roadmap — see `PHASE.md`)
 
 Upstream package: sibling **`tero-mcp`** (`tero-mcp-lite`). Full Rust stack: Mycelium `mycelium-tero` / `tero-mcp` binary (DN-87).
+
+### W2 Facade Updates (2026-07-09 PR process)
+Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDomain (M1 from memory-gate-rs) + returns W2 StructuredResponse (with citations, never silent refusals per DN-87). Wired in SimpleAgent.run_structured (core/agent.py) for TERO domain; legacy compat. 
+Docs (TERO, AGENTS, ROADMAP, INTENT, PHASE, README, .claude/kickoffs/README.md) + tero index updated as part of PR #12 (cab/a1-a3-tui-errors-tests). 
+Run /root/git/scripts/update-tero.sh cabal-devmelopner after doc changes. See facade+schemas in core/schemas.py, integration in WORKSPACE_CABAL_TERO_READINESS.md + wsfull-wave-2026-07-09-compact.md.
+Tero-first, dev-workflow, guards enforced. Parameterized skills + hygiene used. C0/M1 applied.

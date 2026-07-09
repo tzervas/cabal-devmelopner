@@ -3,13 +3,13 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-09.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 138
+- **Items:** 144
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (138 entries)
+## doc (144 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -24,17 +24,19 @@
 | `agents--3-verify-then-new-session-or-mcps-r-if-already-inside-tui` | other | — | 3) Verify, then new session (or /mcps → r if already inside TUI) | `AGENTS.md:69` | — | grok mcp doctor tero   # handshake OK, 9 tools |
 | `agents--grok-mcp-when-available` | section | — | Grok MCP (when available) | `AGENTS.md:75` | — | - Server name: tero → tools namespaced tero… |
 | `agents--this-repos-agent-cli-tui` | section | — | This repo’s agent CLI/TUI | `AGENTS.md:100` | — | Independent of Grok MCP registration: |
+| `agents--latest-state-w2-facade-integration-2026-07-09` | section | — | Latest State (W2 Facade + Integration, 2026-07-09) | `AGENTS.md:112` | — | - W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO,… |
 | `phase` | section | — | cabal-devmelopner — Development Phases | `PHASE.md:1` | — | This document tracks the phased development of cabal-devmelopner. |
 | `phase--poc-phase-current` | section | — | PoC Phase (Current) | `PHASE.md:11` | — | Goal: Validate core architecture and get a working, extensible agent. |
 | `phase--deliverables` | section | — | Deliverables | `PHASE.md:15` | — | - [x] Project skeleton + installable CLI |
-| `phase--exit-criteria` | section | — | Exit Criteria | `PHASE.md:29` | — | PoC not exited until P0 entrypoint is fixed and testing/stabilization is honest about remaining partials. |
-| `phase--mvp-phase` | section | — | MVP Phase | `PHASE.md:42` | — | Goal: Make cabal-devmelopner a practical daily co-dev tool. |
-| `phase--key-features` | section | — | Key Features | `PHASE.md:46` | — | - Full-featured TUI (status, progress, logs, task management) |
-| `phase--exit-criteria-2` | section | — | Exit Criteria | `PHASE.md:57` | — | - Comfortable to use for real development work. |
-| `phase--production-phase` | section | — | Production Phase | `PHASE.md:65` | — | Goal: Robust, scalable, multi-agent development system. |
-| `phase--key-features-2` | section | — | Key Features | `PHASE.md:69` | — | - Multi-provider support (xAI, Claude, others) |
-| `phase--exit-criteria-3` | section | — | Exit Criteria | `PHASE.md:82` | — | - Can reliably run long development sessions with minimal human intervention. |
-| `phase--notes` | section | — | Notes | `PHASE.md:90` | — | - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture. |
+| `phase--recent-wave-updates-w2-facade-integration-2026-07-09` | section | — | Recent Wave Updates (W2 Facade + Integration, 2026-07-09) | `PHASE.md:22` | — | As part of wsfull PR process: |
+| `phase--exit-criteria` | section | — | Exit Criteria | `PHASE.md:44` | — | PoC not exited until P0 entrypoint is fixed and testing/stabilization is honest about remaining partials. |
+| `phase--mvp-phase` | section | — | MVP Phase | `PHASE.md:57` | — | Goal: Make cabal-devmelopner a practical daily co-dev tool. |
+| `phase--key-features` | section | — | Key Features | `PHASE.md:61` | — | - Full-featured TUI (status, progress, logs, task management) |
+| `phase--exit-criteria-2` | section | — | Exit Criteria | `PHASE.md:72` | — | - Comfortable to use for real development work. |
+| `phase--production-phase` | section | — | Production Phase | `PHASE.md:80` | — | Goal: Robust, scalable, multi-agent development system. |
+| `phase--key-features-2` | section | — | Key Features | `PHASE.md:84` | — | - Multi-provider support (xAI, Claude, others) |
+| `phase--exit-criteria-3` | section | — | Exit Criteria | `PHASE.md:97` | — | - Can reliably run long development sessions with minimal human intervention. |
+| `phase--notes` | section | — | Notes | `PHASE.md:105` | — | - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture. |
 | `readme` | other | — | cabal-devmelopner | `README.md:1` | — | cabal-devmelopner is a repo-agnostic development agent designed for long-running, high-quality coding assistance. |
 | `readme--features-poc` | section | — | Features (PoC) | `README.md:7` | — | - Uses Grok via the raw xAI API |
 | `readme--setup-recommended-uv` | section | — | Setup (Recommended: UV) | `README.md:17` | — | This project uses uv for Python version management, dependency resolution, and running. |
@@ -53,25 +55,27 @@
 | `readme--documentation` | section | — | Documentation | `README.md:89` | — | — |
 | `readme--development-phases` | section | — | Development Phases | `README.md:101` | — | See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed. |
 | `readme--license` | section | — | License | `README.md:105` | — | MIT |
+| `readme--latest-wave-w2-facade-pr-process` | section | — | Latest Wave (W2 + Facade, PR process) | `README.md:109` | — | - W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (runstructured uses facad… |
 | `intentandgapanalysis` | section | — | Intent and Gap Analysis | `docs/INTENT_AND_GAP_ANALYSIS.md:1` | Living document — update when PoC exit criteria or architecture change. | Baseline: dev (includes Tero docs/client commit 32d30d3) |
 | `intentandgapanalysis--1.-stated-intent` | section | — | 1. Stated intent | `docs/INTENT_AND_GAP_ANALYSIS.md:11` | — | Core principles: repo-agnostic · extensible communications · strong Tero integration · clean architecture. |
-| `intentandgapanalysis--2.-current-implementation-snapshot` | section | — | 2. Current implementation (snapshot) | `docs/INTENT_AND_GAP_ANALYSIS.md:24` | — | Approximate application size: ~550+ LOC under src/cabaldevmelopner/. |
-| `intentandgapanalysis--architecture-as-implemented` | section | — | Architecture (as implemented) | `docs/INTENT_AND_GAP_ANALYSIS.md:44` | — | CLI / TUI  →  SimpleAgent  →  Provider.complete(prompt) |
-| `intentandgapanalysis--3.-poc-checklist-intent-vs-reality` | section | — | 3. PoC checklist: intent vs reality | `docs/INTENT_AND_GAP_ANALYSIS.md:57` | — | — |
-| `intentandgapanalysis--poc-exit-criteria` | section | — | PoC exit criteria | `docs/INTENT_AND_GAP_ANALYSIS.md:71` | — | — |
-| `intentandgapanalysis--4.-critical-gaps` | section | — | 4. Critical gaps | `docs/INTENT_AND_GAP_ANALYSIS.md:81` | — | Intent: coding assistance that acts on repositories. |
-| `intentandgapanalysis--4.1-not-a-development-agent-yet` | section | — | 4.1 Not a development agent yet | `docs/INTENT_AND_GAP_ANALYSIS.md:83` | — | Intent: coding assistance that acts on repositories. |
-| `intentandgapanalysis--4.2-tui-entrypoint-broken-p0` | section | — | 4.2 TUI entrypoint broken (P0) | `docs/INTENT_AND_GAP_ANALYSIS.md:93` | — | cabal-devmelopner-tui → ImportError: cannot import name 'main' |
-| `intentandgapanalysis--4.3-tero-improved-but-incomplete` | section | — | 4.3 Tero: improved but incomplete | `docs/INTENT_AND_GAP_ANALYSIS.md:101` | — | Landed improvements (dev): sibling defaults, env overrides, token auth, MCP content envelope unwrap, items-based agent formatting, docs/TERO.md. |
-| `intentandgapanalysis--4.4-agent-loop-does-not-iterate` | section | — | 4.4 Agent loop does not iterate | `docs/INTENT_AND_GAP_ANALYSIS.md:115` | — | if iteration == 1: |
-| `intentandgapanalysis--4.5-empty-runtime-dependencies` | section | — | 4.5 Empty runtime dependencies | `docs/INTENT_AND_GAP_ANALYSIS.md:125` | — | dependencies = [] |
-| `intentandgapanalysis--4.6-tui-bypasses-task-type` | section | — | 4.6 TUI bypasses `Task` type | `docs/INTENT_AND_GAP_ANALYSIS.md:133` | — | Duck-typed type("Task", (), {...})() instead of Task dataclass. |
-| `intentandgapanalysis--4.7-status-drift-pre-this-docs-update` | section | — | 4.7 Status drift (pre this docs update) | `docs/INTENT_AND_GAP_ANALYSIS.md:137` | — | PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-iteration remained nominal. Prefer checkboxes that match [OPENISSUES.md](OPENISSUES.… |
-| `intentandgapanalysis--5.-secondary-structural-gaps` | section | — | 5. Secondary / structural gaps | `docs/INTENT_AND_GAP_ANALYSIS.md:143` | — | — |
-| `intentandgapanalysis--6.-what-is-solid-keep` | section | — | 6. What is solid (keep) | `docs/INTENT_AND_GAP_ANALYSIS.md:159` | — | - Clear phase model (PoC → MVP → Production) |
-| `intentandgapanalysis--7.-gap-map-by-phase` | section | — | 7. Gap map by phase | `docs/INTENT_AND_GAP_ANALYSIS.md:172` | — | INTENT                          CURRENT STATE |
-| `intentandgapanalysis--8.-recommended-priority-close-poc-honestly` | section | — | 8. Recommended priority (close PoC honestly) | `docs/INTENT_AND_GAP_ANALYSIS.md:194` | — | 1. POC-1 Fix TUI main entrypoint (+ optional main). |
-| `intentandgapanalysis--9.-bottom-line` | section | — | 9. Bottom line | `docs/INTENT_AND_GAP_ANALYSIS.md:208` | — | Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context. |
+| `intentandgapanalysis--recent-updates-w2-facade-as-of-pr-process-2026-07-09` | section | — | Recent Updates (W2 + Facade, as of PR process 2026-07-09) | `docs/INTENT_AND_GAP_ANALYSIS.md:22` | — | - W2 schemas + CommonMemory facade implementation landed in core/schemas.py: StructuredResponse/Prompt (W2), Citation, MemoryContext, AgentDomain (M1 mirror fr… |
+| `intentandgapanalysis--2.-current-implementation-snapshot` | section | — | 2. Current implementation (snapshot) | `docs/INTENT_AND_GAP_ANALYSIS.md:37` | — | Approximate application size: ~550+ LOC under src/cabaldevmelopner/. |
+| `intentandgapanalysis--architecture-as-implemented` | section | — | Architecture (as implemented) | `docs/INTENT_AND_GAP_ANALYSIS.md:57` | — | CLI / TUI  →  SimpleAgent  →  Provider.complete(prompt) |
+| `intentandgapanalysis--3.-poc-checklist-intent-vs-reality` | section | — | 3. PoC checklist: intent vs reality | `docs/INTENT_AND_GAP_ANALYSIS.md:70` | — | — |
+| `intentandgapanalysis--poc-exit-criteria` | section | — | PoC exit criteria | `docs/INTENT_AND_GAP_ANALYSIS.md:84` | — | — |
+| `intentandgapanalysis--4.-critical-gaps` | section | — | 4. Critical gaps | `docs/INTENT_AND_GAP_ANALYSIS.md:94` | — | Intent: coding assistance that acts on repositories. |
+| `intentandgapanalysis--4.1-not-a-development-agent-yet` | section | — | 4.1 Not a development agent yet | `docs/INTENT_AND_GAP_ANALYSIS.md:96` | — | Intent: coding assistance that acts on repositories. |
+| `intentandgapanalysis--4.2-tui-entrypoint-broken-p0` | section | — | 4.2 TUI entrypoint broken (P0) | `docs/INTENT_AND_GAP_ANALYSIS.md:106` | — | cabal-devmelopner-tui → ImportError: cannot import name 'main' |
+| `intentandgapanalysis--4.3-tero-improved-but-incomplete` | section | — | 4.3 Tero: improved but incomplete | `docs/INTENT_AND_GAP_ANALYSIS.md:114` | — | Landed improvements (dev): sibling defaults, env overrides, token auth, MCP content envelope unwrap, items-based agent formatting, docs/TERO.md. |
+| `intentandgapanalysis--4.4-agent-loop-does-not-iterate` | section | — | 4.4 Agent loop does not iterate | `docs/INTENT_AND_GAP_ANALYSIS.md:128` | — | if iteration == 1: |
+| `intentandgapanalysis--4.5-empty-runtime-dependencies` | section | — | 4.5 Empty runtime dependencies | `docs/INTENT_AND_GAP_ANALYSIS.md:138` | — | dependencies = [] |
+| `intentandgapanalysis--4.6-tui-bypasses-task-type` | section | — | 4.6 TUI bypasses `Task` type | `docs/INTENT_AND_GAP_ANALYSIS.md:146` | — | Duck-typed type("Task", (), {...})() instead of Task dataclass. |
+| `intentandgapanalysis--4.7-status-drift-pre-this-docs-update` | section | — | 4.7 Status drift (pre this docs update) | `docs/INTENT_AND_GAP_ANALYSIS.md:150` | — | PHASE marked TUI and docs fully done while TUI entrypoint failed and multi-iteration remained nominal. Prefer checkboxes that match [OPENISSUES.md](OPENISSUES.… |
+| `intentandgapanalysis--5.-secondary-structural-gaps` | section | — | 5. Secondary / structural gaps | `docs/INTENT_AND_GAP_ANALYSIS.md:156` | — | — |
+| `intentandgapanalysis--6.-what-is-solid-keep` | section | — | 6. What is solid (keep) | `docs/INTENT_AND_GAP_ANALYSIS.md:172` | — | - Clear phase model (PoC → MVP → Production) |
+| `intentandgapanalysis--7.-gap-map-by-phase` | section | — | 7. Gap map by phase | `docs/INTENT_AND_GAP_ANALYSIS.md:185` | — | INTENT                          CURRENT STATE |
+| `intentandgapanalysis--8.-recommended-priority-close-poc-honestly` | section | — | 8. Recommended priority (close PoC honestly) | `docs/INTENT_AND_GAP_ANALYSIS.md:207` | — | 1. POC-1 Fix TUI main entrypoint (+ optional main). |
+| `intentandgapanalysis--9.-bottom-line` | section | — | 9. Bottom line | `docs/INTENT_AND_GAP_ANALYSIS.md:221` | — | Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context. |
 | `localchecks` | section | — | Local checks (CI parity) | `docs/LOCAL_CHECKS.md:1` | — | GitHub Actions workflows in this repo are manual only (workflowdispatch). |
 | `localchecks--run-everything-the-remote-job-would-run` | section | — | Run everything the remote job would run | `docs/LOCAL_CHECKS.md:6` | — | ./scripts/check.sh |
 | `localchecks--tero-index` | section | — | Tero index | `docs/LOCAL_CHECKS.md:19` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root "$(pwd)" |
@@ -108,17 +112,18 @@
 | `roadmap--wave-b-minimum-useful-agent-mvp-core` | section | — | Wave B — Minimum useful agent (MVP core) | `docs/ROADMAP.md:107` | — | Goal: Agent can act on a repo with Tero-assisted context and a real loop. |
 | `roadmap--wave-c-daily-co-dev-polish-mvp-complete` | section | — | Wave C — Daily co-dev polish (MVP complete) | `docs/ROADMAP.md:131` | — | Goal: Comfortable daily driver. |
 | `roadmap--wave-d-multi-agent-production-shape` | section | — | Wave D — Multi-agent & production shape | `docs/ROADMAP.md:148` | — | Goal: Coordinated agents with safe concurrency; security load-bearing. |
-| `roadmap--5.-dependency-graph-high-level` | section | — | 5. Dependency graph (high level) | `docs/ROADMAP.md:167` | — | Wave A (PoC honest) |
-| `roadmap--6.-pr-plan-incremental-reviewable` | section | — | 6. PR Plan (incremental, reviewable) | `docs/ROADMAP.md:186` | — | Each PR should be independently mergeable to dev. Suggested titles match GitHub issues where they exist. |
-| `roadmap--wave-a` | section | — | Wave A | `docs/ROADMAP.md:190` | — | — |
-| `roadmap--wave-b` | section | — | Wave B | `docs/ROADMAP.md:202` | — | — |
-| `roadmap--wave-c` | section | — | Wave C | `docs/ROADMAP.md:215` | — | — |
-| `roadmap--wave-d` | section | — | Wave D | `docs/ROADMAP.md:224` | — | — |
-| `roadmap--7.-key-decisions` | section | — | 7. Key decisions | `docs/ROADMAP.md:236` | — | — |
-| `roadmap--8.-open-questions-need-maintainer-input` | section | — | 8. Open questions (need maintainer input) | `docs/ROADMAP.md:251` | — | 1. Default tool allowlist — shell unrestricted vs allowlist-only from day one? (Recommend allowlist-only.) |
-| `roadmap--9.-suggested-near-term-execution-order-next-2-weeks` | section | — | 9. Suggested near-term execution order (next 2 weeks) | `docs/ROADMAP.md:261` | — | 1. Land docs PR #1 (intent/gap + cold-start) if not merged. |
-| `roadmap--10.-success-metrics-lightweight` | section | — | 10. Success metrics (lightweight) | `docs/ROADMAP.md:272` | — | — |
-| `roadmap--11.-references-tero-cited` | section | — | 11. References (Tero-cited) | `docs/ROADMAP.md:282` | — | Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO. |
+| `roadmap--wave-updates-w2-facade-cabal-integration-2026-07-09` | section | — | Wave Updates (W2 Facade + Cabal Integration, 2026-07-09) | `docs/ROADMAP.md:165` | — | As part of wsfull PR process and doc/tero updates: |
+| `roadmap--5.-dependency-graph-high-level` | section | — | 5. Dependency graph (high level) | `docs/ROADMAP.md:183` | — | Wave A (PoC honest) |
+| `roadmap--6.-pr-plan-incremental-reviewable` | section | — | 6. PR Plan (incremental, reviewable) | `docs/ROADMAP.md:202` | — | Each PR should be independently mergeable to dev. Suggested titles match GitHub issues where they exist. |
+| `roadmap--wave-a` | section | — | Wave A | `docs/ROADMAP.md:206` | — | — |
+| `roadmap--wave-b` | section | — | Wave B | `docs/ROADMAP.md:218` | — | — |
+| `roadmap--wave-c` | section | — | Wave C | `docs/ROADMAP.md:231` | — | — |
+| `roadmap--wave-d` | section | — | Wave D | `docs/ROADMAP.md:240` | — | — |
+| `roadmap--7.-key-decisions` | section | — | 7. Key decisions | `docs/ROADMAP.md:252` | — | — |
+| `roadmap--8.-open-questions-need-maintainer-input` | section | — | 8. Open questions (need maintainer input) | `docs/ROADMAP.md:267` | — | 1. Default tool allowlist — shell unrestricted vs allowlist-only from day one? (Recommend allowlist-only.) |
+| `roadmap--9.-suggested-near-term-execution-order-next-2-weeks` | section | — | 9. Suggested near-term execution order (next 2 weeks) | `docs/ROADMAP.md:277` | — | 1. Land docs PR #1 (intent/gap + cold-start) if not merged. |
+| `roadmap--10.-success-metrics-lightweight` | section | — | 10. Success metrics (lightweight) | `docs/ROADMAP.md:288` | — | — |
+| `roadmap--11.-references-tero-cited` | section | — | 11. References (Tero-cited) | `docs/ROADMAP.md:298` | — | Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO. |
 | `tero` | section | — | Tero-MCP integration | `docs/TERO.md:1` | — | [Tero](https://github.com/tzervas) is a Layer-1 corpus index query surface: cited lookups over docs, decisions, issues, changelog entries, and skills. cabal-de… |
 | `tero--what-tero-is-and-is-not` | section | — | What Tero is (and is not) | `docs/TERO.md:9` | — | Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth. |
 | `tero--expected-sibling-layout` | section | — | Expected sibling layout | `docs/TERO.md:22` | — | Defaults assume a shared parent directory (e.g. ~/git or /root/git): |
@@ -147,6 +152,7 @@
 | `tero--manual-smoke-test-no-grok` | section | — | Manual smoke test (no Grok) | `docs/TERO.md:282` | — | cd /path/to/tero-mcp |
 | `tero--troubleshooting` | section | — | Troubleshooting | `docs/TERO.md:307` | — | — |
 | `tero--status-poc` | section | — | Status (PoC) | `docs/TERO.md:323` | — | - [x] TeroMCPClient one-shot stdio client with token + envelope unwrap |
+| `tero--w2-facade-updates-2026-07-09-pr-process` | section | — | W2 Facade Updates (2026-07-09 PR process) | `docs/TERO.md:335` | — | Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDomain (M1 from memory-gate-rs) + returns W2 StructuredResponse (with citations,… |
 | `readme-2` | other | — | Tero index (Layer 1) | `docs/tero-index/README.md:1` | — | Machine + human citation index for this repository. |
 | `readme--regenerate` | section | — | Regenerate | `docs/tero-index/README.md:13` | — | python3 /path/to/tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |
