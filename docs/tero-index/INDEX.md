@@ -13,17 +13,17 @@
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
-| `agents` | section | — | Agent notes — cabal-devmelopner | `AGENTS.md:1` | — | Use Tero for cited lookups over the corpus index before guessing from memory or grepping the whole tree. Full project guide (including cold-start install when… |
-| `agents--tero-documentation-corpus-context` | section | — | Tero (documentation / corpus context) | `AGENTS.md:3` | — | Use Tero for cited lookups over the corpus index before guessing from memory or grepping the whole tree. Full project guide (including cold-start install when… |
-| `agents--prefer` | section | — | Prefer | `AGENTS.md:7` | — | 1. textsearch / querybyid / querybykind via the tero MCP server (when registered in Grok). |
-| `agents--subagents-and-multi-repo-excavation-required-when-tero-is-available` | section | — | Subagents and multi-repo excavation (required when Tero is available) | `AGENTS.md:13` | — | Sibling-tool investigations, readiness audits, and design waves are harder if agents only ls/grep checkouts. Every agent that excavates (orchestrator and leaf… |
-| `agents--tero-excavation-do-this-before-deep-filesystem-greps` | section | — | Tero excavation (do this before deep filesystem greps) | `AGENTS.md:27` | — | You have access to the tero MCP server (tools tero). Use it to excavate project |
-| `agents--if-this-session-has-no-tero-tools` | section | — | If this session has no `tero__*` tools | `AGENTS.md:46` | — | Sessions only pick up MCP servers registered before launch (or after /mcps → r). Quick path: |
-| `agents--1-one-time-sibling-package-index-adjust-gitparent` | other | — | 1) One-time: sibling package + index (adjust GIT_PARENT) | `AGENTS.md:51` | — | export GITPARENT="${GITPARENT:-$HOME/git}" |
-| `agents--2-register-user-scope-.grok-config.toml` | other | — | 2) Register (user scope → ~/.grok/config.toml) | `AGENTS.md:56` | — | grok mcp add tero \ |
-| `agents--3-verify-then-new-session-or-mcps-r-if-already-inside-tui` | other | — | 3) Verify, then new session (or /mcps → r if already inside TUI) | `AGENTS.md:63` | — | grok mcp doctor tero   # handshake OK, 9 tools |
-| `agents--grok-mcp-when-available` | section | — | Grok MCP (when available) | `AGENTS.md:69` | — | - Server name: tero → tools namespaced tero… |
-| `agents--this-repos-agent-cli-tui` | section | — | This repo’s agent CLI/TUI | `AGENTS.md:94` | — | Independent of Grok MCP registration: |
+| `agents` | section | — | Agent notes — cabal-devmelopner | `AGENTS.md:1` | — | Use Tero (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query… |
+| `agents--tero-documentation-corpus-context-now-dynamic-over-tero-rs` | section | — | Tero (documentation / corpus context) — now dynamic over tero-rs | `AGENTS.md:3` | — | Use Tero (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query… |
+| `agents--prefer` | section | — | Prefer | `AGENTS.md:13` | — | 1. textsearch / querybyid / querybykind via the tero MCP server (when registered in Grok). |
+| `agents--subagents-and-multi-repo-excavation-required-when-tero-is-available` | section | — | Subagents and multi-repo excavation (required when Tero is available) | `AGENTS.md:19` | — | Sibling-tool investigations, readiness audits, and design waves are harder if agents only ls/grep checkouts. Every agent that excavates (orchestrator and leaf… |
+| `agents--tero-excavation-do-this-before-deep-filesystem-greps` | section | — | Tero excavation (do this before deep filesystem greps) | `AGENTS.md:33` | — | You have access to the tero MCP server (tools tero). Use it to excavate project |
+| `agents--if-this-session-has-no-tero-tools` | section | — | If this session has no `tero__*` tools | `AGENTS.md:52` | — | Sessions only pick up MCP servers registered before launch (or after /mcps → r). Quick path: |
+| `agents--1-one-time-sibling-package-index-adjust-gitparent` | other | — | 1) One-time: sibling package + index (adjust GIT_PARENT) | `AGENTS.md:57` | — | export GITPARENT="${GITPARENT:-$HOME/git}" |
+| `agents--2-register-user-scope-.grok-config.toml` | other | — | 2) Register (user scope → ~/.grok/config.toml) | `AGENTS.md:62` | — | grok mcp add tero \ |
+| `agents--3-verify-then-new-session-or-mcps-r-if-already-inside-tui` | other | — | 3) Verify, then new session (or /mcps → r if already inside TUI) | `AGENTS.md:69` | — | grok mcp doctor tero   # handshake OK, 9 tools |
+| `agents--grok-mcp-when-available` | section | — | Grok MCP (when available) | `AGENTS.md:75` | — | - Server name: tero → tools namespaced tero… |
+| `agents--this-repos-agent-cli-tui` | section | — | This repo’s agent CLI/TUI | `AGENTS.md:100` | — | Independent of Grok MCP registration: |
 | `phase` | section | — | cabal-devmelopner — Development Phases | `PHASE.md:1` | — | This document tracks the phased development of cabal-devmelopner. |
 | `phase--poc-phase-current` | section | — | PoC Phase (Current) | `PHASE.md:11` | — | Goal: Validate core architecture and get a working, extensible agent. |
 | `phase--deliverables` | section | — | Deliverables | `PHASE.md:15` | — | - [x] Project skeleton + installable CLI |
