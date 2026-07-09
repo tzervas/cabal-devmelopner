@@ -4,41 +4,43 @@ Derived from [INTENT_AND_GAP_ANALYSIS.md](INTENT_AND_GAP_ANALYSIS.md). Use as a 
 
 Legend: **P0** blocks basic UX · **P1** PoC exit · **P2** MVP foundation · **P3** later
 
+GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzervas/cabal-devmelopner/issues/2)–[#8](https://github.com/tzervas/cabal-devmelopner/issues/8).
+
 ---
 
 ## P0 — Fix before claiming a working TUI
 
-| ID | Title | Description | Acceptance |
-|----|--------|-------------|------------|
-| **POC-1** | TUI console entrypoint broken | `cabal-devmelopner-tui` imports missing `main` | `uv run cabal-devmelopner-tui` launches app; `python -m cabal_devmelopner.tui.app` works |
-| **POC-2** | Keep Tero enablement docs honest | CLI `--use-tero`, TUI `USE_TERO` (partially fixed in README) | README / PHASE / TERO.md stay aligned after any flag changes |
-| **POC-3** | TUI uses duck-typed Task | `type("Task", …)` instead of dataclass | TUI constructs `Task` from `core.types` |
+| ID | GH | Title | Description | Acceptance |
+|----|-----|--------|-------------|------------|
+| **POC-1** | [#2](https://github.com/tzervas/cabal-devmelopner/issues/2) | TUI console entrypoint broken | `cabal-devmelopner-tui` imports missing `main` | `uv run cabal-devmelopner-tui` launches app; `python -m cabal_devmelopner.tui.app` works |
+| **POC-2** | — | Keep Tero enablement docs honest | CLI `--use-tero`, TUI `USE_TERO` (partially fixed in README) | README / PHASE / TERO.md stay aligned after any flag changes |
+| **POC-3** | [#3](https://github.com/tzervas/cabal-devmelopner/issues/3) | TUI uses duck-typed Task | `type("Task", …)` instead of dataclass | TUI constructs `Task` from `core.types` |
 
 ---
 
 ## P1 — PoC exit criteria
 
-| ID | Title | Description | Acceptance |
-|----|--------|-------------|------------|
-| **POC-4** | Tero errors silent in agent | `except Exception: pass` around Tero search | Emit progress/error event or log when Tero fails; optional hard-fail flag |
-| **POC-5** | One-shot MCP only | No session / initialize / tool discovery | Documented limitation **or** proper MCP client session |
-| **POC-6** | Multi-iteration dead code | Always return after iteration 1 | Real feedback path **or** document single-shot and revise PHASE checkbox text |
-| **POC-7** | Thin test suite | Two smoke tests | Cover EventBus, prompt builder, Tero client error paths (mocked), CLI help without API |
-| **POC-8** | ERROR events on provider failure | TUI handler exists; agent rarely emits | Failures emit `EventType.ERROR` |
-| **POC-9** | Tero zero-config story | Requires sibling `tero-mcp` + index | Clear setup error messages when paths missing; optional CI skip marker |
+| ID | GH | Title | Description | Acceptance |
+|----|-----|--------|-------------|------------|
+| **POC-4** | [#4](https://github.com/tzervas/cabal-devmelopner/issues/4) | Tero errors silent in agent | `except Exception: pass` around Tero search | Emit progress/error event or log when Tero fails; optional hard-fail flag |
+| **POC-5** | — | One-shot MCP only | No session / initialize / tool discovery | Documented limitation **or** proper MCP client session |
+| **POC-6** | [#5](https://github.com/tzervas/cabal-devmelopner/issues/5) | Multi-iteration dead code | Always return after iteration 1 | Real feedback path **or** document single-shot and revise PHASE checkbox text |
+| **POC-7** | [#6](https://github.com/tzervas/cabal-devmelopner/issues/6) | Thin test suite | Two smoke tests | Cover EventBus, prompt builder, Tero client error paths (mocked), CLI help without API |
+| **POC-8** | — | ERROR events on provider failure | TUI handler exists; agent rarely emits | Failures emit `EventType.ERROR` |
+| **POC-9** | — | Tero zero-config story | Requires sibling `tero-mcp` + index | Clear setup error messages when paths missing; optional CI skip marker |
 
 ---
 
 ## P2 — Toward a useful development agent / MVP
 
-| ID | Title | Description | Acceptance |
-|----|--------|-------------|------------|
-| **MVP-1** | Minimal tool use | Read file, list dir, run tests | Tool loop + TOOL_CALL / TOOL_RESULT events |
-| **MVP-2** | Config system | Model, iterations, Tero paths, workspace | Documented precedence (file / env / flags) |
-| **MVP-3** | Runtime dependencies | `dependencies = []` | Core + optional extras correct for install story |
-| **MVP-4** | CI: pytest | Only gitleaks today | `uv run pytest` on PR to `dev`/`main` |
-| **MVP-5** | Streaming | Blocking completions only | Progressive CLI/TUI output |
-| **MVP-6** | Session / history | Fully isolated runs | Persist or export transcripts |
+| ID | GH | Title | Description | Acceptance |
+|----|-----|--------|-------------|------------|
+| **MVP-1** | [#8](https://github.com/tzervas/cabal-devmelopner/issues/8) | Minimal tool use | Read file, list dir, run tests | Tool loop + TOOL_CALL / TOOL_RESULT events |
+| **MVP-2** | — | Config system | Model, iterations, Tero paths, workspace | Documented precedence (file / env / flags) |
+| **MVP-3** | — | Runtime dependencies | `dependencies = []` | Core + optional extras correct for install story |
+| **MVP-4** | [#7](https://github.com/tzervas/cabal-devmelopner/issues/7) | CI: pytest | Only gitleaks today | `uv run pytest` on PR to `dev`/`main` |
+| **MVP-5** | — | Streaming | Blocking completions only | Progressive CLI/TUI output |
+| **MVP-6** | — | Session / history | Fully isolated runs | Persist or export transcripts |
 
 ---
 
