@@ -166,3 +166,15 @@ All per AGENTS, wsfull-wave-2026-07-09-compact.md, dev-workflow. Tero cite: agen
 - Process: main pull; git checkout -b chore/honest-docs-post-w2; edits; scripts/check.sh --quick; commit -S; push + gh pr --base main.
 - After: update-tero.sh cabal-devmelopner; hygiene. Tero cite for this: agents--pr12-review-merge-2026-07-09 + workspacecabalteroreadiness--*. Follow AGENTS dev-workflow, branch-guard, append-only. Update this + kickoffs + tero on changes.
 
+### POC-6 iteration documented single-shot (chore/poc6-iteration-honesty appended 2026-07-09)
+- Tero-first (required): /root/git/scripts/tero.sh cabal-devmelopner text_search "POC-6|iteration" (refusal, 156 rows, no prior match); re-ran for "POC","plan","wsfull"; MCP: search_tool "tero", tero__identify, tero__text_search "POC-6" etc (refusals pre), "cabal"/"plan" hits (workspacecabalteroreadiness sections). Excavation before any greps/edits + reads of cited.
+- Read: plan.md (cabal section p2 on cabal-poc-mvp POC-6), docs/OPEN_ISSUES.md, PHASE.md, ROADMAP.md, AGENTS.md (this), + wsfull compact.
+- Branch: git checkout -b chore/poc6-iteration-honesty (from main, clean).
+- Decision per task/plan: document POC-6 as single-shot (honest); defer full feedback/iter to MVP/tools (no code change).
+- Updates (append-only + targeted marks for status): PHASE.md (deliverables bullet + exit criteria + new append section), ROADMAP.md (A6 row + footnote + exit text + append), OPEN_ISSUES.md (status list + new append), INTENT_AND_GAP_ANALYSIS.md (priority + bottom line + append), AGENTS.md (this).
+- Cross-cites: plan.md ("POC-6 (P1): ... document single-shot (honest, defer full feedback to MVP/tools). Update PHASE/ROADMAP/OPEN_ISSUES/INTENT/AGENTS (append-only, cross-cite wsfull compact + this plan)."), wsfull-wave-2026-07-09-compact.md, WORKSPACE_CABAL_TERO_READINESS.md, prior tero hits e.g. phase--honest-poc..., intentandgapanalysis--8.-recommended..., roadmap--wave-a...
+- Commit: signed -S "docs(poc6): document iteration as single-shot honest (plan.md p2)"
+- Then: ./scripts/check.sh (or ruff/pytest), /root/git/scripts/update-tero.sh cabal-devmelopner ; verify tero hits; pr-review if avail (follow merge); land: git checkout dev; git merge --no-ff ... ; push; main --no-ff; propagate.
+- Follows exactly: AGENTS (Tero excavation block, prefer tero before greps, subagent rules, dev-workflow, guards, append-only, update this+tero+kickoffs), hygiene, C0/M1 honesty. No overclaim.
+- Tero cite: agents--poc6-iteration... + plan refs. Post: re-run update-tero + text_search "POC-6".
+

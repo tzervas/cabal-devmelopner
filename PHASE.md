@@ -17,7 +17,7 @@ For honest status vs intent (including known P0/P1 gaps), see **[docs/INTENT_AND
 - [x] Project skeleton + installable CLI
 - [x] Event/communication system (producer/consumer model)
 - [x] xAI provider (raw API)
-- [~] Improved agent loop with iteration + feedback — *loop scaffold only; always returns after first generation (see POC-6)*
+- [~] Improved agent loop with iteration + feedback — *documented as single-shot per POC-6 decision (plan.md p2); loop scaffold only, always returns after iter 1; full feedback deferred to MVP/tools (see POC-6)*
 
 ## Recent Wave Updates (W2 Facade + Integration, 2026-07-09)
 
@@ -50,7 +50,7 @@ See compact, readiness, PR for details. Update docs + tero before land.
 | Tero-MCP can be called from the agent | **Conditional** — `--use-tero` / `USE_TERO=true` with sibling layout |
 | TUI launches via documented entrypoints | **Met (PoC)** — `cabal-devmelopner-tui` entrypoint + Task wiring fixed in PR#12 (A1-A3/POC-1/POC-3); full TUI polish later |
 
-**PoC not exited** until iteration/feedback (POC-6) and testing/stabilization (POC-7) are honest; TUI entrypoint (POC-1) + Tero error surfacing (POC-4) addressed in PR#12. See wsfull-wave-2026-07-09-compact.md and WORKSPACE_CABAL_TERO_READINESS.md.
+**PoC not exited** until testing/stabilization (POC-7) are honest; iteration/feedback (POC-6) is now documented as single-shot (honest deferral to MVP/tools per plan.md); TUI entrypoint (POC-1) + Tero error surfacing (POC-4) addressed in PR#12. See wsfull-wave-2026-07-09-compact.md , WORKSPACE_CABAL_TERO_READINESS.md and plan.md (cabal-poc-mvp).
 
 ---
 
@@ -120,3 +120,12 @@ See compact, readiness, PR for details. Update docs + tero before land.
 - Cross-cites: wsfull-wave-2026-07-09-compact.md (W2, C0/M1, PR#12, A1-A3), WORKSPACE_CABAL_TERO_READINESS.md (facade integration post-wave), AGENTS.md (post C0 + PR#12 review-merge).
 - Append-only + tero-first (MCP text_search "W2 Facade"/"C0"/"wsfull-wave"); no code changes. See ROADMAP/INTENT/OPEN_ISSUES for parallel updates. Process: main pull, branch, edits, check.sh --quick, signed commit, PR to main.
 - Tero cite ref: agents--pr12-review-merge-2026-07-09 + workspacecabalteroreadiness sections. Guards/dev-workflow followed.
+
+### POC-6 iteration honesty (chore/poc6-iteration-honesty, per plan.md p2)
+- **Decision:** Document POC-6 as single-shot (honest); defer full multi-iteration feedback + verification loop to MVP/tools (Wave B: B2/B4 etc). Matches code reality in agent.py (early return on iter==1; "PoC: first success").
+- Updated deliverables status + exit criteria note. No code change (single-shot is intentional until tools).
+- Cross-cites: /root/git/workspace/plan.md (cabal section: "POC-6 (P1): ... document single-shot (honest) ... update PHASE/ROADMAP..."), wsfull-wave-2026-07-09-compact.md, WORKSPACE_CABAL_TERO_READINESS.md, ROADMAP.md §Wave A A6.
+- Tero-first: script + MCP identify/text_search ("POC","plan") before edits (refusals on "POC-6" pre-update as expected).
+- Process: branch from main, append-only + targeted marks, checks, update-tero, land dev/main --no-ff.
+- Tero cite target post-update: will hit after /root/git/scripts/update-tero.sh cabal-devmelopner (cites phase--*, openissues--*, roadmap--*, etc).
+- Follows AGENTS.md (tero-first, dev-workflow, append-only, branch-guard, update this+tero), prior honest-docs-post-w2 pattern.

@@ -204,7 +204,7 @@ Production ───────────────────────
 
 ## 8. Recommended priority (close PoC honestly)
 
-1. **POC-6** (remaining) Document or implement iteration/feedback (still early-return on iter=1); adjust PHASE if needed.
+1. **POC-6** (documented) Iteration/feedback documented as single-shot (plan.md p2 decision); early-return on iter=1 is now honest (defer full to MVP/tools). PHASE/ROADMAP/OPEN_ISSUES updated. See appended section.
 2. **POC-7** (in progress) Expand tests (EventBus/prompt/Tero+provider errs done post PR#12; CI next).
 3. **POC-5/9** Tero: one-shot vs session; zero-config messages.
 4. **MVP-3 / MVP-4** Runtime deps + pytest CI.
@@ -219,7 +219,7 @@ Details: [OPEN_ISSUES.md](OPEN_ISSUES.md).
 
 **Intent:** long-running, repo-agnostic **development agent** with event-driven UIs and strong Tero context.
 
-**Reality:** early **architecture PoC** with working CLI→xAI, W2 CommonMemory facade + tero (AgentDomain), opt-in + Grok MCP Tero, event seams, TUI entrypoint+Task+errors fixed (PR#12 A1-A3/C0) — **not yet** a development agent (no tools/verification) and **not yet** a polished PoC exit (iteration POC-6 nominal, tests/CI partial).
+**Reality:** early **architecture PoC** with working CLI→xAI, W2 CommonMemory facade + tero (AgentDomain), opt-in + Grok MCP Tero, event seams, TUI entrypoint+Task+errors fixed (PR#12 A1-A3/C0) — **not yet** a development agent (no tools/verification) and **not yet** a polished PoC exit (iteration POC-6 documented as single-shot per plan.md, tests/CI partial).
 
 **Largest honesty gap:** claiming full TUI / iterative agent completion ahead of behavior.  
 **Largest product gap:** no tools or verification, so the system cannot act on a codebase.
@@ -235,3 +235,11 @@ Details: [OPEN_ISSUES.md](OPEN_ISSUES.md).
 - Cross-cites: wsfull-wave-2026-07-09-compact.md (W2 facade, A1-A3, C0 fix, PR#12), WORKSPACE_CABAL_TERO_READINESS.md (post-wave integration), PHASE/ROADMAP/OPEN_ISSUES/AGENTS (appends).
 - Tero-first (MCP: text_search "W2 Facade" "C0" "POC" "wsfull-wave"; identify + cited reads of dev-docs) before any edits. Append-only edits. Process followed exactly (main pull, branch chore/honest-docs-post-w2, check.sh, signed commit, gh pr to main).
 - Tero cite example: workspacecabalteroreadiness--w2-facade-cabal-integration-post-wsfull-wave-2026-07-09-compact + agents--post-c0-fix-for-pr12-2026-07-09-appended. No code touched. Hygiene via check --quick.
+
+### POC-6 single-shot documented (chore/poc6-iteration-honesty, append-only)
+- Updated recommended priority, bottom-line reality, PoC gaps note: POC-6 closed as "document or implement" via honest documentation of single-shot.
+- Decision (plan.md): document as single-shot (honest); defer full feedback to MVP/tools. Code in agent.py (run_structured) + comment reflects PoC first-success path.
+- Cross-cites: plan.md (cabal-poc-mvp: "POC-6 (P1)... document single-shot (honest, defer full feedback to MVP/tools)"), wsfull-wave-2026-07-09-compact.md, PHASE.md (deliverables/exit updated), ROADMAP.md (A6), OPEN_ISSUES.md (status), AGENTS.md (this tranche).
+- Tero-first: /root/git/scripts/tero.sh cabal-devmelopner text_search "POC-6|iteration" (refusal pre), "POC" (20+ hits on prior honest sections + phase-- etc); MCP tero__identify + text_search; read cited files.
+- Append-only + targeted. Branch: chore/poc6-iteration-honesty (from main). No src edits. After: check, update-tero, land.
+- Tero cite post-update: intentandgapanalysis--* + new section. Follow AGENTS (tero excavation, dev-workflow, guards, append-only).
