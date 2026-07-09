@@ -45,12 +45,7 @@ class CabalDevmelopnerTUI(App):
     def compose(self) -> ComposeResult:
         yield Header(show_clock=True)
         yield Static("cabal-devmelopner — PoC TUI", id="title")
-        yield Vertical(
-            self.input_widget,
-            self.run_button,
-            self.log_widget,
-            id="main_container"
-        )
+        yield Vertical(self.input_widget, self.run_button, self.log_widget, id="main_container")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -84,12 +79,12 @@ class CabalDevmelopnerTUI(App):
 
         try:
             provider = XaiProvider(api_key=api_key)
-            tero_client = TeroMCPClient() if os.getenv("USE_TERO", "false").lower() == "true" else None
+            tero_client = (
+                TeroMCPClient() if os.getenv("USE_TERO", "false").lower() == "true" else None
+            )
 
             self.agent = SimpleAgent(
-                provider=provider,
-                event_bus=self.event_bus,
-                tero_client=tero_client
+                provider=provider, event_bus=self.event_bus, tero_client=tero_client
             )
 
             self.run_worker(self._execute_agent, task_text, thread=True)
@@ -110,21 +105,15 @@ class CabalDevmelopnerTUI(App):
         if not self.agent:
             return
         try:
-            task = type("Task", (), {
-                "id": "tui-task",
-                "description": task_description,
-                "max_iterations": 3
-            })()
+            task = type(
+                "Task", (), {"id": "tui-task", "description": task_description, "max_iterations": 3}
+            )()
             result = self.agent.run(task)
             self.call_from_thread(
-                self.log_widget.write,
-                f"\n[bold green]=== Final Result ===[/]\n{result}"
+                self.log_widget.write, f"\n[bold green]=== Final Result ===[/]\n{result}"
             )
         except Exception as e:
-            self.call_from_thread(
-                self.log_widget.write,
-                f"[bold red]Agent error:[/] {e}"
-            )
+            self.call_from_thread(self.log_widget.write, f"[bold red]Agent error:[/] {e}")
 
     def _on_progress(self, event: Event) -> None:
         msg = event.payload.get("message", "")
@@ -135,7 +124,9 @@ class CabalDevmelopnerTUI(App):
 
     def _on_generation_complete(self, event: Event) -> None:
         length = event.payload.get("response_length", 0)
-        self.call_from_thread(self.log_widget.write, f"[green]✓ Generation complete ({length} chars)[/]")
+        self.call_from_thread(
+            self.log_widget.write, f"[green]✓ Generation complete ({length} chars)[/]"
+        )
 
     def _on_task_complete(self, event: Event) -> None:
         self.call_from_thread(self.log_widget.write, "[bold green]Task finished.[/]")

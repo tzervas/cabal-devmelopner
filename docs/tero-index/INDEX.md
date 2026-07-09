@@ -3,13 +3,13 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-09.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 126
+- **Items:** 138
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (126 entries)
+## doc (138 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -72,6 +72,12 @@
 | `intentandgapanalysis--7.-gap-map-by-phase` | section | — | 7. Gap map by phase | `docs/INTENT_AND_GAP_ANALYSIS.md:172` | — | INTENT                          CURRENT STATE |
 | `intentandgapanalysis--8.-recommended-priority-close-poc-honestly` | section | — | 8. Recommended priority (close PoC honestly) | `docs/INTENT_AND_GAP_ANALYSIS.md:194` | — | 1. POC-1 Fix TUI main entrypoint (+ optional main). |
 | `intentandgapanalysis--9.-bottom-line` | section | — | 9. Bottom line | `docs/INTENT_AND_GAP_ANALYSIS.md:208` | — | Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context. |
+| `localchecks` | section | — | Local checks (CI parity) | `docs/LOCAL_CHECKS.md:1` | — | GitHub Actions workflows in this repo are manual only (workflowdispatch). |
+| `localchecks--run-everything-the-remote-job-would-run` | section | — | Run everything the remote job would run | `docs/LOCAL_CHECKS.md:6` | — | ./scripts/check.sh |
+| `localchecks--tero-index` | section | — | Tero index | `docs/LOCAL_CHECKS.md:19` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root "$(pwd)" |
+| `localchecks--from-a-checkout-that-can-see-the-generator-sibling-tero-mcp-recommended` | other | — | from a checkout that can see the generator (sibling tero-mcp recommended): | `docs/LOCAL_CHECKS.md:22` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root "$(pwd)" |
+| `localchecks--or` | other | — | or: | `docs/LOCAL_CHECKS.md:24` | — | python3 scripts/generateteroindex.sh   # if present as a thin wrapper |
+| `localchecks--remote-optional` | section | — | Remote (optional) | `docs/LOCAL_CHECKS.md:30` | — | In GitHub: Actions → CI → Run workflow. |
 | `localtooling` | section | — | Local sibling tooling (MCP / packages) | `docs/LOCAL_TOOLING.md:1` | Living notes (2026-07-08) | Status: Living notes (2026-07-08) |
 | `localtooling--inventory-typical-parent-dir` | section | — | Inventory (typical parent dir) | `docs/LOCAL_TOOLING.md:11` | — | — |
 | `localtooling--context-mcp-not-legitimate-rag-yet-and-must-become-efficient-legitimate-rag` | section | — | context-mcp: not legitimate RAG yet — and **must become** efficient legitimate RAG | `docs/LOCAL_TOOLING.md:26` | — | Product need (maintainer): context-mcp requires efficient, legitimate RAG — not pseudo-similarity theater. That is an upstream requirement on the context-mcp r… |
@@ -84,6 +90,8 @@
 | `localtooling--upstream-work-context-mcp-repo-track-there` | section | — | Upstream work (context-mcp repo — track there) | `docs/LOCAL_TOOLING.md:90` | — | Suggested issue themes (file on tzervas/context-mcp): |
 | `localtooling--other-siblings-one-liners` | section | — | Other siblings (one-liners) | `docs/LOCAL_TOOLING.md:105` | — | Branch/in-flight detail from the 2026-07-08 audit lives in session notes (/tmp/investigate-.md); re-run with Tero-first leaf prompts when refreshing. |
 | `localtooling--related` | section | — | Related | `docs/LOCAL_TOOLING.md:119` | — | - [ROADMAP.md](ROADMAP.md) — waves and PR plan |
+| `localtooling--per-repo-tero-indices` | section | — | Per-repo Tero indices | `docs/LOCAL_TOOLING.md:126` | — | Each sibling MCP repo (and this one) commits docs/tero-index/ for local tero-mcp-lite. Regenerate with python3 ../tero-mcp/scripts/generateliteindex.py --root… |
+| `localtooling--local-ci-parity` | section | — | Local CI parity | `docs/LOCAL_TOOLING.md:130` | — | ./scripts/check.sh |
 | `openissues` | section | — | Open issues backlog (from intent / gap analysis) | `docs/OPEN_ISSUES.md:1` | — | Derived from [INTENTANDGAPANALYSIS.md](INTENTANDGAPANALYSIS.md). Execution order, waves, and PR DAG: [ROADMAP.md](ROADMAP.md). Use this file as a checklist for… |
 | `openissues--p0-fix-before-claiming-a-working-tui` | section | — | P0 — Fix before claiming a working TUI | `docs/OPEN_ISSUES.md:11` | — | — |
 | `openissues--p1-poc-exit-criteria` | section | — | P1 — PoC exit criteria | `docs/OPEN_ISSUES.md:21` | — | — |
@@ -139,4 +147,8 @@
 | `tero--manual-smoke-test-no-grok` | section | — | Manual smoke test (no Grok) | `docs/TERO.md:282` | — | cd /path/to/tero-mcp |
 | `tero--troubleshooting` | section | — | Troubleshooting | `docs/TERO.md:307` | — | — |
 | `tero--status-poc` | section | — | Status (PoC) | `docs/TERO.md:323` | — | - [x] TeroMCPClient one-shot stdio client with token + envelope unwrap |
+| `readme-2` | other | — | Tero index (Layer 1) | `docs/tero-index/README.md:1` | — | Machine + human citation index for this repository. |
+| `readme--regenerate` | section | — | Regenerate | `docs/tero-index/README.md:13` | — | python3 /path/to/tero-mcp/scripts/generateliteindex.py --root $(pwd) |
+| `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |
+| `readme--serve-locally` | section | — | Serve locally | `docs/tero-index/README.md:21` | — | export TEROTOKENS=local-dev:refresh |
 

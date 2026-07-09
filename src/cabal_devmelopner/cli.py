@@ -17,7 +17,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         prog="cabal-devmelopner",
         description="cabal-devmelopner — Development Agent (PoC)",
-        epilog="Example: cabal-devmelopner 'Improve error handling in the compiler' --use-tero"
+        epilog="Example: cabal-devmelopner 'Improve error handling in the compiler' --use-tero",
     )
     parser.add_argument("task", nargs="?", help="Task description")
     parser.add_argument("--model", default="grok-4.5", help="xAI model to use")
