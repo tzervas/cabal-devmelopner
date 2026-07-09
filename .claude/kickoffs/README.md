@@ -36,3 +36,13 @@ Additional local stows can live here (e.g. cab-tui.md) for finer waves.
 Run updates, tero regen, commit+push to branch to update PR before review/merge.
 
 Tero-first: ./scripts/tero.sh cabal-devmelopner text_search "facade" etc. See dev-docs for sources.
+
+## Post-fix append (2026-07-09)
+
+- Fixed C0 blocker in PR#12 (facade error now properly emits ERROR via agent when refusal returned from query; test updated + green).
+- Per user: docs/kickoffs/AGENTS/claude + all docs updated as part of PR process for each repo.
+- Run update-tero included.
+- One agent per PR for review+merge via adapted pr-review skill + rubric (tero/W2/C0/M1/dev-workflow/guards).
+- Then merge up + propagate pulls to core (dev/main) lowers.
+- Swarm used for broad disjoint repo tasks.
+- See wsfull.md + private-docs/analyses/ for status. All append-only, tero-cited, guards.

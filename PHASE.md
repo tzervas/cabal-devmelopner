@@ -107,3 +107,9 @@ See compact, readiness, PR for details. Update docs + tero before land.
 - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture.
 - Security and resource management concerns should be considered from MVP onward, even if full implementation lands in Production.
 - Prefer updating checkboxes here when code lands; keep narrative detail in the intent/gap analysis.
+
+### Appended: W2 + C0 fix for PR#12 (2026-07-09)
+- W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green).
+- Part of cab branch PR#12 to dev. Docs/AGENTS/kickoffs updated per process.
+- After tero update + checks: pr-review (rubric adapted for workspace tero/W2/C0/M1/guards) + merge.
+- Tero-cited from wsfull compact + readiness (see dev-docs). dev-workflow + guards followed.

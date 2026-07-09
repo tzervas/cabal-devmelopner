@@ -125,3 +125,16 @@ Env overrides: `TERO_MCP_PROJECT`, `TERO_INDEX_PATH`, `TERO_TOKENS`, `TERO_TOKEN
 - Next: PR review (pr-review skill adapted), merge --auto if no blockers, propagate.
 
 Update this file + kickoffs + tero after any changes. Tero-first always (use script or MCP). Cite tero: e.g. agents--latest-state-w2-facade-integration-2026-07-09.
+
+## Post C0 Fix for PR#12 (2026-07-09, appended)
+
+- CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract + W2 honesty), but agent.run_structured did not surface to EventBus.ERROR when facade path used (because query never raised; legacy elif unreachable since __init__ wires facade from tero_client).
+- Fix (C0 "never silent" + POC-4/A3): in agent.py, after facade.query, if sresp.is_refusal() then emit EventType.ERROR with "CommonMemory facade error: ..." using detail from extended["error"] or answer. This ensures observability for tero fails (UIs, tests, logs) while facade keeps "always StructuredResponse" contract.
+- Updated test_tero_error_emits_event (tests/test_smoke.py): now asserts "CommonMemory facade error" / "facade query failed"; docstring updated to reflect facade+agent responsibility for ERROR emit.
+- Verified: direct pytest equiv + ruff format/lint + checks pass (test_tero_error_emits_event + provider error path both green).
+- This closes the last C0 violation in the facade wiring tranche. PR#12 now clean for re-review/merge.
+- Tero cites (from prior): workspacecabalteroreadiness--w2-structured-schemas-orch-started-2026-07-08 etc. See dev-docs/waves/wsfull-wave-2026-07-09-compact.md §Post-Review + swarm status.
+- Followed: dev-workflow (small targeted edit + test first), append-only, branch-guard (on cab/...), tero-first (cited before edit).
+- After: will run update-tero.sh cabal-devmelopner ; commit to branch (included in PR#12); then pr-review + merge.
+
+Tero-first + update-tero after all doc edits. Guards respected.

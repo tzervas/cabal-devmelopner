@@ -108,6 +108,16 @@ MIT
 
 ## Latest Wave (W2 + Facade, PR process)
 
+W2 CommonMemoryAdapter + AgentDomain (M1) fully wired in core/schemas.py + agent.py (run_structured uses facade for tero domain queries, StructuredResponse + citations). Legacy compat + provider opts.
+
+C0 critical fixed (2026-07-09): facade errors now cause agent to emit EventBus ERROR (never silent) even on explicit refusal return; test updated + passes.
+
+See AGENTS.md for full, dev-docs/waves/wsfull-wave-2026-07-09-compact.md (Tero cite: workspacecabalteroreadiness--wave-2026-07-09-complete-compacted-for-context-optimization), WORKSPACE_CABAL_TERO_READINESS.md.
+
+Part of PR#12. After doc/tero updates + checks, pr-review (adapted rubric: tero-first, W2, C0, M1, guards, hygiene) + merge if clean.
+
+## Post-fix append (C0 resolved) 2026-07-09
+
 - W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (run_structured uses facade for TERO-domain tero queries + W2 StructuredResponse/Prompt with citations).
 - PR #12 (cab/a1-a3-tui-errors-tests) includes facade, A1-A3 (TUI entry/errors/tests), wiring, doc updates (AGENTS/ROADMAP/INTENT/TERO/PHASE/kickoffs/README), tero re-index.
 - Integration: cabal + tero (local index auto-discover), hygiene, C0 (honesty gate), M1 domains. See dev-docs/WORKSPACE_CABAL_TERO_READINESS.md + waves/wsfull-wave-2026-07-09-compact.md .

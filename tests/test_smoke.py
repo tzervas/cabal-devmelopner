@@ -85,7 +85,9 @@ class FailingTeroClient:
 
 
 def test_tero_error_emits_event():
-    """A3/A2: Tero failures surface via ERROR event, no silent pass (POC-4)."""
+    """A3/A2: facade/tero failures surface via ERROR event (never silent), no pass-through to refusal only (C0/POC-4).
+    Facade returns explicit refusal (its contract) but agent always emits ERROR for observability.
+    """
     provider = MockProvider("ok")
     bus = EventBus()
     errors = []
@@ -100,7 +102,8 @@ def test_tero_error_emits_event():
     _ = agent.run(task)
 
     assert len(errors) >= 1
-    assert "Tero client error" in str(errors[0].get("error", ""))
+    err_str = str(errors[0].get("error", ""))
+    assert "CommonMemory facade error" in err_str or "facade query failed" in err_str
 
 
 def test_provider_error_emits_and_refusal():

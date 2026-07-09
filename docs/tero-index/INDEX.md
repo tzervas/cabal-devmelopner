@@ -3,13 +3,13 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-09.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 144
+- **Items:** 150
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (144 entries)
+## doc (150 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -25,6 +25,7 @@
 | `agents--grok-mcp-when-available` | section | — | Grok MCP (when available) | `AGENTS.md:75` | — | - Server name: tero → tools namespaced tero… |
 | `agents--this-repos-agent-cli-tui` | section | — | This repo’s agent CLI/TUI | `AGENTS.md:100` | — | Independent of Grok MCP registration: |
 | `agents--latest-state-w2-facade-integration-2026-07-09` | section | — | Latest State (W2 Facade + Integration, 2026-07-09) | `AGENTS.md:112` | — | - W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO,… |
+| `agents--post-c0-fix-for-pr12-2026-07-09-appended` | section | — | Post C0 Fix for PR#12 (2026-07-09, appended) | `AGENTS.md:129` | — | - CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract… |
 | `phase` | section | — | cabal-devmelopner — Development Phases | `PHASE.md:1` | — | This document tracks the phased development of cabal-devmelopner. |
 | `phase--poc-phase-current` | section | — | PoC Phase (Current) | `PHASE.md:11` | — | Goal: Validate core architecture and get a working, extensible agent. |
 | `phase--deliverables` | section | — | Deliverables | `PHASE.md:15` | — | - [x] Project skeleton + installable CLI |
@@ -37,6 +38,7 @@
 | `phase--key-features-2` | section | — | Key Features | `PHASE.md:84` | — | - Multi-provider support (xAI, Claude, others) |
 | `phase--exit-criteria-3` | section | — | Exit Criteria | `PHASE.md:97` | — | - Can reliably run long development sessions with minimal human intervention. |
 | `phase--notes` | section | — | Notes | `PHASE.md:105` | — | - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture. |
+| `phase--appended-w2-c0-fix-for-pr12-2026-07-09` | section | — | Appended: W2 + C0 fix for PR#12 (2026-07-09) | `PHASE.md:111` | — | - W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green). |
 | `readme` | other | — | cabal-devmelopner | `README.md:1` | — | cabal-devmelopner is a repo-agnostic development agent designed for long-running, high-quality coding assistance. |
 | `readme--features-poc` | section | — | Features (PoC) | `README.md:7` | — | - Uses Grok via the raw xAI API |
 | `readme--setup-recommended-uv` | section | — | Setup (Recommended: UV) | `README.md:17` | — | This project uses uv for Python version management, dependency resolution, and running. |
@@ -55,7 +57,8 @@
 | `readme--documentation` | section | — | Documentation | `README.md:89` | — | — |
 | `readme--development-phases` | section | — | Development Phases | `README.md:101` | — | See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed. |
 | `readme--license` | section | — | License | `README.md:105` | — | MIT |
-| `readme--latest-wave-w2-facade-pr-process` | section | — | Latest Wave (W2 + Facade, PR process) | `README.md:109` | — | - W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (runstructured uses facad… |
+| `readme--latest-wave-w2-facade-pr-process` | section | — | Latest Wave (W2 + Facade, PR process) | `README.md:109` | — | W2 CommonMemoryAdapter + AgentDomain (M1) fully wired in core/schemas.py + agent.py (runstructured uses facade for tero domain queries, StructuredResponse + ci… |
+| `readme--post-fix-append-c0-resolved-2026-07-09` | section | — | Post-fix append (C0 resolved) 2026-07-09 | `README.md:119` | — | - W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (runstructured uses facad… |
 | `intentandgapanalysis` | section | — | Intent and Gap Analysis | `docs/INTENT_AND_GAP_ANALYSIS.md:1` | Living document — update when PoC exit criteria or architecture change. | Baseline: dev (includes Tero docs/client commit 32d30d3) |
 | `intentandgapanalysis--1.-stated-intent` | section | — | 1. Stated intent | `docs/INTENT_AND_GAP_ANALYSIS.md:11` | — | Core principles: repo-agnostic · extensible communications · strong Tero integration · clean architecture. |
 | `intentandgapanalysis--recent-updates-w2-facade-as-of-pr-process-2026-07-09` | section | — | Recent Updates (W2 + Facade, as of PR process 2026-07-09) | `docs/INTENT_AND_GAP_ANALYSIS.md:22` | — | - W2 schemas + CommonMemory facade implementation landed in core/schemas.py: StructuredResponse/Prompt (W2), Citation, MemoryContext, AgentDomain (M1 mirror fr… |
@@ -76,6 +79,7 @@
 | `intentandgapanalysis--7.-gap-map-by-phase` | section | — | 7. Gap map by phase | `docs/INTENT_AND_GAP_ANALYSIS.md:185` | — | INTENT                          CURRENT STATE |
 | `intentandgapanalysis--8.-recommended-priority-close-poc-honestly` | section | — | 8. Recommended priority (close PoC honestly) | `docs/INTENT_AND_GAP_ANALYSIS.md:207` | — | 1. POC-1 Fix TUI main entrypoint (+ optional main). |
 | `intentandgapanalysis--9.-bottom-line` | section | — | 9. Bottom line | `docs/INTENT_AND_GAP_ANALYSIS.md:221` | — | Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context. |
+| `intentandgapanalysis--appended-post-w2-facade-c0-2026-07-09-pr12-process` | section | — | Appended post-W2 facade + C0 (2026-07-09, PR#12 process) | `docs/INTENT_AND_GAP_ANALYSIS.md:230` | — | - W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory. |
 | `localchecks` | section | — | Local checks (CI parity) | `docs/LOCAL_CHECKS.md:1` | — | GitHub Actions workflows in this repo are manual only (workflowdispatch). |
 | `localchecks--run-everything-the-remote-job-would-run` | section | — | Run everything the remote job would run | `docs/LOCAL_CHECKS.md:6` | — | ./scripts/check.sh |
 | `localchecks--tero-index` | section | — | Tero index | `docs/LOCAL_CHECKS.md:19` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root "$(pwd)" |
@@ -124,6 +128,7 @@
 | `roadmap--9.-suggested-near-term-execution-order-next-2-weeks` | section | — | 9. Suggested near-term execution order (next 2 weeks) | `docs/ROADMAP.md:277` | — | 1. Land docs PR #1 (intent/gap + cold-start) if not merged. |
 | `roadmap--10.-success-metrics-lightweight` | section | — | 10. Success metrics (lightweight) | `docs/ROADMAP.md:288` | — | — |
 | `roadmap--11.-references-tero-cited` | section | — | 11. References (Tero-cited) | `docs/ROADMAP.md:298` | — | Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO. |
+| `roadmap--appended-pr12-w2-facade-c0-resolution-2026-07-09` | section | — | Appended: PR#12 W2 facade + C0 resolution (2026-07-09) | `docs/ROADMAP.md:312` | — | - Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG). |
 | `tero` | section | — | Tero-MCP integration | `docs/TERO.md:1` | — | [Tero](https://github.com/tzervas) is a Layer-1 corpus index query surface: cited lookups over docs, decisions, issues, changelog entries, and skills. cabal-de… |
 | `tero--what-tero-is-and-is-not` | section | — | What Tero is (and is not) | `docs/TERO.md:9` | — | Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth. |
 | `tero--expected-sibling-layout` | section | — | Expected sibling layout | `docs/TERO.md:22` | — | Defaults assume a shared parent directory (e.g. ~/git or /root/git): |
@@ -153,6 +158,7 @@
 | `tero--troubleshooting` | section | — | Troubleshooting | `docs/TERO.md:307` | — | — |
 | `tero--status-poc` | section | — | Status (PoC) | `docs/TERO.md:323` | — | - [x] TeroMCPClient one-shot stdio client with token + envelope unwrap |
 | `tero--w2-facade-updates-2026-07-09-pr-process` | section | — | W2 Facade Updates (2026-07-09 PR process) | `docs/TERO.md:335` | — | Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDomain (M1 from memory-gate-rs) + returns W2 StructuredResponse (with citations,… |
+| `tero--post-c0-fix-2026-07-09` | section | — | Post C0 Fix (2026-07-09) | `docs/TERO.md:341` | — | - After facade wiring, tero error path now guarantees ERROR event emission in agent (C0 never-silent) when facade returns refusal. |
 | `readme-2` | other | — | Tero index (Layer 1) | `docs/tero-index/README.md:1` | — | Machine + human citation index for this repository. |
 | `readme--regenerate` | section | — | Regenerate | `docs/tero-index/README.md:13` | — | python3 /path/to/tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |

@@ -337,3 +337,8 @@ Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDo
 Docs (TERO, AGENTS, ROADMAP, INTENT, PHASE, README, .claude/kickoffs/README.md) + tero index updated as part of PR #12 (cab/a1-a3-tui-errors-tests). 
 Run /root/git/scripts/update-tero.sh cabal-devmelopner after doc changes. See facade+schemas in core/schemas.py, integration in WORKSPACE_CABAL_TERO_READINESS.md + wsfull-wave-2026-07-09-compact.md.
 Tero-first, dev-workflow, guards enforced. Parameterized skills + hygiene used. C0/M1 applied.
+
+### Post C0 Fix (2026-07-09)
+- After facade wiring, tero error path now guarantees ERROR event emission in agent (C0 never-silent) when facade returns refusal.
+- Test updated and passes. Part of PR#12 updates. Tero index will reflect after regen.
+- See AGENTS.md Post C0 Fix section + wsfull compact for details/cites.

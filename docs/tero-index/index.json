@@ -124,6 +124,16 @@
       "summary": "- W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO,…"
     },
     {
+      "anchor": "agents--post-c0-fix-for-pr12-2026-07-09-appended",
+      "family": "doc",
+      "kind": "section",
+      "title": "Post C0 Fix for PR#12 (2026-07-09, appended)",
+      "file": "AGENTS.md",
+      "line": 129,
+      "tag": "Empirical/Declared",
+      "summary": "- CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract…"
+    },
+    {
       "anchor": "phase",
       "family": "doc",
       "kind": "section",
@@ -242,6 +252,16 @@
       "line": 105,
       "tag": "Empirical/Declared",
       "summary": "- All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture."
+    },
+    {
+      "anchor": "phase--appended-w2-c0-fix-for-pr12-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Appended: W2 + C0 fix for PR#12 (2026-07-09)",
+      "file": "PHASE.md",
+      "line": 111,
+      "tag": "Empirical/Declared",
+      "summary": "- W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green)."
     },
     {
       "anchor": "readme",
@@ -430,6 +450,16 @@
       "title": "Latest Wave (W2 + Facade, PR process)",
       "file": "README.md",
       "line": 109,
+      "tag": "Empirical/Declared",
+      "summary": "W2 CommonMemoryAdapter + AgentDomain (M1) fully wired in core/schemas.py + agent.py (runstructured uses facade for tero domain queries, StructuredResponse + ci…"
+    },
+    {
+      "anchor": "readme--post-fix-append-c0-resolved-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Post-fix append (C0 resolved) 2026-07-09",
+      "file": "README.md",
+      "line": 119,
       "tag": "Empirical/Declared",
       "summary": "- W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (runstructured uses facad…"
     },
@@ -630,6 +660,16 @@
       "line": 221,
       "tag": "Empirical/Declared",
       "summary": "Intent: long-running, repo-agnostic development agent with event-driven UIs and strong Tero context."
+    },
+    {
+      "anchor": "intentandgapanalysis--appended-post-w2-facade-c0-2026-07-09-pr12-process",
+      "family": "doc",
+      "kind": "section",
+      "title": "Appended post-W2 facade + C0 (2026-07-09, PR#12 process)",
+      "file": "docs/INTENT_AND_GAP_ANALYSIS.md",
+      "line": 230,
+      "tag": "Empirical/Declared",
+      "summary": "- W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory."
     },
     {
       "anchor": "localchecks",
@@ -1103,6 +1143,16 @@
       "summary": "Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO."
     },
     {
+      "anchor": "roadmap--appended-pr12-w2-facade-c0-resolution-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Appended: PR#12 W2 facade + C0 resolution (2026-07-09)",
+      "file": "docs/ROADMAP.md",
+      "line": 312,
+      "tag": "Empirical/Declared",
+      "summary": "- Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG)."
+    },
+    {
       "anchor": "tero",
       "family": "doc",
       "kind": "section",
@@ -1389,6 +1439,16 @@
       "line": 335,
       "tag": "Empirical/Declared",
       "summary": "Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDomain (M1 from memory-gate-rs) + returns W2 StructuredResponse (with citations,…"
+    },
+    {
+      "anchor": "tero--post-c0-fix-2026-07-09",
+      "family": "doc",
+      "kind": "section",
+      "title": "Post C0 Fix (2026-07-09)",
+      "file": "docs/TERO.md",
+      "line": 341,
+      "tag": "Empirical/Declared",
+      "summary": "- After facade wiring, tero error path now guarantees ERROR event emission in agent (C0 never-silent) when facade returns refusal."
     },
     {
       "anchor": "readme-2",

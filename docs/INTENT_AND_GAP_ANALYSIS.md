@@ -226,3 +226,9 @@ Details: [OPEN_ISSUES.md](OPEN_ISSUES.md).
 
 **Largest honesty gap:** claiming full TUI / iterative agent completion ahead of behavior.  
 **Largest product gap:** no tools or verification, so the system cannot act on a codebase.
+
+### Appended post-W2 facade + C0 (2026-07-09, PR#12 process)
+- W2 CommonMemory facade (schemas + agent wiring for StructuredResponse + domain queries via tero) closes integration gap for workspace memory.
+- C0 blocker fixed: tero errors now emit ERROR events (never silent) when using facade path.
+- Updated docs, AGENTS, kickoffs, tero index as required. See wsfull-wave compact + readiness for citations and full state.
+- Enables PR review/merge, up-merge, propagate. All per dev-workflow, tero-first, append-only.

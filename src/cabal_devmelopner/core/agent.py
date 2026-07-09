@@ -77,7 +77,21 @@ class SimpleAgent:
             if getattr(self, "facade", None):
                 try:
                     sresp = self.facade.query(AgentDomain.TERO, task.description, {"limit": 5})
-                    if not sresp.is_refusal() and sresp.citations:
+                    if sresp and sresp.is_refusal():
+                        # C0 honesty (never-silent) + POC-4/A3: even though facade returns explicit
+                        # StructuredResponse.refusal on backend error (per its contract), the agent
+                        # (which owns the EventBus) MUST emit ERROR so UIs/logs/observers see it.
+                        # This makes tero/facade failures visible; no silent refusal path.
+                        err_msg = (
+                            (sresp.extended or {}).get("error") or sresp.answer or "facade refusal"
+                        )
+                        self.event_bus.emit_simple(
+                            EventType.ERROR,
+                            error=f"CommonMemory facade error: {err_msg}",
+                            source="facade",
+                            task_id=task.id,
+                        )
+                    elif not sresp.is_refusal() and sresp.citations:
                         mem_contexts.append(
                             MemoryContext(
                                 source="tero",
@@ -102,8 +116,9 @@ class SimpleAgent:
                         source="facade",
                         task_id=task.id,
                     )
-            elif self.tero_client:
-                # legacy direct (compat during transition to facade)
+            elif self.tero_client and not getattr(self, "facade", None):
+                # legacy direct (compat during transition to facade; unreachable if tero_client passed
+                # because __init__ sets facade=CommonMemoryAdapter(tero_client) )
                 try:
                     sresp = self.tero_client.text_search_structured(task.description, limit=5)
                     if not sresp.is_refusal() and sresp.citations:

@@ -308,3 +308,10 @@ Each PR should be independently mergeable to `dev`. Suggested titles match GitHu
 | E22-1 | Security scanning toolkit epic | Security direction |
 
 Local product docs: PHASE, INTENT_AND_GAP_ANALYSIS, OPEN_ISSUES, TERO.
+
+### Appended: PR#12 W2 facade + C0 resolution (2026-07-09)
+- Integrated W2 schemas (Structured*, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORY_GATE/LANG_*).
+- Agent uses facade for tero-first context in StructuredResponse. C0 fix: ERROR emitted on facade tero fails.
+- Doc updates + kickoffs + AGENTS + tero reindex part of PR process.
+- Next: pr-review (one agent, adapted rubric), merge to dev, then main + pull-down propagate.
+- Grounded in wsfull-wave-2026-07-09-compact.md (Tero: workspacecabalteroreadiness sections), dev-workflow, guards.
