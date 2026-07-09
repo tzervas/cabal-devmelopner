@@ -81,6 +81,15 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 - POC-4 (Tero errors silent): addressed by C0 fix + A3 (agent now emits EventType.ERROR "CommonMemory facade error..." on facade refusal or except; test_tero_error_emits_event asserts). Facade keeps W2 "always StructuredResponse" (incl refusal); agent owns observability.
 - POC-8 (provider ERROR): covered in test_provider_error_emits_and_refusal + agent emit.
 - POC-7 (tests): expanded (now covers EventBus, Task, tero+provider error paths; 6 tests green post PR#12).
-- POC-2/5/6/9 remain open (Tero docs honesty, one-shot MCP, multi-iter dead code, zero-config).
+- POC-2/5/9 remain open (Tero docs honesty, one-shot MCP, zero-config). POC-6 documented as single-shot (see new status alignment below; defer full iter/feedback to MVP per plan.md).
 - Conservative: P0/P1 lists above left as backlog reference; resolved items noted here. Cross-cite wsfull-wave-2026-07-09-compact.md §Swarm + PR#12, WORKSPACE_CABAL_TERO_READINESS.md, AGENTS.md (post-c0-fix + review-merge).
 - Tero-first (text_search W2/C0/POC + query hits), append-only, no code edits. Update-tero/checks after. See ROADMAP Wave A for execution history.
+
+## POC-6 documented as single-shot (chore/poc6-iteration-honesty appended)
+- Per plan.md (cabal section priority 2, "cabal-poc-mvp POC-6"): decide/document as single-shot (honest, defer full feedback to MVP/tools). Matches agent.py reality (if iteration == 1: return).
+- Updated status alignment note; POC-6 no longer "remain open" for implementation in P1 (documented limitation).
+- Acceptance for POC-6 now: "Real feedback path or document single-shot and revise PHASE checkbox text" — met via documentation.
+- Cross-cites: plan.md §1 ("Start with POC-6 decision: document single-shot (honest)..."), PHASE.md, ROADMAP.md (A6 now noted), INTENT_AND_GAP_ANALYSIS.md, wsfull-wave-2026-07-09-compact.md, WORKSPACE_CABAL_TERO_READINESS.md.
+- Tero-first via /root/git/scripts/tero.sh + tero MCP (identify, text_search "POC" hits prior, refusals pre-docs on "POC-6|iteration"). Will verify hits post update-tero.
+- Append-only targeted; branch chore/poc6-iteration-honesty from main; no src changes. Follow AGENTS dev-workflow/guards.
+- Tero cite: will surface openissues--p1-poc... + this section after update-tero.sh cabal-devmelopner.
