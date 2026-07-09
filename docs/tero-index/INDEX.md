@@ -123,7 +123,7 @@
 | `tero--what-tero-is-and-is-not` | section | — | What Tero is (and is not) | `docs/TERO.md:9` | — | Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth. |
 | `tero--expected-sibling-layout` | section | — | Expected sibling layout | `docs/TERO.md:22` | — | Defaults assume a shared parent directory (e.g. ~/git or /root/git): |
 | `tero--prerequisites` | section | — | Prerequisites | `docs/TERO.md:37` | — | 1. Python ≥ 3.11 for tero-mcp-lite (this project targets 3.14 via uv). |
-| `tero--environment-variables` | section | — | Environment variables | `docs/TERO.md:67` | — | — |
+| `tero--environment-variables` | section | — | Environment variables | `docs/TERO.md:67` | — | Auto local index: cabal-devmelopner now prefers a docs/tero-index/index.json found by walking up from the current working directory (stops at git root). This m… |
 | `tero--using-tero-from-cabal-devmelopner` | section | — | Using Tero from cabal-devmelopner | `docs/TERO.md:80` | — | export XAIAPIKEY="your-xai-key" |
 | `tero--cli-opt-in-flag` | section | — | CLI (opt-in flag) | `docs/TERO.md:82` | — | export XAIAPIKEY="your-xai-key" |
 | `tero--optional-overrides` | other | — | optional overrides: | `docs/TERO.md:86` | — | uv run cabal-devmelopner "Improve error handling in the compiler frontend" --use-tero |

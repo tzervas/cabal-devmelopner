@@ -1099,7 +1099,8 @@
       "title": "Environment variables",
       "file": "docs/TERO.md",
       "line": 67,
-      "tag": "Empirical/Declared"
+      "tag": "Empirical/Declared",
+      "summary": "Auto local index: cabal-devmelopner now prefers a docs/tero-index/index.json found by walking up from the current working directory (stops at git root). This m…"
     },
     {
       "anchor": "tero--using-tero-from-cabal-devmelopner",
