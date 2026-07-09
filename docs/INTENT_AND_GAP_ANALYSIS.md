@@ -4,7 +4,7 @@
 **Analysis date:** 2026-07-08  
 **Status:** Living document — update when PoC exit criteria or architecture change.
 
-This document records product **intent**, **current implementation reality**, and the **gaps** between them. Prefer this file over marketing phrasing in the README when they disagree. Trackable work items: [OPEN_ISSUES.md](OPEN_ISSUES.md). Related setup: [TERO.md](TERO.md), [PHASE.md](../PHASE.md).
+This document records product **intent**, **current implementation reality**, and the **gaps** between them. Prefer this file over marketing phrasing in the README when they disagree. Trackable work items: [OPEN_ISSUES.md](OPEN_ISSUES.md). Ordered waves + PR plan: [ROADMAP.md](ROADMAP.md). Related setup: [TERO.md](TERO.md), [PHASE.md](../PHASE.md).
 
 ---
 

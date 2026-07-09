@@ -4,6 +4,8 @@ This document tracks the phased development of `cabal-devmelopner`.
 
 For honest status vs intent (including known P0/P1 gaps), see **[docs/INTENT_AND_GAP_ANALYSIS.md](docs/INTENT_AND_GAP_ANALYSIS.md)** and the backlog in **[docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md)**.
 
+**Full product plan (waves + PR DAG):** **[docs/ROADMAP.md](docs/ROADMAP.md)** — maps PoC → MVP → Production onto ordered work, with Tero/corpus alignment.
+
 ---
 
 ## PoC Phase (Current)
