@@ -102,3 +102,18 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 - Tero-first via /root/git/scripts/tero.sh + tero MCP (identify, text_search "POC" hits prior, refusals pre-docs on "POC-6|iteration"). Will verify hits post update-tero.
 - Append-only targeted; branch chore/poc6-iteration-honesty from main; no src changes. Follow AGENTS dev-workflow/guards.
 - Tero cite: will surface openissues--p1-poc... + this section after update-tero.sh cabal-devmelopner.
+
+## MVP-1 complete (chore/cabal-poc-mvp-close appended 2026-07-09)
+- Per plan.md priority 2 (cabal-poc-mvp): B1 tool host + B2 loop implemented/verified.
+- core/tools.py: ToolHost (read_file/list_dir/run_command allowlisted/safe, confined to workspace_root, timeout, events TOOL_CALL/RESULT emitted), parse_tool_call (regex for "call tool X with k is v"), get_tool_descriptions, execute dispatch.
+- agent.py: tools_enabled + tool_host in __init__; in run_structured after provider.complete: parse, if within _max_tool_steps=4 execute + feedback append + continue (re-prompt); else final.
+- cli.py: --use-tools flag, TOOL event subs for visibility, pass to SimpleAgent(tools_enabled=..., workspace_root=".")
+- prompt.py: injects get_tool_descriptions() into system for StructuredPrompt (integrates with W2/tero path).
+- tests/test_smoke.py: test_parse_tool_call_basic, test_tool_host_read_list_local, test_tool_host_run_allowlisted_and_blocks, test_agent_tools_loop_emits_and_reprompts (10/10 green).
+- Verified: uv run python -c (parse/host exec OK), pytest full smoke (.......... [100%]).
+- Docs/AGENTS/ROADMAP/PHASE/OPEN updated append-only + tero; cross-cites plan.md §1, wsfull-wave..., prior mvp1-start.
+- Still limited (MVP start): single tool/turn, no write, config later (B3), full verify/iter (B4 defers POC-6 full). No overclaim.
+- Tero-first (script + mcp pre/post), hygiene (check.sh ruff/pytest), branch-guard, append-only.
+- Status: MVP-1 done (functional start per acceptance in OPEN). Next B3+ in later waves.
+- Tero cite expected: openissues--mvp-1-complete + this section post update-tero.
+
