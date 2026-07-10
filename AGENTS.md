@@ -219,3 +219,18 @@ Append-only; followed dev-workflow, branch-guard (chore/orch-wiring-devmcp), hyg
 
 Update this + kickoffs + tero after.
 
+## Semver + Releases (2026-07-10 appended)
+
+Semver established for packages and releases writ large (per plan.md, user directive, Tero-scoped commit history + docs survey).
+
+- Declared: 0.1.0
+- Initial formal release: v0.1.0 (grounds post-hygiene/P1, cabal-poc-mvp MVP-1 tools, early W2 facade).
+- Process: uv build (local), GPG-signed git tag (-s), gh release (assets: sdist/wheel), push tags + branch.
+- Local-only for dist images (podman build/push to ghcr.io/tzervas/... when Dockerfile present; avoids Actions credits/usage entirely).
+- Future bumps follow semver (MAJOR.MINOR.PATCH) + update CHANGELOG/ROADMAP/AGENTS + tero regen + hygiene before land.
+- No prior tags existed; this establishes baseline.
+
+Cites (Tero + git): plan.md (semver section, local podman GHCR), CONTRIBUTING patterns, dev-docs/context/cabal tero searches for "version|release|0.1", git tag survey (none pre), manifest pyproject. Cross-ref wsfull + current-status analyses.
+
+Append-only. Land via chore branch PRs + --no-ff propagate. Hygiene + /root/git/scripts/update-tero.sh cabal-devmelopner after.
+

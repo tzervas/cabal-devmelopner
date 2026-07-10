@@ -29,6 +29,17 @@ It is **not** Mycelium’s ADK phylum (RFC-0023 / M-671) and **not** mycelium-te
 
 ---
 
+## Semver Releases (appended 2026-07-10)
+
+Per workspace plan + user: semver + GPG releases established across projects (local podman GHCR for any dist images).
+
+- This project baseline: v0.1.0 (no prior tags; matches pyproject).
+- See AGENTS.md##Semver for process (uv build, -s tag, gh release, tero update).
+- Podman for containers (see peri example; herr-doktor will follow).
+- Bumps only with hygiene, docs/tero updates, cites to plan.
+
+Cites: plan.md, Tero version/release searches, git baselines.
+
 ## 2. Current position (summary)
 
 | Area | State |
