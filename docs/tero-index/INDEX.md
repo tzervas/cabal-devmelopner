@@ -3,13 +3,13 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-10.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 167
+- **Items:** 169
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (167 entries)
+## doc (169 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -38,15 +38,15 @@
 | `phase--exit-criteria` | section | — | Exit Criteria | `PHASE.md:44` | — | PoC not exited until testing/stabilization (POC-7) are honest; iteration/feedback (POC-6) is now documented as single-shot (honest deferral to MVP/tools per pl… |
 | `phase--mvp-phase` | section | — | MVP Phase | `PHASE.md:57` | — | Goal: Make cabal-devmelopner a practical daily co-dev tool. |
 | `phase--key-features` | section | — | Key Features | `PHASE.md:61` | — | - Full-featured TUI (status, progress, logs, task management) |
-| `phase--exit-criteria-2` | section | — | Exit Criteria | `PHASE.md:72` | — | - Comfortable to use for real development work. |
-| `phase--production-phase` | section | — | Production Phase | `PHASE.md:80` | — | Goal: Robust, scalable, multi-agent development system. |
-| `phase--key-features-2` | section | — | Key Features | `PHASE.md:84` | — | - Multi-provider support (xAI, Claude, others) |
-| `phase--exit-criteria-3` | section | — | Exit Criteria | `PHASE.md:97` | — | - Can reliably run long development sessions with minimal human intervention. |
-| `phase--notes` | section | — | Notes | `PHASE.md:105` | — | - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture. |
-| `phase--mvp-1-tools-start-appended-2026-07-09-chore-mvp1-tools-start-per-plan.md-p2` | section | MVP-1 | MVP-1 tools start (appended 2026-07-09, chore/mvp1-tools-start per plan.md p2) | `PHASE.md:111` | — | - Started B1 (tool host v0 in core/tools.py: read/list/run allowlisted, emit TOOL) + B2 (agent loop detect/execute/feedback re-prompt). |
-| `phase--appended-w2-c0-fix-for-pr12-2026-07-09` | section | — | Appended: W2 + C0 fix for PR#12 (2026-07-09) | `PHASE.md:121` | — | - W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green). |
-| `phase--honest-poc-status-alignment-chore-honest-docs-post-w2-2026-07-09` | section | — | Honest PoC status alignment (chore/honest-docs-post-w2, 2026-07-09) | `PHASE.md:127` | — | - Updated lagging PoC bullets + exit criteria for TUI (now entrypoint + Task met post A1-A3) and Tero error handling (C0/POC-4 addressed, facade path). |
-| `phase--poc-6-iteration-honesty-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 iteration honesty (chore/poc6-iteration-honesty, per plan.md p2) | `PHASE.md:134` | — | - Decision: Document POC-6 as single-shot (honest); defer full multi-iteration feedback + verification loop to MVP/tools (Wave B: B2/B4 etc). Matches code real… |
+| `phase--exit-criteria-2` | section | — | Exit Criteria | `PHASE.md:73` | — | - Comfortable to use for real development work. |
+| `phase--production-phase` | section | — | Production Phase | `PHASE.md:81` | — | Goal: Robust, scalable, multi-agent development system. |
+| `phase--key-features-2` | section | — | Key Features | `PHASE.md:85` | — | - Multi-provider support (xAI, Claude, others) |
+| `phase--exit-criteria-3` | section | — | Exit Criteria | `PHASE.md:98` | — | - Can reliably run long development sessions with minimal human intervention. |
+| `phase--notes` | section | — | Notes | `PHASE.md:106` | — | - All phases should maintain the core principles: repo-agnostic, extensible communications, strong Tero integration, and clean architecture. |
+| `phase--mvp-1-tools-start-appended-2026-07-09-chore-mvp1-tools-start-per-plan.md-p2` | section | MVP-1 | MVP-1 tools start (appended 2026-07-09, chore/mvp1-tools-start per plan.md p2) | `PHASE.md:112` | — | - Started B1 (tool host v0 in core/tools.py: read/list/run allowlisted, emit TOOL) + B2 (agent loop detect/execute/feedback re-prompt). |
+| `phase--appended-w2-c0-fix-for-pr12-2026-07-09` | section | — | Appended: W2 + C0 fix for PR#12 (2026-07-09) | `PHASE.md:122` | — | - W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green). |
+| `phase--honest-poc-status-alignment-chore-honest-docs-post-w2-2026-07-09` | section | — | Honest PoC status alignment (chore/honest-docs-post-w2, 2026-07-09) | `PHASE.md:128` | — | - Updated lagging PoC bullets + exit criteria for TUI (now entrypoint + Task met post A1-A3) and Tero error handling (C0/POC-4 addressed, facade path). |
+| `phase--poc-6-iteration-honesty-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 iteration honesty (chore/poc6-iteration-honesty, per plan.md p2) | `PHASE.md:135` | — | - Decision: Document POC-6 as single-shot (honest); defer full multi-iteration feedback + verification loop to MVP/tools (Wave B: B2/B4 etc). Matches code real… |
 | `readme` | other | — | cabal-devmelopner | `README.md:1` | — | cabal-devmelopner is a repo-agnostic development agent designed for long-running, high-quality coding assistance. |
 | `readme--features-poc` | section | — | Features (PoC) | `README.md:7` | — | - Uses Grok via the raw xAI API |
 | `readme--setup-recommended-uv` | section | — | Setup (Recommended: UV) | `README.md:17` | — | This project uses uv for Python version management, dependency resolution, and running. |
@@ -120,6 +120,7 @@
 | `openissues--mvp-1-minimal-tools-started-chore-mvp1-tools-start-appended-2026-07-09` | section | MVP-1 | MVP-1 minimal tools started (chore/mvp1-tools-start appended 2026-07-09) | `docs/OPEN_ISSUES.md:79` | — | - Per plan.md p2 (cabal-poc-mvp): B1 tool host v0 (read/list/run + TOOL via EventBus) + B2 loop (model propose/execute/re-prompt) + tero/W2 integrate. |
 | `openissues--status-alignment-post-w2-c0-pr12-appended-2026-07-09-chore-honest-docs-post-w2` | section | — | Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2) | `docs/OPEN_ISSUES.md:88` | — | - POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now cabal-devmelopner-tui has main(); TUI imports/uses core.types.Task). |
 | `openissues--poc-6-documented-as-single-shot-chore-poc6-iteration-honesty-appended` | section | POC-6 | POC-6 documented as single-shot (chore/poc6-iteration-honesty appended) | `docs/OPEN_ISSUES.md:97` | — | - Per plan.md (cabal section priority 2, "cabal-poc-mvp POC-6"): decide/document as single-shot (honest, defer full feedback to MVP/tools). Matches agent.py re… |
+| `openissues--mvp-1-complete-chore-cabal-poc-mvp-close-appended-2026-07-09` | section | MVP-1 | MVP-1 complete (chore/cabal-poc-mvp-close appended 2026-07-09) | `docs/OPEN_ISSUES.md:106` | — | - Per plan.md priority 2 (cabal-poc-mvp): B1 tool host + B2 loop implemented/verified. |
 | `roadmap` | note | — | cabal-devmelopner — Product Roadmap | `docs/ROADMAP.md:1` | Plan (2026-07-08) | Status: Plan (2026-07-08) |
 | `roadmap--1.-north-star` | section | — | 1. North star | `docs/ROADMAP.md:11` | — | cabal-devmelopner is a repo-agnostic development agent: long-running, event-driven, multi-surface (CLI / TUI / future Discord), with strong Tero integration fo… |
 | `roadmap--2.-current-position-summary` | section | — | 2. Current position (summary) | `docs/ROADMAP.md:32` | — | PoC exit requires honest tests/stabilization (POC-7); iteration (POC-6) now documented single-shot (honest, per plan.md p2 deferral to MVP/tools); TUI launch (… |
@@ -128,24 +129,25 @@
 | `roadmap--wave-a-poc-close-out-make-claims-true` | section | — | Wave A — PoC close-out (make claims true) | `docs/ROADMAP.md:86` | — | Goal: Documented entrypoints work; status docs match code; minimal regression net. |
 | `roadmap--wave-b-minimum-useful-agent-mvp-core` | section | — | Wave B — Minimum useful agent (MVP core) | `docs/ROADMAP.md:107` | — | Goal: Agent can act on a repo with Tero-assisted context and a real loop. |
 | `roadmap--mvp-1-tools-start-chore-mvp1-tools-start-2026-07-09-appended` | section | MVP-1 | MVP-1 tools start (chore/mvp1-tools-start, 2026-07-09 appended) | `docs/ROADMAP.md:129` | — | - B1: core/tools.py (ToolHost + readfile/listdir/runcommand allowlisted + parse + events TOOLCALL/RESULT). |
-| `roadmap--wave-c-daily-co-dev-polish-mvp-complete` | section | — | Wave C — Daily co-dev polish (MVP complete) | `docs/ROADMAP.md:143` | — | Goal: Comfortable daily driver. |
-| `roadmap--wave-d-multi-agent-production-shape` | section | — | Wave D — Multi-agent & production shape | `docs/ROADMAP.md:160` | — | Goal: Coordinated agents with safe concurrency; security load-bearing. |
-| `roadmap--wave-updates-w2-facade-cabal-integration-2026-07-09` | section | — | Wave Updates (W2 Facade + Cabal Integration, 2026-07-09) | `docs/ROADMAP.md:177` | — | As part of wsfull PR process and doc/tero updates: |
-| `roadmap--5.-dependency-graph-high-level` | section | — | 5. Dependency graph (high level) | `docs/ROADMAP.md:195` | — | Wave A (PoC honest) |
-| `roadmap--6.-pr-plan-incremental-reviewable` | section | — | 6. PR Plan (incremental, reviewable) | `docs/ROADMAP.md:214` | — | Each PR should be independently mergeable to dev. Suggested titles match GitHub issues where they exist. |
-| `roadmap--wave-a` | section | — | Wave A | `docs/ROADMAP.md:218` | — | — |
-| `roadmap--wave-b` | section | — | Wave B | `docs/ROADMAP.md:230` | — | — |
-| `roadmap--wave-c` | section | — | Wave C | `docs/ROADMAP.md:243` | — | — |
-| `roadmap--wave-d` | section | — | Wave D | `docs/ROADMAP.md:252` | — | — |
-| `roadmap--7.-key-decisions` | section | — | 7. Key decisions | `docs/ROADMAP.md:264` | — | — |
-| `roadmap--8.-open-questions-need-maintainer-input` | section | — | 8. Open questions (need maintainer input) | `docs/ROADMAP.md:279` | — | 1. Default tool allowlist — shell unrestricted vs allowlist-only from day one? (Recommend allowlist-only.) |
-| `roadmap--9.-suggested-near-term-execution-order-next-2-weeks` | section | — | 9. Suggested near-term execution order (next 2 weeks) | `docs/ROADMAP.md:289` | — | 1. Land docs PR #1 (intent/gap + cold-start) if not merged. |
-| `roadmap--10.-success-metrics-lightweight` | section | — | 10. Success metrics (lightweight) | `docs/ROADMAP.md:300` | — | — |
-| `roadmap--11.-references-tero-cited` | section | — | 11. References (Tero-cited) | `docs/ROADMAP.md:310` | — | Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO. |
-| `roadmap--appended-pr12-w2-facade-c0-resolution-2026-07-09` | section | — | Appended: PR#12 W2 facade + C0 resolution (2026-07-09) | `docs/ROADMAP.md:324` | — | - Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG). |
-| `roadmap--honest-docs-update-chore-honest-docs-post-w2` | section | — | Honest docs update (chore/honest-docs-post-w2) | `docs/ROADMAP.md:331` | — | - Aligned lagging current-position table + Wave A exit text post-PR#12 merges (TUI entrypoint now accurate; POC-1/3/4 closed in code). |
-| `roadmap--poc-6-documented-single-shot-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 documented single-shot (chore/poc6-iteration-honesty per plan.md p2) | `docs/ROADMAP.md:338` | — | - A6 marked documented single-shot; footnote updated; exit/position text revised for honesty (no longer requires POC-6 for PoC exit). |
-| `roadmap--dev-mcp-orch-wiring-cabal-as-leaf-consumer-chore-orch-wiring-devmcp` | section | — | dev-mcp Orch Wiring (cabal as leaf consumer; chore/orch-wiring-devmcp) | `docs/ROADMAP.md:346` | — | Appended notes on dev-mcp orch use per task (parallel to W2 docs): |
+| `roadmap--mvp-1-complete-chore-cabal-poc-mvp-close-appended` | section | MVP-1 | MVP-1 complete (chore/cabal-poc-mvp-close appended) | `docs/ROADMAP.md:141` | — | - B1/B2 done + verified green: tools.py full host+parse+safe+events; agent loop tool detect/execute/re-prompt budget + feedback; cli --use-tools + events; prom… |
+| `roadmap--wave-c-daily-co-dev-polish-mvp-complete` | section | — | Wave C — Daily co-dev polish (MVP complete) | `docs/ROADMAP.md:153` | — | Goal: Comfortable daily driver. |
+| `roadmap--wave-d-multi-agent-production-shape` | section | — | Wave D — Multi-agent & production shape | `docs/ROADMAP.md:170` | — | Goal: Coordinated agents with safe concurrency; security load-bearing. |
+| `roadmap--wave-updates-w2-facade-cabal-integration-2026-07-09` | section | — | Wave Updates (W2 Facade + Cabal Integration, 2026-07-09) | `docs/ROADMAP.md:187` | — | As part of wsfull PR process and doc/tero updates: |
+| `roadmap--5.-dependency-graph-high-level` | section | — | 5. Dependency graph (high level) | `docs/ROADMAP.md:205` | — | Wave A (PoC honest) |
+| `roadmap--6.-pr-plan-incremental-reviewable` | section | — | 6. PR Plan (incremental, reviewable) | `docs/ROADMAP.md:224` | — | Each PR should be independently mergeable to dev. Suggested titles match GitHub issues where they exist. |
+| `roadmap--wave-a` | section | — | Wave A | `docs/ROADMAP.md:228` | — | — |
+| `roadmap--wave-b` | section | — | Wave B | `docs/ROADMAP.md:240` | — | — |
+| `roadmap--wave-c` | section | — | Wave C | `docs/ROADMAP.md:253` | — | — |
+| `roadmap--wave-d` | section | — | Wave D | `docs/ROADMAP.md:262` | — | — |
+| `roadmap--7.-key-decisions` | section | — | 7. Key decisions | `docs/ROADMAP.md:274` | — | — |
+| `roadmap--8.-open-questions-need-maintainer-input` | section | — | 8. Open questions (need maintainer input) | `docs/ROADMAP.md:289` | — | 1. Default tool allowlist — shell unrestricted vs allowlist-only from day one? (Recommend allowlist-only.) |
+| `roadmap--9.-suggested-near-term-execution-order-next-2-weeks` | section | — | 9. Suggested near-term execution order (next 2 weeks) | `docs/ROADMAP.md:299` | — | 1. Land docs PR #1 (intent/gap + cold-start) if not merged. |
+| `roadmap--10.-success-metrics-lightweight` | section | — | 10. Success metrics (lightweight) | `docs/ROADMAP.md:310` | — | — |
+| `roadmap--11.-references-tero-cited` | section | — | 11. References (Tero-cited) | `docs/ROADMAP.md:320` | — | Local product docs: PHASE, INTENTANDGAPANALYSIS, OPENISSUES, TERO. |
+| `roadmap--appended-pr12-w2-facade-c0-resolution-2026-07-09` | section | — | Appended: PR#12 W2 facade + C0 resolution (2026-07-09) | `docs/ROADMAP.md:334` | — | - Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG). |
+| `roadmap--honest-docs-update-chore-honest-docs-post-w2` | section | — | Honest docs update (chore/honest-docs-post-w2) | `docs/ROADMAP.md:341` | — | - Aligned lagging current-position table + Wave A exit text post-PR#12 merges (TUI entrypoint now accurate; POC-1/3/4 closed in code). |
+| `roadmap--poc-6-documented-single-shot-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 documented single-shot (chore/poc6-iteration-honesty per plan.md p2) | `docs/ROADMAP.md:348` | — | - A6 marked documented single-shot; footnote updated; exit/position text revised for honesty (no longer requires POC-6 for PoC exit). |
+| `roadmap--dev-mcp-orch-wiring-cabal-as-leaf-consumer-chore-orch-wiring-devmcp` | section | — | dev-mcp Orch Wiring (cabal as leaf consumer; chore/orch-wiring-devmcp) | `docs/ROADMAP.md:356` | — | Appended notes on dev-mcp orch use per task (parallel to W2 docs): |
 | `tero` | section | — | Tero-MCP integration | `docs/TERO.md:1` | — | [Tero](https://github.com/tzervas) is a Layer-1 corpus index query surface: cited lookups over docs, decisions, issues, changelog entries, and skills. cabal-de… |
 | `tero--what-tero-is-and-is-not` | section | — | What Tero is (and is not) | `docs/TERO.md:9` | — | Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth. |
 | `tero--expected-sibling-layout` | section | — | Expected sibling layout | `docs/TERO.md:22` | — | Defaults assume a shared parent directory (e.g. ~/git or /root/git): |

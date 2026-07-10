@@ -138,6 +138,16 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 - Cross-cite: plan.md §1 (B1 tool host v0 + B2 loop + integrate tero/W2), wsfull compact, WORKSPACE..., prior agents--pr12...
 - Status: MVP-1 started (minimal functional). Full B3+ (config/verify) later. No overclaim.
 
+## MVP-1 complete (chore/cabal-poc-mvp-close appended)
+- B1/B2 done + verified green: tools.py full host+parse+safe+events; agent loop tool detect/execute/re-prompt budget + feedback; cli --use-tools + events; prompt inject; 4 new tests + 6 prior (10 pass).
+- Exec verified (parse, list/read/run host, agent loop with mock tool-then-answer).
+- Integrates W2 Structured + tero memory in same loop (no breakage to non-tool path).
+- Per plan.md cabal-poc-mvp + ROADMAP Wave B; cross-cites wsfull compact, OPEN_ISSUES (MVP-1 section), PHASE, AGENTS, dev-docs readiness.
+- Tero-first + hygiene + update-tero post; land --no-ff dev/main + propagate.
+- MVP-1 acceptance met (see OPEN). Defer B3 config, B4 verify/iter feedback, TUI polish etc.
+- Tero cite: roadmap--mvp-1-complete...
+
+
 ---
 
 ### Wave C — Daily co-dev polish (MVP complete)

@@ -67,7 +67,8 @@ See compact, readiness, PR for details. Update docs + tero before land.
 - Improved agent loop with real verification/feedback
 - Basic support for running as a long-lived process
 - Packaging and easy installation (`uv tool install`)
-- Minimal tool use so the agent can act on a codebase (see MVP-1; started in chore/mvp1-tools-start: read_file/list_dir/run_command allowlisted + loop + TOOL_* events + --use-tools)
+- Minimal tool use so the agent can act on a codebase (see MVP-1; started in chore/mvp1-tools-start: read_file/list_dir/run_command allowlisted + loop + TOOL_* events + --use-tools; **completed in chore/cabal-poc-mvp-close**: full ToolHost + loop wiring + tests + --use-tools CLI verified green)
+
 
 ### Exit Criteria
 
