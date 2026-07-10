@@ -1,5 +1,5 @@
 {
-  "generated": "Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-09.",
+  "generated": "Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-10.",
   "item_tag": "Empirical/Declared",
   "siblings": [],
   "items": [
@@ -174,6 +174,16 @@
       "tag": "Empirical/Declared",
       "id": "MVP-1",
       "summary": "- Task: start MVP-1 per plan.md p2 cabal-poc-mvp (parallel to w2): B1 tool host v0 (readfile/listdir/runcommand allowlisted + TOOL events), B2 loop (model prop…"
+    },
+    {
+      "anchor": "agents--dev-mcp-orch-use-cabal-as-leaf-for-dev-mcp-tasks-chore-orch-wiring-devmcp-appended",
+      "family": "doc",
+      "kind": "section",
+      "title": "dev-mcp Orch Use (cabal as leaf for dev-mcp tasks; chore/orch-wiring-devmcp appended)",
+      "file": "AGENTS.md",
+      "line": 203,
+      "tag": "Empirical/Declared",
+      "summary": "cabal-devmelopner is the leaf consumer/executor for dev-mcp orch tasks:"
     },
     {
       "anchor": "phase",
@@ -1309,6 +1319,16 @@
       "tag": "Empirical/Declared",
       "id": "POC-6",
       "summary": "- A6 marked documented single-shot; footnote updated; exit/position text revised for honesty (no longer requires POC-6 for PoC exit)."
+    },
+    {
+      "anchor": "roadmap--dev-mcp-orch-wiring-cabal-as-leaf-consumer-chore-orch-wiring-devmcp",
+      "family": "doc",
+      "kind": "section",
+      "title": "dev-mcp Orch Wiring (cabal as leaf consumer; chore/orch-wiring-devmcp)",
+      "file": "docs/ROADMAP.md",
+      "line": 346,
+      "tag": "Empirical/Declared",
+      "summary": "Appended notes on dev-mcp orch use per task (parallel to W2 docs):"
     },
     {
       "anchor": "tero",
