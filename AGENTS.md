@@ -200,3 +200,22 @@ All per AGENTS, wsfull-wave-2026-07-09-compact.md, dev-workflow. Tero cite: agen
 
 Follow AGENTS exactly on future changes.
 
+## dev-mcp Orch Use (cabal as leaf for dev-mcp tasks; chore/orch-wiring-devmcp appended)
+
+cabal-devmelopner is the leaf consumer/executor for dev-mcp orch tasks:
+
+- Discovery + onboarding: use dev-mcp README + servers/ for family inventory (agent-mcp orch, tero L1, memory-gate domains M1, context session, security). Clone/register via AGENTS.md snippets there.
+- W2 facade matrix: cabal implements CommonMemoryAdapter + AgentDomain (mirror memory-gate-rs) as primary consumer; domain-scoped queries (TERO etc) feed StructuredResponse (citations + orchestration) for cross-family orch (see dev-mcp servers/README.md#orch-inventory-truth for matrix).
+- dev-mcp tasks: cabal acts as leaf executor (tools loop + tero/W2 in agent); dev-mcp indexes cabal as "consumer". See family clone layout in dev-mcp/README.md.
+- Links: dev-mcp servers/README.md (enhanced with links + doctor notes), docs/ROADMAP.md (Wave B cabal matrix), docs/ASSESSMENT.md; per-server e.g. memory-gate-rs.md, agent-mcp.md.
+- Doctor: grok mcp doctor tero (or per-server); cabal --use-tero exercises dev-mcp family paths.
+- Orch hints: facade supports dev-mcp orch wiring (plan §3); future agent-mcp will consume cabal W2 outputs.
+
+Tero-first (pre + post): MCP tero__text_search "dev-mcp orch w2 facade" + /root/git/scripts/tero.sh dev-mcp "orch inventory w2 cabal" (hits: memory-gate-rs--w2-mirror-to-cabal-tero, readme--server-inventory, workspacecabalteroreadiness sections, agents--subagents...); cite used.
+
+Cross-cites: plan.md §3 orch-wiring, dev-mcp ROADMAP (D-B2), wsfull-wave-2026-07-09-compact.md, WORKSPACE_CABAL_TERO_READINESS.md (leaf-orch), dev-mcp servers/README post-update.
+
+Append-only; followed dev-workflow, branch-guard (chore/orch-wiring-devmcp), hygiene + update-tero. Land --no-ff dev/main + propagate. Verify tero hits "dev-mcp|cabal as leaf|orch".
+
+Update this + kickoffs + tero after.
+

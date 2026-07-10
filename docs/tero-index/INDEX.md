@@ -1,15 +1,15 @@
 # cabal-devmelopner — Tero Index (Layer 1)
 
-> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-09.
+> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-10.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 165
+- **Items:** 167
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (165 entries)
+## doc (167 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -30,6 +30,7 @@
 | `agents--honest-docs-closure-chore-honest-docs-post-w2-2026-07-09-appended` | section | — | Honest docs closure (chore/honest-docs-post-w2, 2026-07-09 appended) | `AGENTS.md:161` | — | - Tero-first (MCP identify + textsearch "W2 Facade"\|"C0"\|"POC"\|"wsfull-wave" + cite reads of dev-docs/waves/ + WORKSPACE... before greps/edits). Read cited + P… |
 | `agents--poc-6-iteration-documented-single-shot-chore-poc6-iteration-honesty-appended-2026-07-09` | section | POC-6 | POC-6 iteration documented single-shot (chore/poc6-iteration-honesty appended 2026-07-09) | `AGENTS.md:169` | — | - Tero-first (required): /root/git/scripts/tero.sh cabal-devmelopner textsearch "POC-6\|iteration" (refusal, 156 rows, no prior match); re-ran for "POC","plan",… |
 | `agents--mvp-1-minimal-tools-start-chore-mvp1-tools-start-appended-2026-07-09` | section | MVP-1 | MVP-1 minimal tools start (chore/mvp1-tools-start appended 2026-07-09) | `AGENTS.md:181` | — | - Task: start MVP-1 per plan.md p2 cabal-poc-mvp (parallel to w2): B1 tool host v0 (readfile/listdir/runcommand allowlisted + TOOL events), B2 loop (model prop… |
+| `agents--dev-mcp-orch-use-cabal-as-leaf-for-dev-mcp-tasks-chore-orch-wiring-devmcp-appended` | section | — | dev-mcp Orch Use (cabal as leaf for dev-mcp tasks; chore/orch-wiring-devmcp appended) | `AGENTS.md:203` | — | cabal-devmelopner is the leaf consumer/executor for dev-mcp orch tasks: |
 | `phase` | section | — | cabal-devmelopner — Development Phases | `PHASE.md:1` | — | This document tracks the phased development of cabal-devmelopner. |
 | `phase--poc-phase-current` | section | — | PoC Phase (Current) | `PHASE.md:11` | — | Goal: Validate core architecture and get a working, extensible agent. |
 | `phase--deliverables` | section | — | Deliverables | `PHASE.md:15` | — | - [x] Project skeleton + installable CLI |
@@ -144,6 +145,7 @@
 | `roadmap--appended-pr12-w2-facade-c0-resolution-2026-07-09` | section | — | Appended: PR#12 W2 facade + C0 resolution (2026-07-09) | `docs/ROADMAP.md:324` | — | - Integrated W2 schemas (Structured, Citation, MemoryContext) + CommonMemoryAdapter + AgentDomain M1 (6+ domains incl. TERO/CONTEXT/MEMORYGATE/LANG). |
 | `roadmap--honest-docs-update-chore-honest-docs-post-w2` | section | — | Honest docs update (chore/honest-docs-post-w2) | `docs/ROADMAP.md:331` | — | - Aligned lagging current-position table + Wave A exit text post-PR#12 merges (TUI entrypoint now accurate; POC-1/3/4 closed in code). |
 | `roadmap--poc-6-documented-single-shot-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 documented single-shot (chore/poc6-iteration-honesty per plan.md p2) | `docs/ROADMAP.md:338` | — | - A6 marked documented single-shot; footnote updated; exit/position text revised for honesty (no longer requires POC-6 for PoC exit). |
+| `roadmap--dev-mcp-orch-wiring-cabal-as-leaf-consumer-chore-orch-wiring-devmcp` | section | — | dev-mcp Orch Wiring (cabal as leaf consumer; chore/orch-wiring-devmcp) | `docs/ROADMAP.md:346` | — | Appended notes on dev-mcp orch use per task (parallel to W2 docs): |
 | `tero` | section | — | Tero-MCP integration | `docs/TERO.md:1` | — | [Tero](https://github.com/tzervas) is a Layer-1 corpus index query surface: cited lookups over docs, decisions, issues, changelog entries, and skills. cabal-de… |
 | `tero--what-tero-is-and-is-not` | section | — | What Tero is (and is not) | `docs/TERO.md:9` | — | Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth. |
 | `tero--expected-sibling-layout` | section | — | Expected sibling layout | `docs/TERO.md:22` | — | Defaults assume a shared parent directory (e.g. ~/git or /root/git): |

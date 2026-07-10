@@ -342,3 +342,18 @@ Local product docs: PHASE, INTENT_AND_GAP_ANALYSIS, OPEN_ISSUES, TERO.
 - Tero-first (script text_search "POC|plan|wsfull" + MCP identify) + cited reads of plan + prior phase/intent hits before edits. Refusals on exact "POC-6" pre this (expected).
 - Append-only + targeted accuracy. Branch from main. Will run update-tero post.
 - Tero cite post: roadmap--wave-a... + new section. Follows dev-workflow/append-only/guards.
+
+### dev-mcp Orch Wiring (cabal as leaf consumer; chore/orch-wiring-devmcp)
+
+Appended notes on dev-mcp orch use per task (parallel to W2 docs):
+
+- cabal-devmelopner = leaf for dev-mcp tasks: consumes dev-mcp inventory (servers/README, top README), registers family MCPs, executes as consumer in orch (W2 facade for memory across tero/agent-mcp/context/memory-gate).
+- W2 facade matrix + memory-gate domains (M1): referenced in cabal's CommonMemoryAdapter (AgentDomain.TERO primary for tero-first + orch); see enhanced dev-mcp/servers/README.md#orch-inventory-truth (table of consumers/domains) + cabal schemas.py .
+- Links added in dev-mcp: to cabal AGENTS/ROADMAP, leaf ROADMAPs; doctor notes fit.
+- From dev-mcp ROADMAP: advances D-B2 (cabal consumption matrix), D-A inventory truth (cabal marked # consumer).
+- Orch vision tie: cabal as executor leaf in single-NL / wave orch (plan.md §3, wsfull kickoff); uses dev-mcp for cross-family map.
+- Tero cites (MCP/script pre-edit): dev-mcp text_search "orch|inventory|w2|cabal" (anchors: readme--server-inventory, memory-gate-rs--w2-mirror..., workspacecabalteroreadiness--leaf-orch-review-tranche-wsfull); cabal text_search "dev-mcp orch w2" (agents--..., roadmap--wave...); explain/cite used.
+
+See dev-mcp/docs/ROADMAP.md (orch section), servers/README.md (matrix), plan.md §3. 
+
+Append-only; hygiene (check.sh), update-tero, branch chore/orch... Land --no-ff + propagate to verify tero "dev-mcp|orch|leaf". Cross: AGENTS.md (this append), WORKSPACE_CABAL..., wsfull compact.
