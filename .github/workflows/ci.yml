@@ -2,6 +2,12 @@ name: CI
 
 # Manual only — run the same checks locally via ./scripts/check.sh
 on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
   workflow_dispatch:
 
 permissions:
@@ -10,7 +16,7 @@ permissions:
 jobs:
   check:
     name: Local-parity checks
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, podman]
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
