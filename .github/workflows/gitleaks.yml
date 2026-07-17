@@ -2,11 +2,17 @@ name: gitleaks
 
 # Manual only — prefer local secret scanning before push
 on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
   workflow_dispatch:
 
 jobs:
   gitleaks:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, podman]
     steps:
       - uses: actions/checkout@v4
         with:

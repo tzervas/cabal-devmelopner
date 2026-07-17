@@ -126,6 +126,28 @@ Filed issues today: GitHub **#2–#8** (see OPEN_ISSUES).
 
 **Maps to PHASE MVP:** tools, verification, config, long-lived-ish TUI, packaging prep.
 
+## MVP-1 tools start (chore/mvp1-tools-start, 2026-07-09 appended)
+- B1: core/tools.py (ToolHost + read_file/list_dir/run_command allowlisted + parse + events TOOL_CALL/RESULT).
+- B2: wired in agent.py (tools_enabled flag, loop detect/parse/execute/feedback re-prompt limited _max_tool_steps; compat non-tool path preserved).
+- CLI: --use-tools flag + event subs + pass to SimpleAgent.
+- Prompt: tool format + get_tool_descriptions injected (integrates tero/W2 Structured in same path).
+- Tests: parse, host fs/run safety, agent tool loop (mock propose+final).
+- Docs updated append-only (this, OPEN_ISSUES, PHASE, AGENTS).
+- Tero-first (script + mcp), branch chore/mvp1-tools-start from main, hygiene next, land per dev-workflow.
+- Verify: uv run ... --use-tools works (emits, acts), pytest new tests green.
+- Cross-cite: plan.md §1 (B1 tool host v0 + B2 loop + integrate tero/W2), wsfull compact, WORKSPACE..., prior agents--pr12...
+- Status: MVP-1 started (minimal functional). Full B3+ (config/verify) later. No overclaim.
+
+## MVP-1 complete (chore/cabal-poc-mvp-close appended)
+- B1/B2 done + verified green: tools.py full host+parse+safe+events; agent loop tool detect/execute/re-prompt budget + feedback; cli --use-tools + events; prompt inject; 4 new tests + 6 prior (10 pass).
+- Exec verified (parse, list/read/run host, agent loop with mock tool-then-answer).
+- Integrates W2 Structured + tero memory in same loop (no breakage to non-tool path).
+- Per plan.md cabal-poc-mvp + ROADMAP Wave B; cross-cites wsfull compact, OPEN_ISSUES (MVP-1 section), PHASE, AGENTS, dev-docs readiness.
+- Tero-first + hygiene + update-tero post; land --no-ff dev/main + propagate.
+- MVP-1 acceptance met (see OPEN). Defer B3 config, B4 verify/iter feedback, TUI polish etc.
+- Tero cite: roadmap--mvp-1-complete...
+
+
 ---
 
 ### Wave C — Daily co-dev polish (MVP complete)
@@ -330,3 +352,18 @@ Local product docs: PHASE, INTENT_AND_GAP_ANALYSIS, OPEN_ISSUES, TERO.
 - Tero-first (script text_search "POC|plan|wsfull" + MCP identify) + cited reads of plan + prior phase/intent hits before edits. Refusals on exact "POC-6" pre this (expected).
 - Append-only + targeted accuracy. Branch from main. Will run update-tero post.
 - Tero cite post: roadmap--wave-a... + new section. Follows dev-workflow/append-only/guards.
+
+### dev-mcp Orch Wiring (cabal as leaf consumer; chore/orch-wiring-devmcp)
+
+Appended notes on dev-mcp orch use per task (parallel to W2 docs):
+
+- cabal-devmelopner = leaf for dev-mcp tasks: consumes dev-mcp inventory (servers/README, top README), registers family MCPs, executes as consumer in orch (W2 facade for memory across tero/agent-mcp/context/memory-gate).
+- W2 facade matrix + memory-gate domains (M1): referenced in cabal's CommonMemoryAdapter (AgentDomain.TERO primary for tero-first + orch); see enhanced dev-mcp/servers/README.md#orch-inventory-truth (table of consumers/domains) + cabal schemas.py .
+- Links added in dev-mcp: to cabal AGENTS/ROADMAP, leaf ROADMAPs; doctor notes fit.
+- From dev-mcp ROADMAP: advances D-B2 (cabal consumption matrix), D-A inventory truth (cabal marked # consumer).
+- Orch vision tie: cabal as executor leaf in single-NL / wave orch (plan.md §3, wsfull kickoff); uses dev-mcp for cross-family map.
+- Tero cites (MCP/script pre-edit): dev-mcp text_search "orch|inventory|w2|cabal" (anchors: readme--server-inventory, memory-gate-rs--w2-mirror..., workspacecabalteroreadiness--leaf-orch-review-tranche-wsfull); cabal text_search "dev-mcp orch w2" (agents--..., roadmap--wave...); explain/cite used.
+
+See dev-mcp/docs/ROADMAP.md (orch section), servers/README.md (matrix), plan.md §3. 
+
+Append-only; hygiene (check.sh), update-tero, branch chore/orch... Land --no-ff + propagate to verify tero "dev-mcp|orch|leaf". Cross: AGENTS.md (this append), WORKSPACE_CABAL..., wsfull compact.

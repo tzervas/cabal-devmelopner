@@ -35,7 +35,7 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 
 | ID | GH | Title | Description | Acceptance |
 |----|-----|--------|-------------|------------|
-| **MVP-1** | [#8](https://github.com/tzervas/cabal-devmelopner/issues/8) | Minimal tool use | Read file, list dir, run tests | Tool loop + TOOL_CALL / TOOL_RESULT events |
+| **MVP-1** | [#8](https://github.com/tzervas/cabal-devmelopner/issues/8) | Minimal tool use | Read file, list dir, run tests | Tool loop + TOOL_CALL / TOOL_RESULT events (started chore/mvp1-tools-start: host+loop+tests; see appended status) |
 | **MVP-2** | — | Config system | Model, iterations, Tero paths, workspace | Documented precedence (file / env / flags) |
 | **MVP-3** | — | Runtime dependencies | `dependencies = []` | Core + optional extras correct for install story |
 | **MVP-4** | [#7](https://github.com/tzervas/cabal-devmelopner/issues/7) | CI: pytest | Only gitleaks today | `uv run pytest` on PR to `dev`/`main` |
@@ -76,6 +76,15 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 - Implementing the fixes above
 - Changing runtime behavior (except via future code PRs)
 
+## MVP-1 minimal tools started (chore/mvp1-tools-start appended 2026-07-09)
+- Per plan.md p2 (cabal-poc-mvp): B1 tool host v0 (read/list/run + TOOL_* via EventBus) + B2 loop (model propose/execute/re-prompt) + tero/W2 integrate.
+- Landed minimal: core/tools.py impl + parse, agent wiring (opt-in --use-tools), cli flag+handlers, prompt tool instr, basic tests (parse/host/agent-loop).
+- Still MVP start: no config, limited safety/allow, single tool per turn, no B4 verify yet (iteration remains single-shot until B2+B4).
+- Tero-first (script "MVP-1|tool|read_file" + MCP), append-only, branch from main, hygiene + update-tero post.
+- Marks MVP-1 in progress (see ROADMAP Wave B, PHASE MVP).
+- Cross-cites: plan.md cabal section, roadmap--wave-b..., phase--mvp..., agents (this), wsfull-wave-2026-07-09-compact.md.
+- Tero cite expected post update-tero: openissues--mvp-1... + chore/mvp1...
+
 ## Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2)
 - POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now `cabal-devmelopner-tui` has main(); TUI imports/uses core.types.Task).
 - POC-4 (Tero errors silent): addressed by C0 fix + A3 (agent now emits EventType.ERROR "CommonMemory facade error..." on facade refusal or except; test_tero_error_emits_event asserts). Facade keeps W2 "always StructuredResponse" (incl refusal); agent owns observability.
@@ -93,3 +102,18 @@ GitHub issues filed from this backlog (2026-07-08): [#2](https://github.com/tzer
 - Tero-first via /root/git/scripts/tero.sh + tero MCP (identify, text_search "POC" hits prior, refusals pre-docs on "POC-6|iteration"). Will verify hits post update-tero.
 - Append-only targeted; branch chore/poc6-iteration-honesty from main; no src changes. Follow AGENTS dev-workflow/guards.
 - Tero cite: will surface openissues--p1-poc... + this section after update-tero.sh cabal-devmelopner.
+
+## MVP-1 complete (chore/cabal-poc-mvp-close appended 2026-07-09)
+- Per plan.md priority 2 (cabal-poc-mvp): B1 tool host + B2 loop implemented/verified.
+- core/tools.py: ToolHost (read_file/list_dir/run_command allowlisted/safe, confined to workspace_root, timeout, events TOOL_CALL/RESULT emitted), parse_tool_call (regex for "call tool X with k is v"), get_tool_descriptions, execute dispatch.
+- agent.py: tools_enabled + tool_host in __init__; in run_structured after provider.complete: parse, if within _max_tool_steps=4 execute + feedback append + continue (re-prompt); else final.
+- cli.py: --use-tools flag, TOOL event subs for visibility, pass to SimpleAgent(tools_enabled=..., workspace_root=".")
+- prompt.py: injects get_tool_descriptions() into system for StructuredPrompt (integrates with W2/tero path).
+- tests/test_smoke.py: test_parse_tool_call_basic, test_tool_host_read_list_local, test_tool_host_run_allowlisted_and_blocks, test_agent_tools_loop_emits_and_reprompts (10/10 green).
+- Verified: uv run python -c (parse/host exec OK), pytest full smoke (.......... [100%]).
+- Docs/AGENTS/ROADMAP/PHASE/OPEN updated append-only + tero; cross-cites plan.md §1, wsfull-wave..., prior mvp1-start.
+- Still limited (MVP start): single tool/turn, no write, config later (B3), full verify/iter (B4 defers POC-6 full). No overclaim.
+- Tero-first (script + mcp pre/post), hygiene (check.sh ruff/pytest), branch-guard, append-only.
+- Status: MVP-1 done (functional start per acceptance in OPEN). Next B3+ in later waves.
+- Tero cite expected: openissues--mvp-1-complete + this section post update-tero.
+

@@ -1,128 +1,148 @@
 # cabal-devmelopner
 
-**cabal-devmelopner** is a repo-agnostic development agent designed for long-running, high-quality coding assistance.
+<!-- FLEET-BADGES:BEGIN -->
+[![CI](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-ci.yml/badge.svg?branch=dev)](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-ci.yml?query=branch%3Adev)
+[![Security](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-security.yml/badge.svg?branch=dev)](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-security.yml?query=branch%3Adev)
+<!-- FLEET-BADGES:END -->
 
-It is currently in **PoC** stage. Status is intentionally conservative: see the [intent and gap analysis](docs/INTENT_AND_GAP_ANALYSIS.md).
+**cabal-devmelopner** is a **repo-agnostic development agent** for long-running,
+high-quality coding assistance: CLI + TUI, pluggable model providers (local
+Ollama by default, xAI/Grok optional), optional **Tero-MCP** cited corpus
+context, and an MVP tools loop (`read_file` / `list_dir` / `run_command`).
 
-## Features (PoC)
+| | |
+|--|--|
+| **Who** | Operators and fractal L0/L1 agent swarms working in tzervas (or any) repos |
+| **What** | Event-driven agent with config-as-code profiles (`cabal.toml`) |
+| **Why** | One honest leaf executor that prefers local models + Tero-first memory over silent RAG claims |
 
-- Uses Grok via the raw xAI API
-- Optional **Tero-MCP** integration for cited corpus context (docs, decisions, issues) — requires sibling setup
-- Event-driven architecture (easy to extend with new interfaces)
-- Agent loop scaffold (today: single-shot generation; multi-iteration not yet real)
-- CLI works; TUI code + entrypoint works (POC-1/POC-3 fixed in PR#12 cab/a1-a3); still PoC surface (see docs)
+**Status: alpha (v0.1.0).** Usable scaffold — not a full multi-agent production
+platform. See [PHASE.md](PHASE.md) and [docs/INTENT_AND_GAP_ANALYSIS.md](docs/INTENT_AND_GAP_ANALYSIS.md).
 
-> **Not yet:** file/tools loop, verification, multi-agent, or zero-config Tero.
-
-## Setup (Recommended: UV)
-
-This project uses `uv` for Python version management, dependency resolution, and running.
-
-### One-command setup (Ubuntu / WSL / macOS / Linux)
+## 5-minute path
 
 ```bash
 git clone https://github.com/tzervas/cabal-devmelopner.git
 cd cabal-devmelopner
 ./setup.sh
+
+# Offline smoke (no model / no network API required)
+uv run cabal-devmelopner --version
+# expected: cabal-devmelopner 0.1.0
+
+uv run pytest -q
+# expected: all tests passed
+
+./scripts/check.sh --quick
+# expected: OK: cabal-devmelopner checks passed
 ```
 
-### Manual setup
+### Optional: run a real task
+
+Default provider is **local-ollama** (self-hosted). Frontier needs `XAI_API_KEY`.
 
 ```bash
-# 1. Install uv if you don't have it
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Local model (Ollama must be up on localhost:11434)
+uv run cabal-devmelopner "Summarize the project structure"
 
-# 2. Clone and enter the repo
-cd cabal-devmelopner
+# With config profile (copy example first)
+cp cabal.example.toml cabal.toml
+uv run cabal-devmelopner "Improve error handling" --profile l1
 
-# 3. Sync environment
-uv sync --all-extras
+# Frontier explicit
+export XAI_API_KEY=...
+uv run cabal-devmelopner "High-level architecture review" --profile l0 --provider xai
+
+# TUI
+uv run cabal-devmelopner-tui
 ```
 
-### Tero (optional, for corpus context)
+### Optional: Tero sibling (corpus context)
 
-Tero is **opt-in**. Defaults expect sibling checkouts next to this repo:
+Tero is **opt-in**. Cabal does **not** auto-install mycelium or tero-mcp.
 
 ```text
 <git-parent>/
   cabal-devmelopner/
-  tero-mcp/          # MCP server package
-  mycelium/          # provides docs/tero-index/index.json
+  tero-mcp/          # optional MCP server package
+  mycelium/          # optional: docs/tero-index/index.json (handoff only)
 ```
 
 ```bash
-cd ../tero-mcp && uv sync   # once
+cd ../tero-mcp && uv sync   # once, if you want Tero
 export TERO_TOKENS='local-dev:refresh'
+cd ../cabal-devmelopner
+uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero
 ```
 
-Full setup (env vars, **cold-start Grok MCP install** when a session lacks `tero`, tools, troubleshooting): **[docs/TERO.md](docs/TERO.md)**.
+Full guide: **[docs/TERO.md](docs/TERO.md)**.
 
-## Running
+## Config-as-code
 
-```bash
-# Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas)
-uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b
+| File | Purpose |
+|------|---------|
+| [cabal.example.toml](cabal.example.toml) | Documented template (L0/L1 profiles, tero-first, tools allowlist) |
+| `cabal.toml` | Your local overrides (optional; not required for smoke) |
 
-# Frontier explicit
-export XAI_API_KEY=...
-uv run cabal-devmelopner "High-level orch review" --provider xai --model grok-4.5 --use-tero
+| Profile | Role | Typical model hint |
+|---------|------|--------------------|
+| **l1** (default) | Composer / implementer | local-ollama `qwen2.5-coder:7b` |
+| **l0** | Frontier / hard architecture | xAI `grok-4.5` |
 
-# TUI (entrypoint fixed PR#12 A1; PoC surface)
-uv run cabal-devmelopner-tui
+Precedence: **CLI flags > env > cabal.toml > defaults**.
 
-# TUI with Tero
-USE_TERO=true uv run cabal-devmelopner-tui
-```
+## Features (alpha)
 
-| Surface | How to enable Tero |
-|---------|-------------------|
-| CLI | Pass `--use-tero` |
-| TUI | Set `USE_TERO=true` |
+- Grok via raw xAI API **or** local Ollama
+- Optional **Tero-MCP** for cited corpus context
+- Event-driven architecture (easy to extend)
+- MVP-1 tools loop (`--use-tools`)
+- CLI + TUI entrypoints
+- W2 StructuredResponse + CommonMemory facade (tero domain)
 
-## Architecture Notes
+> **Not yet:** full verification loop, multi-agent swarms, zero-config Tero,
+> production security wrappers.
 
-- **EventBus**: Central communication mechanism (producer/consumer model)
-- **Providers**: Pluggable model backends (xAI implemented)
-- **MCP Clients**: `TeroMCPClient` — one-shot stdio client for `tero-mcp-lite` (see [docs/TERO.md](docs/TERO.md))
-- Designed to support future features like agent swarms, Discord control, and security-wrapped tools
+## Architecture
+
+- **EventBus** — producer/consumer events
+- **Providers** — pluggable backends (`local-ollama`, `xai`)
+- **Config** — `core/config.py` + `cabal.toml` profiles
+- **MCP** — `TeroMCPClient` one-shot stdio client for `tero-mcp-lite`
+- **Compose** — plugs into tz-forge `agent-swarm`, agent-harness, relay ([docs/COMPOSE.md](docs/COMPOSE.md))
 
 ## Documentation
 
 | Doc | Contents |
 |-----|----------|
-| [docs/ROADMAP.md](docs/ROADMAP.md) | Full product plan: waves, PR DAG, corpus alignment |
-| [docs/LOCAL_TOOLING.md](docs/LOCAL_TOOLING.md) | Sibling MCP/tools readiness (incl. context-mcp ≠ RAG) |
-| [docs/INTENT_AND_GAP_ANALYSIS.md](docs/INTENT_AND_GAP_ANALYSIS.md) | Product intent vs current reality |
-| [docs/OPEN_ISSUES.md](docs/OPEN_ISSUES.md) | P0–P3 backlog from the analysis |
-| [docs/TERO.md](docs/TERO.md) | Tero-MCP setup, env, Grok tools, agent client |
-| [AGENTS.md](AGENTS.md) | Short agent-session notes for Tero lookups |
-| [PHASE.md](PHASE.md) | PoC → MVP → Production roadmap (honest checkboxes) |
+| [docs/COMPOSE.md](docs/COMPOSE.md) | tz-forge / harness / relay / tero compose |
+| [docs/ROADMAP.md](docs/ROADMAP.md) | Waves, PR DAG, corpus alignment |
+| [docs/TERO.md](docs/TERO.md) | Tero-MCP setup, cold start, troubleshooting |
+| [docs/LOCAL_CHECKS.md](docs/LOCAL_CHECKS.md) | Local CI parity |
+| [docs/FLEET_STANDARDS.md](docs/FLEET_STANDARDS.md) | Fleet CI + issue close policy |
+| [AGENTS.md](AGENTS.md) | Fractal agent rules (tero-first) |
+| [CLAUDE.md](CLAUDE.md) | Coding-assistant project context |
+| [CHANGELOG.md](CHANGELOG.md) | Version history |
+| [PHASE.md](PHASE.md) | PoC → MVP → Production (honest checkboxes) |
 
-## Development Phases
+## Development
 
-See [PHASE.md](PHASE.md) for the roadmap. PoC is **not exited** until P0 TUI entrypoint and basic stabilization items are addressed.
+```bash
+./scripts/check.sh          # ruff + mypy(advisory) + pytest
+./scripts/check.sh --fix
+uv run ruff check src tests
+uv run pytest -q
+```
+
+Branch model: feature → **`dev`** (`Refs #n`) → **`main`** (`Closes #n`).
+No automatic Copilot code review.
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).
 
-## Latest Wave (W2 + Facade, PR process)
+## Release
 
-W2 CommonMemoryAdapter + AgentDomain (M1) fully wired in core/schemas.py + agent.py (run_structured uses facade for tero domain queries, StructuredResponse + citations). Legacy compat + provider opts.
-
-C0 critical fixed (2026-07-09): facade errors now cause agent to emit EventBus ERROR (never silent) even on explicit refusal return; test updated + passes.
-
-See AGENTS.md for full, dev-docs/waves/wsfull-wave-2026-07-09-compact.md (Tero cite: workspacecabalteroreadiness--wave-2026-07-09-complete-compacted-for-context-optimization), WORKSPACE_CABAL_TERO_READINESS.md.
-
-Part of PR#12. After doc/tero updates + checks, pr-review (adapted rubric: tero-first, W2, C0, M1, guards, hygiene) + merge if clean.
-
-## Post-fix append (C0 resolved) 2026-07-09
-
-- W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (run_structured uses facade for TERO-domain tero queries + W2 StructuredResponse/Prompt with citations).
-- PR #12 (cab/a1-a3-tui-errors-tests) includes facade, A1-A3 (TUI entry/errors/tests), wiring, doc updates (AGENTS/ROADMAP/INTENT/TERO/PHASE/kickoffs/README), tero re-index.
-- Integration: cabal + tero (local index auto-discover), hygiene, C0 (honesty gate), M1 domains. See dev-docs/WORKSPACE_CABAL_TERO_READINESS.md + waves/wsfull-wave-2026-07-09-compact.md .
-- Kickoffs/agent/claude files updated (tero-first, dev-workflow, guards, facade/W2 refs).
-- Tero index + docs updated as part of PR; run update-tero.sh after edits.
-- Prefer: local-ollama + --use-tero + W2 structured (full pipeline). Follow tero-first, hygiene, security, branch/worktree guards, dev-workflow (append-only).
-
-Docs + tero always updated in PR process. See AGENTS.md for agent context. Tero cites: readme--latest-wave-w2-facade-pr-process .
+- Semver in [pyproject.toml](pyproject.toml) / [VERSION](VERSION) / package `__version__`
+- Notes: [CHANGELOG.md](CHANGELOG.md)
+- Tag path: `v0.1.0` (GitHub Release notes for 0.x+)

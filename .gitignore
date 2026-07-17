@@ -126,3 +126,7 @@ var/
 venv.bak/
 venv/
 wheels/
+
+# Local config-as-code (keep cabal.example.toml tracked)
+cabal.toml
+.cabal-devmelopner.toml

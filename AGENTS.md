@@ -1,5 +1,45 @@
 # Agent notes — cabal-devmelopner
 
+Operator-style rules for solo AI **and** multi-agent L0/L1 (fractal) waves.
+Living file: **append** status sections; keep this top block accurate.
+
+## Product (alpha 0.1.x)
+
+- **Role:** repo-agnostic development agent (CLI/TUI), leaf executor in swarms
+- **Config:** `cabal.example.toml` → optional `cabal.toml` (profiles **l1** default, **l0** frontier)
+- **Compose:** [docs/COMPOSE.md](docs/COMPOSE.md) — tz-forge `agent-swarm` + agent-harness + tg-agent-relay
+- **Assistant context:** [CLAUDE.md](CLAUDE.md)
+- **Honesty:** not full multi-agent production; tools MVP-1; Tero opt-in; **no mycelium automation**
+
+## Fractal model policy (L0 / L1)
+
+| Role | Class | Default | Use for |
+|------|-------|---------|---------|
+| **L0** | Frontier | Named only when architecture is hard | Design forks, irreversible naming, cross-repo program design |
+| **L1** | Composer / fast implementer | **Default for all implementation** | Code, tests, docs, PRs, config, evidence |
+
+- Select via `cabal.toml` `agent.profile` or CLI `--profile l0|l1`
+- **No automatic Copilot code review** (fleet-wide)
+- Wave shape: optional L0 design → L1 implement leaves → L1 pr-review → merge (`Refs` on dev, `Closes` on main)
+
+## Local gates
+
+```bash
+./scripts/check.sh
+./scripts/check.sh --quick
+./scripts/check.sh --fix
+uv run cabal-devmelopner --version
+uv run pytest -q
+```
+
+## Branch / PR guards
+
+- Branch from `dev`; never commit directly to `main`
+- Feature → `dev`: **`Refs #n`** only (issues stay open)
+- Delivery → `main`: **`Closes #n`** / **`Fixes #n`**
+- Prefer one worktree per concurrent wave
+- Append-only for this file + ROADMAP/PHASE status sections
+
 ## Tero (documentation / corpus context) — now dynamic over tero-rs
 
 Use **Tero** (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query/explain/maintenance) is **dynamically discovered** at runtime via `--describe`. Python renders (loose hints + early schema validation + rich errors); Rust backend ensures strict validation + execution + Layer-2 when gated.
@@ -8,7 +48,7 @@ Prefer tero before greps. Full guide: **[docs/TERO.md](docs/TERO.md)**. Categori
 
 See workspace vision for common memory (tero + context-mcp + memory-gate-rs), local llama.cpp/GPU, cross-repo scoped reuse, token optimization.
 
-**Kickoff framework**: root `.claude/kickoffs/cab.md` + `wsfull.md` owns the work here. Use fresh `/kickoff cab`. Apply partial mycelium workflow (dev-workflow, tero-first with categories, guards, wave). Local `.claude/kickoffs/README.md`.
+**Kickoff framework**: root `.claude/kickoffs/cab.md` + `wsfull.md` owns the work here. Use fresh `/kickoff cab`. Apply partial mycelium workflow (dev-workflow, tero-first with categories, guards, wave). Local `.claude/kickoffs/README.md`. **Do not automate mycelium clone/update from this product.**
 
 ### Prefer
 
@@ -178,3 +218,60 @@ All per AGENTS, wsfull-wave-2026-07-09-compact.md, dev-workflow. Tero cite: agen
 - Follows exactly: AGENTS (Tero excavation block, prefer tero before greps, subagent rules, dev-workflow, guards, append-only, update this+tero+kickoffs), hygiene, C0/M1 honesty. No overclaim.
 - Tero cite: agents--poc6-iteration... + plan refs. Post: re-run update-tero + text_search "POC-6".
 
+### MVP-1 minimal tools start (chore/mvp1-tools-start appended 2026-07-09)
+- Task: start MVP-1 per plan.md p2 cabal-poc-mvp (parallel to w2): B1 tool host v0 (read_file/list_dir/run_command allowlisted + TOOL_* events), B2 loop (model propose/execute/re-prompt limited), integrate tero/W2.
+- Tero-first (script + MCP): /root/git/scripts/tero.sh cabal-devmelopner text_search "MVP-1|tool|read_file" (refusals pre + hits on mvp/tool sections in docs); tero__identify, tero__text_search "MVP-1 tools B1..." (workspacecabal... + roadmap mvp + phase mvp + openissues p2); repeated before branch/edits/greps.
+- Read (after tero): plan.md (cabal MVP B1/B2), agent.py/event.py/types.py/schemas.py (W2 StructuredResponse + pre-existing TOOL_*), test_smoke.py, cli.py, prompt.py, ROADMAP/OPEN_ISSUES/PHASE/AGENTS.
+- Branch: git checkout -b chore/mvp1-tools-start (from main, per task; guard respected).
+- Impl (minimal):
+  - New: core/tools.py (ToolHost, parse_tool_call, safe read/list/run_command w/ allowlist, emit TOOL_CALL/RESULT, get_descriptions, confine to workspace_root).
+  - agent.py: import, __init__ (tools_enabled, ToolHost), run_structured loop (parse after gen, exec+feedback+continue for re-prompt if tool; compat !tools path + early return preserved; W2/tero unchanged).
+  - prompt.py: always-inject tool format/desc (MVP start) so model can propose; StructuredPrompt used.
+  - cli.py: --use-tools flag, subscribe TOOL_* (print), pass to agent + workspace_root="".
+  - tests: parse, host (tmp+allow), agent tools loop (mock tool-then-final, asserts events + multi-call + final resp).
+- Docs (append-only + targeted): ROADMAP (new MVP-1 section + B table context), OPEN_ISSUES (MVP-1 row + new status append), PHASE (MVP bullet + append), AGENTS (this).
+- Hygiene: will run scripts/check.sh (ruff/pytest), update-tero.sh cabal-devmelopner.
+- Land: commit -S, PR if, --no-ff to dev then main, propagate pulls, reindex tero.
+- Verify per task: cabal --use-tools runs (emits, acts on read/list), tero hits post, tests green (incl new).
+- Follows: AGENTS (Tero excavation block in this, prefer tero, dev-workflow, guards, append-only, update this+tero+kickoffs after), C0 (events never silent), M1/W2 (Structured + facade untouched).
+- Cross-cites: plan.md, roadmap--wave-b-minimum..., openissues--mvp-1..., phase--mvp..., workspacecabalteroreadiness (prior), wsfull-wave-2026-07-09-compact.md, prior agents--poc6...
+- Tero cite: agents--mvp1-tools-start-2026-07-09 (post update-tero.sh).
+- Note: this starts MVP-1 (parallel w2); POC-6 still single-shot honest until B4 verify. No overclaim on full iter.
+
+Follow AGENTS exactly on future changes.
+
+## dev-mcp Orch Use (cabal as leaf for dev-mcp tasks; chore/orch-wiring-devmcp appended)
+
+cabal-devmelopner is the leaf consumer/executor for dev-mcp orch tasks:
+
+- Discovery + onboarding: use dev-mcp README + servers/ for family inventory (agent-mcp orch, tero L1, memory-gate domains M1, context session, security). Clone/register via AGENTS.md snippets there.
+- W2 facade matrix: cabal implements CommonMemoryAdapter + AgentDomain (mirror memory-gate-rs) as primary consumer; domain-scoped queries (TERO etc) feed StructuredResponse (citations + orchestration) for cross-family orch (see dev-mcp servers/README.md#orch-inventory-truth for matrix).
+- dev-mcp tasks: cabal acts as leaf executor (tools loop + tero/W2 in agent); dev-mcp indexes cabal as "consumer". See family clone layout in dev-mcp/README.md.
+- Links: dev-mcp servers/README.md (enhanced with links + doctor notes), docs/ROADMAP.md (Wave B cabal matrix), docs/ASSESSMENT.md; per-server e.g. memory-gate-rs.md, agent-mcp.md.
+- Doctor: grok mcp doctor tero (or per-server); cabal --use-tero exercises dev-mcp family paths.
+- Orch hints: facade supports dev-mcp orch wiring (plan §3); future agent-mcp will consume cabal W2 outputs.
+
+Tero-first (pre + post): MCP tero__text_search "dev-mcp orch w2 facade" + /root/git/scripts/tero.sh dev-mcp "orch inventory w2 cabal" (hits: memory-gate-rs--w2-mirror-to-cabal-tero, readme--server-inventory, workspacecabalteroreadiness sections, agents--subagents...); cite used.
+
+Cross-cites: plan.md §3 orch-wiring, dev-mcp ROADMAP (D-B2), wsfull-wave-2026-07-09-compact.md, WORKSPACE_CABAL_TERO_READINESS.md (leaf-orch), dev-mcp servers/README post-update.
+
+Append-only; followed dev-workflow, branch-guard (chore/orch-wiring-devmcp), hygiene + update-tero. Land --no-ff dev/main + propagate. Verify tero hits "dev-mcp|cabal as leaf|orch".
+
+Update this + kickoffs + tero after.
+
+
+## P28b production polish (feat/p28-production appended 2026-07-16)
+
+- **Bar:** plans/fractal/P28_AI_DEVTOOLING_PRODUCTION.md Wave A cabal-devmelopner
+- Delivered:
+  - Config-as-code: `cabal.example.toml` + `core/config.py` (L0/L1 profiles, tero-first, no mycelium automation); CLI wire (`--config`, `--profile`, `--version`)
+  - CLAUDE.md + fractal top of this AGENTS.md
+  - README 5-min: setup.sh → `--version` / pytest / check.sh; tero sibling optional
+  - docs/COMPOSE.md: tz-forge agent-swarm + harness + relay + tero
+  - CHANGELOG.md + VERSION 0.1.0 (alpha honest)
+  - tests/test_config.py; local check green
+- Branch: `feat/p28-production` → PR → merge to `dev` (Refs only; Closes on main later if needed)
+- Evidence: `/root/work/plans/evidence/P28-ai-devtooling/P28b-cabal.md`
+- Non-goals: no mycelium automation; no false production claims; no Copilot auto-review
+
+Update this + tero after material process changes.

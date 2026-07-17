@@ -16,6 +16,7 @@ from cabal_devmelopner.core.schemas import (
     MemoryContext,
     StructuredResponse,
 )
+from cabal_devmelopner.core.tools import ToolHost, parse_tool_call
 from cabal_devmelopner.core.types import EventType, Task
 from cabal_devmelopner.mcp.tero_client import TeroMCPClient
 from cabal_devmelopner.providers.base import Provider
@@ -23,11 +24,10 @@ from cabal_devmelopner.providers.base import Provider
 
 class SimpleAgent:
     """
-    PoC agent with a proper while-loop and feedback support.
+    PoC/MVP-1 agent with loop + W2 Structured + tero facade + minimal tools (B1/B2).
 
-    This version supports multiple iterations with feedback from previous attempts.
-    It is still simple but forms a solid foundation for later expansion
-    (Tero-MCP context, tool use, swarm coordination, etc.).
+    Tools opt-in: model proposes (text format) -> execute (read/list/run allowlist) via ToolHost
+    emitting TOOL_CALL/RESULT, feedback re-prompt limited steps. Integrates tero/W2.
     """
 
     def __init__(
@@ -35,6 +35,8 @@ class SimpleAgent:
         provider: Provider,
         event_bus: EventBus | None = None,
         tero_client: TeroMCPClient | None = None,
+        tools_enabled: bool = False,
+        workspace_root: str | None = None,
     ) -> None:
         self.provider = provider
         self.event_bus = event_bus or EventBus()
@@ -42,6 +44,14 @@ class SimpleAgent:
         self.facade: CommonMemoryAdapter | None = (
             CommonMemoryAdapter(tero_client) if tero_client else None
         )
+        self.tools_enabled = tools_enabled
+        self.tool_host: ToolHost | None = (
+            ToolHost(event_bus=self.event_bus, workspace_root=workspace_root)
+            if tools_enabled
+            else None
+        )
+        self._tool_steps = 0
+        self._max_tool_steps = 4  # MVP-1 budget (B2)
 
     def run(self, task: Task) -> str:
         """Run the agent loop. Returns raw text (compat). Prefer run_structured for schema use."""
@@ -62,6 +72,7 @@ class SimpleAgent:
         )
 
         feedback: list[str] = []
+        self._tool_steps = 0
         last_resp: StructuredResponse = StructuredResponse(kind="answer", answer="")
 
         for iteration in range(1, task.max_iterations + 1):
@@ -203,8 +214,27 @@ class SimpleAgent:
 
             last_resp = resp
 
-            # PoC: first success. Real impl would verify + populate confidence/orchestration.
-            if iteration == 1:
+            # MVP-1 tool loop (B2): if model emitted a tool call format, execute (host emits TOOL_*),
+            # feed result back via feedback, re-prompt (limited steps). Integrates tero/W2 (prompt has context).
+            # When tools disabled (default for compat), or no tool call, treat as final answer (old PoC path).
+            if getattr(self, "tools_enabled", False) and getattr(self, "tool_host", None):
+                tc = parse_tool_call(raw)
+                if tc:
+                    self._tool_steps = getattr(self, "_tool_steps", 0) + 1
+                    if self._tool_steps > getattr(self, "_max_tool_steps", 4):
+                        feedback.append(
+                            "Tool step budget exceeded. Provide final answer based on context."
+                        )
+                    else:
+                        tres = self.tool_host.execute(tc.name, tc.args)
+                        feedback.append(
+                            f"TOOL RESULT {tres.name} args={tres.args}: success={tres.success}\n{tres.output[:700]}"
+                        )
+                        # re-prompt with tool feedback (model decides next tool or answer)
+                        continue
+
+            # final answer path (tools not enabled or model gave direct answer)
+            if (not getattr(self, "tools_enabled", False)) or iteration == 1:
                 self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
                 return resp
 
