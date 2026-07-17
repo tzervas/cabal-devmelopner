@@ -1,0 +1,93 @@
+# cabal-devmelopner — config-as-code example
+#
+# Copy to cabal.toml (gitignored by default recommendation) or
+# .cabal-devmelopner.toml in the workspace root you point the agent at.
+#
+# Precedence (highest wins): CLI flags > env > cabal.toml > defaults
+#
+# Profiles:
+#   L0 — frontier / hard architecture (rare; named only when design forks)
+#   L1 — composer / fast implementer (default for all implementation)
+#
+# Non-goals in this file:
+#   - No mycelium path automation (handoff/docs only; never auto-install)
+#   - No Copilot auto-review toggles (fleet standard: reviews stay off)
+
+[project]
+# Optional label for transcripts / multi-workspace runs
+name = "example-workspace"
+# Directory the agent treats as workspace root (relative or absolute)
+workspace_root = "."
+
+[agent]
+# Max tool steps in the MVP-1 tools loop (read_file / list_dir / run_command)
+max_tool_steps = 5
+# Max agent iterations when tools are enabled
+max_iterations = 5
+# Default: enable structured (W2) response path
+structured = true
+# Default tools on/off (CLI --use-tools still overrides)
+use_tools = false
+
+# ---------------------------------------------------------------------------
+# Profiles — select with: profile = "l1"  (default)  or  profile = "l0"
+# ---------------------------------------------------------------------------
+profile = "l1"
+
+[profiles.l1]
+# L1 composer — default implementer lane
+description = "Composer / fast implementer (default)"
+provider = "local-ollama"
+# Hints only; actual model must exist on the provider
+model = "qwen2.5-coder:7b"
+# local-ollama model when provider is local-ollama
+local_model = "qwen2.5-coder:7b"
+temperature = 0.2
+max_tokens = 2048
+# Tero-first: prefer cited corpus context when siblings are available
+use_tero = true
+
+[profiles.l0]
+# L0 frontier — hard architecture / design forks only
+description = "Frontier (hard architecture; use sparingly)"
+provider = "xai"
+model = "grok-4.5"
+local_model = "qwen2.5-coder:7b"
+temperature = 0.2
+max_tokens = 4096
+use_tero = true
+
+# ---------------------------------------------------------------------------
+# Tero (optional sibling — never auto-installed)
+# ---------------------------------------------------------------------------
+[tero]
+# Opt-in at profile level; this section only sets paths/tokens when enabled.
+# Defaults assume sibling checkouts under the same git parent:
+#   ../tero-mcp
+#   ../mycelium/docs/tero-index/index.json   # or any Layer-1 index
+# Do NOT automate mycelium clone/update from cabal.
+enabled = false
+# mcp_project = "../tero-mcp"
+# index_path = "../mycelium/docs/tero-index/index.json"
+# tokens = "local-dev:refresh"
+# token = "local-dev"
+
+# ---------------------------------------------------------------------------
+# Tools allowlist (MVP-1+)
+# ---------------------------------------------------------------------------
+[tools]
+# When use_tools is true, only these command basenames may run
+allowlist = ["pytest", "ruff", "mypy", "uv", "python", "python3", "ls", "cat", "head", "git"]
+# Confined under workspace_root; never escape without explicit future config
+
+# ---------------------------------------------------------------------------
+# Compose pointers (documentation only — not executed by the CLI)
+# ---------------------------------------------------------------------------
+[compose]
+# How this product plugs into the fleet (see docs/COMPOSE.md)
+tz_forge_kind = "agent-swarm"
+assistant_profile = "fractal-swarm"
+agent_harness = "https://github.com/tzervas/agent-harness"
+tg_agent_relay = "https://github.com/tzervas/tg-agent-relay"
+tero_mcp = "https://github.com/tzervas/tero-mcp"
+# mycelium = handoff-only; never automate
