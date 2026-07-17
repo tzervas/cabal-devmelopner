@@ -1,5 +1,10 @@
 # cabal-devmelopner
 
+<!-- FLEET-BADGES:BEGIN -->
+[![CI](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-ci.yml/badge.svg?branch=dev)](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-ci.yml?query=branch%3Adev)
+[![Security](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-security.yml/badge.svg?branch=dev)](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-security.yml?query=branch%3Adev)
+<!-- FLEET-BADGES:END -->
+
 **cabal-devmelopner** is a repo-agnostic development agent designed for long-running, high-quality coding assistance.
 
 It is currently in **PoC** stage. Status is intentionally conservative: see the [intent and gap analysis](docs/INTENT_AND_GAP_ANALYSIS.md).
