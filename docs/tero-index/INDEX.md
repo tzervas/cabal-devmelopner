@@ -1,36 +1,50 @@
 # cabal-devmelopner — Tero Index (Layer 1)
 
-> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-10.
+> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-17.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 169
+- **Items:** 206
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (169 entries)
+## doc (201 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
-| `agents` | section | — | Agent notes — cabal-devmelopner | `AGENTS.md:1` | — | Use Tero (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query… |
-| `agents--tero-documentation-corpus-context-now-dynamic-over-tero-rs` | section | — | Tero (documentation / corpus context) — now dynamic over tero-rs | `AGENTS.md:3` | — | Use Tero (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query… |
-| `agents--prefer` | section | — | Prefer | `AGENTS.md:13` | — | 1. textsearch / querybyid / querybykind via the tero MCP server (when registered in Grok). |
-| `agents--subagents-and-multi-repo-excavation-required-when-tero-is-available` | section | — | Subagents and multi-repo excavation (required when Tero is available) | `AGENTS.md:19` | — | Sibling-tool investigations, readiness audits, and design waves are harder if agents only ls/grep checkouts. Every agent that excavates (orchestrator and leaf… |
-| `agents--tero-excavation-do-this-before-deep-filesystem-greps` | section | — | Tero excavation (do this before deep filesystem greps) | `AGENTS.md:33` | — | You have access to the tero MCP server (tools tero). Use it to excavate project |
-| `agents--if-this-session-has-no-tero-tools` | section | — | If this session has no `tero__*` tools | `AGENTS.md:52` | — | Sessions only pick up MCP servers registered before launch (or after /mcps → r). Quick path: |
-| `agents--1-one-time-sibling-package-index-adjust-gitparent` | other | — | 1) One-time: sibling package + index (adjust GIT_PARENT) | `AGENTS.md:57` | — | export GITPARENT="${GITPARENT:-$HOME/git}" |
-| `agents--2-register-user-scope-.grok-config.toml` | other | — | 2) Register (user scope → ~/.grok/config.toml) | `AGENTS.md:62` | — | grok mcp add tero \ |
-| `agents--3-verify-then-new-session-or-mcps-r-if-already-inside-tui` | other | — | 3) Verify, then new session (or /mcps → r if already inside TUI) | `AGENTS.md:69` | — | grok mcp doctor tero   # handshake OK, 9 tools |
-| `agents--grok-mcp-when-available` | section | — | Grok MCP (when available) | `AGENTS.md:75` | — | - Server name: tero → tools namespaced tero… |
-| `agents--this-repos-agent-cli-tui` | section | — | This repo’s agent CLI/TUI | `AGENTS.md:100` | — | Independent of Grok MCP registration: |
-| `agents--latest-state-w2-facade-integration-2026-07-09` | section | — | Latest State (W2 Facade + Integration, 2026-07-09) | `AGENTS.md:112` | — | - W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO,… |
-| `agents--post-c0-fix-for-pr12-2026-07-09-appended` | section | — | Post C0 Fix for PR#12 (2026-07-09, appended) | `AGENTS.md:129` | — | - CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract… |
-| `agents--pr12-reviewmerge-agent-2026-07-09-appended` | section | — | PR#12 Review+Merge Agent (2026-07-09 appended) | `AGENTS.md:142` | — | - Tero-first (MCP + script): teroidentify + textsearch "cabal W2 facade" "C0 PR#12" "dev-docs wsfull-wave-2026-07-09-compact" (hits: workspacecabalteroreadines… |
-| `agents--honest-docs-closure-chore-honest-docs-post-w2-2026-07-09-appended` | section | — | Honest docs closure (chore/honest-docs-post-w2, 2026-07-09 appended) | `AGENTS.md:161` | — | - Tero-first (MCP identify + textsearch "W2 Facade"\|"C0"\|"POC"\|"wsfull-wave" + cite reads of dev-docs/waves/ + WORKSPACE... before greps/edits). Read cited + P… |
-| `agents--poc-6-iteration-documented-single-shot-chore-poc6-iteration-honesty-appended-2026-07-09` | section | POC-6 | POC-6 iteration documented single-shot (chore/poc6-iteration-honesty appended 2026-07-09) | `AGENTS.md:169` | — | - Tero-first (required): /root/git/scripts/tero.sh cabal-devmelopner textsearch "POC-6\|iteration" (refusal, 156 rows, no prior match); re-ran for "POC","plan",… |
-| `agents--mvp-1-minimal-tools-start-chore-mvp1-tools-start-appended-2026-07-09` | section | MVP-1 | MVP-1 minimal tools start (chore/mvp1-tools-start appended 2026-07-09) | `AGENTS.md:181` | — | - Task: start MVP-1 per plan.md p2 cabal-poc-mvp (parallel to w2): B1 tool host v0 (readfile/listdir/runcommand allowlisted + TOOL events), B2 loop (model prop… |
-| `agents--dev-mcp-orch-use-cabal-as-leaf-for-dev-mcp-tasks-chore-orch-wiring-devmcp-appended` | section | — | dev-mcp Orch Use (cabal as leaf for dev-mcp tasks; chore/orch-wiring-devmcp appended) | `AGENTS.md:203` | — | cabal-devmelopner is the leaf consumer/executor for dev-mcp orch tasks: |
+| `agents` | section | — | Agent notes — cabal-devmelopner | `AGENTS.md:1` | — | Operator-style rules for solo AI and multi-agent L0/L1 (fractal) waves. |
+| `agents--product-alpha-0.1.x` | section | — | Product (alpha 0.1.x) | `AGENTS.md:6` | — | - Role: repo-agnostic development agent (CLI/TUI), leaf executor in swarms |
+| `agents--fractal-model-policy-l0-l1` | section | — | Fractal model policy (L0 / L1) | `AGENTS.md:14` | — | - Select via cabal.toml agent.profile or CLI --profile l0\|l1 |
+| `agents--local-gates` | section | — | Local gates | `AGENTS.md:25` | — | ./scripts/check.sh |
+| `agents--branch-pr-guards` | section | — | Branch / PR guards | `AGENTS.md:35` | — | - Branch from dev; never commit directly to main |
+| `agents--tero-documentation-corpus-context-now-dynamic-over-tero-rs` | section | — | Tero (documentation / corpus context) — now dynamic over tero-rs | `AGENTS.md:43` | — | Use Tero (Python presenter over tero-rs binary) for cited lookups. The surface (tools, args, inputSchemas with Rust type hints, categories: introspection/query… |
+| `agents--prefer` | section | — | Prefer | `AGENTS.md:53` | — | 1. textsearch / querybyid / querybykind via the tero MCP server (when registered in Grok). |
+| `agents--subagents-and-multi-repo-excavation-required-when-tero-is-available` | section | — | Subagents and multi-repo excavation (required when Tero is available) | `AGENTS.md:59` | — | Sibling-tool investigations, readiness audits, and design waves are harder if agents only ls/grep checkouts. Every agent that excavates (orchestrator and leaf… |
+| `agents--tero-excavation-do-this-before-deep-filesystem-greps` | section | — | Tero excavation (do this before deep filesystem greps) | `AGENTS.md:73` | — | You have access to the tero MCP server (tools tero). Use it to excavate project |
+| `agents--if-this-session-has-no-tero-tools` | section | — | If this session has no `tero__*` tools | `AGENTS.md:92` | — | Sessions only pick up MCP servers registered before launch (or after /mcps → r). Quick path: |
+| `agents--1-one-time-sibling-package-index-adjust-gitparent` | other | — | 1) One-time: sibling package + index (adjust GIT_PARENT) | `AGENTS.md:97` | — | export GITPARENT="${GITPARENT:-$HOME/git}" |
+| `agents--2-register-user-scope-.grok-config.toml` | other | — | 2) Register (user scope → ~/.grok/config.toml) | `AGENTS.md:102` | — | grok mcp add tero \ |
+| `agents--3-verify-then-new-session-or-mcps-r-if-already-inside-tui` | other | — | 3) Verify, then new session (or /mcps → r if already inside TUI) | `AGENTS.md:109` | — | grok mcp doctor tero   # handshake OK, 9 tools |
+| `agents--grok-mcp-when-available` | section | — | Grok MCP (when available) | `AGENTS.md:115` | — | - Server name: tero → tools namespaced tero… |
+| `agents--this-repos-agent-cli-tui` | section | — | This repo’s agent CLI/TUI | `AGENTS.md:140` | — | Independent of Grok MCP registration: |
+| `agents--latest-state-w2-facade-integration-2026-07-09` | section | — | Latest State (W2 Facade + Integration, 2026-07-09) | `AGENTS.md:152` | — | - W2 CommonMemory facade implementation: CommonMemoryAdapter + AgentDomain M1 (full Py mirror of memory-gate-rs M1 domains with prefix parsing: GENERAL, TERO,… |
+| `agents--post-c0-fix-for-pr12-2026-07-09-appended` | section | — | Post C0 Fix for PR#12 (2026-07-09, appended) | `AGENTS.md:169` | — | - CRITICAL blocker resolved: in CommonMemoryAdapter.query (schemas.py) tero backend error returned as explicit StructuredResponse.refusal (per facade contract… |
+| `agents--pr12-reviewmerge-agent-2026-07-09-appended` | section | — | PR#12 Review+Merge Agent (2026-07-09 appended) | `AGENTS.md:182` | — | - Tero-first (MCP + script): teroidentify + textsearch "cabal W2 facade" "C0 PR#12" "dev-docs wsfull-wave-2026-07-09-compact" (hits: workspacecabalteroreadines… |
+| `agents--honest-docs-closure-chore-honest-docs-post-w2-2026-07-09-appended` | section | — | Honest docs closure (chore/honest-docs-post-w2, 2026-07-09 appended) | `AGENTS.md:201` | — | - Tero-first (MCP identify + textsearch "W2 Facade"\|"C0"\|"POC"\|"wsfull-wave" + cite reads of dev-docs/waves/ + WORKSPACE... before greps/edits). Read cited + P… |
+| `agents--poc-6-iteration-documented-single-shot-chore-poc6-iteration-honesty-appended-2026-07-09` | section | POC-6 | POC-6 iteration documented single-shot (chore/poc6-iteration-honesty appended 2026-07-09) | `AGENTS.md:209` | — | - Tero-first (required): /root/git/scripts/tero.sh cabal-devmelopner textsearch "POC-6\|iteration" (refusal, 156 rows, no prior match); re-ran for "POC","plan",… |
+| `agents--mvp-1-minimal-tools-start-chore-mvp1-tools-start-appended-2026-07-09` | section | MVP-1 | MVP-1 minimal tools start (chore/mvp1-tools-start appended 2026-07-09) | `AGENTS.md:221` | — | - Task: start MVP-1 per plan.md p2 cabal-poc-mvp (parallel to w2): B1 tool host v0 (readfile/listdir/runcommand allowlisted + TOOL events), B2 loop (model prop… |
+| `agents--dev-mcp-orch-use-cabal-as-leaf-for-dev-mcp-tasks-chore-orch-wiring-devmcp-appended` | section | — | dev-mcp Orch Use (cabal as leaf for dev-mcp tasks; chore/orch-wiring-devmcp appended) | `AGENTS.md:243` | — | cabal-devmelopner is the leaf consumer/executor for dev-mcp orch tasks: |
+| `agents--p28b-production-polish-feat-p28-production-appended-2026-07-16` | section | — | P28b production polish (feat/p28-production appended 2026-07-16) | `AGENTS.md:263` | — | - Bar: plans/fractal/P28AIDEVTOOLINGPRODUCTION.md Wave A cabal-devmelopner |
+| `claude` | section | — | cabal-devmelopner — Claude / coding-assistant context | `CLAUDE.md:1` | — | cabal-devmelopner is a repo-agnostic development agent (CLI + TUI) with |
+| `claude--overview` | section | — | Overview | `CLAUDE.md:3` | — | cabal-devmelopner is a repo-agnostic development agent (CLI + TUI) with |
+| `claude--project-map` | section | — | Project map | `CLAUDE.md:10` | — | src/cabaldevmelopner/ |
+| `claude--development-commands` | section | — | Development commands | `CLAUDE.md:32` | — | ./setup.sh                 # one-shot: uv + sync |
+| `claude--config-as-code` | section | — | Config-as-code | `CLAUDE.md:45` | — | Copy cabal.example.toml → cabal.toml (optional). Profiles: |
+| `claude--coding-standards` | section | — | Coding standards | `CLAUDE.md:58` | — | - Prefer small, reviewable diffs |
+| `claude--pr-hygiene` | section | — | PR hygiene | `CLAUDE.md:67` | — | Branch from dev. Never push directly to main. |
+| `claude--compose` | section | — | Compose | `CLAUDE.md:76` | — | How this plugs into tz-forge agent-swarm, agent-harness, and |
+| `claude--further-reading` | section | — | Further reading | `CLAUDE.md:81` | — | - [README.md](README.md) — 5-minute path |
 | `phase` | section | — | cabal-devmelopner — Development Phases | `PHASE.md:1` | — | This document tracks the phased development of cabal-devmelopner. |
 | `phase--poc-phase-current` | section | — | PoC Phase (Current) | `PHASE.md:11` | — | Goal: Validate core architecture and get a working, extensible agent. |
 | `phase--deliverables` | section | — | Deliverables | `PHASE.md:15` | — | - [x] Project skeleton + installable CLI |
@@ -47,26 +61,44 @@
 | `phase--appended-w2-c0-fix-for-pr12-2026-07-09` | section | — | Appended: W2 + C0 fix for PR#12 (2026-07-09) | `PHASE.md:122` | — | - W2 facade + AgentDomain + StructuredResponse wired + C0 error emit fixed (agent.py + test green). |
 | `phase--honest-poc-status-alignment-chore-honest-docs-post-w2-2026-07-09` | section | — | Honest PoC status alignment (chore/honest-docs-post-w2, 2026-07-09) | `PHASE.md:128` | — | - Updated lagging PoC bullets + exit criteria for TUI (now entrypoint + Task met post A1-A3) and Tero error handling (C0/POC-4 addressed, facade path). |
 | `phase--poc-6-iteration-honesty-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 iteration honesty (chore/poc6-iteration-honesty, per plan.md p2) | `PHASE.md:135` | — | - Decision: Document POC-6 as single-shot (honest); defer full multi-iteration feedback + verification loop to MVP/tools (Wave B: B2/B4 etc). Matches code real… |
-| `readme` | other | — | cabal-devmelopner | `README.md:1` | — | cabal-devmelopner is a repo-agnostic development agent designed for long-running, high-quality coding assistance. |
-| `readme--features-poc` | section | — | Features (PoC) | `README.md:7` | — | - Uses Grok via the raw xAI API |
-| `readme--setup-recommended-uv` | section | — | Setup (Recommended: UV) | `README.md:17` | — | This project uses uv for Python version management, dependency resolution, and running. |
-| `readme--one-command-setup-ubuntu-wsl-macos-linux` | section | — | One-command setup (Ubuntu / WSL / macOS / Linux) | `README.md:21` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
-| `readme--manual-setup` | section | — | Manual setup | `README.md:29` | — | curl -LsSf https://astral.sh/uv/install.sh \| sh |
-| `readme--1.-install-uv-if-you-dont-have-it` | other | — | 1. Install uv if you don't have it | `README.md:32` | — | curl -LsSf https://astral.sh/uv/install.sh \| sh |
-| `readme--2.-clone-and-enter-the-repo` | other | — | 2. Clone and enter the repo | `README.md:35` | — | cd cabal-devmelopner |
-| `readme--3.-sync-environment` | other | — | 3. Sync environment | `README.md:38` | — | uv sync --all-extras |
-| `readme--tero-optional-for-corpus-context` | section | — | Tero (optional, for corpus context) | `README.md:42` | — | Tero is opt-in. Defaults expect sibling checkouts next to this repo: |
-| `readme--running` | section | — | Running | `README.md:60` | — | uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b |
-| `readme--local-self-hosted-default-gpu-on-5080-full-pipeline-with-tero-w2-schemas` | other | — | Local self-hosted (default, GPU on 5080; full pipeline with tero + W2 schemas) | `README.md:63` | — | uv run cabal-devmelopner "Refactor using memory-gate + tero" --use-tero --local-model qwen2.5-coder:7b |
-| `readme--frontier-explicit` | other | — | Frontier explicit | `README.md:66` | — | export XAIAPIKEY=... |
-| `readme--tui-entrypoint-fixed-pr12-a1-poc-surface` | other | — | TUI (entrypoint fixed PR#12 A1; PoC surface) | `README.md:70` | — | uv run cabal-devmelopner-tui |
-| `readme--tui-with-tero` | other | — | TUI with Tero | `README.md:73` | — | USETERO=true uv run cabal-devmelopner-tui |
-| `readme--architecture-notes` | section | — | Architecture Notes | `README.md:82` | — | - EventBus: Central communication mechanism (producer/consumer model) |
-| `readme--documentation` | section | — | Documentation | `README.md:89` | — | — |
-| `readme--development-phases` | section | — | Development Phases | `README.md:101` | — | See [PHASE.md](PHASE.md) for the roadmap. PoC is not exited until P0 TUI entrypoint and basic stabilization items are addressed. |
-| `readme--license` | section | — | License | `README.md:105` | — | MIT |
-| `readme--latest-wave-w2-facade-pr-process` | section | — | Latest Wave (W2 + Facade, PR process) | `README.md:109` | — | W2 CommonMemoryAdapter + AgentDomain (M1) fully wired in core/schemas.py + agent.py (runstructured uses facade for tero domain queries, StructuredResponse + ci… |
-| `readme--post-fix-append-c0-resolved-2026-07-09` | section | — | Post-fix append (C0 resolved) 2026-07-09 | `README.md:119` | — | - W2 CommonMemory facade (CommonMemoryAdapter + AgentDomain M1 from memory-gate-rs) implemented in core/schemas.py + wired into agent (runstructured uses facad… |
+| `readme` | other | — | cabal-devmelopner | `README.md:1` | — | <!-- FLEET-BADGES:BEGIN --> |
+| `readme--5-minute-path` | section | — | 5-minute path | `README.md:22` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
+| `readme--offline-smoke-no-model-no-network-api-required` | other | — | Offline smoke (no model / no network API required) | `README.md:29` | — | uv run cabal-devmelopner --version |
+| `readme--expected-cabal-devmelopner-0.1.0` | other | — | expected: cabal-devmelopner 0.1.0 | `README.md:31` | — | uv run pytest -q |
+| `readme--expected-all-tests-passed` | other | — | expected: all tests passed | `README.md:34` | — | ./scripts/check.sh --quick |
+| `readme--expected-ok-cabal-devmelopner-checks-passed` | other | — | expected: OK: cabal-devmelopner checks passed | `README.md:37` | — | Default provider is local-ollama (self-hosted). Frontier needs XAIAPIKEY. |
+| `readme--optional-run-a-real-task` | section | — | Optional: run a real task | `README.md:40` | — | Default provider is local-ollama (self-hosted). Frontier needs XAIAPIKEY. |
+| `readme--local-model-ollama-must-be-up-on-localhost11434` | other | — | Local model (Ollama must be up on localhost:11434) | `README.md:45` | — | uv run cabal-devmelopner "Summarize the project structure" |
+| `readme--with-config-profile-copy-example-first` | other | — | With config profile (copy example first) | `README.md:48` | — | cp cabal.example.toml cabal.toml |
+| `readme--frontier-explicit` | other | — | Frontier explicit | `README.md:52` | — | export XAIAPIKEY=... |
+| `readme--tui` | other | — | TUI | `README.md:56` | — | uv run cabal-devmelopner-tui |
+| `readme--optional-tero-sibling-corpus-context` | section | — | Optional: Tero sibling (corpus context) | `README.md:60` | — | Tero is opt-in. Cabal does not auto-install mycelium or tero-mcp. |
+| `readme--config-as-code` | section | — | Config-as-code | `README.md:80` | — | Precedence: CLI flags > env > cabal.toml > defaults. |
+| `readme--features-alpha` | section | — | Features (alpha) | `README.md:94` | — | - Grok via raw xAI API or local Ollama |
+| `readme--architecture` | section | — | Architecture | `README.md:106` | — | - EventBus — producer/consumer events |
+| `readme--documentation` | section | — | Documentation | `README.md:114` | — | — |
+| `readme--development` | section | — | Development | `README.md:128` | — | ./scripts/check.sh          # ruff + mypy(advisory) + pytest |
+| `readme--license` | section | — | License | `README.md:140` | — | MIT — see [LICENSE](LICENSE). |
+| `readme--release` | section | — | Release | `README.md:144` | — | - Semver in [pyproject.toml](pyproject.toml) / [VERSION](VERSION) / package version |
+| `compose` | section | — | Compose — cabal-devmelopner in the fleet | `docs/COMPOSE.md:1` | — | How this product plugs into tz-forge, agent-harness, tg-agent-relay, |
+| `compose--product-role` | section | — | Product role | `docs/COMPOSE.md:7` | — | [tz-forge](https://github.com/tzervas/tz-forge) project kind agent-swarm |
+| `compose--tz-forge-agent-swarm-kind` | section | — | tz-forge: `agent-swarm` kind | `docs/COMPOSE.md:17` | — | [tz-forge](https://github.com/tzervas/tz-forge) project kind agent-swarm |
+| `compose--from-a-tz-forge-checkout` | other | — | from a tz-forge checkout | `docs/COMPOSE.md:24` | — | python3 cli/tznew.py agent-swarm my-wave --assistant=fractal-swarm |
+| `compose--installs-agents-md-fractal-model-policy-kickoffs-cabal-profile-compose-pointer` | other | — | installs: agents-md-fractal + model-policy + kickoffs + cabal-profile COMPOSE pointer | `docs/COMPOSE.md:26` | — | Mirror module doc: tz-forge/docs/compose/cabal-devmelopner.md. |
+| `compose--agent-harness` | section | — | agent-harness | `docs/COMPOSE.md:38` | — | Compose rules |
+| `compose--sibling-layout-optional` | other | — | sibling layout (optional) | `docs/COMPOSE.md:54` | — | ../agent-harness/   # uv run agent-harness doctor |
+| `compose--tg-agent-relay` | section | — | tg-agent-relay | `docs/COMPOSE.md:59` | — | In scope for cabal consumers |
+| `compose--tero-mcp-optional-sibling` | section | — | tero-mcp (optional sibling) | `docs/COMPOSE.md:77` | — | <git-parent>/ |
+| `compose--config-as-code-profiles` | section | — | Config-as-code profiles | `docs/COMPOSE.md:94` | — | Example: [cabal.example.toml](../cabal.example.toml). Loader: core/config.py. |
+| `compose--5-minute-consumer-path` | section | — | 5-minute consumer path | `docs/COMPOSE.md:103` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
+| `compose--offline-smoke-no-model-call` | other | — | Offline smoke (no model call): | `docs/COMPOSE.md:110` | — | uv run pytest -q |
+| `compose--non-goals` | section | — | Non-goals | `docs/COMPOSE.md:117` | — | - Embedding cabal binary into tz-forge templates |
+| `fleetstandards` | section | — | Fleet standards (tzervas) | `docs/FLEET_STANDARDS.md:1` | — | Applied from the workstation pack under plans/fleet-standards/pack/. |
+| `fleetstandards--workflows` | section | — | Workflows | `docs/FLEET_STANDARDS.md:5` | — | - dev / feature merges: Refs #n only — issues stay open |
+| `fleetstandards--issue-close-policy` | section | — | Issue close policy | `docs/FLEET_STANDARDS.md:14` | — | - dev / feature merges: Refs #n only — issues stay open |
+| `fleetstandards--badges` | section | — | Badges | `docs/FLEET_STANDARDS.md:20` | — | README badges use GitHub Actions SVG for trunk branch — live status, not static green. |
+| `fleetstandards--copilot` | section | — | Copilot | `docs/FLEET_STANDARDS.md:24` | — | Automatic Copilot code reviews are disabled for fleet-managed repos. Do not request Copilot on PRs. |
+| `fleetstandards--permissions` | section | — | Permissions | `docs/FLEET_STANDARDS.md:28` | — | Workflows use minimum permissions: blocks (contents read; issues write only for close/reopen jobs). |
 | `intentandgapanalysis` | section | — | Intent and Gap Analysis | `docs/INTENT_AND_GAP_ANALYSIS.md:1` | Living document — update when PoC exit criteria or architecture change. | Baseline: dev (includes Tero docs/client commit 32d30d3) |
 | `intentandgapanalysis--1.-stated-intent` | section | — | 1. Stated intent | `docs/INTENT_AND_GAP_ANALYSIS.md:11` | — | Core principles: repo-agnostic · extensible communications · strong Tero integration · clean architecture. |
 | `intentandgapanalysis--recent-updates-w2-facade-as-of-pr-process-2026-07-09` | section | — | Recent Updates (W2 + Facade, as of PR process 2026-07-09) | `docs/INTENT_AND_GAP_ANALYSIS.md:22` | — | - W2 schemas + CommonMemory facade implementation landed in core/schemas.py: StructuredResponse/Prompt (W2), Citation, MemoryContext, AgentDomain (M1 mirror fr… |
@@ -182,4 +214,14 @@
 | `readme--regenerate` | section | — | Regenerate | `docs/tero-index/README.md:13` | — | python3 /path/to/tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--serve-locally` | section | — | Serve locally | `docs/tero-index/README.md:21` | — | export TEROTOKENS=local-dev:refresh |
+
+## changelog (5 entries)
+
+| Anchor | Kind | Id | Title | File:Line | Status | Summary |
+|---|---|---|---|---|---|---|
+| `changelog` | entry | — | Changelog | `CHANGELOG.md:1` | — | All notable changes to cabal-devmelopner are documented in this file. |
+| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:8` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:22` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
+| `changelog--notes` | section | — | Notes | `CHANGELOG.md:29` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
 
