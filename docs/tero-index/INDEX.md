@@ -1,15 +1,15 @@
 # cabal-devmelopner — Tero Index (Layer 1)
 
-> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-17.
+> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 206
+- **Items:** 251
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (201 entries)
+## doc (244 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -143,16 +143,16 @@
 | `localtooling--per-repo-tero-indices` | section | — | Per-repo Tero indices | `docs/LOCAL_TOOLING.md:126` | — | Each sibling MCP repo (and this one) commits docs/tero-index/ for local tero-mcp-lite. Regenerate with python3 ../tero-mcp/scripts/generateliteindex.py --root… |
 | `localtooling--local-ci-parity` | section | — | Local CI parity | `docs/LOCAL_TOOLING.md:130` | — | ./scripts/check.sh |
 | `openissues` | section | — | Open issues backlog (from intent / gap analysis) | `docs/OPEN_ISSUES.md:1` | — | Derived from [INTENTANDGAPANALYSIS.md](INTENTANDGAPANALYSIS.md). Execution order, waves, and PR DAG: [ROADMAP.md](ROADMAP.md). Use this file as a checklist for… |
-| `openissues--p0-fix-before-claiming-a-working-tui` | section | — | P0 — Fix before claiming a working TUI | `docs/OPEN_ISSUES.md:11` | — | — |
-| `openissues--p1-poc-exit-criteria` | section | — | P1 — PoC exit criteria | `docs/OPEN_ISSUES.md:21` | — | — |
-| `openissues--p2-toward-a-useful-development-agent-mvp` | section | — | P2 — Toward a useful development agent / MVP | `docs/OPEN_ISSUES.md:34` | — | — |
-| `openissues--p3-production-oriented-track-only` | section | — | P3 — Production-oriented (track only) | `docs/OPEN_ISSUES.md:48` | — | — |
-| `openissues--suggested-github-issue-titles` | section | — | Suggested GitHub issue titles | `docs/OPEN_ISSUES.md:61` | — | 1. [P0] Fix cabal-devmelopner-tui entrypoint (missing main) |
-| `openissues--out-of-scope-for-the-docs-pr-that-added-this-file` | section | — | Out of scope for the docs PR that added this file | `docs/OPEN_ISSUES.md:74` | — | - Implementing the fixes above |
-| `openissues--mvp-1-minimal-tools-started-chore-mvp1-tools-start-appended-2026-07-09` | section | MVP-1 | MVP-1 minimal tools started (chore/mvp1-tools-start appended 2026-07-09) | `docs/OPEN_ISSUES.md:79` | — | - Per plan.md p2 (cabal-poc-mvp): B1 tool host v0 (read/list/run + TOOL via EventBus) + B2 loop (model propose/execute/re-prompt) + tero/W2 integrate. |
-| `openissues--status-alignment-post-w2-c0-pr12-appended-2026-07-09-chore-honest-docs-post-w2` | section | — | Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2) | `docs/OPEN_ISSUES.md:88` | — | - POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now cabal-devmelopner-tui has main(); TUI imports/uses core.types.Task). |
-| `openissues--poc-6-documented-as-single-shot-chore-poc6-iteration-honesty-appended` | section | POC-6 | POC-6 documented as single-shot (chore/poc6-iteration-honesty appended) | `docs/OPEN_ISSUES.md:97` | — | - Per plan.md (cabal section priority 2, "cabal-poc-mvp POC-6"): decide/document as single-shot (honest, defer full feedback to MVP/tools). Matches agent.py re… |
-| `openissues--mvp-1-complete-chore-cabal-poc-mvp-close-appended-2026-07-09` | section | MVP-1 | MVP-1 complete (chore/cabal-poc-mvp-close appended 2026-07-09) | `docs/OPEN_ISSUES.md:106` | — | - Per plan.md priority 2 (cabal-poc-mvp): B1 tool host + B2 loop implemented/verified. |
+| `openissues--p0-fix-before-claiming-a-working-tui` | section | — | P0 — Fix before claiming a working TUI | `docs/OPEN_ISSUES.md:14` | — | — |
+| `openissues--p1-poc-exit-criteria` | section | — | P1 — PoC exit criteria | `docs/OPEN_ISSUES.md:24` | — | — |
+| `openissues--p2-toward-a-useful-development-agent-mvp` | section | — | P2 — Toward a useful development agent / MVP | `docs/OPEN_ISSUES.md:37` | — | — |
+| `openissues--p3-production-oriented-track-only` | section | — | P3 — Production-oriented (track only) | `docs/OPEN_ISSUES.md:51` | — | — |
+| `openissues--suggested-github-issue-titles` | section | — | Suggested GitHub issue titles | `docs/OPEN_ISSUES.md:64` | — | 1. [P0] Fix cabal-devmelopner-tui entrypoint (missing main) |
+| `openissues--out-of-scope-for-the-docs-pr-that-added-this-file` | section | — | Out of scope for the docs PR that added this file | `docs/OPEN_ISSUES.md:77` | — | - Implementing the fixes above |
+| `openissues--mvp-1-minimal-tools-started-chore-mvp1-tools-start-appended-2026-07-09` | section | MVP-1 | MVP-1 minimal tools started (chore/mvp1-tools-start appended 2026-07-09) | `docs/OPEN_ISSUES.md:82` | — | - Per plan.md p2 (cabal-poc-mvp): B1 tool host v0 (read/list/run + TOOL via EventBus) + B2 loop (model propose/execute/re-prompt) + tero/W2 integrate. |
+| `openissues--status-alignment-post-w2-c0-pr12-appended-2026-07-09-chore-honest-docs-post-w2` | section | — | Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2) | `docs/OPEN_ISSUES.md:91` | — | - POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now cabal-devmelopner-tui has main(); TUI imports/uses core.types.Task). |
+| `openissues--poc-6-documented-as-single-shot-chore-poc6-iteration-honesty-appended` | section | POC-6 | POC-6 documented as single-shot (chore/poc6-iteration-honesty appended) | `docs/OPEN_ISSUES.md:100` | — | - Per plan.md (cabal section priority 2, "cabal-poc-mvp POC-6"): decide/document as single-shot (honest, defer full feedback to MVP/tools). Matches agent.py re… |
+| `openissues--mvp-1-complete-chore-cabal-poc-mvp-close-appended-2026-07-09` | section | MVP-1 | MVP-1 complete (chore/cabal-poc-mvp-close appended 2026-07-09) | `docs/OPEN_ISSUES.md:109` | — | - Per plan.md priority 2 (cabal-poc-mvp): B1 tool host + B2 loop implemented/verified. |
 | `roadmap` | note | — | cabal-devmelopner — Product Roadmap | `docs/ROADMAP.md:1` | Plan (2026-07-08) | Status: Plan (2026-07-08) |
 | `roadmap--1.-north-star` | section | — | 1. North star | `docs/ROADMAP.md:11` | — | cabal-devmelopner is a repo-agnostic development agent: long-running, event-driven, multi-surface (CLI / TUI / future Discord), with strong Tero integration fo… |
 | `roadmap--2.-current-position-summary` | section | — | 2. Current position (summary) | `docs/ROADMAP.md:32` | — | PoC exit requires honest tests/stabilization (POC-7); iteration (POC-6) now documented single-shot (honest, per plan.md p2 deferral to MVP/tools); TUI launch (… |
@@ -210,18 +210,63 @@
 | `tero--status-poc` | section | — | Status (PoC) | `docs/TERO.md:323` | — | - [x] TeroMCPClient one-shot stdio client with token + envelope unwrap |
 | `tero--w2-facade-updates-2026-07-09-pr-process` | section | — | W2 Facade Updates (2026-07-09 PR process) | `docs/TERO.md:335` | — | Facade (CommonMemoryAdapter) now primary for tero queries in agent: uses AgentDomain (M1 from memory-gate-rs) + returns W2 StructuredResponse (with citations,… |
 | `tero--post-c0-fix-2026-07-09` | section | — | Post C0 Fix (2026-07-09) | `docs/TERO.md:341` | — | - After facade wiring, tero error path now guarantees ERROR event emission in agent (C0 never-silent) when facade returns refusal. |
+| `toolingstackreadiness` | section | — | Tooling stack readiness — cabal 1.0 workflow efficiency | `docs/TOOLING_STACK_READINESS.md:1` | — | Date: 2026-07-21 |
+| `toolingstackreadiness--1.-stack-map-roles` | section | — | 1. Stack map (roles) | `docs/TOOLING_STACK_READINESS.md:10` | — | flowchart TB |
+| `toolingstackreadiness--memory-pipeline-target-not-all-wired-yet` | section | — | Memory pipeline (target — not all wired yet) | `docs/TOOLING_STACK_READINESS.md:42` | — | flowchart LR |
+| `toolingstackreadiness--2.-efficiency-gaps-tooling-not-cabal-core` | section | — | 2. Efficiency gaps (tooling, not cabal core) | `docs/TOOLING_STACK_READINESS.md:89` | — | — |
+| `toolingstackreadiness--3.-minimum-tooling-up-to-snuff-checklist-before-heavy-1.0-impl` | section | — | 3. Minimum “tooling up to snuff” checklist (before heavy 1.0 impl) | `docs/TOOLING_STACK_READINESS.md:104` | — | - [x] gha-runner-ctl 0.2.10 pool live (16c/16g) |
+| `toolingstackreadiness--must-blocks-efficient-joint-work` | section | — | Must (blocks efficient joint work) | `docs/TOOLING_STACK_READINESS.md:106` | — | - [x] gha-runner-ctl 0.2.10 pool live (16c/16g) |
+| `toolingstackreadiness--should-within-first-1.0-weeks-after-tools` | section | — | Should (within first 1.0 weeks, after tools) | `docs/TOOLING_STACK_READINESS.md:117` | — | - [ ] tero-rs --features memory + memory-gate-rs integration smoke |
+| `toolingstackreadiness--later` | section | — | Later | `docs/TOOLING_STACK_READINESS.md:126` | — | - [ ] security-mcp wrap of runcommand |
+| `toolingstackreadiness--4.-recommended-joint-ops-claude-grok` | section | — | 4. Recommended joint ops (Claude + Grok) | `docs/TOOLING_STACK_READINESS.md:133` | — | — |
+| `toolingstackreadiness--5.-immediate-actions-this-tranche` | section | — | 5. Immediate actions (this tranche) | `docs/TOOLING_STACK_READINESS.md:144` | — | 1. Land cabal docs PR: V1 gap + joint exec + this readiness file. |
+| `toolingstackreadiness--6.-bottom-line` | section | — | 6. Bottom line | `docs/TOOLING_STACK_READINESS.md:153` | — | The runtime fleet (gha-runner-ctl, tg-agent-relay) is good enough to execute cabal 1.0 efficiently. The product leaf (cabal) is the bottleneck (write/verify/st… |
+| `v100gapanalysis` | section | — | cabal-devmelopner — 1.0.0 Gap Analysis | `docs/V1_0_0_GAP_ANALYSIS.md:1` | — | Baseline: dev @ 5fd9781 (fleet harden) + product tree ~2.0 kLOC under src/cabaldevmelopner/ |
+| `v100gapanalysis--1.-what-1.0.0-means-product-definition` | section | — | 1. What 1.0.0 means (product definition) | `docs/V1_0_0_GAP_ANALYSIS.md:14` | — | 1.0.0 = daily co-dev agent you can trust on a real repo without hand-copying model output. |
+| `v100gapanalysis--execution-order-maintainer-direction-2026-07-21` | section | — | Execution order (maintainer direction 2026-07-21) | `docs/V1_0_0_GAP_ANALYSIS.md:46` | — | 1. Tools usable — write/applypatch + multi-step loop + verify (E1 → E2) |
+| `v100gapanalysis--2.-current-reality-0.1.0-measured-2026-07-21` | section | — | 2. Current reality (0.1.0 — measured 2026-07-21) | `docs/V1_0_0_GAP_ANALYSIS.md:53` | — | — |
+| `v100gapanalysis--3.-gap-matrix-1.0.0` | section | — | 3. Gap matrix → 1.0.0 | `docs/V1_0_0_GAP_ANALYSIS.md:87` | — | — |
+| `v100gapanalysis--github-issues-hygiene-filed-vs-reality` | section | — | GitHub issues hygiene (filed vs reality) | `docs/V1_0_0_GAP_ANALYSIS.md:106` | — | — |
+| `v100gapanalysis--4.-epics-for-1.0.0-github-milestone-v1.0.0` | section | — | 4. Epics for 1.0.0 (GitHub milestone `v1.0.0`) | `docs/V1_0_0_GAP_ANALYSIS.md:120` | — | Outcome: Versioning, CI gates, docs SoT, milestone hygiene. |
+| `v100gapanalysis--epic-e0-release-foundation-ship` | section | — | Epic E0 — Release foundation (Ship) | `docs/V1_0_0_GAP_ANALYSIS.md:122` | — | Outcome: Versioning, CI gates, docs SoT, milestone hygiene. |
+| `v100gapanalysis--epic-e1-act-on-codebases-tools-v1` | section | — | Epic E1 — Act on codebases (Tools v1) | `docs/V1_0_0_GAP_ANALYSIS.md:132` | — | Outcome: Agent can modify a repo safely. |
+| `v100gapanalysis--epic-e2-verify-loop` | section | — | Epic E2 — Verify loop | `docs/V1_0_0_GAP_ANALYSIS.md:143` | — | Outcome: Edits are checked, not trusted. |
+| `v100gapanalysis--epic-e3-config-budgets-packaging` | section | — | Epic E3 — Config, budgets, packaging | `docs/V1_0_0_GAP_ANALYSIS.md:152` | — | Outcome: Installable, tunable leaf. |
+| `v100gapanalysis--epic-e4-providers-streaming` | section | — | Epic E4 — Providers & streaming | `docs/V1_0_0_GAP_ANALYSIS.md:162` | — | Outcome: Local default, frontier optional, progressive UX. |
+| `v100gapanalysis--epic-e5-tero-memory-honesty` | section | — | Epic E5 — Tero & memory honesty | `docs/V1_0_0_GAP_ANALYSIS.md:171` | — | Outcome: Opt-in context that never lies. |
+| `v100gapanalysis--epic-e6-tui-v1` | section | — | Epic E6 — TUI v1 | `docs/V1_0_0_GAP_ANALYSIS.md:181` | — | Outcome: Daily co-dev surface. |
+| `v100gapanalysis--epic-e7-notify-hitl` | section | — | Epic E7 — Notify + HITL | `docs/V1_0_0_GAP_ANALYSIS.md:191` | — | Outcome: Async awareness + approval. |
+| `v100gapanalysis--epic-e8-hardening-for-1.0-ship` | section | — | Epic E8 — Hardening for 1.0 ship | `docs/V1_0_0_GAP_ANALYSIS.md:200` | — | Outcome: Trust. |
+| `v100gapanalysis--5.-suggested-issue-graph-disjoint-by-design` | section | — | 5. Suggested issue graph (disjoint by design) | `docs/V1_0_0_GAP_ANALYSIS.md:212` | — | flowchart TB |
+| `v100gapanalysis--6.-definition-of-done-for-1.0.0` | section | — | 6. Definition of Done for 1.0.0 | `docs/V1_0_0_GAP_ANALYSIS.md:241` | — | - [ ] All P0 issues under E0–E8 closed |
+| `v100gapanalysis--7.-effort-sketch-indicative` | section | — | 7. Effort sketch (indicative) | `docs/V1_0_0_GAP_ANALYSIS.md:253` | — | — |
+| `v100gapanalysis--8.-open-decisions-need-deliberation` | section | — | 8. Open decisions (need deliberation) | `docs/V1_0_0_GAP_ANALYSIS.md:271` | — | 1. Write tool shape: full file write vs unified diff apply only? (Recommend diff/apply first for safer review.) |
+| `v100gapanalysis--9.-bottom-line` | section | — | 9. Bottom line | `docs/V1_0_0_GAP_ANALYSIS.md:281` | — | Today (0.1.0): honest config + tools-read scaffold + dual provider + Tero opt-in — a strong architecture alpha, not yet a 1.0 development agent. |
+| `v100jointexecution` | section | — | Joint execution plan — Grok + Claude Code (1.0.0) | `docs/V1_0_0_JOINT_EXECUTION.md:1` | — | Purpose: Disjoint-by-design implementation after [V100GAPANALYSIS.md](V100GAPANALYSIS.md). |
+| `v100jointexecution--rules-both-agents` | section | — | Rules (both agents) | `docs/V1_0_0_JOINT_EXECUTION.md:8` | — | 1. One worktree per leaf; never commit on main/dev directly. |
+| `v100jointexecution--lane-ownership` | section | — | Lane ownership | `docs/V1_0_0_JOINT_EXECUTION.md:19` | — | Conflict resolution: L0 (cabal/Grok orchestrator) reassigns paths; never force-push shared branches. |
+| `v100jointexecution--phase-0-bookkeeping-l-ops-started` | section | — | Phase 0 — Bookkeeping — **L-ops** ✅ started | `docs/V1_0_0_JOINT_EXECUTION.md:32` | — | - [x] Milestone v1.0.0 + epics #19–#27 |
+| `v100jointexecution--phase-1-tools-usable-first-l-core` | section | — | Phase 1 — Tools usable **FIRST** — **L-core** | `docs/V1_0_0_JOINT_EXECUTION.md:39` | — | — |
+| `v100jointexecution--phase-1b-memory-stack-usable-parallel-after-tools-land` | section | — | Phase 1b — Memory stack usable (parallel after tools land) | `docs/V1_0_0_JOINT_EXECUTION.md:50` | — | — |
+| `v100jointexecution--phase-2-stream-session-tui` | section | — | Phase 2 — Stream + Session + TUI | `docs/V1_0_0_JOINT_EXECUTION.md:60` | — | — |
+| `v100jointexecution--phase-3-polish-ship` | section | — | Phase 3 — Polish + Ship | `docs/V1_0_0_JOINT_EXECUTION.md:69` | — | — |
+| `v100jointexecution--claude-code-kickoff-blurb-paste` | section | — | Claude Code kickoff blurb (paste) | `docs/V1_0_0_JOINT_EXECUTION.md:80` | — | You are L1 implementer for cabal-devmelopner 1.0.0. |
+| `v100jointexecution--grok-kickoff-blurb-self` | section | — | Grok kickoff blurb (self) | `docs/V1_0_0_JOINT_EXECUTION.md:91` | — | You are L0/L-ops + L-memory for cabal-devmelopner 1.0.0. |
+| `v100jointexecution--exit-of-this-plan-doc` | section | — | Exit of this plan doc | `docs/V1_0_0_JOINT_EXECUTION.md:101` | — | When Phase 0 issues exist on GitHub and Phase 1 first PR is open, this plan is active. Update checkboxes as waves complete (append-only notes at bottom). |
 | `readme-2` | other | — | Tero index (Layer 1) | `docs/tero-index/README.md:1` | — | Machine + human citation index for this repository. |
 | `readme--regenerate` | section | — | Regenerate | `docs/tero-index/README.md:13` | — | python3 /path/to/tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--serve-locally` | section | — | Serve locally | `docs/tero-index/README.md:21` | — | export TEROTOKENS=local-dev:refresh |
 
-## changelog (5 entries)
+## changelog (7 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
 | `changelog` | entry | — | Changelog | `CHANGELOG.md:1` | — | All notable changes to cabal-devmelopner are documented in this file. |
-| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:8` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:22` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
-| `changelog--notes` | section | — | Notes | `CHANGELOG.md:29` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
+| `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E2 verify loop: after a tools-path final answer, run configurable |
+| `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - E2 verify loop: after a tools-path final answer, run configurable |
+| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:21` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--added-2` | section | — | Added | `CHANGELOG.md:23` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:35` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
+| `changelog--notes` | section | — | Notes | `CHANGELOG.md:43` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
 

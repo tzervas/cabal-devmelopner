@@ -5,6 +5,19 @@ All notable changes to **cabal-devmelopner** are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning follows [SemVer](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- **E2 verify loop:** after a tools-path final answer, run configurable
+  `tools.verify_command` (default `uv run pytest -q`), emit
+  `VERIFY_STARTED` / `VERIFY_RESULT`, re-prompt up to `max_verify_rounds` on
+  failure, then annotate / ERROR if still red.
+- **E3.1 config budgets:** `max_tool_steps`, `max_iterations`, `use_verify`,
+  allowlist, and verify settings from `CabalConfig` → `SimpleAgent` / CLI
+  (`--use-verify`, `--verify-command`); not hardcoded.
+- Configurable `ToolHost` command allowlist + `is_safe_command` public helper.
+
 ## [0.1.0] — 2026-07-16
 
 ### Added
@@ -22,8 +35,9 @@ versioning follows [SemVer](https://semver.org/).
 ### Product status (honest)
 
 - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional
-  Tero client + W2 CommonMemory facade, MVP-1 tools loop, Textual TUI entrypoint.
-- Not yet: full verification loop, multi-agent swarms, security wrappers,
+  Tero client + W2 CommonMemory facade, MVP-1 tools + write/apply_patch + verify loop,
+  Textual TUI entrypoint.
+- Not yet: streaming, multi-agent swarms, security wrappers,
   zero-config Tero, production packaging.
 
 ### Notes

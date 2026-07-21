@@ -22,12 +22,25 @@ from cabal_devmelopner.mcp.tero_client import TeroMCPClient
 from cabal_devmelopner.providers.base import Provider
 
 
+def _verify_output_ok(vout: str) -> bool:
+    """True when ToolHost.run_command reports success (no error/exit prefix)."""
+    if not vout:
+        return True
+    if vout.startswith("[exit ") or vout.startswith("[run_command error]"):
+        return False
+    # other tool-style bracket errors
+    return not (vout.startswith("[") and "error" in vout[:40].lower())
+
+
 class SimpleAgent:
     """
     PoC/MVP-1 agent with loop + W2 Structured + tero facade + minimal tools (B1/B2).
 
     Tools opt-in: model proposes (text format) -> execute (read/list/run allowlist) via ToolHost
     emitting TOOL_CALL/RESULT, feedback re-prompt limited steps. Integrates tero/W2.
+
+    E2 verify: when tools are on and the model stops calling tools, optionally run
+    ``verify_command`` and re-prompt up to ``max_verify_rounds`` on failure.
     """
 
     def __init__(
@@ -37,6 +50,12 @@ class SimpleAgent:
         tero_client: TeroMCPClient | None = None,
         tools_enabled: bool = False,
         workspace_root: str | None = None,
+        *,
+        max_tool_steps: int = 5,
+        verify_command: str | None = None,
+        max_verify_rounds: int = 2,
+        use_verify: bool = True,
+        command_allowlist: tuple[str, ...] | None = None,
     ) -> None:
         self.provider = provider
         self.event_bus = event_bus or EventBus()
@@ -46,12 +65,20 @@ class SimpleAgent:
         )
         self.tools_enabled = tools_enabled
         self.tool_host: ToolHost | None = (
-            ToolHost(event_bus=self.event_bus, workspace_root=workspace_root)
+            ToolHost(
+                event_bus=self.event_bus,
+                workspace_root=workspace_root,
+                allowlist=command_allowlist,
+            )
             if tools_enabled
             else None
         )
         self._tool_steps = 0
-        self._max_tool_steps = 4  # MVP-1 budget (B2)
+        self._max_tool_steps = max(1, max_tool_steps)
+        self.verify_command = verify_command
+        self.max_verify_rounds = max(0, max_verify_rounds)
+        self.use_verify = use_verify and bool(verify_command)
+        self._verify_rounds = 0
 
     def run(self, task: Task) -> str:
         """Run the agent loop. Returns raw text (compat). Prefer run_structured for schema use."""
@@ -73,6 +100,7 @@ class SimpleAgent:
 
         feedback: list[str] = []
         self._tool_steps = 0
+        self._verify_rounds = 0
         last_resp: StructuredResponse = StructuredResponse(kind="answer", answer="")
 
         for iteration in range(1, task.max_iterations + 1):
@@ -217,31 +245,120 @@ class SimpleAgent:
             # MVP-1 tool loop (B2): if model emitted a tool call format, execute (host emits TOOL_*),
             # feed result back via feedback, re-prompt (limited steps). Integrates tero/W2 (prompt has context).
             # When tools disabled (default for compat), or no tool call, treat as final answer (old PoC path).
-            if getattr(self, "tools_enabled", False) and getattr(self, "tool_host", None):
+            if self.tools_enabled and self.tool_host:
                 tc = parse_tool_call(raw)
                 if tc:
-                    self._tool_steps = getattr(self, "_tool_steps", 0) + 1
-                    if self._tool_steps > getattr(self, "_max_tool_steps", 4):
+                    self._tool_steps += 1
+                    if self._tool_steps > self._max_tool_steps:
                         feedback.append(
                             "Tool step budget exceeded. Provide final answer based on context."
                         )
-                    else:
-                        tres = self.tool_host.execute(tc.name, tc.args)
-                        feedback.append(
-                            f"TOOL RESULT {tres.name} args={tres.args}: success={tres.success}\n{tres.output[:700]}"
-                        )
-                        # re-prompt with tool feedback (model decides next tool or answer)
+                        # re-prompt so the model can give a real final answer (not a tool call)
                         continue
+                    tres = self.tool_host.execute(tc.name, tc.args)
+                    feedback.append(
+                        f"TOOL RESULT {tres.name} args={tres.args}: success={tres.success}\n"
+                        f"{tres.output[:700]}"
+                    )
+                    # re-prompt with tool feedback (model decides next tool or answer)
+                    continue
 
             # Final answer path:
             # - tools off: single-shot (honest PoC default) after first completion
-            # - tools on: return when model gave a direct answer (no tool call this turn)
-            if not getattr(self, "tools_enabled", False):
+            # - tools on: when model stops calling tools, optionally run verify (E2)
+            if not self.tools_enabled:
                 self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
                 return resp
-            # tools enabled + no tool call this iteration → treat as final answer
-            self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
-            return resp
+
+            verified, retry_note = self._run_verify(task, resp)
+            if verified is not None:
+                return verified
+            if retry_note:
+                feedback.append(retry_note)
+            continue
 
         self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
         return last_resp
+
+    def _run_verify(
+        self,
+        task: Task,
+        resp: StructuredResponse,
+    ) -> tuple[StructuredResponse | None, str | None]:
+        """Run configured verify_command after a tools-path final answer (E2).
+
+        Returns:
+          (StructuredResponse, None) — finish the task (pass, exhausted rounds, or disabled)
+          (None, feedback_str) — verify failed with rounds left; continue the agent loop
+        """
+        if not self.use_verify or not self.verify_command or not self.tool_host:
+            self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
+            return resp, None
+
+        cmd = self.verify_command
+        self.event_bus.emit_simple(
+            EventType.VERIFY_STARTED,
+            command=cmd,
+            task_id=task.id,
+            round=self._verify_rounds,
+        )
+        vout = self.tool_host.run_command(cmd)
+        ok = _verify_output_ok(vout)
+        self.event_bus.emit_simple(
+            EventType.VERIFY_RESULT,
+            command=cmd,
+            success=ok,
+            output=vout[:1500],
+            task_id=task.id,
+            round=self._verify_rounds,
+        )
+
+        if ok:
+            self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
+            return (
+                StructuredResponse(
+                    kind=resp.kind,
+                    answer=resp.answer,
+                    citations=resp.citations,
+                    lang_refs=resp.lang_refs,
+                    model=resp.model,
+                    explain=resp.explain,
+                    extended={
+                        **(resp.extended or {}),
+                        "verify": {"ok": True, "command": cmd, "output": vout[:500]},
+                    },
+                ),
+                None,
+            )
+
+        self._verify_rounds += 1
+        if self._verify_rounds > self.max_verify_rounds:
+            self.event_bus.emit_simple(
+                EventType.ERROR,
+                error=f"verify failed after {self.max_verify_rounds} round(s): {cmd}",
+                source="verify",
+                task_id=task.id,
+            )
+            self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
+            return (
+                StructuredResponse(
+                    kind="answer",
+                    answer=(
+                        (resp.answer or "")
+                        + f"\n\n[verify FAILED after {self.max_verify_rounds} rounds]\n"
+                        + vout[:800]
+                    ),
+                    citations=resp.citations,
+                    extended={
+                        **(resp.extended or {}),
+                        "verify": {"ok": False, "command": cmd, "output": vout[:800]},
+                    },
+                ),
+                None,
+            )
+
+        note = (
+            f"VERIFY FAILED ({cmd}):\n{vout[:700]}\n"
+            "Fix the failures with tools, then give a final answer again."
+        )
+        return None, note

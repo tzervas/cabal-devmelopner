@@ -1,5 +1,5 @@
 {
-  "generated": "Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-17.",
+  "generated": "Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.",
   "item_tag": "Empirical/Declared",
   "siblings": [],
   "items": [
@@ -1311,7 +1311,7 @@
       "kind": "section",
       "title": "P0 — Fix before claiming a working TUI",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 11,
+      "line": 14,
       "tag": "Empirical/Declared"
     },
     {
@@ -1320,7 +1320,7 @@
       "kind": "section",
       "title": "P1 — PoC exit criteria",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 21,
+      "line": 24,
       "tag": "Empirical/Declared"
     },
     {
@@ -1329,7 +1329,7 @@
       "kind": "section",
       "title": "P2 — Toward a useful development agent / MVP",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 34,
+      "line": 37,
       "tag": "Empirical/Declared"
     },
     {
@@ -1338,7 +1338,7 @@
       "kind": "section",
       "title": "P3 — Production-oriented (track only)",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 48,
+      "line": 51,
       "tag": "Empirical/Declared"
     },
     {
@@ -1347,7 +1347,7 @@
       "kind": "section",
       "title": "Suggested GitHub issue titles",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 61,
+      "line": 64,
       "tag": "Empirical/Declared",
       "summary": "1. [P0] Fix cabal-devmelopner-tui entrypoint (missing main)"
     },
@@ -1357,7 +1357,7 @@
       "kind": "section",
       "title": "Out of scope for the docs PR that added this file",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 74,
+      "line": 77,
       "tag": "Empirical/Declared",
       "summary": "- Implementing the fixes above"
     },
@@ -1367,7 +1367,7 @@
       "kind": "section",
       "title": "MVP-1 minimal tools started (chore/mvp1-tools-start appended 2026-07-09)",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 79,
+      "line": 82,
       "tag": "Empirical/Declared",
       "id": "MVP-1",
       "summary": "- Per plan.md p2 (cabal-poc-mvp): B1 tool host v0 (read/list/run + TOOL via EventBus) + B2 loop (model propose/execute/re-prompt) + tero/W2 integrate."
@@ -1378,7 +1378,7 @@
       "kind": "section",
       "title": "Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2)",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 88,
+      "line": 91,
       "tag": "Empirical/Declared",
       "summary": "- POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now cabal-devmelopner-tui has main(); TUI imports/uses core.types.Task)."
     },
@@ -1388,7 +1388,7 @@
       "kind": "section",
       "title": "POC-6 documented as single-shot (chore/poc6-iteration-honesty appended)",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 97,
+      "line": 100,
       "tag": "Empirical/Declared",
       "id": "POC-6",
       "summary": "- Per plan.md (cabal section priority 2, \"cabal-poc-mvp POC-6\"): decide/document as single-shot (honest, defer full feedback to MVP/tools). Matches agent.py re…"
@@ -1399,7 +1399,7 @@
       "kind": "section",
       "title": "MVP-1 complete (chore/cabal-poc-mvp-close appended 2026-07-09)",
       "file": "docs/OPEN_ISSUES.md",
-      "line": 106,
+      "line": 109,
       "tag": "Empirical/Declared",
       "id": "MVP-1",
       "summary": "- Per plan.md priority 2 (cabal-poc-mvp): B1 tool host + B2 loop implemented/verified."
@@ -1971,6 +1971,426 @@
       "summary": "- After facade wiring, tero error path now guarantees ERROR event emission in agent (C0 never-silent) when facade returns refusal."
     },
     {
+      "anchor": "toolingstackreadiness",
+      "family": "doc",
+      "kind": "section",
+      "title": "Tooling stack readiness — cabal 1.0 workflow efficiency",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "Date: 2026-07-21"
+    },
+    {
+      "anchor": "toolingstackreadiness--1.-stack-map-roles",
+      "family": "doc",
+      "kind": "section",
+      "title": "1. Stack map (roles)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 10,
+      "tag": "Empirical/Declared",
+      "summary": "flowchart TB"
+    },
+    {
+      "anchor": "toolingstackreadiness--memory-pipeline-target-not-all-wired-yet",
+      "family": "doc",
+      "kind": "section",
+      "title": "Memory pipeline (target — not all wired yet)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 42,
+      "tag": "Empirical/Declared",
+      "summary": "flowchart LR"
+    },
+    {
+      "anchor": "toolingstackreadiness--2.-efficiency-gaps-tooling-not-cabal-core",
+      "family": "doc",
+      "kind": "section",
+      "title": "2. Efficiency gaps (tooling, not cabal core)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 89,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "toolingstackreadiness--3.-minimum-tooling-up-to-snuff-checklist-before-heavy-1.0-impl",
+      "family": "doc",
+      "kind": "section",
+      "title": "3. Minimum “tooling up to snuff” checklist (before heavy 1.0 impl)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 104,
+      "tag": "Empirical/Declared",
+      "summary": "- [x] gha-runner-ctl 0.2.10 pool live (16c/16g)"
+    },
+    {
+      "anchor": "toolingstackreadiness--must-blocks-efficient-joint-work",
+      "family": "doc",
+      "kind": "section",
+      "title": "Must (blocks efficient joint work)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 106,
+      "tag": "Empirical/Declared",
+      "summary": "- [x] gha-runner-ctl 0.2.10 pool live (16c/16g)"
+    },
+    {
+      "anchor": "toolingstackreadiness--should-within-first-1.0-weeks-after-tools",
+      "family": "doc",
+      "kind": "section",
+      "title": "Should (within first 1.0 weeks, after tools)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 117,
+      "tag": "Empirical/Declared",
+      "summary": "- [ ] tero-rs --features memory + memory-gate-rs integration smoke"
+    },
+    {
+      "anchor": "toolingstackreadiness--later",
+      "family": "doc",
+      "kind": "section",
+      "title": "Later",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 126,
+      "tag": "Empirical/Declared",
+      "summary": "- [ ] security-mcp wrap of runcommand"
+    },
+    {
+      "anchor": "toolingstackreadiness--4.-recommended-joint-ops-claude-grok",
+      "family": "doc",
+      "kind": "section",
+      "title": "4. Recommended joint ops (Claude + Grok)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 133,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "toolingstackreadiness--5.-immediate-actions-this-tranche",
+      "family": "doc",
+      "kind": "section",
+      "title": "5. Immediate actions (this tranche)",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 144,
+      "tag": "Empirical/Declared",
+      "summary": "1. Land cabal docs PR: V1 gap + joint exec + this readiness file."
+    },
+    {
+      "anchor": "toolingstackreadiness--6.-bottom-line",
+      "family": "doc",
+      "kind": "section",
+      "title": "6. Bottom line",
+      "file": "docs/TOOLING_STACK_READINESS.md",
+      "line": 153,
+      "tag": "Empirical/Declared",
+      "summary": "The runtime fleet (gha-runner-ctl, tg-agent-relay) is good enough to execute cabal 1.0 efficiently. The product leaf (cabal) is the bottleneck (write/verify/st…"
+    },
+    {
+      "anchor": "v100gapanalysis",
+      "family": "doc",
+      "kind": "section",
+      "title": "cabal-devmelopner — 1.0.0 Gap Analysis",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "Baseline: dev @ 5fd9781 (fleet harden) + product tree ~2.0 kLOC under src/cabaldevmelopner/"
+    },
+    {
+      "anchor": "v100gapanalysis--1.-what-1.0.0-means-product-definition",
+      "family": "doc",
+      "kind": "section",
+      "title": "1. What 1.0.0 means (product definition)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 14,
+      "tag": "Empirical/Declared",
+      "summary": "1.0.0 = daily co-dev agent you can trust on a real repo without hand-copying model output."
+    },
+    {
+      "anchor": "v100gapanalysis--execution-order-maintainer-direction-2026-07-21",
+      "family": "doc",
+      "kind": "section",
+      "title": "Execution order (maintainer direction 2026-07-21)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 46,
+      "tag": "Empirical/Declared",
+      "summary": "1. Tools usable — write/applypatch + multi-step loop + verify (E1 → E2)"
+    },
+    {
+      "anchor": "v100gapanalysis--2.-current-reality-0.1.0-measured-2026-07-21",
+      "family": "doc",
+      "kind": "section",
+      "title": "2. Current reality (0.1.0 — measured 2026-07-21)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 53,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100gapanalysis--3.-gap-matrix-1.0.0",
+      "family": "doc",
+      "kind": "section",
+      "title": "3. Gap matrix → 1.0.0",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 87,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100gapanalysis--github-issues-hygiene-filed-vs-reality",
+      "family": "doc",
+      "kind": "section",
+      "title": "GitHub issues hygiene (filed vs reality)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 106,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100gapanalysis--4.-epics-for-1.0.0-github-milestone-v1.0.0",
+      "family": "doc",
+      "kind": "section",
+      "title": "4. Epics for 1.0.0 (GitHub milestone `v1.0.0`)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 120,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Versioning, CI gates, docs SoT, milestone hygiene."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e0-release-foundation-ship",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E0 — Release foundation (Ship)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 122,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Versioning, CI gates, docs SoT, milestone hygiene."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e1-act-on-codebases-tools-v1",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E1 — Act on codebases (Tools v1)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 132,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Agent can modify a repo safely."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e2-verify-loop",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E2 — Verify loop",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 143,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Edits are checked, not trusted."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e3-config-budgets-packaging",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E3 — Config, budgets, packaging",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 152,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Installable, tunable leaf."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e4-providers-streaming",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E4 — Providers & streaming",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 162,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Local default, frontier optional, progressive UX."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e5-tero-memory-honesty",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E5 — Tero & memory honesty",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 171,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Opt-in context that never lies."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e6-tui-v1",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E6 — TUI v1",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 181,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Daily co-dev surface."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e7-notify-hitl",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E7 — Notify + HITL",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 191,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Async awareness + approval."
+    },
+    {
+      "anchor": "v100gapanalysis--epic-e8-hardening-for-1.0-ship",
+      "family": "doc",
+      "kind": "section",
+      "title": "Epic E8 — Hardening for 1.0 ship",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 200,
+      "tag": "Empirical/Declared",
+      "summary": "Outcome: Trust."
+    },
+    {
+      "anchor": "v100gapanalysis--5.-suggested-issue-graph-disjoint-by-design",
+      "family": "doc",
+      "kind": "section",
+      "title": "5. Suggested issue graph (disjoint by design)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 212,
+      "tag": "Empirical/Declared",
+      "summary": "flowchart TB"
+    },
+    {
+      "anchor": "v100gapanalysis--6.-definition-of-done-for-1.0.0",
+      "family": "doc",
+      "kind": "section",
+      "title": "6. Definition of Done for 1.0.0",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 241,
+      "tag": "Empirical/Declared",
+      "summary": "- [ ] All P0 issues under E0–E8 closed"
+    },
+    {
+      "anchor": "v100gapanalysis--7.-effort-sketch-indicative",
+      "family": "doc",
+      "kind": "section",
+      "title": "7. Effort sketch (indicative)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 253,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100gapanalysis--8.-open-decisions-need-deliberation",
+      "family": "doc",
+      "kind": "section",
+      "title": "8. Open decisions (need deliberation)",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 271,
+      "tag": "Empirical/Declared",
+      "summary": "1. Write tool shape: full file write vs unified diff apply only? (Recommend diff/apply first for safer review.)"
+    },
+    {
+      "anchor": "v100gapanalysis--9.-bottom-line",
+      "family": "doc",
+      "kind": "section",
+      "title": "9. Bottom line",
+      "file": "docs/V1_0_0_GAP_ANALYSIS.md",
+      "line": 281,
+      "tag": "Empirical/Declared",
+      "summary": "Today (0.1.0): honest config + tools-read scaffold + dual provider + Tero opt-in — a strong architecture alpha, not yet a 1.0 development agent."
+    },
+    {
+      "anchor": "v100jointexecution",
+      "family": "doc",
+      "kind": "section",
+      "title": "Joint execution plan — Grok + Claude Code (1.0.0)",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 1,
+      "tag": "Empirical/Declared",
+      "summary": "Purpose: Disjoint-by-design implementation after [V100GAPANALYSIS.md](V100GAPANALYSIS.md)."
+    },
+    {
+      "anchor": "v100jointexecution--rules-both-agents",
+      "family": "doc",
+      "kind": "section",
+      "title": "Rules (both agents)",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 8,
+      "tag": "Empirical/Declared",
+      "summary": "1. One worktree per leaf; never commit on main/dev directly."
+    },
+    {
+      "anchor": "v100jointexecution--lane-ownership",
+      "family": "doc",
+      "kind": "section",
+      "title": "Lane ownership",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 19,
+      "tag": "Empirical/Declared",
+      "summary": "Conflict resolution: L0 (cabal/Grok orchestrator) reassigns paths; never force-push shared branches."
+    },
+    {
+      "anchor": "v100jointexecution--phase-0-bookkeeping-l-ops-started",
+      "family": "doc",
+      "kind": "section",
+      "title": "Phase 0 — Bookkeeping — **L-ops** ✅ started",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 32,
+      "tag": "Empirical/Declared",
+      "summary": "- [x] Milestone v1.0.0 + epics #19–#27"
+    },
+    {
+      "anchor": "v100jointexecution--phase-1-tools-usable-first-l-core",
+      "family": "doc",
+      "kind": "section",
+      "title": "Phase 1 — Tools usable **FIRST** — **L-core**",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 39,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100jointexecution--phase-1b-memory-stack-usable-parallel-after-tools-land",
+      "family": "doc",
+      "kind": "section",
+      "title": "Phase 1b — Memory stack usable (parallel after tools land)",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 50,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100jointexecution--phase-2-stream-session-tui",
+      "family": "doc",
+      "kind": "section",
+      "title": "Phase 2 — Stream + Session + TUI",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 60,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100jointexecution--phase-3-polish-ship",
+      "family": "doc",
+      "kind": "section",
+      "title": "Phase 3 — Polish + Ship",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 69,
+      "tag": "Empirical/Declared"
+    },
+    {
+      "anchor": "v100jointexecution--claude-code-kickoff-blurb-paste",
+      "family": "doc",
+      "kind": "section",
+      "title": "Claude Code kickoff blurb (paste)",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 80,
+      "tag": "Empirical/Declared",
+      "summary": "You are L1 implementer for cabal-devmelopner 1.0.0."
+    },
+    {
+      "anchor": "v100jointexecution--grok-kickoff-blurb-self",
+      "family": "doc",
+      "kind": "section",
+      "title": "Grok kickoff blurb (self)",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 91,
+      "tag": "Empirical/Declared",
+      "summary": "You are L0/L-ops + L-memory for cabal-devmelopner 1.0.0."
+    },
+    {
+      "anchor": "v100jointexecution--exit-of-this-plan-doc",
+      "family": "doc",
+      "kind": "section",
+      "title": "Exit of this plan doc",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 101,
+      "tag": "Empirical/Declared",
+      "summary": "When Phase 0 issues exist on GitHub and Phase 1 first PR is open, this plan is active. Update checkboxes as waves complete (append-only notes at bottom)."
+    },
+    {
       "anchor": "readme-2",
       "family": "doc",
       "kind": "other",
@@ -2021,14 +2441,14 @@
       "summary": "All notable changes to cabal-devmelopner are documented in this file."
     },
     {
-      "anchor": "changelog--0.1.0-2026-07-16",
+      "anchor": "changelog--unreleased",
       "family": "changelog",
       "kind": "section",
-      "title": "[0.1.0] — 2026-07-16",
+      "title": "[Unreleased]",
       "file": "CHANGELOG.md",
       "line": 8,
       "tag": "Empirical/Declared",
-      "summary": "- Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer)"
+      "summary": "- E2 verify loop: after a tools-path final answer, run configurable"
     },
     {
       "anchor": "changelog--added",
@@ -2038,6 +2458,26 @@
       "file": "CHANGELOG.md",
       "line": 10,
       "tag": "Empirical/Declared",
+      "summary": "- E2 verify loop: after a tools-path final answer, run configurable"
+    },
+    {
+      "anchor": "changelog--0.1.0-2026-07-16",
+      "family": "changelog",
+      "kind": "section",
+      "title": "[0.1.0] — 2026-07-16",
+      "file": "CHANGELOG.md",
+      "line": 21,
+      "tag": "Empirical/Declared",
+      "summary": "- Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer)"
+    },
+    {
+      "anchor": "changelog--added-2",
+      "family": "changelog",
+      "kind": "section",
+      "title": "Added",
+      "file": "CHANGELOG.md",
+      "line": 23,
+      "tag": "Empirical/Declared",
       "summary": "- Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer)"
     },
     {
@@ -2046,7 +2486,7 @@
       "kind": "section",
       "title": "Product status (honest)",
       "file": "CHANGELOG.md",
-      "line": 22,
+      "line": 35,
       "tag": "Empirical/Declared",
       "summary": "- Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional"
     },
@@ -2056,7 +2496,7 @@
       "kind": "section",
       "title": "Notes",
       "file": "CHANGELOG.md",
-      "line": 29,
+      "line": 43,
       "tag": "Empirical/Declared",
       "summary": "- Fleet standards (P26): self-hosted CI badges, issue close on main only."
     }

@@ -43,7 +43,12 @@ class ToolsConfig:
         "cat",
         "head",
         "git",
+        "bash",  # only for verify scripts if explicitly allowlisted
     )
+    # After tools finish (or on --verify), run this command under workspace root
+    verify_command: str | None = "uv run pytest -q"
+    # How many times to re-prompt after a failing verify before giving up
+    max_verify_rounds: int = 2
 
 
 @dataclass(frozen=True)
@@ -68,6 +73,8 @@ class CabalConfig:
     max_iterations: int = 5
     structured: bool = True
     use_tools: bool = False
+    # When tools enabled, run verify_command after a final answer (E2)
+    use_verify: bool = True
     profile: ProfileConfig = field(default_factory=ProfileConfig)
     tero: TeroConfig = field(default_factory=TeroConfig)
     tools: ToolsConfig = field(default_factory=ToolsConfig)
@@ -159,10 +166,25 @@ def parse_config_data(data: dict[str, Any], *, source_path: str | None = None) -
     profile = profiles.get(profile_name, profiles[DEFAULT_PROFILE])
 
     allow = tools_t.get("allowlist")
+    verify_cmd = tools_t.get("verify_command")
+    max_vr = tools_t.get("max_verify_rounds")
     if isinstance(allow, list) and allow:
-        tools = ToolsConfig(allowlist=tuple(str(x) for x in allow))
+        tools = ToolsConfig(
+            allowlist=tuple(str(x) for x in allow),
+            verify_command=(
+                str(verify_cmd) if verify_cmd is not None else ToolsConfig().verify_command
+            ),
+            max_verify_rounds=int(max_vr) if max_vr is not None else 2,
+        )
     else:
-        tools = ToolsConfig()
+        tools = ToolsConfig(
+            verify_command=(
+                str(verify_cmd) if verify_cmd is not None else ToolsConfig().verify_command
+            ),
+            max_verify_rounds=int(max_vr) if max_vr is not None else 2,
+        )
+    if verify_cmd is not None and str(verify_cmd).strip() == "":
+        tools = replace(tools, verify_command=None)
 
     tero = TeroConfig(
         enabled=_as_bool(tero_t.get("enabled"), False),
@@ -182,6 +204,7 @@ def parse_config_data(data: dict[str, Any], *, source_path: str | None = None) -
         max_iterations=int(agent.get("max_iterations", 5)),
         structured=_as_bool(agent.get("structured"), True),
         use_tools=_as_bool(agent.get("use_tools"), False),
+        use_verify=_as_bool(agent.get("use_verify"), True),
         profile=replace(profile, use_tero=use_tero),
         tero=replace(tero, enabled=use_tero),
         tools=tools,
@@ -269,8 +292,10 @@ def merge_cli_overrides(
     max_tokens: int | None = None,
     use_tero: bool | None = None,
     use_tools: bool | None = None,
+    use_verify: bool | None = None,
     profile: str | None = None,
     workspace_root: str | None = None,
+    verify_command: str | None = None,
 ) -> CabalConfig:
     """Apply CLI flag overrides (highest precedence). None means 'unset'."""
     p = cfg.profile
@@ -292,10 +317,16 @@ def merge_cli_overrides(
     if use_tero is not None:
         p = replace(p, use_tero=use_tero)
 
+    tools = cfg.tools
+    if verify_command is not None:
+        tools = replace(tools, verify_command=verify_command if verify_command.strip() else None)
+
     return replace(
         cfg,
         workspace_root=workspace_root if workspace_root is not None else cfg.workspace_root,
         use_tools=use_tools if use_tools is not None else cfg.use_tools,
+        use_verify=use_verify if use_verify is not None else cfg.use_verify,
+        tools=tools,
         profile=p,
         tero=replace(
             cfg.tero, enabled=p.use_tero if use_tero is not None else cfg.tero.enabled or p.use_tero
