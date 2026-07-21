@@ -1,5 +1,8 @@
 # Open issues backlog (from intent / gap analysis)
 
+> **1.0.0 SoT (2026-07-21):** [V1_0_0_GAP_ANALYSIS.md](V1_0_0_GAP_ANALYSIS.md) · [V1_0_0_JOINT_EXECUTION.md](V1_0_0_JOINT_EXECUTION.md) · [TOOLING_STACK_READINESS.md](TOOLING_STACK_READINESS.md)  
+> Milestone: https://github.com/tzervas/cabal-devmelopner/milestone/1 · Epics #19–#27
+
 Derived from [INTENT_AND_GAP_ANALYSIS.md](INTENT_AND_GAP_ANALYSIS.md). Execution order, waves, and PR DAG: **[ROADMAP.md](ROADMAP.md)**. Use this file as a checklist for GitHub issues or PoC close-out PRs. Update when work lands on `dev`.
 
 Legend: **P0** blocks basic UX · **P1** PoC exit · **P2** MVP foundation · **P3** later

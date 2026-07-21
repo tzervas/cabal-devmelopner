@@ -1,22 +1,72 @@
 name: gitleaks
 
-# Manual only — prefer local secret scanning before push
+# Self-hosted: do not use gitleaks/gitleaks-action@v2 — its SARIF upload assumes
+# runner.temp under /home/runner and fails on Podman workdirs under /opt/actions-runner.
+# Scan with pinned binary (same pin as fleet-security).
 on:
   push:
     branches:
+      - main
+      - master
       - dev
   pull_request:
     branches:
+      - main
+      - master
       - dev
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: gitleaks-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   gitleaks:
+    name: gitleaks
     runs-on: [self-hosted, linux, x64, podman]
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
+          # Full history for this dedicated workflow; fleet-security tips --no-git on PR.
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+
+      - name: Ensure gitleaks (pinned + checksum)
+        run: |
+          set -euo pipefail
+          GITLEAKS_VERSION="8.30.1"
+          GITLEAKS_SHA256="551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+          if command -v gitleaks >/dev/null 2>&1; then
+            echo "using preinstalled $(command -v gitleaks) ($(gitleaks version 2>/dev/null || true))"
+            exit 0
+          fi
+          install_dir="${RUNNER_TEMP:-/tmp}/gitleaks-bin"
+          mkdir -p "$install_dir"
+          archive="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          url="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${archive}"
+          tmp="${RUNNER_TEMP:-/tmp}/${archive}"
+          curl -fsSL "$url" -o "$tmp"
+          echo "${GITLEAKS_SHA256}  ${tmp}" | sha256sum -c -
+          tar -xzf "$tmp" -C "$install_dir" gitleaks
+          chmod 0755 "$install_dir/gitleaks"
+          echo "$install_dir" >> "$GITHUB_PATH"
+          "$install_dir/gitleaks" version
+
+      - name: Run gitleaks
+        run: |
+          set -euo pipefail
+          if ! command -v gitleaks >/dev/null 2>&1; then
+            echo "gitleaks not available after install — FAIL (honest security gate)" >&2
+            exit 1
+          fi
+          # PR/push: tip working tree (avoids historical fixture noise blocking delivery).
+          # Full history remains available via fetch-depth 0 for schedule/manual deep scans.
+          if [ "${GITHUB_EVENT_NAME}" = "schedule" ]; then
+            gitleaks detect --source . --verbose --redact --exit-code 1
+          else
+            gitleaks detect --source . --no-git --verbose --redact --exit-code 1
+          fi

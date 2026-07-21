@@ -120,7 +120,11 @@ def parse_tool_call(text: str) -> ToolCall | None:
 
 
 class ToolHost:
-    """Host for v0 tools. Confined, evented, W2 compatible."""
+    """Host for tools. Confined, evented, W2 compatible.
+
+    v0 (MVP-1): read_file, list_dir, run_command
+    v1 (1.0 E1): write_file, apply_patch (workspace-confined writes)
+    """
 
     def __init__(
         self,
@@ -128,21 +132,34 @@ class ToolHost:
         workspace_root: str | Path | None = None,
         max_bytes: int = 16384,
         timeout_sec: int = 15,
+        max_write_bytes: int = 256 * 1024,
     ) -> None:
         self.event_bus = event_bus or EventBus()
         self.root = Path(workspace_root or ".").resolve()
         self.max_bytes = max_bytes
+        self.max_write_bytes = max_write_bytes
         self.timeout_sec = timeout_sec
 
     def _emit(self, etype: EventType, **payload: Any) -> None:
         self.event_bus.emit_simple(etype, **payload)
 
+    def _resolve_in_workspace(self, path: str) -> Path | None:
+        """Resolve relative path under root; None if escape / invalid."""
+        if not path or path.startswith("/") or ".." in Path(path).parts:
+            return None
+        p = (self.root / path).resolve(strict=False)
+        root_s = str(self.root)
+        # Ensure path is under root (prefix + boundary)
+        if p != self.root and not str(p).startswith(root_s + "/"):
+            return None
+        return p
+
     def read_file(self, path: str) -> str:
         """Read UTF8 text file (relative to root, size limited, no escape)."""
         self._emit(EventType.TOOL_CALL, name="read_file", args={"path": path})
         try:
-            p = (self.root / path).resolve(strict=False)
-            if not str(p).startswith(str(self.root)) or ".." in Path(path).parts:
+            p = self._resolve_in_workspace(path)
+            if p is None:
                 out = f"[read_file error] path outside workspace or invalid: {path}"
                 self._emit(
                     EventType.TOOL_RESULT,
@@ -189,8 +206,10 @@ class ToolHost:
         """List directory entries (names only, no escape from root)."""
         self._emit(EventType.TOOL_CALL, name="list_dir", args={"path": path})
         try:
-            p = (self.root / path).resolve(strict=False)
-            if not str(p).startswith(str(self.root)) or ".." in Path(path).parts:
+            p = self._resolve_in_workspace(path if path not in (".", "") else ".")
+            if path in (".", ""):
+                p = self.root
+            elif p is None:
                 out = f"[list_dir error] path outside workspace: {path}"
                 self._emit(
                     EventType.TOOL_RESULT,
@@ -290,6 +309,166 @@ class ToolHost:
             )
             return out
 
+    def write_file(self, path: str, content: str) -> str:
+        """Write UTF-8 text under workspace (create parents). No escape; size capped."""
+        args = {"path": path, "bytes": len(content.encode("utf-8"))}
+        self._emit(EventType.TOOL_CALL, name="write_file", args=args)
+        try:
+            p = self._resolve_in_workspace(path)
+            if p is None:
+                out = f"[write_file error] path outside workspace or invalid: {path}"
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="write_file",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            raw = content.encode("utf-8")
+            if len(raw) > self.max_write_bytes:
+                out = (
+                    f"[write_file error] content exceeds max_write_bytes="
+                    f"{self.max_write_bytes} ({len(raw)} bytes)"
+                )
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="write_file",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            # Refuse writing outside text-ish safety: block path traversal already done;
+            # also refuse writing into .git
+            if ".git" in p.parts:
+                out = "[write_file error] writing under .git is not allowed"
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="write_file",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_bytes(raw)
+            out = f"wrote {len(raw)} bytes to {path}"
+            self._emit(
+                EventType.TOOL_RESULT,
+                name="write_file",
+                args=args,
+                output=out,
+                success=True,
+            )
+            return out
+        except Exception as e:
+            out = f"[write_file error] {e}"
+            self._emit(
+                EventType.TOOL_RESULT,
+                name="write_file",
+                args=args,
+                output=out,
+                success=False,
+            )
+            return out
+
+    def apply_patch(self, path: str, old: str, new: str) -> str:
+        """Replace first exact occurrence of old with new in a workspace file.
+
+        Safer than full rewrite when the model can quote a unique snippet.
+        """
+        args = {"path": path, "old_len": len(old), "new_len": len(new)}
+        self._emit(EventType.TOOL_CALL, name="apply_patch", args=args)
+        try:
+            p = self._resolve_in_workspace(path)
+            if p is None:
+                out = f"[apply_patch error] path outside workspace or invalid: {path}"
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="apply_patch",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            if not p.is_file():
+                out = f"[apply_patch error] not a file: {path}"
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="apply_patch",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            if ".git" in p.parts:
+                out = "[apply_patch error] writing under .git is not allowed"
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="apply_patch",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            text = p.read_text(encoding="utf-8")
+            if old not in text:
+                out = "[apply_patch error] old snippet not found (must match exactly once region)"
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="apply_patch",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            if text.count(old) > 1:
+                out = (
+                    "[apply_patch error] old snippet matches multiple times; "
+                    "use a longer unique context or write_file"
+                )
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="apply_patch",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            updated = text.replace(old, new, 1)
+            raw = updated.encode("utf-8")
+            if len(raw) > self.max_write_bytes:
+                out = f"[apply_patch error] result exceeds max_write_bytes={self.max_write_bytes}"
+                self._emit(
+                    EventType.TOOL_RESULT,
+                    name="apply_patch",
+                    args=args,
+                    output=out,
+                    success=False,
+                )
+                return out
+            p.write_bytes(raw)
+            out = f"patched {path} ({len(old)} → {len(new)} chars)"
+            self._emit(
+                EventType.TOOL_RESULT,
+                name="apply_patch",
+                args=args,
+                output=out,
+                success=True,
+            )
+            return out
+        except Exception as e:
+            out = f"[apply_patch error] {e}"
+            self._emit(
+                EventType.TOOL_RESULT,
+                name="apply_patch",
+                args=args,
+                output=out,
+                success=False,
+            )
+            return out
+
     def execute(self, name: str, args: dict[str, Any]) -> ToolResult:
         """Dispatch by name. Returns ToolResult (events already emitted)."""
         name = name.lower()
@@ -311,6 +490,27 @@ class ToolHost:
             return ToolResult(
                 name=name, args={"command": cmd}, output=output, success=not output.startswith("[")
             )
+        if name == "write_file":
+            path = args.get("path") or args.get("file") or ""
+            content = args.get("content") or args.get("text") or ""
+            output = self.write_file(str(path), str(content))
+            return ToolResult(
+                name=name,
+                args={"path": path},
+                output=output,
+                success=not output.startswith("["),
+            )
+        if name == "apply_patch":
+            path = args.get("path") or args.get("file") or ""
+            old = args.get("old") or args.get("search") or ""
+            new = args.get("new") or args.get("replace") or ""
+            output = self.apply_patch(str(path), str(old), str(new))
+            return ToolResult(
+                name=name,
+                args={"path": path},
+                output=output,
+                success=not output.startswith("["),
+            )
         # unknown
         out = f"[tool error] unknown tool: {name}"
         self._emit(EventType.TOOL_RESULT, name=name, args=args, output=out, success=False)
@@ -320,14 +520,17 @@ class ToolHost:
 def get_tool_descriptions() -> str:
     """Text block for injection into StructuredPrompt / system for model to learn format."""
     return """
-AVAILABLE TOOLS (MVP-1 minimal; use EXACT format below when you need to act; one call per response for now):
-- read_file: read text contents (relative path under workspace)
+AVAILABLE TOOLS (use EXACT format; one tool call per response unless finishing):
+- read_file: read text (relative path under workspace)
   call tool read_file with path is src/example.py
 - list_dir: list files/dirs (relative)
   call tool list_dir with path is .
-- run_command: execute allowlisted read/verify cmd only (ls/cat/pytest/ruff/python -m ...; NO shell meta, NO write)
-  call tool run_command with command is python -m pytest --collectonly -q
+- write_file: create/overwrite a text file under workspace (prefer apply_patch for edits)
+  call tool write_file with path is src/foo.py content is print("hi")
+- apply_patch: replace one exact unique snippet in a file (safer than full rewrite)
+  call tool apply_patch with path is src/foo.py old is OLD_SNIPPET new is NEW_SNIPPET
+- run_command: allowlisted verify/read cmds only (pytest/ruff/uv/python/git/ls/cat/head; no shell meta)
+  call tool run_command with command is python -m pytest -q
 
-After tool results are provided back to you in context, either call another tool or give final answer.
-Cite tero context if used. Keep answers lean + include citations where known.
+After tool results, call another tool or give the final answer. Cite tero if used.
 """.strip()

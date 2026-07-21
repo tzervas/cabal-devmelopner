@@ -220,3 +220,46 @@ def test_agent_tools_loop_emits_and_reprompts():
     assert "list_dir" in tool_results
     assert resp.kind == "answer"
     assert "done" in resp.answer or "Final" in resp.answer
+
+
+def test_write_file_confined(tmp_path, monkeypatch):
+    from cabal_devmelopner.core.tools import ToolHost
+
+    host = ToolHost(workspace_root=tmp_path)
+    out = host.write_file("hello.txt", "world\n")
+    assert "wrote" in out
+    assert (tmp_path / "hello.txt").read_text() == "world\n"
+    bad = host.write_file("../escape.txt", "nope")
+    assert bad.startswith("[write_file error]")
+    bad2 = host.write_file(".git/config", "x")
+    assert "not allowed" in bad2
+
+
+def test_apply_patch_unique(tmp_path):
+    from cabal_devmelopner.core.tools import ToolHost
+
+    f = tmp_path / "a.py"
+    f.write_text("def foo():\n    return 1\n")
+    host = ToolHost(workspace_root=tmp_path)
+    out = host.apply_patch("a.py", "return 1", "return 2")
+    assert "patched" in out
+    assert "return 2" in f.read_text()
+    # non-unique fails
+    f.write_text("x = 1\ny = 1\n")
+    out2 = host.apply_patch("a.py", "1", "9")
+    assert out2.startswith("[apply_patch error]")
+
+
+def test_parse_write_and_patch():
+    from cabal_devmelopner.core.tools import parse_tool_call
+
+    tc = parse_tool_call("call tool write_file with path is src/x.py content is print(1)")
+    assert tc is not None
+    assert tc.name == "write_file"
+    assert tc.args.get("path") == "src/x.py"
+    assert "print(1)" in tc.args.get("content", "")
+    tc2 = parse_tool_call("call tool apply_patch with path is a.py old is foo new is bar")
+    assert tc2 is not None
+    assert tc2.name == "apply_patch"
+    assert tc2.args.get("old") == "foo"
+    assert tc2.args.get("new") == "bar"
