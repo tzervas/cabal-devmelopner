@@ -59,12 +59,25 @@
 
 ## Phase 2 — Stream + Session + TUI
 
-| Issue | Owner |
-|-------|--------|
-| E4.1 streaming | Claude |
-| E5.3 JSONL session | Grok |
-| E5.1 tero zero-config errors | Grok |
-| E6.1 TUI log/status | Claude |
+| Issue | Owner | Status |
+|-------|--------|--------|
+| E4.1 streaming | Grok | **PR #32 merged** ✅ |
+| E5.3 JSONL session | Claude+Grok | **PR #33 merged** ✅ |
+| E5.1 tero zero-config errors | Claude+Grok | **PR #33 merged** ✅ |
+| E6.1 TUI log/status | Grok | in flight (this wave) |
+
+### Landed on `dev` (2026-07-21)
+
+| PR | Topic |
+|----|--------|
+| #28 | gap analysis + tools write docs |
+| #29 | E2 verify + E3.1 budgets |
+| #30 | phase status docs |
+| #31 | E8 security/release + path tests |
+| #32 | E4 stream + E1.2 JSON tools |
+| #33 | E5 session + tero hints |
+| context-mcp #46 | Embedder Wave 1 (fail-closed) |
+| tero-mcp #25 | memory path smoke |
 
 ## Phase 3 — Polish + Ship
 
