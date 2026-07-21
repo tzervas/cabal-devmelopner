@@ -60,11 +60,14 @@ Rationale: 1.0 ships a **single trustworthy leaf agent**. Swarm is a product aft
 
 Architecture today:
 
-```text
-CLI/TUI → SimpleAgent → Provider.complete (blocking)
-              ├─ EventBus
-              ├─ CommonMemoryAdapter → TeroMCPClient (opt-in)
-              └─ ToolHost (opt-in): read | list | run  (no write)
+```mermaid
+flowchart LR
+  UI["CLI / TUI"] --> AG["SimpleAgent"]
+  AG --> PROV["Provider.complete<br/>blocking"]
+  AG --> BUS["EventBus"]
+  AG --> MEM["CommonMemoryAdapter"]
+  MEM --> TERO["TeroMCPClient<br/>opt-in"]
+  AG --> TOOLS["ToolHost opt-in<br/>read · list · run<br/>no write yet"]
 ```
 
 ---

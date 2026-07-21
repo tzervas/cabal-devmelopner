@@ -9,36 +9,28 @@ Companion: [COMPOSE.md](COMPOSE.md) · [V1_0_0_GAP_ANALYSIS.md](V1_0_0_GAP_ANALY
 
 ## 1. Stack map (roles)
 
-```text
-                    ┌──────────────────┐
-  Human / Telegram  │  tg-agent-relay  │  phone ↔ agents (v0.10.1 live)
-                    └────────┬─────────┘
-                             │ FIFO / notify
-         ┌───────────────────┼───────────────────┐
-         ▼                   ▼                   ▼
-┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
-│ agent-harness   │ │ cabal-devmelopner│ │ Claude / Grok   │
-│ orchestrate     │ │ leaf coding     │ │ L0/L1 surfaces  │
-│ wave / doctor   │ │ agent (0.1.0)   │ │ CLIs            │
-└────────┬────────┘ └────────┬────────┘ └─────────────────┘
-         │                   │
-         │          ┌────────┴────────┐
-         │          ▼                 ▼
-         │   ┌────────────┐    ┌────────────┐
-         │   │ tero-mcp   │    │ providers  │
-         │   │ L1 cites   │    │ ollama/xAI │
-         │   └─────┬──────┘    └────────────┘
-         │         │
-         ▼         ▼
-┌─────────────────────────────────────────┐
-│ gha-runner-ctl (0.2.10) self-hosted CI  │
-│ security-mcp · agent-mcp · fleet pack   │
-└─────────────────────────────────────────┘
-         ▲
-┌────────┴────────┐
-│ tz-forge        │  project kinds + cabal-profile module
-│ dev-shell       │  operator env
-└─────────────────┘
+```mermaid
+flowchart TB
+  subgraph phone["Human / Telegram"]
+    RELAY["tg-agent-relay<br/>phone ↔ agents · v0.10.1"]
+  end
+
+  RELAY -->|"FIFO / notify"| HARNESS
+  RELAY -->|"FIFO / notify"| CABAL
+  RELAY -->|"FIFO / notify"| SURF
+
+  HARNESS["agent-harness<br/>orchestrate · wave / doctor"]
+  CABAL["cabal-devmelopner<br/>leaf coding agent · 0.1.0"]
+  SURF["Claude / Grok<br/>L0/L1 surfaces · CLIs"]
+
+  CABAL --> TERO["tero-mcp<br/>L1 cites"]
+  CABAL --> PROV["providers<br/>ollama / xAI"]
+
+  HARNESS --> GHA
+  TERO --> GHA
+  GHA["gha-runner-ctl 0.2.10<br/>self-hosted CI<br/>security-mcp · agent-mcp · fleet pack"]
+
+  HOST["tz-forge · dev-shell<br/>project kinds · cabal-profile · operator env"] --> GHA
 ```
 
 | Repo | Role vs cabal | Version (local tip) | 1.0-workflow readiness |
