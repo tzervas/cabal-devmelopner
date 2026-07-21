@@ -16,7 +16,7 @@ run), post-edit **verify loop**, and per-run **JSONL session** transcripts.
 | **What** | Event-driven agent with config-as-code profiles (`cabal.toml`) |
 | **Why** | Trustworthy single-agent co-dev: act → verify → remember (session), without silent RAG claims |
 
-**Status: v0.2.0** (usable leaf). **Not** a multi-agent production platform.
+**Status: v0.2.1** (usable leaf). **Not** a multi-agent production platform.
 **Not** legitimate RAG (context-mcp is session/embedder Wave 1 only).  
 1.0.0 bar: [docs/V1_0_0_GAP_ANALYSIS.md](docs/V1_0_0_GAP_ANALYSIS.md).
 
@@ -28,7 +28,7 @@ cd cabal-devmelopner
 ./setup.sh
 
 uv run cabal-devmelopner --version
-# expected: cabal-devmelopner 0.2.0
+# expected: cabal-devmelopner 0.2.1
 
 uv run pytest -q
 ./scripts/check.sh --quick
@@ -87,7 +87,7 @@ Precedence: **CLI > env > cabal.toml > defaults**.
 | **l1** (default) | Composer | local-ollama `qwen2.5-coder:7b` |
 | **l0** | Frontier design | xAI `grok-4.5` |
 
-## Features (0.2.0)
+## Features (0.2.1)
 
 - Local Ollama **and** xAI providers; optional streaming (`--stream`)
 - Tools: `read_file`, `list_dir`, `write_file`, `apply_patch`, allowlisted `run_command`
@@ -142,4 +142,4 @@ MIT — see [LICENSE](LICENSE).
 ## Release
 
 - Semver: [VERSION](VERSION) / [pyproject.toml](pyproject.toml) / `__version__`
-- Current: **v0.2.0** · Target full bar: **v1.0.0** (see gap analysis)
+- Current: **v0.2.1** · Target full bar: **v1.0.0** (see gap analysis)

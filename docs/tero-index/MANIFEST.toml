@@ -4,8 +4,8 @@
 [index]
 schema = "tero-layer1-v1"
 repo = "cabal-devmelopner"
-generated_at = "2026-07-21T23:15:19Z"
-item_count = 272
+generated_at = "2026-07-21T23:27:29Z"
+item_count = 275
 source_files = 19
 generator = "tero-mcp/scripts/generate_lite_index.py"
 honesty = "Empirical/Declared — markdown heading heuristic; source is ground truth"

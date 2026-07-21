@@ -9,10 +9,27 @@ versioning follows [SemVer](https://semver.org/).
 
 ### Planned toward 1.0.0
 
-- E3.2 wall-clock / token soft budgets
-- E7.1 Telegram notify via tg-agent-relay
-- E6.2 cancel in-flight task; E6.3 richer widgets
+- E7.3 HITL approve path; E6.2 cancel
+- Token soft budgets (beyond wall-clock)
 - E8.4 full security checklist sign-off + `v1.0.0` tag when bar met
+
+## [0.2.1] — 2026-07-21
+
+Patch release: outbound Telegram notify + soft wall-clock budget (merged from #36).
+
+### Added
+
+- **E7.1 notify:** `cabal_devmelopner.notify.RelayNotifier` calls tg-agent-relay
+  `relay-notify.sh` (opt-in). Config `[notify]`, env `CABAL_NOTIFY` /
+  `CABAL_RELAY_NOTIFY`, CLI `--notify`. Soft-fail on missing relay.
+- **E3.2 soft wall budget:** `max_wall_secs` (config / `CABAL_MAX_WALL_SECS` /
+  `--max-wall-secs`) stops the agent loop with ERROR `source=budget`.
+- COMPOSE: inbound Telegram is platform `tg-poll` + FIFO keepalives — **no
+  per-session Grok monitor** required for intake.
+
+### Changed
+
+- `cabal.example.toml` documents `[notify]` and wall budget knobs.
 
 ## [0.2.0] — 2026-07-21
 
@@ -65,6 +82,7 @@ Interim **leaf agent** release: act + verify + session + stream + TUI dogfood.
 - **CLAUDE.md**, **docs/COMPOSE.md**, CHANGELOG, basic tests
 - EventBus, xAI + local-ollama providers, optional Tero client, MVP-1 tools, Textual TUI entry
 
-[Unreleased]: https://github.com/tzervas/cabal-devmelopner/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/tzervas/cabal-devmelopner/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/tzervas/cabal-devmelopner/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/tzervas/cabal-devmelopner/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/tzervas/cabal-devmelopner/releases/tag/v0.1.0

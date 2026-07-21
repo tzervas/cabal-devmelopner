@@ -508,10 +508,10 @@
       "summary": "git clone https://github.com/tzervas/cabal-devmelopner.git"
     },
     {
-      "anchor": "readme--expected-cabal-devmelopner-0.2.0",
+      "anchor": "readme--expected-cabal-devmelopner-0.2.1",
       "family": "doc",
       "kind": "other",
-      "title": "expected: cabal-devmelopner 0.2.0",
+      "title": "expected: cabal-devmelopner 0.2.1",
       "file": "README.md",
       "line": 31,
       "tag": "Empirical/Declared",
@@ -2630,7 +2630,7 @@
       "file": "CHANGELOG.md",
       "line": 8,
       "tag": "Empirical/Declared",
-      "summary": "- E3.2 wall-clock / token soft budgets"
+      "summary": "- E7.3 HITL approve path; E6.2 cancel"
     },
     {
       "anchor": "changelog--planned-toward-1.0.0",
@@ -2640,17 +2640,17 @@
       "file": "CHANGELOG.md",
       "line": 10,
       "tag": "Empirical/Declared",
-      "summary": "- E3.2 wall-clock / token soft budgets"
+      "summary": "- E7.3 HITL approve path; E6.2 cancel"
     },
     {
-      "anchor": "changelog--0.2.0-2026-07-21",
+      "anchor": "changelog--0.2.1-2026-07-21",
       "family": "changelog",
       "kind": "section",
-      "title": "[0.2.0] — 2026-07-21",
+      "title": "[0.2.1] — 2026-07-21",
       "file": "CHANGELOG.md",
-      "line": 17,
+      "line": 16,
       "tag": "Empirical/Declared",
-      "summary": "Interim leaf agent release: act + verify + session + stream + TUI dogfood."
+      "summary": "Patch release: outbound Telegram notify + soft wall-clock budget (merged from #36)."
     },
     {
       "anchor": "changelog--added",
@@ -2658,9 +2658,9 @@
       "kind": "section",
       "title": "Added",
       "file": "CHANGELOG.md",
-      "line": 22,
+      "line": 20,
       "tag": "Empirical/Declared",
-      "summary": "- Tools write path: writefile / applypatch workspace-confined (E1.1)"
+      "summary": "- E7.1 notify: cabaldevmelopner.notify.RelayNotifier calls tg-agent-relay"
     },
     {
       "anchor": "changelog--changed",
@@ -2668,7 +2668,37 @@
       "kind": "section",
       "title": "Changed",
       "file": "CHANGELOG.md",
+      "line": 30,
+      "tag": "Empirical/Declared",
+      "summary": "- cabal.example.toml documents [notify] and wall budget knobs."
+    },
+    {
+      "anchor": "changelog--0.2.0-2026-07-21",
+      "family": "changelog",
+      "kind": "section",
+      "title": "[0.2.0] — 2026-07-21",
+      "file": "CHANGELOG.md",
+      "line": 34,
+      "tag": "Empirical/Declared",
+      "summary": "Interim leaf agent release: act + verify + session + stream + TUI dogfood."
+    },
+    {
+      "anchor": "changelog--added-2",
+      "family": "changelog",
+      "kind": "section",
+      "title": "Added",
+      "file": "CHANGELOG.md",
       "line": 39,
+      "tag": "Empirical/Declared",
+      "summary": "- Tools write path: writefile / applypatch workspace-confined (E1.1)"
+    },
+    {
+      "anchor": "changelog--changed-2",
+      "family": "changelog",
+      "kind": "section",
+      "title": "Changed",
+      "file": "CHANGELOG.md",
+      "line": 56,
       "tag": "Empirical/Declared",
       "summary": "- README honesty for 0.2.0 feature set"
     },
@@ -2678,7 +2708,7 @@
       "kind": "section",
       "title": "Product status (honest)",
       "file": "CHANGELOG.md",
-      "line": 44,
+      "line": 61,
       "tag": "Empirical/Declared"
     },
     {
@@ -2687,17 +2717,17 @@
       "kind": "section",
       "title": "[0.1.0] — 2026-07-16",
       "file": "CHANGELOG.md",
-      "line": 59,
+      "line": 76,
       "tag": "Empirical/Declared",
       "summary": "- Config-as-code: cabal.example.toml with L0 / L1 profiles"
     },
     {
-      "anchor": "changelog--added-2",
+      "anchor": "changelog--added-3",
       "family": "changelog",
       "kind": "section",
       "title": "Added",
       "file": "CHANGELOG.md",
-      "line": 61,
+      "line": 78,
       "tag": "Empirical/Declared",
       "summary": "- Config-as-code: cabal.example.toml with L0 / L1 profiles"
     }
