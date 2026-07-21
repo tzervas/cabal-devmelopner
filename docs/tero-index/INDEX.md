@@ -1,6 +1,6 @@
-# cabal-devmelopner — Tero Index (Layer 1)
+# cabal-devmelopner-claude-e5e4 — Tero Index (Layer 1)
 
-> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
+> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner-claude-e5e4 via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
 > Use this index to find where to Read, not as authoritative ground truth.
 
 - **Items:** 270
@@ -282,10 +282,10 @@
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
 | `changelog` | entry | — | Changelog | `CHANGELOG.md:1` | — | All notable changes to cabal-devmelopner are documented in this file. |
-| `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E2 verify loop: after a tools-path final answer, run configurable |
-| `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - E2 verify loop: after a tools-path final answer, run configurable |
-| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:23` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--added-2` | section | — | Added | `CHANGELOG.md:25` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:37` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
-| `changelog--notes` | section | — | Notes | `CHANGELOG.md:45` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
+| `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E5.3 session JSONL: core/session.py SessionRecorder writes an |
+| `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - E5.3 session JSONL: core/session.py SessionRecorder writes an |
+| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:30` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--added-2` | section | — | Added | `CHANGELOG.md:32` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:44` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
+| `changelog--notes` | section | — | Notes | `CHANGELOG.md:52` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
 
