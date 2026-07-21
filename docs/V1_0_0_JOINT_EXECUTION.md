@@ -29,42 +29,51 @@
 
 ---
 
-## Phase 0 — Bookkeeping (days 0–2) — **L-ops**
+## Phase 0 — Bookkeeping — **L-ops** ✅ started
 
-- [ ] Create GitHub milestone **v1.0.0**  
-- [ ] File epic issues E0–E8 + P0 children from gap analysis  
-- [ ] Close completed #2–#4, #8; retitle #5–#7  
-- [ ] Merge any open fleet PRs that are green  
+- [x] Milestone **v1.0.0** + epics #19–#27  
+- [x] Close stale #2–#5,#7–#8  
+- [ ] Merge docs PR #28 when green  
+- [x] compose-doctor + prefer/warm  
 
-## Phase 1 — Act + Verify (weeks 1–3) — **L-core** primary
+## Phase 1 — Tools usable **FIRST** — **L-core**
 
 | Order | Issue | Owner |
 |------:|-------|--------|
-| 1 | E1.1 write/apply_patch | Claude |
-| 2 | E1.2 structured tool protocol | Claude |
-| 3 | E1.3 multi-step tools loop | Claude |
-| 4 | E2.1–E2.2 verify loop | Claude |
-| 5 | E3.1 config→agent budgets | Claude |
-| — | Review / CI babysit | Grok |
+| 1 | E1.1 write_file + apply_patch | Grok started / Claude continues |
+| 2 | E1.3 multi-step tools loop | Claude |
+| 3 | E1.2 structured tool protocol | Claude |
+| 4 | E2.1–E2.2 verify_command loop | Claude |
+| 5 | E3.1 budgets from cabal.toml | Claude |
+| — | CI babysit | Grok |
 
-## Phase 2 — Stream + Session + Tero (weeks 2–4, parallel) — **L-surface + L-memory**
+## Phase 1b — Memory stack usable (parallel after tools land)
+
+| Order | Work | Repo |
+|------:|------|------|
+| 1 | Real Embedder + local backend (C1.x) | **context-mcp** (first RAG target) |
+| 2 | tero-rs `memory` feature ↔ memory-gate-rs | tero-rs / memory-gate-rs |
+| 3 | tero-mcp delegates memory_* to tero-rs | tero-mcp |
+| 4 | cabal facade: tero L1 + context-mcp + MG domains | cabal E5 |
+| 5 | Eval vs keyword baseline before RAG claims | context-mcp |
+
+## Phase 2 — Stream + Session + TUI
 
 | Issue | Owner |
 |-------|--------|
-| E4.1 streaming | Claude (providers) |
+| E4.1 streaming | Claude |
 | E5.3 JSONL session | Grok |
-| E5.1 zero-config errors | Grok |
-| E6.1 TUI log/status | Claude after stream API stable |
+| E5.1 tero zero-config errors | Grok |
+| E6.1 TUI log/status | Claude |
 
-## Phase 3 — Polish + Ship (weeks 4–7)
+## Phase 3 — Polish + Ship
 
 | Issue | Owner |
 |-------|--------|
 | E6.2–E6.4 TUI cancel/thread | Claude |
-| E7.1 Telegram notify | Grok (tg-agent-relay) |
+| E7.1 Telegram notify | Grok |
 | E7.3 HITL | Claude |
-| E3.3 packaging smoke | Grok |
-| E8.* hardening + release | Joint; Grok tags |
+| E8.* release | Joint |
 
 ---
 

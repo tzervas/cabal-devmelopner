@@ -108,16 +108,20 @@ flowchart LR
 - [x] gha-runner-ctl **0.2.10** pool live (16c/16g)  
 - [x] tg-agent-relay **0.10.1** inbound keepalives merged  
 - [x] cabal **v1.0.0 milestone + epics** filed  
-- [ ] **Compose doctor script** (sibling presence + versions) — *open*  
-- [ ] cabal on **GHA_PREFER_REPOS** + warm retain for tzervas/cabal-devmelopner  
-- [ ] agent-harness README/compose points at V1_JOINT_EXECUTION  
+- [x] **compose-doctor.sh** (sibling presence)  
+- [x] cabal on **GHA_PREFER_REPOS** + warm retain  
+- [x] agent-harness pointer PR (#21)  
+- [ ] **cabal tools write/patch usable** (E1.1) — *in flight*  
+- [ ] **context-mcp real Embedder** (C1.1–C1.2) started — first memory target  
 
-### Should (within first 1.0 weeks)
+### Should (within first 1.0 weeks, after tools)
 
-- [ ] tero-mcp “missing index” golden error path shared with cabal E5.1  
-- [ ] One end-to-end smoke: Telegram → relay → (future) cabal notify  
-- [ ] tz-forge `cabal-profile` module version pin / link check  
-- [ ] dev-shell profile exports `CABAL_*` / `TERO_*` helpers  
+- [ ] tero-rs `--features memory` + memory-gate-rs integration smoke  
+- [ ] tero-mcp default path uses tero-rs binary when present  
+- [ ] cabal facade wires context-mcp session + tero L1 in one agent run  
+- [ ] tero-mcp “missing index” golden error path (E5.1)  
+- [ ] Telegram → relay → cabal notify (E7.1)  
+- [ ] tz-forge `cabal-profile` link check  
 
 ### Later
 
