@@ -59,3 +59,15 @@ def test_unsafe_task_id_sanitized(tmp_path):
     assert rec.path.parent == tmp_path / ".cabal" / "runs"
     rec.record_final({"kind": "answer", "answer": "ok"})
     assert rec.path.is_file()
+
+
+def test_recorder_redacts_secret_keys(tmp_path):
+    from cabal_devmelopner.core.types import Event, EventType
+
+    rec = SessionRecorder(tmp_path, "sec")
+    rec.record_event(
+        Event(type=EventType.ERROR, payload={"api_key": "sk-secret", "ok": True}, timestamp=1.0)
+    )
+    line = json.loads(rec.path.read_text().splitlines()[0])
+    assert line["payload"]["api_key"] == "[redacted]"
+    assert line["payload"]["ok"] is True
