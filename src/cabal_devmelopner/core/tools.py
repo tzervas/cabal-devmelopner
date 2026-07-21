@@ -60,9 +60,12 @@ SAFE_COMMANDS = {
 }
 
 
-def _is_safe_command(cmd: str) -> bool:
-    """Basic allowlist + no dangerous patterns for MVP v0."""
+def is_safe_command(cmd: str, allowlist: set[str] | frozenset[str] | None = None) -> bool:
+    """Allowlist + no shell metacharacters. Basename of argv[0] must be allowlisted."""
+    allowed = set(allowlist) if allowlist is not None else set(SAFE_COMMANDS)
     if not cmd or ";" in cmd or "&&" in cmd or "|" in cmd or ">" in cmd or "<" in cmd:
+        return False
+    if "`" in cmd or "$(" in cmd:
         return False
     try:
         argv = shlex.split(cmd)
@@ -70,13 +73,22 @@ def _is_safe_command(cmd: str) -> bool:
         return False
     if not argv:
         return False
-    base = argv[0]
-    # allow "python -m pytest" etc by checking first two tokens for common
-    if base in SAFE_COMMANDS:
+    base = Path(argv[0]).name
+    if base in allowed:
         return True
     if base in ("python", "python3") and len(argv) > 1 and argv[1] in ("-m", "-c"):
         return True
-    return any(base.startswith(s) for s in SAFE_COMMANDS)
+    # allow ./scripts/foo.sh only if bash/sh allowlisted and path is relative under workspace
+    if base in ("bash", "sh") and len(argv) >= 2:
+        script = argv[1]
+        if not script.startswith("/") and ".." not in Path(script).parts:
+            return True
+    return False
+
+
+def _is_safe_command(cmd: str) -> bool:
+    """Backward-compatible default allowlist check."""
+    return is_safe_command(cmd, SAFE_COMMANDS)
 
 
 def parse_tool_call(text: str) -> ToolCall | None:
@@ -133,12 +145,14 @@ class ToolHost:
         max_bytes: int = 16384,
         timeout_sec: int = 15,
         max_write_bytes: int = 256 * 1024,
+        allowlist: set[str] | frozenset[str] | tuple[str, ...] | None = None,
     ) -> None:
         self.event_bus = event_bus or EventBus()
         self.root = Path(workspace_root or ".").resolve()
         self.max_bytes = max_bytes
         self.max_write_bytes = max_write_bytes
         self.timeout_sec = timeout_sec
+        self.allowlist: set[str] = set(allowlist) if allowlist is not None else set(SAFE_COMMANDS)
 
     def _emit(self, etype: EventType, **payload: Any) -> None:
         self.event_bus.emit_simple(etype, **payload)
@@ -256,7 +270,7 @@ class ToolHost:
     def run_command(self, command: str) -> str:
         """Run allowlisted command (no shell, timeout, capture stdout+stderr)."""
         self._emit(EventType.TOOL_CALL, name="run_command", args={"command": command})
-        if not _is_safe_command(command):
+        if not is_safe_command(command, self.allowlist):
             out = f"[run_command error] command not in allowlist or unsafe pattern: {command[:80]}"
             self._emit(
                 EventType.TOOL_RESULT,

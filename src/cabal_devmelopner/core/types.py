@@ -15,6 +15,8 @@ class EventType(StrEnum):
     GENERATION_COMPLETE = "generation_complete"
     TOOL_CALL = "tool_call"
     TOOL_RESULT = "tool_result"
+    VERIFY_STARTED = "verify_started"
+    VERIFY_RESULT = "verify_result"
     PROGRESS = "progress"
     NEEDS_HUMAN_INPUT = "needs_human_input"
     ERROR = "error"

@@ -263,3 +263,164 @@ def test_parse_write_and_patch():
     assert tc2.name == "apply_patch"
     assert tc2.args.get("old") == "foo"
     assert tc2.args.get("new") == "bar"
+
+
+# --- E2 verify loop + E3.1 budgets ---
+
+
+class VerifyThenAnswerProvider(Provider):
+    """First call: final answer (triggers verify). Later calls: final answers after feedback."""
+
+    def __init__(self, answers: list[str] | None = None):
+        self.call_count = 0
+        self.answers = answers or ["I am done.", "Fixed. Done again."]
+
+    def complete(self, prompt: str, **kwargs) -> str:
+        self.call_count += 1
+        idx = min(self.call_count - 1, len(self.answers) - 1)
+        return self.answers[idx]
+
+    def name(self) -> str:
+        return "VerifyMock"
+
+
+def test_verify_success_emits_and_annotates(tmp_path):
+    """E2: successful verify_command emits VERIFY_* and sets extended.verify.ok."""
+    bus = EventBus()
+    started = []
+    results = []
+    bus.subscribe(EventType.VERIFY_STARTED, lambda e: started.append(e.payload))
+    bus.subscribe(EventType.VERIFY_RESULT, lambda e: results.append(e.payload))
+
+    agent = SimpleAgent(
+        provider=VerifyThenAnswerProvider(["all good"]),
+        event_bus=bus,
+        tools_enabled=True,
+        workspace_root=str(tmp_path),
+        verify_command="echo verify-ok",
+        max_verify_rounds=1,
+        use_verify=True,
+        command_allowlist=("echo", "ls"),
+    )
+    resp = agent.run_structured(Task(id="v1", description="finish cleanly", max_iterations=3))
+    assert len(started) == 1
+    assert len(results) == 1
+    assert results[0].get("success") is True
+    assert resp.extended and resp.extended.get("verify", {}).get("ok") is True
+    assert "verify-ok" in str(resp.extended.get("verify", {}).get("output", ""))
+
+
+def test_verify_fail_reprompts_then_passes(tmp_path):
+    """E2: failing verify re-prompts; second pass succeeds within max_verify_rounds."""
+    bus = EventBus()
+    results = []
+    bus.subscribe(EventType.VERIFY_RESULT, lambda e: results.append(e.payload.get("success")))
+
+    # Use a small script that fails once then passes via a marker file
+    script = tmp_path / "check.sh"
+    marker = tmp_path / "pass.marker"
+    script.write_text(
+        "#!/bin/sh\n"
+        f"if [ -f '{marker}' ]; then echo PASS; exit 0; fi\n"
+        f"touch '{marker}'\n"
+        "echo FAIL first; exit 1\n"
+    )
+    script.chmod(0o755)
+
+    provider = VerifyThenAnswerProvider(["done attempt1", "done attempt2"])
+    agent = SimpleAgent(
+        provider=provider,
+        event_bus=bus,
+        tools_enabled=True,
+        workspace_root=str(tmp_path),
+        verify_command="bash check.sh",
+        max_verify_rounds=2,
+        use_verify=True,
+        command_allowlist=("bash", "sh", "echo"),
+        max_tool_steps=3,
+    )
+    resp = agent.run_structured(
+        Task(id="v2", description="repair after verify fail", max_iterations=5)
+    )
+    assert False in results  # at least one fail
+    assert True in results  # then pass
+    assert resp.extended and resp.extended.get("verify", {}).get("ok") is True
+    assert provider.call_count >= 2
+
+
+def test_verify_exhausted_rounds_emits_error(tmp_path):
+    """E2: after max_verify_rounds failures, task finishes with verify FAILED annotation."""
+    bus = EventBus()
+    errors = []
+    bus.subscribe(EventType.ERROR, lambda e: errors.append(e.payload))
+
+    agent = SimpleAgent(
+        provider=VerifyThenAnswerProvider(["still broken"] * 5),
+        event_bus=bus,
+        tools_enabled=True,
+        workspace_root=str(tmp_path),
+        verify_command="bash -c 'exit 1'",
+        max_verify_rounds=1,
+        use_verify=True,
+        command_allowlist=("bash", "sh"),
+    )
+    # Note: bash -c may be blocked by is_safe_command if path rules fail;
+    # use a failing script instead for determinism.
+    fail = tmp_path / "always_fail.sh"
+    fail.write_text("#!/bin/sh\necho always-fail\nexit 1\n")
+    fail.chmod(0o755)
+    agent.verify_command = "bash always_fail.sh"
+
+    resp = agent.run_structured(Task(id="v3", description="cannot fix", max_iterations=6))
+    assert any("verify failed" in str(e.get("error", "")).lower() for e in errors)
+    assert "verify FAILED" in resp.answer
+    assert resp.extended and resp.extended.get("verify", {}).get("ok") is False
+
+
+def test_max_tool_steps_from_ctor(tmp_path):
+    """E3.1: max_tool_steps is honored (not hardcoded)."""
+
+    class AlwaysToolProvider(Provider):
+        def __init__(self):
+            self.call_count = 0
+            self.saw_budget = False
+
+        def complete(self, prompt: str, **kwargs) -> str:
+            self.call_count += 1
+            if "Tool step budget exceeded" in prompt:
+                self.saw_budget = True
+                return "Forced final after budget."
+            return "call tool list_dir with path is ."
+
+        def name(self) -> str:
+            return "AlwaysTool"
+
+    bus = EventBus()
+    provider = AlwaysToolProvider()
+    agent = SimpleAgent(
+        provider=provider,
+        event_bus=bus,
+        tools_enabled=True,
+        workspace_root=str(tmp_path),
+        max_tool_steps=2,
+        use_verify=False,
+    )
+    resp = agent.run_structured(Task(id="budget", description="list forever", max_iterations=8))
+    # 2 successful tools + 1 budget rejection re-prompt + final
+    assert provider.call_count >= 3
+    assert provider.saw_budget is True
+    assert "Forced final" in resp.answer or resp.kind == "answer"
+
+
+def test_is_safe_command_allowlist():
+    from cabal_devmelopner.core.tools import is_safe_command
+
+    assert is_safe_command("echo hi", {"echo"})
+    assert not is_safe_command("echo hi", {"pytest"})
+    assert is_safe_command("uv run pytest -q", {"uv", "pytest"})
+    # shell metacharacters always blocked even if basename is allowlisted
+    assert not is_safe_command("echo hi; rm -rf /", {"echo"})
+    assert not is_safe_command("echo hi && true", {"echo"})
+    assert not is_safe_command("cat $(whoami)", {"cat"})
+    # unlisted basename blocked
+    assert not is_safe_command("rm -rf /tmp/x", {"echo", "pytest"})

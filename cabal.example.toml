@@ -28,6 +28,8 @@ max_iterations = 5
 structured = true
 # Default tools on/off (CLI --use-tools still overrides)
 use_tools = false
+# E2: after a tools-path final answer, run [tools].verify_command and re-prompt on failure
+use_verify = true
 
 # ---------------------------------------------------------------------------
 # Profiles — select with: profile = "l1"  (default)  or  profile = "l0"
@@ -77,7 +79,11 @@ enabled = false
 # ---------------------------------------------------------------------------
 [tools]
 # When use_tools is true, only these command basenames may run
-allowlist = ["pytest", "ruff", "mypy", "uv", "python", "python3", "ls", "cat", "head", "git"]
+allowlist = ["pytest", "ruff", "mypy", "uv", "python", "python3", "ls", "cat", "head", "git", "bash"]
+# E2: run after model stops calling tools (basename must be on allowlist)
+verify_command = "uv run pytest -q"
+# How many re-prompt rounds after a failing verify before giving up
+max_verify_rounds = 2
 # Confined under workspace_root; never escape without explicit future config
 
 # ---------------------------------------------------------------------------

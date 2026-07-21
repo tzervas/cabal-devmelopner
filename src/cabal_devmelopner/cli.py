@@ -85,6 +85,17 @@ def main() -> None:
         help="Enable MVP-1 minimal tools (read_file, list_dir, run_command allowlisted)",
     )
     parser.add_argument(
+        "--use-verify",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="After tools final answer, run tools.verify_command and re-prompt on failure (E2)",
+    )
+    parser.add_argument(
+        "--verify-command",
+        default=None,
+        help="Override [tools].verify_command (e.g. 'uv run pytest -q')",
+    )
+    parser.add_argument(
         "--workspace",
         default=None,
         help="Workspace root (default: config project.workspace_root or .)",
@@ -111,8 +122,10 @@ def main() -> None:
         max_tokens=args.max_tokens,
         use_tero=args.use_tero,
         use_tools=args.use_tools,
+        use_verify=args.use_verify,
         profile=args.profile,
         workspace_root=args.workspace,
+        verify_command=args.verify_command,
     )
 
     provider_name = cfg.profile.provider
@@ -175,6 +188,20 @@ def main() -> None:
     event_bus.subscribe(EventType.TOOL_CALL, on_tool_call)
     event_bus.subscribe(EventType.TOOL_RESULT, on_tool_result)
 
+    def on_verify_started(event):  # type: ignore[no-untyped-def]
+        print(
+            f"[VERIFY] start: {event.payload.get('command')} "
+            f"(round={event.payload.get('round', 0)})"
+        )
+
+    def on_verify_result(event):  # type: ignore[no-untyped-def]
+        ok = event.payload.get("success")
+        out = str(event.payload.get("output", ""))[:200]
+        print(f"[VERIFY] {'ok' if ok else 'FAIL'}: {out}")
+
+    event_bus.subscribe(EventType.VERIFY_STARTED, on_verify_started)
+    event_bus.subscribe(EventType.VERIFY_RESULT, on_verify_result)
+
     # Apply optional tero path env from config (no mycelium automation)
     if cfg.tero.mcp_project:
         os.environ.setdefault("TERO_MCP_PROJECT", cfg.tero.mcp_project)
@@ -186,12 +213,18 @@ def main() -> None:
         os.environ.setdefault("TERO_TOKEN", cfg.tero.token)
 
     tero_client = TeroMCPClient() if cfg.profile.use_tero else None
+    # E3.1: budgets + allowlist + E2 verify from CabalConfig (not hardcoded)
     agent = SimpleAgent(
         provider=provider,
         event_bus=event_bus,
         tero_client=tero_client,
         tools_enabled=cfg.use_tools,
         workspace_root=cfg.workspace_root,
+        max_tool_steps=cfg.max_tool_steps,
+        verify_command=cfg.tools.verify_command if cfg.use_verify else None,
+        max_verify_rounds=cfg.tools.max_verify_rounds,
+        use_verify=cfg.use_verify and cfg.use_tools,
+        command_allowlist=cfg.tools.allowlist,
     )
 
     task = Task(
@@ -201,10 +234,15 @@ def main() -> None:
     )
 
     tools_note = " +tools" if cfg.use_tools else ""
+    verify_note = (
+        f" +verify={cfg.tools.verify_command!r}"
+        if (cfg.use_tools and cfg.use_verify and cfg.tools.verify_command)
+        else ""
+    )
     tero_note = " +tero" if cfg.profile.use_tero else ""
     src_note = f" config={cfg.source_path}" if cfg.source_path else " config=defaults"
     print(
-        f"Running task with {provider.name()}{tools_note}{tero_note} "
+        f"Running task with {provider.name()}{tools_note}{verify_note}{tero_note} "
         f"(profile={cfg.profile.name}{src_note})...\n"
     )
     structured: StructuredResponse = agent.run_structured(task)
