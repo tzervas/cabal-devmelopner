@@ -23,15 +23,51 @@ flowchart TB
   CABAL["cabal-devmelopner<br/>leaf coding agent · 0.1.0"]
   SURF["Claude / Grok<br/>L0/L1 surfaces · CLIs"]
 
-  CABAL --> TERO["tero-mcp<br/>L1 cites"]
+  CABAL --> TERO["tero-mcp<br/>L1 cites + memory tools"]
+  CABAL --> CTX["context-mcp<br/>session + legitimate RAG"]
   CABAL --> PROV["providers<br/>ollama / xAI"]
+
+  TERO --> TRS["tero-rs"]
+  TRS --> MGRS["memory-gate-rs<br/>dense embed / store"]
+  CTX --> EMB["real Embedder<br/>Wave 1 target"]
 
   HARNESS --> GHA
   TERO --> GHA
-  GHA["gha-runner-ctl 0.2.10<br/>self-hosted CI<br/>security-mcp · agent-mcp · fleet pack"]
+  CTX --> GHA
+  GHA["gha-runner-ctl 0.2.10<br/>self-hosted CI · fleet pack"]
 
-  HOST["tz-forge · dev-shell<br/>project kinds · cabal-profile · operator env"] --> GHA
+  HOST["tz-forge · dev-shell"] --> GHA
 ```
+
+### Memory pipeline (target — not all wired yet)
+
+```mermaid
+flowchart LR
+  subgraph sources["Sources"]
+    CORPUS["Project corpus / index"]
+    SESS["Agent session turns"]
+    LEARN["Task outcomes / verifies"]
+  end
+
+  CORPUS --> TERO_RS["tero-rs index / L1"]
+  TERO_RS --> TERO_MCP["tero-mcp"]
+  LEARN --> MGRS["memory-gate-rs"]
+  MGRS -->|"memory_* tools"| TERO_RS
+  SESS --> CTX["context-mcp"]
+  EMB["real embeddings"] --> CTX
+
+  TERO_MCP --> FACADE["cabal CommonMemoryAdapter"]
+  CTX --> FACADE
+  MGRS -.->|"domains via facade"| FACADE
+  FACADE --> AGENT["SimpleAgent"]
+```
+
+| Layer | Today | First-steps target |
+|-------|--------|-------------------|
+| **tero-mcp** | Python lite L1; memory tools refuse without tero-rs binary | Always prefer tero-rs binary; document `TERO_RS_BINARY` |
+| **tero-rs** | Standalone 0.2; optional `memory` feature | CI smoke with memory feature + memory-gate-rs |
+| **memory-gate-rs** | Real vector backends (sqlite-vec / qdrant) | Stable feed into tero-rs memory tools |
+| **context-mcp** | Session KV; **pseudo-embeddings only** | **Wave 1 embedder** is a **first** shared dev target (issue #19 open) |
 
 | Repo | Role vs cabal | Version (local tip) | 1.0-workflow readiness |
 |------|---------------|---------------------|------------------------|
