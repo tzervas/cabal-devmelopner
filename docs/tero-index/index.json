@@ -1,5 +1,5 @@
 {
-  "generated": "Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner-claude-e5e4 via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.",
+  "generated": "Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.",
   "item_tag": "Empirical/Declared",
   "siblings": [],
   "items": [
@@ -2535,12 +2535,21 @@
       "tag": "Empirical/Declared"
     },
     {
+      "anchor": "v100jointexecution--landed-on-dev-2026-07-21",
+      "family": "doc",
+      "kind": "section",
+      "title": "Landed on `dev` (2026-07-21)",
+      "file": "docs/V1_0_0_JOINT_EXECUTION.md",
+      "line": 69,
+      "tag": "Empirical/Declared"
+    },
+    {
       "anchor": "v100jointexecution--phase-3-polish-ship",
       "family": "doc",
       "kind": "section",
       "title": "Phase 3 — Polish + Ship",
       "file": "docs/V1_0_0_JOINT_EXECUTION.md",
-      "line": 69,
+      "line": 82,
       "tag": "Empirical/Declared"
     },
     {
@@ -2549,7 +2558,7 @@
       "kind": "section",
       "title": "Claude Code kickoff blurb (paste)",
       "file": "docs/V1_0_0_JOINT_EXECUTION.md",
-      "line": 80,
+      "line": 93,
       "tag": "Empirical/Declared",
       "summary": "You are L1 implementer for cabal-devmelopner 1.0.0."
     },
@@ -2559,7 +2568,7 @@
       "kind": "section",
       "title": "Grok kickoff blurb (self)",
       "file": "docs/V1_0_0_JOINT_EXECUTION.md",
-      "line": 91,
+      "line": 104,
       "tag": "Empirical/Declared",
       "summary": "You are L0/L-ops + L-memory for cabal-devmelopner 1.0.0."
     },
@@ -2569,7 +2578,7 @@
       "kind": "section",
       "title": "Exit of this plan doc",
       "file": "docs/V1_0_0_JOINT_EXECUTION.md",
-      "line": 101,
+      "line": 114,
       "tag": "Empirical/Declared",
       "summary": "When Phase 0 issues exist on GitHub and Phase 1 first PR is open, this plan is active. Update checkboxes as waves complete (append-only notes at bottom)."
     },
@@ -2649,7 +2658,7 @@
       "kind": "section",
       "title": "[0.1.0] — 2026-07-16",
       "file": "CHANGELOG.md",
-      "line": 30,
+      "line": 32,
       "tag": "Empirical/Declared",
       "summary": "- Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer)"
     },
@@ -2659,7 +2668,7 @@
       "kind": "section",
       "title": "Added",
       "file": "CHANGELOG.md",
-      "line": 32,
+      "line": 34,
       "tag": "Empirical/Declared",
       "summary": "- Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer)"
     },
@@ -2669,7 +2678,7 @@
       "kind": "section",
       "title": "Product status (honest)",
       "file": "CHANGELOG.md",
-      "line": 44,
+      "line": 46,
       "tag": "Empirical/Declared",
       "summary": "- Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional"
     },
@@ -2679,7 +2688,7 @@
       "kind": "section",
       "title": "Notes",
       "file": "CHANGELOG.md",
-      "line": 52,
+      "line": 54,
       "tag": "Empirical/Declared",
       "summary": "- Fleet standards (P26): self-hosted CI badges, issue close on main only."
     }

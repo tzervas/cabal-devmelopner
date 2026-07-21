@@ -1,15 +1,15 @@
-# cabal-devmelopner-claude-e5e4 — Tero Index (Layer 1)
+# cabal-devmelopner — Tero Index (Layer 1)
 
-> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner-claude-e5e4 via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
+> **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 270
+- **Items:** 271
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (263 entries)
+## doc (264 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -268,10 +268,11 @@
 | `v100jointexecution--phase-1-tools-usable-first-l-core` | section | — | Phase 1 — Tools usable **FIRST** — **L-core** | `docs/V1_0_0_JOINT_EXECUTION.md:39` | — | — |
 | `v100jointexecution--phase-1b-memory-stack-usable-parallel-after-tools-land` | section | — | Phase 1b — Memory stack usable (parallel after tools land) | `docs/V1_0_0_JOINT_EXECUTION.md:50` | — | — |
 | `v100jointexecution--phase-2-stream-session-tui` | section | — | Phase 2 — Stream + Session + TUI | `docs/V1_0_0_JOINT_EXECUTION.md:60` | — | — |
-| `v100jointexecution--phase-3-polish-ship` | section | — | Phase 3 — Polish + Ship | `docs/V1_0_0_JOINT_EXECUTION.md:69` | — | — |
-| `v100jointexecution--claude-code-kickoff-blurb-paste` | section | — | Claude Code kickoff blurb (paste) | `docs/V1_0_0_JOINT_EXECUTION.md:80` | — | You are L1 implementer for cabal-devmelopner 1.0.0. |
-| `v100jointexecution--grok-kickoff-blurb-self` | section | — | Grok kickoff blurb (self) | `docs/V1_0_0_JOINT_EXECUTION.md:91` | — | You are L0/L-ops + L-memory for cabal-devmelopner 1.0.0. |
-| `v100jointexecution--exit-of-this-plan-doc` | section | — | Exit of this plan doc | `docs/V1_0_0_JOINT_EXECUTION.md:101` | — | When Phase 0 issues exist on GitHub and Phase 1 first PR is open, this plan is active. Update checkboxes as waves complete (append-only notes at bottom). |
+| `v100jointexecution--landed-on-dev-2026-07-21` | section | — | Landed on `dev` (2026-07-21) | `docs/V1_0_0_JOINT_EXECUTION.md:69` | — | — |
+| `v100jointexecution--phase-3-polish-ship` | section | — | Phase 3 — Polish + Ship | `docs/V1_0_0_JOINT_EXECUTION.md:82` | — | — |
+| `v100jointexecution--claude-code-kickoff-blurb-paste` | section | — | Claude Code kickoff blurb (paste) | `docs/V1_0_0_JOINT_EXECUTION.md:93` | — | You are L1 implementer for cabal-devmelopner 1.0.0. |
+| `v100jointexecution--grok-kickoff-blurb-self` | section | — | Grok kickoff blurb (self) | `docs/V1_0_0_JOINT_EXECUTION.md:104` | — | You are L0/L-ops + L-memory for cabal-devmelopner 1.0.0. |
+| `v100jointexecution--exit-of-this-plan-doc` | section | — | Exit of this plan doc | `docs/V1_0_0_JOINT_EXECUTION.md:114` | — | When Phase 0 issues exist on GitHub and Phase 1 first PR is open, this plan is active. Update checkboxes as waves complete (append-only notes at bottom). |
 | `readme-2` | other | — | Tero index (Layer 1) | `docs/tero-index/README.md:1` | — | Machine + human citation index for this repository. |
 | `readme--regenerate` | section | — | Regenerate | `docs/tero-index/README.md:13` | — | python3 /path/to/tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |
@@ -284,8 +285,8 @@
 | `changelog` | entry | — | Changelog | `CHANGELOG.md:1` | — | All notable changes to cabal-devmelopner are documented in this file. |
 | `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E5.3 session JSONL: core/session.py SessionRecorder writes an |
 | `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - E5.3 session JSONL: core/session.py SessionRecorder writes an |
-| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:30` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--added-2` | section | — | Added | `CHANGELOG.md:32` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:44` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
-| `changelog--notes` | section | — | Notes | `CHANGELOG.md:52` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
+| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:32` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--added-2` | section | — | Added | `CHANGELOG.md:34` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:46` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
+| `changelog--notes` | section | — | Notes | `CHANGELOG.md:54` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
 

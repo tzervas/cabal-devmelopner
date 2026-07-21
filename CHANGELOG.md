@@ -15,6 +15,8 @@ versioning follows [SemVer](https://semver.org/).
 - **E5.1 tero actionable errors:** tero / CommonMemory-facade failures now emit
   `ERROR` with a `hint` naming `TERO_INDEX_PATH`, `TERO_MCP_PROJECT`, a sibling
   `../tero-mcp` checkout, and `docs/TERO.md` instead of a bare stack trace.
+- **E6.1 TUI:** live log for tools/verify/errors; config-driven provider (local
+  ollama default); SessionRecorder path shown after run.
 
 - **E2 verify loop:** after a tools-path final answer, run configurable
   `tools.verify_command` (default `uv run pytest -q`), emit
