@@ -97,3 +97,18 @@ agent_harness = "https://github.com/tzervas/agent-harness"
 tg_agent_relay = "https://github.com/tzervas/tg-agent-relay"
 tero_mcp = "https://github.com/tzervas/tero-mcp"
 # mycelium = handoff-only; never automate
+
+# ---------------------------------------------------------------------------
+# Notify (E7.1) — outbound Telegram via tg-agent-relay (optional)
+# Inbound phone→agent is platform-owned (tg-poll + FIFO keepalives); cabal does
+# not run a long-lived Telegram monitor.
+# ---------------------------------------------------------------------------
+[notify]
+enabled = false
+# relay_script = "~/.claude/telegram-bridge/relay-notify.sh"
+on_complete = true
+on_error = true
+label = "cabal"
+
+# Soft wall-clock budget (E3.2). 0 or omit-via-env CABAL_MAX_WALL_SECS=0 disables.
+# [agent] max_wall_secs = 900

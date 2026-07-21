@@ -6,6 +6,7 @@ parseable citations/lang_refs from tero+RAG+lang-docs, and orchestration hooks.
 
 from __future__ import annotations
 
+import time
 from typing import Any
 
 from cabal_devmelopner.core.events import EventBus
@@ -64,6 +65,7 @@ class SimpleAgent:
         max_verify_rounds: int = 2,
         use_verify: bool = True,
         command_allowlist: tuple[str, ...] | None = None,
+        max_wall_secs: float | None = None,
     ) -> None:
         self.provider = provider
         self.event_bus = event_bus or EventBus()
@@ -87,6 +89,8 @@ class SimpleAgent:
         self.max_verify_rounds = max(0, max_verify_rounds)
         self.use_verify = use_verify and bool(verify_command)
         self._verify_rounds = 0
+        # E3.2: soft wall-clock budget (None / <=0 disables)
+        self.max_wall_secs = max_wall_secs if max_wall_secs and max_wall_secs > 0 else None
 
     def run(self, task: Task) -> str:
         """Run the agent loop. Returns raw text (compat). Prefer run_structured for schema use."""
@@ -110,8 +114,40 @@ class SimpleAgent:
         self._tool_steps = 0
         self._verify_rounds = 0
         last_resp: StructuredResponse = StructuredResponse(kind="answer", answer="")
+        t0 = time.monotonic()
 
         for iteration in range(1, task.max_iterations + 1):
+            # E3.2 soft wall-clock budget — clean stop with ERROR, never hang forever
+            if self.max_wall_secs is not None:
+                elapsed = time.monotonic() - t0
+                if elapsed >= self.max_wall_secs:
+                    self.event_bus.emit_simple(
+                        EventType.ERROR,
+                        error=(
+                            f"wall-clock budget exceeded: {elapsed:.1f}s "
+                            f">= max_wall_secs={self.max_wall_secs}"
+                        ),
+                        source="budget",
+                        task_id=task.id,
+                        elapsed_secs=elapsed,
+                    )
+                    self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
+                    return StructuredResponse(
+                        kind="answer",
+                        answer=(
+                            (last_resp.answer or "") + f"\n\n[budget] stopped after {elapsed:.1f}s "
+                            f"(max_wall_secs={self.max_wall_secs})"
+                        ).strip(),
+                        citations=last_resp.citations,
+                        extended={
+                            **(last_resp.extended or {}),
+                            "budget": {
+                                "wall_secs": elapsed,
+                                "max_wall_secs": self.max_wall_secs,
+                            },
+                        },
+                    )
+
             self.event_bus.emit_simple(
                 EventType.PROGRESS,
                 message=f"Iteration {iteration}/{task.max_iterations}",

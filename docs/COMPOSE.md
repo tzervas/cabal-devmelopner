@@ -66,13 +66,20 @@ Mirror module doc: `tz-forge/docs/compose/cabal-devmelopner.md`.
 
 **In scope for cabal consumers**
 
-- Future notify hooks via documented relay interfaces
+- **Outbound (E7.1):** `RelayNotifier` → `relay-notify.sh` (task complete/fail pings)
 - Shared fleet process (Refs on `dev`, Closes on `main`, no Copilot auto-review)
+
+**Inbound architecture (no per-session Grok monitor required)**
+
+Telegram → `tg-poll` (platform long-poll) → backend FIFOs with RDWR keepalives.
+The agent host consumes FIFO traffic via platform session routing. Cabal does
+**not** run `backend-fifo-reader` or a long-lived Telegram monitor; intake is
+owned by the host/bridge supervisor (`ensure-inbound` / session-supervisor).
 
 **Out of scope**
 
 - Vendoring relay into cabal
-- Shipping Telegram runtime inside this repo
+- Shipping Telegram runtime / poll loop inside this repo
 
 ## tero-mcp (optional sibling)
 

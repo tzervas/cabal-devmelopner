@@ -14,6 +14,7 @@ from cabal_devmelopner.core.schemas import StructuredResponse
 from cabal_devmelopner.core.session import SessionRecorder
 from cabal_devmelopner.core.types import EventType, Task
 from cabal_devmelopner.mcp.tero_client import TeroMCPClient
+from cabal_devmelopner.notify import build_notifier
 from cabal_devmelopner.providers.base import LocalOllamaProvider, Provider
 from cabal_devmelopner.providers.xai import XaiProvider
 
@@ -113,6 +114,18 @@ def main() -> None:
         default=True,
         help="Stream provider tokens to stdout when available (E4.1; default on)",
     )
+    parser.add_argument(
+        "--notify",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Outbound Telegram status via tg-agent-relay (E7.1; needs relay-notify.sh)",
+    )
+    parser.add_argument(
+        "--max-wall-secs",
+        type=float,
+        default=None,
+        help="Soft wall-clock budget seconds (E3.2; 0 disables)",
+    )
     args = parser.parse_args()
 
     if not args.task:
@@ -134,6 +147,14 @@ def main() -> None:
         workspace_root=args.workspace,
         verify_command=args.verify_command,
     )
+    # CLI notify / wall budget (highest precedence)
+    from dataclasses import replace as _replace
+
+    if args.notify is not None:
+        cfg = _replace(cfg, notify=_replace(cfg.notify, enabled=args.notify))
+    if args.max_wall_secs is not None:
+        wall = None if args.max_wall_secs <= 0 else float(args.max_wall_secs)
+        cfg = _replace(cfg, max_wall_secs=wall)
 
     provider_name = cfg.profile.provider
     model = cfg.profile.model
@@ -220,7 +241,14 @@ def main() -> None:
         os.environ.setdefault("TERO_TOKEN", cfg.tero.token)
 
     tero_client = TeroMCPClient() if cfg.profile.use_tero else None
-    # E3.1: budgets + allowlist + E2 verify from CabalConfig (not hardcoded)
+    notifier, notify_flags = build_notifier(
+        enabled=cfg.notify.enabled,
+        script=cfg.notify.relay_script,
+        event_bus=event_bus,
+        on_complete=cfg.notify.on_complete,
+        on_error=cfg.notify.on_error,
+    )
+    # E3.1/E3.2: budgets + allowlist + E2 verify from CabalConfig
     agent = SimpleAgent(
         provider=provider,
         event_bus=event_bus,
@@ -232,6 +260,7 @@ def main() -> None:
         max_verify_rounds=cfg.tools.max_verify_rounds,
         use_verify=cfg.use_verify and cfg.use_tools,
         command_allowlist=cfg.tools.allowlist,
+        max_wall_secs=cfg.max_wall_secs,
     )
 
     task = Task(
@@ -252,9 +281,12 @@ def main() -> None:
     )
     tero_note = " +tero" if cfg.profile.use_tero else ""
     stream_note = " +stream" if args.stream else ""
+    notify_note = " +notify" if cfg.notify.enabled else ""
+    wall_note = f" wall={cfg.max_wall_secs}s" if cfg.max_wall_secs else ""
     src_note = f" config={cfg.source_path}" if cfg.source_path else " config=defaults"
     print(
-        f"Running task with {provider.name()}{tools_note}{verify_note}{tero_note}{stream_note} "
+        f"Running task with {provider.name()}{tools_note}{verify_note}{tero_note}"
+        f"{stream_note}{notify_note}{wall_note} "
         f"(profile={cfg.profile.name}{src_note})...\n"
     )
 
@@ -271,6 +303,20 @@ def main() -> None:
     structured: StructuredResponse = agent.run_structured(task)
     recorder.record_final(structured.to_dict())
     print(f"\n[session] recorded run → {recorder.path}")
+
+    # E7.1 outbound status (never blocks success of the task)
+    is_err = structured.kind == "refusal" or (structured.extended or {}).get("budget") is not None
+    if notify_flags.get("on_error") and is_err:
+        notifier.notify(
+            f"task={task.id} FAIL kind={structured.kind}: {(structured.answer or '')[:200]}",
+            label=cfg.notify.label,
+        )
+    elif notify_flags.get("on_complete"):
+        notifier.notify(
+            f"task={task.id} complete kind={structured.kind}: {(structured.answer or '')[:200]}",
+            label=cfg.notify.label,
+        )
+
     print("\n--- StructuredResponse (schema v1, answer + citations + optionals) ---")
     print("kind:", structured.kind)
     print("answer:", structured.answer[:800] if len(structured.answer) > 800 else structured.answer)
