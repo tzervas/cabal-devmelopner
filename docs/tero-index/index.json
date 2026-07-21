@@ -742,7 +742,7 @@
       "kind": "section",
       "title": "tero-mcp (optional sibling)",
       "file": "docs/COMPOSE.md",
-      "line": 77,
+      "line": 84,
       "tag": "Empirical/Declared",
       "summary": "<git-parent>/"
     },
@@ -752,7 +752,7 @@
       "kind": "section",
       "title": "Config-as-code profiles",
       "file": "docs/COMPOSE.md",
-      "line": 94,
+      "line": 101,
       "tag": "Empirical/Declared",
       "summary": "Example: [cabal.example.toml](../cabal.example.toml). Loader: core/config.py."
     },
@@ -762,7 +762,7 @@
       "kind": "section",
       "title": "5-minute consumer path",
       "file": "docs/COMPOSE.md",
-      "line": 103,
+      "line": 110,
       "tag": "Empirical/Declared",
       "summary": "git clone https://github.com/tzervas/cabal-devmelopner.git"
     },
@@ -772,7 +772,7 @@
       "kind": "other",
       "title": "Offline smoke (no model call):",
       "file": "docs/COMPOSE.md",
-      "line": 110,
+      "line": 117,
       "tag": "Empirical/Declared",
       "summary": "uv run pytest -q"
     },
@@ -782,7 +782,7 @@
       "kind": "section",
       "title": "Non-goals",
       "file": "docs/COMPOSE.md",
-      "line": 117,
+      "line": 124,
       "tag": "Empirical/Declared",
       "summary": "- Embedding cabal binary into tz-forge templates"
     },

@@ -86,11 +86,11 @@
 | `compose--agent-harness` | section | — | agent-harness | `docs/COMPOSE.md:38` | — | Compose rules |
 | `compose--sibling-layout-optional` | other | — | sibling layout (optional) | `docs/COMPOSE.md:54` | — | ../agent-harness/   # uv run agent-harness doctor |
 | `compose--tg-agent-relay` | section | — | tg-agent-relay | `docs/COMPOSE.md:59` | — | In scope for cabal consumers |
-| `compose--tero-mcp-optional-sibling` | section | — | tero-mcp (optional sibling) | `docs/COMPOSE.md:77` | — | <git-parent>/ |
-| `compose--config-as-code-profiles` | section | — | Config-as-code profiles | `docs/COMPOSE.md:94` | — | Example: [cabal.example.toml](../cabal.example.toml). Loader: core/config.py. |
-| `compose--5-minute-consumer-path` | section | — | 5-minute consumer path | `docs/COMPOSE.md:103` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
-| `compose--offline-smoke-no-model-call` | other | — | Offline smoke (no model call): | `docs/COMPOSE.md:110` | — | uv run pytest -q |
-| `compose--non-goals` | section | — | Non-goals | `docs/COMPOSE.md:117` | — | - Embedding cabal binary into tz-forge templates |
+| `compose--tero-mcp-optional-sibling` | section | — | tero-mcp (optional sibling) | `docs/COMPOSE.md:84` | — | <git-parent>/ |
+| `compose--config-as-code-profiles` | section | — | Config-as-code profiles | `docs/COMPOSE.md:101` | — | Example: [cabal.example.toml](../cabal.example.toml). Loader: core/config.py. |
+| `compose--5-minute-consumer-path` | section | — | 5-minute consumer path | `docs/COMPOSE.md:110` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
+| `compose--offline-smoke-no-model-call` | other | — | Offline smoke (no model call): | `docs/COMPOSE.md:117` | — | uv run pytest -q |
+| `compose--non-goals` | section | — | Non-goals | `docs/COMPOSE.md:124` | — | - Embedding cabal binary into tz-forge templates |
 | `fleetstandards` | section | — | Fleet standards (tzervas) | `docs/FLEET_STANDARDS.md:1` | — | Applied from the workstation pack under plans/fleet-standards/pack/. |
 | `fleetstandards--workflows` | section | — | Workflows | `docs/FLEET_STANDARDS.md:5` | — | - dev / feature merges: Refs #n only — issues stay open |
 | `fleetstandards--issue-close-policy` | section | — | Issue close policy | `docs/FLEET_STANDARDS.md:14` | — | - dev / feature merges: Refs #n only — issues stay open |

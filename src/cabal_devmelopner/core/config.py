@@ -64,6 +64,18 @@ class ProfileConfig:
 
 
 @dataclass(frozen=True)
+class NotifyConfig:
+    """E7.1 outbound status via tg-agent-relay (optional)."""
+
+    enabled: bool = False
+    # Path to relay-notify.sh; empty → resolve well-known install / CABAL_RELAY_NOTIFY
+    relay_script: str | None = None
+    on_complete: bool = True
+    on_error: bool = True
+    label: str = "cabal"
+
+
+@dataclass(frozen=True)
 class CabalConfig:
     """Resolved runtime configuration."""
 
@@ -71,6 +83,8 @@ class CabalConfig:
     workspace_root: str = "."
     max_tool_steps: int = 5
     max_iterations: int = 5
+    # E3.2: soft wall-clock budget (seconds). None / 0 = disabled.
+    max_wall_secs: float | None = 900.0
     structured: bool = True
     use_tools: bool = False
     # When tools enabled, run verify_command after a final answer (E2)
@@ -78,6 +92,7 @@ class CabalConfig:
     profile: ProfileConfig = field(default_factory=ProfileConfig)
     tero: TeroConfig = field(default_factory=TeroConfig)
     tools: ToolsConfig = field(default_factory=ToolsConfig)
+    notify: NotifyConfig = field(default_factory=NotifyConfig)
     source_path: str | None = None
 
 
@@ -154,6 +169,7 @@ def parse_config_data(data: dict[str, Any], *, source_path: str | None = None) -
     agent = data.get("agent") or {}
     tero_t = data.get("tero") or {}
     tools_t = data.get("tools") or {}
+    notify_t = data.get("notify") or {}
     profiles_raw = data.get("profiles") or {}
 
     profiles = _default_profiles()
@@ -197,17 +213,38 @@ def parse_config_data(data: dict[str, Any], *, source_path: str | None = None) -
     # Profile use_tero OR [tero].enabled can enable tero; profile is primary hint
     use_tero = profile.use_tero or tero.enabled
 
+    wall = agent.get("max_wall_secs")
+    max_wall: float | None
+    if wall is None:
+        max_wall = 900.0
+    elif wall == "" or wall is False:
+        max_wall = None
+    else:
+        max_wall = float(wall)
+        if max_wall <= 0:
+            max_wall = None
+
+    notify = NotifyConfig(
+        enabled=_as_bool(notify_t.get("enabled"), False),
+        relay_script=(str(notify_t["relay_script"]) if notify_t.get("relay_script") else None),
+        on_complete=_as_bool(notify_t.get("on_complete"), True),
+        on_error=_as_bool(notify_t.get("on_error"), True),
+        label=str(notify_t.get("label", "cabal")),
+    )
+
     return CabalConfig(
         project_name=str(project.get("name", "workspace")),
         workspace_root=str(project.get("workspace_root", ".")),
         max_tool_steps=int(agent.get("max_tool_steps", 5)),
         max_iterations=int(agent.get("max_iterations", 5)),
+        max_wall_secs=max_wall,
         structured=_as_bool(agent.get("structured"), True),
         use_tools=_as_bool(agent.get("use_tools"), False),
         use_verify=_as_bool(agent.get("use_verify"), True),
         profile=replace(profile, use_tero=use_tero),
         tero=replace(tero, enabled=use_tero),
         tools=tools,
+        notify=notify,
         source_path=source_path,
     )
 
@@ -236,9 +273,28 @@ def apply_env(cfg: CabalConfig) -> CabalConfig:
 
     workspace = os.getenv("CABAL_WORKSPACE_ROOT", cfg.workspace_root)
 
+    notify = cfg.notify
+    notify_en = os.getenv("CABAL_NOTIFY") or os.getenv("CABAL_USE_NOTIFY")
+    if notify_en is not None:
+        notify = replace(notify, enabled=_as_bool(notify_en, notify.enabled))
+    relay_script = os.getenv("CABAL_RELAY_NOTIFY") or os.getenv("RELAY_NOTIFY")
+    if relay_script:
+        notify = replace(notify, relay_script=relay_script)
+
+    wall_env = os.getenv("CABAL_MAX_WALL_SECS")
+    max_wall = cfg.max_wall_secs
+    if wall_env is not None:
+        try:
+            w = float(wall_env)
+            max_wall = None if w <= 0 else w
+        except ValueError:
+            pass
+
     return replace(
         cfg,
         workspace_root=workspace,
+        max_wall_secs=max_wall,
+        notify=notify,
         profile=replace(
             profile,
             name=profile_name,
