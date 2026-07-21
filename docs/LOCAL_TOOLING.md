@@ -28,6 +28,12 @@ This document records **honest readiness** for wiring siblings into cabal-devmel
 **Product need (maintainer):** context-mcp **requires** efficient, **legitimate** RAG — not pseudo-similarity theater. That is an **upstream requirement** on the `context-mcp` repo before cabal (or any agent) may treat it as a RAG backend.
 
 **Claim to avoid today:** “context-mcp is production RAG / real embeddings.”  
+**Wave 1 progress (2026-07-21):** `Embedder` trait + fail-closed semantic path in flight
+([context-mcp#46](https://github.com/tzervas/context-mcp/pull/46)) — still **not** legitimate RAG
+until vectors persist + eval gates pass. Parallel corpus memory path:
+`tero-rs --features memory` → memory-gate-rs (`memory_hits`, not L1 citations);
+smoke: `tero-mcp/scripts/smoke-memory-path.sh`.
+
 **Code truth today (verify in `context-mcp` checkout):**
 
 ### Embeddings (gap)

@@ -64,10 +64,10 @@ flowchart LR
 
 | Layer | Today | First-steps target |
 |-------|--------|-------------------|
-| **tero-mcp** | Python lite L1; memory tools refuse without tero-rs binary | Always prefer tero-rs binary; document `TERO_RS_BINARY` |
-| **tero-rs** | Standalone 0.2; optional `memory` feature | CI smoke with memory feature + memory-gate-rs |
-| **memory-gate-rs** | Real vector backends (sqlite-vec / qdrant) | Stable feed into tero-rs memory tools |
-| **context-mcp** | Session KV; **pseudo-embeddings only** | **Wave 1 embedder** is a **first** shared dev target (issue #19 open) |
+| **tero-mcp** | Python lite L1; memory tools refuse without tero-rs binary | Prefer tero-rs binary; `scripts/smoke-memory-path.sh` |
+| **tero-rs** | Standalone 0.2; optional `memory` feature | **Local smoke 2026-07-21** with `--features memory` + MG store/retrieve |
+| **memory-gate-rs** | Real vector backends (sqlite-vec / qdrant) | Feed via tero-rs memory tools (`memory_hits` envelope) |
+| **context-mcp** | Session KV; Wave 1 Embedder PR open | **Not legitimate RAG** until vector store + eval (Wave 2–3) |
 
 | Repo | Role vs cabal | Version (local tip) | 1.0-workflow readiness |
 |------|---------------|---------------------|------------------------|
