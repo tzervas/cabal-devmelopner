@@ -233,12 +233,15 @@ class SimpleAgent:
                         # re-prompt with tool feedback (model decides next tool or answer)
                         continue
 
-            # final answer path (tools not enabled or model gave direct answer)
-            if (not getattr(self, "tools_enabled", False)) or iteration == 1:
+            # Final answer path:
+            # - tools off: single-shot (honest PoC default) after first completion
+            # - tools on: return when model gave a direct answer (no tool call this turn)
+            if not getattr(self, "tools_enabled", False):
                 self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
                 return resp
-
-            feedback.append("The previous attempt did not fully satisfy the requirements.")
+            # tools enabled + no tool call this iteration → treat as final answer
+            self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
+            return resp
 
         self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
         return last_resp
