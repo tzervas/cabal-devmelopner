@@ -25,16 +25,33 @@ class SlowProvider(Provider):
         return "slow"
 
 
-def test_wall_budget_stops_loop():
+class AlwaysToolProvider(Provider):
+    """Keeps calling tools so the agent loop iterates (budget checked each iter)."""
+
+    def complete(self, prompt: str, **kwargs) -> str:
+        import time
+
+        time.sleep(0.04)
+        return "call tool list_dir with path is ."
+
+    def name(self) -> str:
+        return "always-tool"
+
+
+def test_wall_budget_stops_loop(tmp_path):
     bus = EventBus()
     errs = []
     bus.subscribe(EventType.ERROR, lambda e: errs.append(e.payload))
     agent = SimpleAgent(
-        provider=SlowProvider(),
+        provider=AlwaysToolProvider(),
         event_bus=bus,
-        max_wall_secs=0.08,
+        tools_enabled=True,
+        workspace_root=str(tmp_path),
+        max_wall_secs=0.1,
+        use_verify=False,
+        max_tool_steps=50,
     )
-    resp = agent.run_structured(Task(id="b1", description="slow", max_iterations=20))
+    resp = agent.run_structured(Task(id="b1", description="slow", max_iterations=40))
     assert any(e.get("source") == "budget" for e in errs)
     assert "budget" in resp.answer or (resp.extended or {}).get("budget")
 
