@@ -33,29 +33,29 @@
 
 - [x] Milestone **v1.0.0** + epics #19–#27  
 - [x] Close stale #2–#5,#7–#8  
-- [ ] Merge docs PR #28 when green  
+- [x] Merge docs PR #28 when green  
 - [x] compose-doctor + prefer/warm  
 
 ## Phase 1 — Tools usable **FIRST** — **L-core**
 
 | Order | Issue | Owner |
 |------:|-------|--------|
-| 1 | E1.1 write_file + apply_patch | Grok started / Claude continues |
-| 2 | E1.3 multi-step tools loop | Claude |
-| 3 | E1.2 structured tool protocol | Claude |
-| 4 | E2.1–E2.2 verify_command loop | Claude |
-| 5 | E3.1 budgets from cabal.toml | Claude |
+| 1 | E1.1 write_file + apply_patch | Grok (in #28 tools write) ✅ |
+| 2 | E1.3 multi-step tools loop | pre-existing MVP-1 loop ✅ |
+| 3 | E1.2 structured tool protocol | still free-text `call tool …` (Claude optional) |
+| 4 | E2.1–E2.2 verify_command loop | Grok **PR #29 merged** ✅ |
+| 5 | E3.1 budgets from cabal.toml | Grok **PR #29 merged** ✅ |
 | — | CI babysit | Grok |
 
 ## Phase 1b — Memory stack usable (parallel after tools land)
 
-| Order | Work | Repo |
-|------:|------|------|
-| 1 | Real Embedder + local backend (C1.x) | **context-mcp** (first RAG target) |
-| 2 | tero-rs `memory` feature ↔ memory-gate-rs | tero-rs / memory-gate-rs |
-| 3 | tero-mcp delegates memory_* to tero-rs | tero-mcp |
-| 4 | cabal facade: tero L1 + context-mcp + MG domains | cabal E5 |
-| 5 | Eval vs keyword baseline before RAG claims | context-mcp |
+| Order | Work | Repo | Status |
+|------:|------|------|--------|
+| 1 | Real Embedder + local backend (C1.x) | **context-mcp** | **PR #46 open** (Wave 1 trait + fail-closed) |
+| 2 | tero-rs `memory` feature ↔ memory-gate-rs | tero-rs / memory-gate-rs | **smoked** store/retrieve 2026-07-21 |
+| 3 | tero-mcp delegates memory_* to tero-rs | tero-mcp | lite refuses; binary path smoke ✅ |
+| 4 | cabal facade: tero L1 + context-mcp + MG domains | cabal E5 | not started |
+| 5 | Eval vs keyword baseline before RAG claims | context-mcp | Wave 2+ |
 
 ## Phase 2 — Stream + Session + TUI
 
