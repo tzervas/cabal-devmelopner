@@ -3,7 +3,7 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 272
+- **Items:** 275
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
@@ -63,7 +63,7 @@
 | `phase--poc-6-iteration-honesty-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 iteration honesty (chore/poc6-iteration-honesty, per plan.md p2) | `PHASE.md:135` | — | - Decision: Document POC-6 as single-shot (honest); defer full multi-iteration feedback + verification loop to MVP/tools (Wave B: B2/B4 etc). Matches code real… |
 | `readme` | other | — | cabal-devmelopner | `README.md:1` | — | <!-- FLEET-BADGES:BEGIN --> |
 | `readme--5-minute-path` | section | — | 5-minute path | `README.md:23` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
-| `readme--expected-cabal-devmelopner-0.2.0` | other | — | expected: cabal-devmelopner 0.2.0 | `README.md:31` | — | uv run pytest -q |
+| `readme--expected-cabal-devmelopner-0.2.1` | other | — | expected: cabal-devmelopner 0.2.1 | `README.md:31` | — | uv run pytest -q |
 | `readme--run-a-task` | section | — | Run a task | `README.md:37` | — | uv run cabal-devmelopner "Summarize the project structure" |
 | `readme--local-model-ollama-on-localhost11434` | other | — | Local model (Ollama on localhost:11434) | `README.md:40` | — | uv run cabal-devmelopner "Summarize the project structure" |
 | `readme--tools-verify-from-cabal.toml-defaults` | other | — | Tools + verify (from cabal.toml / defaults) | `README.md:43` | — | uv run cabal-devmelopner "Add a docstring to README" --use-tools --use-verify |
@@ -277,17 +277,20 @@
 | `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--serve-locally` | section | — | Serve locally | `docs/tero-index/README.md:21` | — | export TEROTOKENS=local-dev:refresh |
 
-## changelog (9 entries)
+## changelog (12 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
 | `changelog` | entry | — | Changelog | `CHANGELOG.md:1` | — | All notable changes to cabal-devmelopner are documented in this file. |
-| `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E3.2 wall-clock / token soft budgets |
-| `changelog--planned-toward-1.0.0` | section | — | Planned toward 1.0.0 | `CHANGELOG.md:10` | — | - E3.2 wall-clock / token soft budgets |
-| `changelog--0.2.0-2026-07-21` | section | — | [0.2.0] — 2026-07-21 | `CHANGELOG.md:17` | — | Interim leaf agent release: act + verify + session + stream + TUI dogfood. |
-| `changelog--added` | section | — | Added | `CHANGELOG.md:22` | — | - Tools write path: writefile / applypatch workspace-confined (E1.1) |
-| `changelog--changed` | section | — | Changed | `CHANGELOG.md:39` | — | - README honesty for 0.2.0 feature set |
-| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:44` | — | — |
-| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:59` | — | - Config-as-code: cabal.example.toml with L0 / L1 profiles |
-| `changelog--added-2` | section | — | Added | `CHANGELOG.md:61` | — | - Config-as-code: cabal.example.toml with L0 / L1 profiles |
+| `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E7.3 HITL approve path; E6.2 cancel |
+| `changelog--planned-toward-1.0.0` | section | — | Planned toward 1.0.0 | `CHANGELOG.md:10` | — | - E7.3 HITL approve path; E6.2 cancel |
+| `changelog--0.2.1-2026-07-21` | section | — | [0.2.1] — 2026-07-21 | `CHANGELOG.md:16` | — | Patch release: outbound Telegram notify + soft wall-clock budget (merged from #36). |
+| `changelog--added` | section | — | Added | `CHANGELOG.md:20` | — | - E7.1 notify: cabaldevmelopner.notify.RelayNotifier calls tg-agent-relay |
+| `changelog--changed` | section | — | Changed | `CHANGELOG.md:30` | — | - cabal.example.toml documents [notify] and wall budget knobs. |
+| `changelog--0.2.0-2026-07-21` | section | — | [0.2.0] — 2026-07-21 | `CHANGELOG.md:34` | — | Interim leaf agent release: act + verify + session + stream + TUI dogfood. |
+| `changelog--added-2` | section | — | Added | `CHANGELOG.md:39` | — | - Tools write path: writefile / applypatch workspace-confined (E1.1) |
+| `changelog--changed-2` | section | — | Changed | `CHANGELOG.md:56` | — | - README honesty for 0.2.0 feature set |
+| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:61` | — | — |
+| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:76` | — | - Config-as-code: cabal.example.toml with L0 / L1 profiles |
+| `changelog--added-3` | section | — | Added | `CHANGELOG.md:78` | — | - Config-as-code: cabal.example.toml with L0 / L1 profiles |
 

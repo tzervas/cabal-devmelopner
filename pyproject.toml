@@ -1,6 +1,6 @@
 [project]
 name = "cabal-devmelopner"
-version = "0.2.0"
+version = "0.2.1"
 description = "Repo-agnostic development agent with TUI/CLI, tools+verify, multi-provider support, and Tero-MCP integration"
 readme = "README.md"
 requires-python = ">=3.14"
