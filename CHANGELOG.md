@@ -17,6 +17,8 @@ versioning follows [SemVer](https://semver.org/).
   allowlist, and verify settings from `CabalConfig` → `SimpleAgent` / CLI
   (`--use-verify`, `--verify-command`); not hardcoded.
 - Configurable `ToolHost` command allowlist + `is_safe_command` public helper.
+- **E8.1** property-style path confinement tests (`tests/test_path_confinement.py`).
+- **E8.2 / E0.4** docs: `docs/SECURITY_REVIEW_1_0.md`, `docs/RELEASE_1_0_0.md`.
 
 ## [0.1.0] — 2026-07-16
 

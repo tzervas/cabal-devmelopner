@@ -3,13 +3,13 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 251
+- **Items:** 270
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (244 entries)
+## doc (263 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -131,17 +131,17 @@
 | `localtooling` | section | — | Local sibling tooling (MCP / packages) | `docs/LOCAL_TOOLING.md:1` | Living notes (2026-07-08) | Status: Living notes (2026-07-08) |
 | `localtooling--inventory-typical-parent-dir` | section | — | Inventory (typical parent dir) | `docs/LOCAL_TOOLING.md:11` | — | — |
 | `localtooling--context-mcp-not-legitimate-rag-yet-and-must-become-efficient-legitimate-rag` | section | — | context-mcp: not legitimate RAG yet — and **must become** efficient legitimate RAG | `docs/LOCAL_TOOLING.md:26` | — | Product need (maintainer): context-mcp requires efficient, legitimate RAG — not pseudo-similarity theater. That is an upstream requirement on the context-mcp r… |
-| `localtooling--embeddings-gap` | section | — | Embeddings (gap) | `docs/LOCAL_TOOLING.md:33` | — | - Retrieval “semantic” path in src/rag.rs uses texttopseudoembedding: word-hash + sin features into a 64-d vector, then cosine. |
-| `localtooling--storage-gap` | section | — | Storage (gap) | `docs/LOCAL_TOOLING.md:40` | — | So today: structured session store + filters/tags/temporal scores + optional disk, with a placeholder similarity channel. Useful agent scratch memory, not legi… |
-| `localtooling--definition-of-efficient-legitimate-rag-exit-for-this-gap` | section | — | Definition of “efficient legitimate RAG” (exit for this gap) | `docs/LOCAL_TOOLING.md:50` | — | Upstream context-mcp is RAG-ready only when all of the following hold: |
-| `localtooling--split-of-roles-do-not-collapse` | section | — | Split of roles (do not collapse) | `docs/LOCAL_TOOLING.md:63` | — | Cabal may use both: Tero for project truth, context-mcp for runtime/session RAG after the exit criteria above. |
-| `localtooling--cabal-integration-rules` | section | — | Cabal integration rules | `docs/LOCAL_TOOLING.md:74` | — | 1. Wave B: default session history = JSONL (B8). Do not depend on context-mcp for “RAG quality.” |
-| `localtooling--readiness-for-cabal-context-mcp-only` | section | — | Readiness for cabal (context-mcp only) | `docs/LOCAL_TOOLING.md:81` | — | Suggested issue themes (file on tzervas/context-mcp): |
-| `localtooling--upstream-work-context-mcp-repo-track-there` | section | — | Upstream work (context-mcp repo — track there) | `docs/LOCAL_TOOLING.md:90` | — | Suggested issue themes (file on tzervas/context-mcp): |
-| `localtooling--other-siblings-one-liners` | section | — | Other siblings (one-liners) | `docs/LOCAL_TOOLING.md:105` | — | Branch/in-flight detail from the 2026-07-08 audit lives in session notes (/tmp/investigate-.md); re-run with Tero-first leaf prompts when refreshing. |
-| `localtooling--related` | section | — | Related | `docs/LOCAL_TOOLING.md:119` | — | - [ROADMAP.md](ROADMAP.md) — waves and PR plan |
-| `localtooling--per-repo-tero-indices` | section | — | Per-repo Tero indices | `docs/LOCAL_TOOLING.md:126` | — | Each sibling MCP repo (and this one) commits docs/tero-index/ for local tero-mcp-lite. Regenerate with python3 ../tero-mcp/scripts/generateliteindex.py --root… |
-| `localtooling--local-ci-parity` | section | — | Local CI parity | `docs/LOCAL_TOOLING.md:130` | — | ./scripts/check.sh |
+| `localtooling--embeddings-gap` | section | — | Embeddings (gap) | `docs/LOCAL_TOOLING.md:39` | — | - Retrieval “semantic” path in src/rag.rs uses texttopseudoembedding: word-hash + sin features into a 64-d vector, then cosine. |
+| `localtooling--storage-gap` | section | — | Storage (gap) | `docs/LOCAL_TOOLING.md:46` | — | So today: structured session store + filters/tags/temporal scores + optional disk, with a placeholder similarity channel. Useful agent scratch memory, not legi… |
+| `localtooling--definition-of-efficient-legitimate-rag-exit-for-this-gap` | section | — | Definition of “efficient legitimate RAG” (exit for this gap) | `docs/LOCAL_TOOLING.md:56` | — | Upstream context-mcp is RAG-ready only when all of the following hold: |
+| `localtooling--split-of-roles-do-not-collapse` | section | — | Split of roles (do not collapse) | `docs/LOCAL_TOOLING.md:69` | — | Cabal may use both: Tero for project truth, context-mcp for runtime/session RAG after the exit criteria above. |
+| `localtooling--cabal-integration-rules` | section | — | Cabal integration rules | `docs/LOCAL_TOOLING.md:80` | — | 1. Wave B: default session history = JSONL (B8). Do not depend on context-mcp for “RAG quality.” |
+| `localtooling--readiness-for-cabal-context-mcp-only` | section | — | Readiness for cabal (context-mcp only) | `docs/LOCAL_TOOLING.md:87` | — | Suggested issue themes (file on tzervas/context-mcp): |
+| `localtooling--upstream-work-context-mcp-repo-track-there` | section | — | Upstream work (context-mcp repo — track there) | `docs/LOCAL_TOOLING.md:96` | — | Suggested issue themes (file on tzervas/context-mcp): |
+| `localtooling--other-siblings-one-liners` | section | — | Other siblings (one-liners) | `docs/LOCAL_TOOLING.md:111` | — | Branch/in-flight detail from the 2026-07-08 audit lives in session notes (/tmp/investigate-.md); re-run with Tero-first leaf prompts when refreshing. |
+| `localtooling--related` | section | — | Related | `docs/LOCAL_TOOLING.md:125` | — | - [ROADMAP.md](ROADMAP.md) — waves and PR plan |
+| `localtooling--per-repo-tero-indices` | section | — | Per-repo Tero indices | `docs/LOCAL_TOOLING.md:132` | — | Each sibling MCP repo (and this one) commits docs/tero-index/ for local tero-mcp-lite. Regenerate with python3 ../tero-mcp/scripts/generateliteindex.py --root… |
+| `localtooling--local-ci-parity` | section | — | Local CI parity | `docs/LOCAL_TOOLING.md:136` | — | ./scripts/check.sh |
 | `openissues` | section | — | Open issues backlog (from intent / gap analysis) | `docs/OPEN_ISSUES.md:1` | — | Derived from [INTENTANDGAPANALYSIS.md](INTENTANDGAPANALYSIS.md). Execution order, waves, and PR DAG: [ROADMAP.md](ROADMAP.md). Use this file as a checklist for… |
 | `openissues--p0-fix-before-claiming-a-working-tui` | section | — | P0 — Fix before claiming a working TUI | `docs/OPEN_ISSUES.md:14` | — | — |
 | `openissues--p1-poc-exit-criteria` | section | — | P1 — PoC exit criteria | `docs/OPEN_ISSUES.md:24` | — | — |
@@ -153,6 +153,15 @@
 | `openissues--status-alignment-post-w2-c0-pr12-appended-2026-07-09-chore-honest-docs-post-w2` | section | — | Status alignment post W2/C0 + PR#12 (appended 2026-07-09, chore/honest-docs-post-w2) | `docs/OPEN_ISSUES.md:91` | — | - POC-1 (TUI entrypoint) + POC-3 (real Task): addressed by A1/A2 in PR#12 cab/a1-a3 (now cabal-devmelopner-tui has main(); TUI imports/uses core.types.Task). |
 | `openissues--poc-6-documented-as-single-shot-chore-poc6-iteration-honesty-appended` | section | POC-6 | POC-6 documented as single-shot (chore/poc6-iteration-honesty appended) | `docs/OPEN_ISSUES.md:100` | — | - Per plan.md (cabal section priority 2, "cabal-poc-mvp POC-6"): decide/document as single-shot (honest, defer full feedback to MVP/tools). Matches agent.py re… |
 | `openissues--mvp-1-complete-chore-cabal-poc-mvp-close-appended-2026-07-09` | section | MVP-1 | MVP-1 complete (chore/cabal-poc-mvp-close appended 2026-07-09) | `docs/OPEN_ISSUES.md:109` | — | - Per plan.md priority 2 (cabal-poc-mvp): B1 tool host + B2 loop implemented/verified. |
+| `release100` | section | — | Release checklist — v1.0.0 | `docs/RELEASE_1_0_0.md:1` | — | — |
+| `release100--pre-tag-must-be-true` | section | — | Pre-tag (must be true) | `docs/RELEASE_1_0_0.md:3` | — | — |
+| `release100--product-p0-from-v100gapanalysis` | section | — | Product P0 (from V1_0_0_GAP_ANALYSIS) | `docs/RELEASE_1_0_0.md:5` | — | — |
+| `release100--honesty-bar` | section | — | Honesty bar | `docs/RELEASE_1_0_0.md:23` | — | - [ ] README / PHASE / OPENISSUES do not claim multi-agent swarm production or legitimate RAG via context-mcp |
+| `release100--gates` | section | — | Gates | `docs/RELEASE_1_0_0.md:28` | — | ./scripts/check.sh --quick |
+| `release100--optional-smoke-with-local-ollama-if-available` | other | — | optional: smoke with local ollama if available | `docs/RELEASE_1_0_0.md:33` | — | 1. Bump VERSION → 1.0.0 |
+| `release100--versioning` | section | — | Versioning | `docs/RELEASE_1_0_0.md:36` | — | 1. Bump VERSION → 1.0.0 |
+| `release100--compose-matrix-1.0` | section | — | Compose matrix (1.0) | `docs/RELEASE_1_0_0.md:45` | — | - [ ] Update fleet prefer-list warm to include this tag branch if needed |
+| `release100--post-tag` | section | — | Post-tag | `docs/RELEASE_1_0_0.md:55` | — | - [ ] Update fleet prefer-list warm to include this tag branch if needed |
 | `roadmap` | note | — | cabal-devmelopner — Product Roadmap | `docs/ROADMAP.md:1` | Plan (2026-07-08) | Status: Plan (2026-07-08) |
 | `roadmap--1.-north-star` | section | — | 1. North star | `docs/ROADMAP.md:11` | — | cabal-devmelopner is a repo-agnostic development agent: long-running, event-driven, multi-surface (CLI / TUI / future Discord), with strong Tero integration fo… |
 | `roadmap--2.-current-position-summary` | section | — | 2. Current position (summary) | `docs/ROADMAP.md:32` | — | PoC exit requires honest tests/stabilization (POC-7); iteration (POC-6) now documented single-shot (honest, per plan.md p2 deferral to MVP/tools); TUI launch (… |
@@ -180,6 +189,16 @@
 | `roadmap--honest-docs-update-chore-honest-docs-post-w2` | section | — | Honest docs update (chore/honest-docs-post-w2) | `docs/ROADMAP.md:341` | — | - Aligned lagging current-position table + Wave A exit text post-PR#12 merges (TUI entrypoint now accurate; POC-1/3/4 closed in code). |
 | `roadmap--poc-6-documented-single-shot-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 documented single-shot (chore/poc6-iteration-honesty per plan.md p2) | `docs/ROADMAP.md:348` | — | - A6 marked documented single-shot; footnote updated; exit/position text revised for honesty (no longer requires POC-6 for PoC exit). |
 | `roadmap--dev-mcp-orch-wiring-cabal-as-leaf-consumer-chore-orch-wiring-devmcp` | section | — | dev-mcp Orch Wiring (cabal as leaf consumer; chore/orch-wiring-devmcp) | `docs/ROADMAP.md:356` | — | Appended notes on dev-mcp orch use per task (parallel to W2 docs): |
+| `securityreview10` | section | — | Security review checklist — cabal-devmelopner 1.0 | `docs/SECURITY_REVIEW_1_0.md:1` | Living checklist for E8.2. Complete before `v1.0.0` tag. | Status: Living checklist for E8.2. Complete before v1.0.0 tag. |
+| `securityreview10--scope` | section | — | Scope | `docs/SECURITY_REVIEW_1_0.md:6` | — | Leaf coding agent: CLI/TUI, optional Tero client, ToolHost (fs + allowlisted commands), |
+| `securityreview10--checklist` | section | — | Checklist | `docs/SECURITY_REVIEW_1_0.md:12` | — | — |
+| `securityreview10--secrets-credentials` | section | — | Secrets & credentials | `docs/SECURITY_REVIEW_1_0.md:14` | — | — |
+| `securityreview10--filesystem-confinement-toolhost` | section | — | Filesystem confinement (ToolHost) | `docs/SECURITY_REVIEW_1_0.md:23` | — | — |
+| `securityreview10--command-execution` | section | — | Command execution | `docs/SECURITY_REVIEW_1_0.md:32` | — | — |
+| `securityreview10--network-providers` | section | — | Network & providers | `docs/SECURITY_REVIEW_1_0.md:40` | — | — |
+| `securityreview10--supply-chain-ci` | section | — | Supply chain / CI | `docs/SECURITY_REVIEW_1_0.md:47` | — | ./scripts/check.sh --quick |
+| `securityreview10--spot-check-procedure` | section | — | Spot-check procedure | `docs/SECURITY_REVIEW_1_0.md:55` | — | ./scripts/check.sh --quick |
+| `securityreview10--sign-off` | section | — | Sign-off | `docs/SECURITY_REVIEW_1_0.md:63` | — | When all boxes are ☑ and tests green, E8.2 is complete for 1.0 ship. |
 | `tero` | section | — | Tero-MCP integration | `docs/TERO.md:1` | — | [Tero](https://github.com/tzervas) is a Layer-1 corpus index query surface: cited lookups over docs, decisions, issues, changelog entries, and skills. cabal-de… |
 | `tero--what-tero-is-and-is-not` | section | — | What Tero is (and is not) | `docs/TERO.md:9` | — | Treat results as pointers: open the cited path and read the source. Do not treat summaries as ground truth. |
 | `tero--expected-sibling-layout` | section | — | Expected sibling layout | `docs/TERO.md:22` | — | Defaults assume a shared parent directory (e.g. ~/git or /root/git): |
@@ -265,8 +284,8 @@
 | `changelog` | entry | — | Changelog | `CHANGELOG.md:1` | — | All notable changes to cabal-devmelopner are documented in this file. |
 | `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E2 verify loop: after a tools-path final answer, run configurable |
 | `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - E2 verify loop: after a tools-path final answer, run configurable |
-| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:21` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--added-2` | section | — | Added | `CHANGELOG.md:23` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:35` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
-| `changelog--notes` | section | — | Notes | `CHANGELOG.md:43` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
+| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:23` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--added-2` | section | — | Added | `CHANGELOG.md:25` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
+| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:37` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
+| `changelog--notes` | section | — | Notes | `CHANGELOG.md:45` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
 
