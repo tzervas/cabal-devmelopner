@@ -6,19 +6,24 @@
 
 | ID | Item | Done |
 |----|------|------|
-| E1.1 | write_file / apply_patch confined | ☐ |
-| E1.2 | Tool protocol (structured or golden ≥95%) | ☐ |
-| E1.3 | Multi-tool steps | ☐ |
-| E2.* | verify_command loop + events | ☑ PR #29 |
-| E3.1 | budgets from cabal.toml | ☑ PR #29 |
-| E4.1 | Streaming complete | ☐ |
-| E5.1 | Tero missing → actionable error | ☐ |
-| E5.3 | Session JSONL under `.cabal/runs/` | ☐ |
+| E1.1 | write_file / apply_patch confined | ☑ #28/#32 |
+| E1.2 | Tool protocol (structured or golden ≥95%) | ☑ #32 (JSON+legacy) |
+| E1.3 | Multi-tool steps | ☑ |
+| E2.* | verify_command loop + events | ☑ #29 |
+| E3.1 | budgets from cabal.toml | ☑ #29 |
+| E4.1 | Streaming complete | ☑ #32 (Ollama stream; xAI single-shot) |
+| E5.1 | Tero missing → actionable error | ☑ #33 |
+| E5.3 | Session JSONL under `.cabal/runs/` | ☑ #33 |
 | E5.4 | No false RAG claims | ☑ docs |
-| E6.1 | TUI live log / task / error (minimum dogfood) | ☐ |
-| E8.1 | Path confinement property tests | ☐ this PR |
-| E8.2 | Security review checklist filled | ☐ |
-| E8.4 | Tag + release notes | ☐ |
+| E6.1 | TUI live log / task / error (minimum dogfood) | ☑ #34 |
+| E8.1 | Path confinement property tests | ☑ #31 |
+| E8.2 | Security review checklist filled | ☑ doc; sign-off still open |
+| E8.4 | Tag + release notes | ☑ **v0.2.0** interim; **v1.0.0** when E7+E3.2+sign-off |
+
+### Interim release
+
+- **v0.2.0** (2026-07-21): ship leaf core without waiting for E7/E3.2.
+- **v1.0.0**: only after notify + soft budgets + checklist sign-off.
 
 ### Honesty bar
 

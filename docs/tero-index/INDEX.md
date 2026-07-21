@@ -3,13 +3,13 @@
 > **Honesty:** Empirical/Declared — lite heading/line heuristic over markdown in cabal-devmelopner via tero-mcp/scripts/generate_lite_index.py; source files are ground truth. Generated 2026-07-21.
 > Use this index to find where to Read, not as authoritative ground truth.
 
-- **Items:** 271
+- **Items:** 272
 - **Flagged:** 0
 - **item_tag:** `Empirical/Declared`
 - **Machine index:** [`index.json`](./index.json)
 - **Manifest:** [`MANIFEST.toml`](./MANIFEST.toml)
 
-## doc (264 entries)
+## doc (263 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
@@ -62,24 +62,22 @@
 | `phase--honest-poc-status-alignment-chore-honest-docs-post-w2-2026-07-09` | section | — | Honest PoC status alignment (chore/honest-docs-post-w2, 2026-07-09) | `PHASE.md:128` | — | - Updated lagging PoC bullets + exit criteria for TUI (now entrypoint + Task met post A1-A3) and Tero error handling (C0/POC-4 addressed, facade path). |
 | `phase--poc-6-iteration-honesty-chore-poc6-iteration-honesty-per-plan.md-p2` | section | POC-6 | POC-6 iteration honesty (chore/poc6-iteration-honesty, per plan.md p2) | `PHASE.md:135` | — | - Decision: Document POC-6 as single-shot (honest); defer full multi-iteration feedback + verification loop to MVP/tools (Wave B: B2/B4 etc). Matches code real… |
 | `readme` | other | — | cabal-devmelopner | `README.md:1` | — | <!-- FLEET-BADGES:BEGIN --> |
-| `readme--5-minute-path` | section | — | 5-minute path | `README.md:22` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
-| `readme--offline-smoke-no-model-no-network-api-required` | other | — | Offline smoke (no model / no network API required) | `README.md:29` | — | uv run cabal-devmelopner --version |
-| `readme--expected-cabal-devmelopner-0.1.0` | other | — | expected: cabal-devmelopner 0.1.0 | `README.md:31` | — | uv run pytest -q |
-| `readme--expected-all-tests-passed` | other | — | expected: all tests passed | `README.md:34` | — | ./scripts/check.sh --quick |
-| `readme--expected-ok-cabal-devmelopner-checks-passed` | other | — | expected: OK: cabal-devmelopner checks passed | `README.md:37` | — | Default provider is local-ollama (self-hosted). Frontier needs XAIAPIKEY. |
-| `readme--optional-run-a-real-task` | section | — | Optional: run a real task | `README.md:40` | — | Default provider is local-ollama (self-hosted). Frontier needs XAIAPIKEY. |
-| `readme--local-model-ollama-must-be-up-on-localhost11434` | other | — | Local model (Ollama must be up on localhost:11434) | `README.md:45` | — | uv run cabal-devmelopner "Summarize the project structure" |
-| `readme--with-config-profile-copy-example-first` | other | — | With config profile (copy example first) | `README.md:48` | — | cp cabal.example.toml cabal.toml |
-| `readme--frontier-explicit` | other | — | Frontier explicit | `README.md:52` | — | export XAIAPIKEY=... |
-| `readme--tui` | other | — | TUI | `README.md:56` | — | uv run cabal-devmelopner-tui |
-| `readme--optional-tero-sibling-corpus-context` | section | — | Optional: Tero sibling (corpus context) | `README.md:60` | — | Tero is opt-in. Cabal does not auto-install mycelium or tero-mcp. |
-| `readme--config-as-code` | section | — | Config-as-code | `README.md:80` | — | Precedence: CLI flags > env > cabal.toml > defaults. |
-| `readme--features-alpha` | section | — | Features (alpha) | `README.md:94` | — | - Grok via raw xAI API or local Ollama |
-| `readme--architecture` | section | — | Architecture | `README.md:106` | — | - EventBus — producer/consumer events |
-| `readme--documentation` | section | — | Documentation | `README.md:114` | — | — |
-| `readme--development` | section | — | Development | `README.md:128` | — | ./scripts/check.sh          # ruff + mypy(advisory) + pytest |
-| `readme--license` | section | — | License | `README.md:140` | — | MIT — see [LICENSE](LICENSE). |
-| `readme--release` | section | — | Release | `README.md:144` | — | - Semver in [pyproject.toml](pyproject.toml) / [VERSION](VERSION) / package version |
+| `readme--5-minute-path` | section | — | 5-minute path | `README.md:23` | — | git clone https://github.com/tzervas/cabal-devmelopner.git |
+| `readme--expected-cabal-devmelopner-0.2.0` | other | — | expected: cabal-devmelopner 0.2.0 | `README.md:31` | — | uv run pytest -q |
+| `readme--run-a-task` | section | — | Run a task | `README.md:37` | — | uv run cabal-devmelopner "Summarize the project structure" |
+| `readme--local-model-ollama-on-localhost11434` | other | — | Local model (Ollama on localhost:11434) | `README.md:40` | — | uv run cabal-devmelopner "Summarize the project structure" |
+| `readme--tools-verify-from-cabal.toml-defaults` | other | — | Tools + verify (from cabal.toml / defaults) | `README.md:43` | — | uv run cabal-devmelopner "Add a docstring to README" --use-tools --use-verify |
+| `readme--config-profiles` | other | — | Config profiles | `README.md:46` | — | cp cabal.example.toml cabal.toml |
+| `readme--frontier` | other | — | Frontier | `README.md:50` | — | export XAIAPIKEY=... |
+| `readme--tui` | other | — | TUI | `README.md:54` | — | uv run cabal-devmelopner-tui |
+| `readme--optional-tero-sibling` | section | — | Optional: Tero sibling | `README.md:60` | — | <git-parent>/ |
+| `readme--config-as-code` | section | — | Config-as-code | `README.md:76` | — | Precedence: CLI > env > cabal.toml > defaults. |
+| `readme--features-0.2.0` | section | — | Features (0.2.0) | `README.md:90` | — | - Local Ollama and xAI providers; optional streaming (--stream) |
+| `readme--compose-stack` | section | — | Compose stack | `README.md:104` | — | See [docs/COMPOSE.md](docs/COMPOSE.md) and [docs/TOOLINGSTACKREADINESS.md](docs/TOOLINGSTACKREADINESS.md). |
+| `readme--documentation` | section | — | Documentation | `README.md:117` | — | — |
+| `readme--development` | section | — | Development | `README.md:129` | — | ./scripts/check.sh --quick |
+| `readme--license` | section | — | License | `README.md:138` | — | MIT — see [LICENSE](LICENSE). |
+| `readme--release` | section | — | Release | `README.md:142` | — | - Semver: [VERSION](VERSION) / [pyproject.toml](pyproject.toml) / version |
 | `compose` | section | — | Compose — cabal-devmelopner in the fleet | `docs/COMPOSE.md:1` | — | How this product plugs into tz-forge, agent-harness, tg-agent-relay, |
 | `compose--product-role` | section | — | Product role | `docs/COMPOSE.md:7` | — | [tz-forge](https://github.com/tzervas/tz-forge) project kind agent-swarm |
 | `compose--tz-forge-agent-swarm-kind` | section | — | tz-forge: `agent-swarm` kind | `docs/COMPOSE.md:17` | — | [tz-forge](https://github.com/tzervas/tz-forge) project kind agent-swarm |
@@ -156,12 +154,13 @@
 | `release100` | section | — | Release checklist — v1.0.0 | `docs/RELEASE_1_0_0.md:1` | — | — |
 | `release100--pre-tag-must-be-true` | section | — | Pre-tag (must be true) | `docs/RELEASE_1_0_0.md:3` | — | — |
 | `release100--product-p0-from-v100gapanalysis` | section | — | Product P0 (from V1_0_0_GAP_ANALYSIS) | `docs/RELEASE_1_0_0.md:5` | — | — |
-| `release100--honesty-bar` | section | — | Honesty bar | `docs/RELEASE_1_0_0.md:23` | — | - [ ] README / PHASE / OPENISSUES do not claim multi-agent swarm production or legitimate RAG via context-mcp |
-| `release100--gates` | section | — | Gates | `docs/RELEASE_1_0_0.md:28` | — | ./scripts/check.sh --quick |
-| `release100--optional-smoke-with-local-ollama-if-available` | other | — | optional: smoke with local ollama if available | `docs/RELEASE_1_0_0.md:33` | — | 1. Bump VERSION → 1.0.0 |
-| `release100--versioning` | section | — | Versioning | `docs/RELEASE_1_0_0.md:36` | — | 1. Bump VERSION → 1.0.0 |
-| `release100--compose-matrix-1.0` | section | — | Compose matrix (1.0) | `docs/RELEASE_1_0_0.md:45` | — | - [ ] Update fleet prefer-list warm to include this tag branch if needed |
-| `release100--post-tag` | section | — | Post-tag | `docs/RELEASE_1_0_0.md:55` | — | - [ ] Update fleet prefer-list warm to include this tag branch if needed |
+| `release100--interim-release` | section | — | Interim release | `docs/RELEASE_1_0_0.md:23` | — | - v0.2.0 (2026-07-21): ship leaf core without waiting for E7/E3.2. |
+| `release100--honesty-bar` | section | — | Honesty bar | `docs/RELEASE_1_0_0.md:28` | — | - [ ] README / PHASE / OPENISSUES do not claim multi-agent swarm production or legitimate RAG via context-mcp |
+| `release100--gates` | section | — | Gates | `docs/RELEASE_1_0_0.md:33` | — | ./scripts/check.sh --quick |
+| `release100--optional-smoke-with-local-ollama-if-available` | other | — | optional: smoke with local ollama if available | `docs/RELEASE_1_0_0.md:38` | — | 1. Bump VERSION → 1.0.0 |
+| `release100--versioning` | section | — | Versioning | `docs/RELEASE_1_0_0.md:41` | — | 1. Bump VERSION → 1.0.0 |
+| `release100--compose-matrix-1.0` | section | — | Compose matrix (1.0) | `docs/RELEASE_1_0_0.md:50` | — | - [ ] Update fleet prefer-list warm to include this tag branch if needed |
+| `release100--post-tag` | section | — | Post-tag | `docs/RELEASE_1_0_0.md:60` | — | - [ ] Update fleet prefer-list warm to include this tag branch if needed |
 | `roadmap` | note | — | cabal-devmelopner — Product Roadmap | `docs/ROADMAP.md:1` | Plan (2026-07-08) | Status: Plan (2026-07-08) |
 | `roadmap--1.-north-star` | section | — | 1. North star | `docs/ROADMAP.md:11` | — | cabal-devmelopner is a repo-agnostic development agent: long-running, event-driven, multi-surface (CLI / TUI / future Discord), with strong Tero integration fo… |
 | `roadmap--2.-current-position-summary` | section | — | 2. Current position (summary) | `docs/ROADMAP.md:32` | — | PoC exit requires honest tests/stabilization (POC-7); iteration (POC-6) now documented single-shot (honest, per plan.md p2 deferral to MVP/tools); TUI launch (… |
@@ -278,15 +277,17 @@
 | `readme--or-if-tero-mcp-is-a-sibling` | other | — | or if tero-mcp is a sibling: | `docs/tero-index/README.md:17` | — | python3 ../tero-mcp/scripts/generateliteindex.py --root $(pwd) |
 | `readme--serve-locally` | section | — | Serve locally | `docs/tero-index/README.md:21` | — | export TEROTOKENS=local-dev:refresh |
 
-## changelog (7 entries)
+## changelog (9 entries)
 
 | Anchor | Kind | Id | Title | File:Line | Status | Summary |
 |---|---|---|---|---|---|---|
 | `changelog` | entry | — | Changelog | `CHANGELOG.md:1` | — | All notable changes to cabal-devmelopner are documented in this file. |
-| `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E5.3 session JSONL: core/session.py SessionRecorder writes an |
-| `changelog--added` | section | — | Added | `CHANGELOG.md:10` | — | - E5.3 session JSONL: core/session.py SessionRecorder writes an |
-| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:32` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--added-2` | section | — | Added | `CHANGELOG.md:34` | — | - Config-as-code: cabal.example.toml with L0 (frontier) and L1 (composer) |
-| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:46` | — | - Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional |
-| `changelog--notes` | section | — | Notes | `CHANGELOG.md:54` | — | - Fleet standards (P26): self-hosted CI badges, issue close on main only. |
+| `changelog--unreleased` | section | — | [Unreleased] | `CHANGELOG.md:8` | — | - E3.2 wall-clock / token soft budgets |
+| `changelog--planned-toward-1.0.0` | section | — | Planned toward 1.0.0 | `CHANGELOG.md:10` | — | - E3.2 wall-clock / token soft budgets |
+| `changelog--0.2.0-2026-07-21` | section | — | [0.2.0] — 2026-07-21 | `CHANGELOG.md:17` | — | Interim leaf agent release: act + verify + session + stream + TUI dogfood. |
+| `changelog--added` | section | — | Added | `CHANGELOG.md:22` | — | - Tools write path: writefile / applypatch workspace-confined (E1.1) |
+| `changelog--changed` | section | — | Changed | `CHANGELOG.md:39` | — | - README honesty for 0.2.0 feature set |
+| `changelog--product-status-honest` | section | — | Product status (honest) | `CHANGELOG.md:44` | — | — |
+| `changelog--0.1.0-2026-07-16` | section | — | [0.1.0] — 2026-07-16 | `CHANGELOG.md:59` | — | - Config-as-code: cabal.example.toml with L0 / L1 profiles |
+| `changelog--added-2` | section | — | Added | `CHANGELOG.md:61` | — | - Config-as-code: cabal.example.toml with L0 / L1 profiles |
 

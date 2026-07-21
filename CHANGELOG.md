@@ -7,53 +7,64 @@ versioning follows [SemVer](https://semver.org/).
 
 ## [Unreleased]
 
+### Planned toward 1.0.0
+
+- E3.2 wall-clock / token soft budgets
+- E7.1 Telegram notify via tg-agent-relay
+- E6.2 cancel in-flight task; E6.3 richer widgets
+- E8.4 full security checklist sign-off + `v1.0.0` tag when bar met
+
+## [0.2.0] — 2026-07-21
+
+Interim **leaf agent** release: act + verify + session + stream + TUI dogfood.
+**Not** multi-agent production; **not** legitimate RAG via context-mcp.
+
 ### Added
 
-- **E5.3 session JSONL:** `core/session.py` `SessionRecorder` writes an
-  append-only `.cabal/runs/<task_id>.jsonl` (one line per EventBus event plus a
-  final answer line); wired into the CLI, which prints the recorded path.
-- **E5.1 tero actionable errors:** tero / CommonMemory-facade failures now emit
-  `ERROR` with a `hint` naming `TERO_INDEX_PATH`, `TERO_MCP_PROJECT`, a sibling
-  `../tero-mcp` checkout, and `docs/TERO.md` instead of a bare stack trace.
-- **E6.1 TUI:** live log for tools/verify/errors; config-driven provider (local
-  ollama default); SessionRecorder path shown after run.
+- **Tools write path:** `write_file` / `apply_patch` workspace-confined (E1.1)
+- **Tool protocol:** fenced/bare JSON `{name,args}` plus legacy free-text (E1.2)
+- **Multi-step tools loop** with configurable `max_tool_steps` (E1.3 / E3.1)
+- **E2 verify loop:** `tools.verify_command`, re-prompt up to `max_verify_rounds`,
+  `VERIFY_STARTED` / `VERIFY_RESULT` events
+- **E3.1 config budgets:** `max_tool_steps`, `max_iterations`, allowlist, `use_verify`
+  from `CabalConfig` / CLI (`--use-verify`, `--verify-command`)
+- **E4.1 streaming:** `Provider.complete_stream`; Ollama NDJSON; CLI `--stream`
+- **E5.3 session JSONL:** `.cabal/runs/<task_id>.jsonl` via `SessionRecorder`
+- **E5.1 tero errors:** actionable ERROR hints (`TERO_INDEX_PATH`, sibling layout,
+  `docs/TERO.md`)
+- **E6.1 TUI:** live tools/verify/error log; config-driven provider; session path
+- **E8.1** path confinement property tests
+- **Docs:** gap analysis, joint execution, RELEASE/SECURITY checklists, tooling readiness
 
-- **E2 verify loop:** after a tools-path final answer, run configurable
-  `tools.verify_command` (default `uv run pytest -q`), emit
-  `VERIFY_STARTED` / `VERIFY_RESULT`, re-prompt up to `max_verify_rounds` on
-  failure, then annotate / ERROR if still red.
-- **E3.1 config budgets:** `max_tool_steps`, `max_iterations`, `use_verify`,
-  allowlist, and verify settings from `CabalConfig` → `SimpleAgent` / CLI
-  (`--use-verify`, `--verify-command`); not hardcoded.
-- Configurable `ToolHost` command allowlist + `is_safe_command` public helper.
-- **E8.1** property-style path confinement tests (`tests/test_path_confinement.py`).
-- **E8.2 / E0.4** docs: `docs/SECURITY_REVIEW_1_0.md`, `docs/RELEASE_1_0_0.md`.
+### Changed
+
+- README honesty for 0.2.0 feature set
+- Default CLI description no longer claims bare alpha-only tools
+
+### Product status (honest)
+
+| Area | 0.2.0 |
+|------|-------|
+| Act (read/list/write/patch/run allowlist) | yes |
+| Verify loop | yes |
+| Session JSONL | yes |
+| Stream (Ollama) | yes |
+| Tero opt-in L1 | yes (sibling required) |
+| TUI dogfood | yes |
+| Notify (Telegram) | **no** (E7) |
+| Wall-clock budgets | **no** (E3.2) |
+| Multi-agent swarm | **no** (post-1.0) |
+| Legitimate RAG | **no** (context-mcp Wave 2+) |
 
 ## [0.1.0] — 2026-07-16
 
 ### Added
 
-- **Config-as-code:** `cabal.example.toml` with **L0** (frontier) and **L1** (composer)
-  profiles; loader in `core/config.py` (CLI flags > env > file > defaults).
-- **CLI:** `--config`, `--profile {l0,l1}`, `--version`, `--workspace`,
-  `--use-tero` / `--no-use-tero`, `--use-tools` / `--no-use-tools`.
-- **CLAUDE.md** — coding-assistant surface for this product.
-- **docs/COMPOSE.md** — compose with tz-forge `agent-swarm`, agent-harness,
-  tg-agent-relay, optional tero-mcp (no mycelium automation).
-- **CHANGELOG.md** / explicit **0.1.0** alpha release notes.
-- Tests for config parse, profiles, and CLI override precedence.
+- **Config-as-code:** `cabal.example.toml` with **L0** / **L1** profiles
+- **CLI:** `--config`, `--profile`, `--version`, `--workspace`, `--use-tero`, `--use-tools`
+- **CLAUDE.md**, **docs/COMPOSE.md**, CHANGELOG, basic tests
+- EventBus, xAI + local-ollama providers, optional Tero client, MVP-1 tools, Textual TUI entry
 
-### Product status (honest)
-
-- Alpha / PoC→MVP scaffold: EventBus, xAI + local-ollama providers, optional
-  Tero client + W2 CommonMemory facade, MVP-1 tools + write/apply_patch + verify loop,
-  Textual TUI entrypoint.
-- Not yet: streaming, multi-agent swarms, security wrappers,
-  zero-config Tero, production packaging.
-
-### Notes
-
-- Fleet standards (P26): self-hosted CI badges, issue close on **main** only.
-- Tero is opt-in sibling; mycelium is handoff-only.
-
+[Unreleased]: https://github.com/tzervas/cabal-devmelopner/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/tzervas/cabal-devmelopner/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/tzervas/cabal-devmelopner/releases/tag/v0.1.0
