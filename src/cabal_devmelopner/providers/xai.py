@@ -6,6 +6,7 @@ import json
 import os
 import urllib.error
 import urllib.request
+from collections.abc import Iterator
 from typing import Any
 
 from cabal_devmelopner.providers.base import Provider
@@ -68,3 +69,7 @@ class XaiProvider(Provider):
             raise RuntimeError(f"Network error calling xAI: {getattr(e, 'reason', e)}") from e
         except Exception as e:
             raise RuntimeError(f"Unexpected error calling xAI API: {e}") from e
+
+    def complete_stream(self, prompt: str, **kwargs: Any) -> Iterator[str]:
+        """xAI Responses API has no stable public stream shape here — single-shot yield (E4.1)."""
+        yield self.complete(prompt, **kwargs)

@@ -265,6 +265,54 @@ def test_parse_write_and_patch():
     assert tc2.args.get("new") == "bar"
 
 
+def test_parse_tool_call_json_and_fenced():
+    """E1.2: JSON + fenced JSON tool protocol alongside legacy free-text."""
+    from cabal_devmelopner.core.tools import parse_tool_call
+
+    fenced = """I'll read it:
+```json
+{"name": "read_file", "args": {"path": "src/a.py"}}
+```
+"""
+    tc = parse_tool_call(fenced)
+    assert tc is not None
+    assert tc.name == "read_file"
+    assert tc.args.get("path") == "src/a.py"
+
+    bare = '{"name": "list_dir", "arguments": {"path": "."}}'
+    tc2 = parse_tool_call(bare)
+    assert tc2 is not None
+    assert tc2.name == "list_dir"
+
+    # legacy still works
+    tc3 = parse_tool_call("call tool run_command with command is pytest -q")
+    assert tc3 is not None
+    assert tc3.name == "run_command"
+
+
+def test_provider_complete_stream_default():
+    """E4.1: default stream yields full complete once."""
+    chunks = list(MockProvider("hello stream").complete_stream("p"))
+    assert chunks == ["hello stream"]
+
+
+class ChunkProvider(Provider):
+    def complete(self, prompt: str, **kwargs) -> str:
+        return "".join(self.complete_stream(prompt, **kwargs))
+
+    def complete_stream(self, prompt: str, **kwargs):
+        yield "hel"
+        yield "lo"
+
+    def name(self) -> str:
+        return "chunk"
+
+
+def test_provider_stream_override():
+    assert "".join(ChunkProvider().complete_stream("x")) == "hello"
+    assert ChunkProvider().complete("x") == "hello"
+
+
 # --- E2 verify loop + E3.1 budgets ---
 
 

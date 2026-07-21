@@ -91,19 +91,66 @@ def _is_safe_command(cmd: str) -> bool:
     return is_safe_command(cmd, SAFE_COMMANDS)
 
 
-def parse_tool_call(text: str) -> ToolCall | None:
-    """Parse a tool call from free-text model output (minimal format for PoC/MVP-1).
+def _parse_json_tool_payload(obj: Any) -> ToolCall | None:
+    """Accept common JSON shapes: {name, args|arguments|parameters}."""
+    if not isinstance(obj, dict):
+        return None
+    name = obj.get("name") or obj.get("tool") or obj.get("tool_name")
+    if not name:
+        return None
+    args = obj.get("args") or obj.get("arguments") or obj.get("parameters") or {}
+    if not isinstance(args, dict):
+        return None
+    return ToolCall(name=str(name).strip().lower(), args=args)
 
-    Supported (exact-ish, case-insensitive name):
-        call tool read_file with path is src/foo.py
-        call tool list_dir with path is .
-        call tool run_command with command is ls -l
+
+def parse_tool_call(text: str) -> ToolCall | None:
+    """Parse a tool call from model output (E1.2 multi-format).
+
+    Supported (first match wins):
+      1. Fenced JSON: ```json\\n{"name":"read_file","args":{"path":"x"}}\\n```
+      2. Inline JSON object with name+args
+      3. Legacy free-text: ``call tool read_file with path is src/foo.py``
 
     Falls back to None if no match (model gave final answer).
     """
     if not text:
         return None
-    # find first plausible call
+
+    # 1) fenced json block
+    fence = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL | re.IGNORECASE)
+    if fence:
+        try:
+            import json
+
+            tc = _parse_json_tool_payload(json.loads(fence.group(1)))
+            if tc:
+                return tc
+        except Exception:
+            pass
+
+    # 2) bare JSON object (brace-balanced scan for nested args)
+    import json
+
+    starts = [i for i, ch in enumerate(text) if ch == "{"]
+    for start in starts:
+        depth = 0
+        for end in range(start, len(text)):
+            if text[end] == "{":
+                depth += 1
+            elif text[end] == "}":
+                depth -= 1
+                if depth == 0:
+                    snippet = text[start : end + 1]
+                    try:
+                        tc = _parse_json_tool_payload(json.loads(snippet))
+                        if tc:
+                            return tc
+                    except Exception:
+                        pass
+                    break
+
+    # 3) legacy free-text
     m = re.search(
         r"(?i)call\s+tool\s+(\w+)\s+with\s+(.+?)(?:\n|$)",
         text,
@@ -114,20 +161,20 @@ def parse_tool_call(text: str) -> ToolCall | None:
     name = m.group(1).strip().lower()
     rest = m.group(2).strip()
     args: dict[str, Any] = {}
-    # parse key is value pairs (simple, stop at next key)
     kv_re = re.finditer(r"(\w+)\s+is\s+([^\n]+?)(?=\s+\w+\s+is\s+|$)", rest)
     for kv in kv_re:
         k = kv.group(1).strip().lower()
         v = kv.group(2).strip()
         args[k] = v
     if not args:
-        # fallback: treat whole rest as single arg by name
         if name == "read_file":
             args = {"path": rest}
         elif name == "list_dir":
             args = {"path": rest or "."}
         elif name == "run_command":
             args = {"command": rest}
+        elif name in ("write_file", "apply_patch"):
+            args = {"path": rest}
     return ToolCall(name=name, args=args)
 
 
@@ -534,17 +581,19 @@ class ToolHost:
 def get_tool_descriptions() -> str:
     """Text block for injection into StructuredPrompt / system for model to learn format."""
     return """
-AVAILABLE TOOLS (use EXACT format; one tool call per response unless finishing):
-- read_file: read text (relative path under workspace)
+AVAILABLE TOOLS (one tool call per response unless finishing). Prefer fenced JSON:
+
+```json
+{"name": "read_file", "args": {"path": "src/example.py"}}
+```
+
+Legacy free-text also works:
   call tool read_file with path is src/example.py
-- list_dir: list files/dirs (relative)
   call tool list_dir with path is .
-- write_file: create/overwrite a text file under workspace (prefer apply_patch for edits)
   call tool write_file with path is src/foo.py content is print("hi")
-- apply_patch: replace one exact unique snippet in a file (safer than full rewrite)
   call tool apply_patch with path is src/foo.py old is OLD_SNIPPET new is NEW_SNIPPET
-- run_command: allowlisted verify/read cmds only (pytest/ruff/uv/python/git/ls/cat/head; no shell meta)
   call tool run_command with command is python -m pytest -q
 
+Tools: read_file, list_dir, write_file, apply_patch, run_command (allowlisted only).
 After tool results, call another tool or give the final answer. Cite tero if used.
 """.strip()

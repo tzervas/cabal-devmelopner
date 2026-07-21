@@ -106,6 +106,12 @@ def main() -> None:
         default=True,
         help="Use StructuredResponse path (W2 schemas, citations, orchestration hints)",
     )
+    parser.add_argument(
+        "--stream",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Stream provider tokens to stdout when available (E4.1; default on)",
+    )
     args = parser.parse_args()
 
     if not args.task:
@@ -240,11 +246,23 @@ def main() -> None:
         else ""
     )
     tero_note = " +tero" if cfg.profile.use_tero else ""
+    stream_note = " +stream" if args.stream else ""
     src_note = f" config={cfg.source_path}" if cfg.source_path else " config=defaults"
     print(
-        f"Running task with {provider.name()}{tools_note}{verify_note}{tero_note} "
+        f"Running task with {provider.name()}{tools_note}{verify_note}{tero_note}{stream_note} "
         f"(profile={cfg.profile.name}{src_note})...\n"
     )
+
+    # E4.1: optional progressive preview via provider.complete_stream (agent still uses complete)
+    if args.stream and not cfg.use_tools:
+        print("--- stream ---")
+        try:
+            for chunk in provider.complete_stream(args.task):
+                print(chunk, end="", flush=True)
+            print("\n--- end stream (agent structured pass follows) ---\n")
+        except Exception as e:
+            print(f"\n[stream error] {e}; falling back to non-stream agent path\n")
+
     structured: StructuredResponse = agent.run_structured(task)
     print("\n--- StructuredResponse (schema v1, answer + citations + optionals) ---")
     print("kind:", structured.kind)
