@@ -9,6 +9,13 @@ versioning follows [SemVer](https://semver.org/).
 
 ### Added
 
+- **E5.3 session JSONL:** `core/session.py` `SessionRecorder` writes an
+  append-only `.cabal/runs/<task_id>.jsonl` (one line per EventBus event plus a
+  final answer line); wired into the CLI, which prints the recorded path.
+- **E5.1 tero actionable errors:** tero / CommonMemory-facade failures now emit
+  `ERROR` with a `hint` naming `TERO_INDEX_PATH`, `TERO_MCP_PROJECT`, a sibling
+  `../tero-mcp` checkout, and `docs/TERO.md` instead of a bare stack trace.
+
 - **E2 verify loop:** after a tools-path final answer, run configurable
   `tools.verify_command` (default `uv run pytest -q`), emit
   `VERIFY_STARTED` / `VERIFY_RESULT`, re-prompt up to `max_verify_rounds` on

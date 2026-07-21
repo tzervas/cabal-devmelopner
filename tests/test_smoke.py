@@ -107,6 +107,22 @@ def test_tero_error_emits_event():
     assert "CommonMemory facade error" in err_str or "facade query failed" in err_str
 
 
+def test_tero_error_surfaces_actionable_hints():
+    """E5.1: a tero/facade failure surfaces ERROR with actionable setup hints."""
+    provider = MockProvider("ok")
+    bus = EventBus()
+    errors = []
+    bus.subscribe(EventType.ERROR, lambda e: errors.append(e.payload))
+
+    agent = SimpleAgent(provider=provider, event_bus=bus, tero_client=FailingTeroClient())
+    _ = agent.run(Task(id="e-hint", description="task with tero", max_iterations=1))
+
+    assert errors
+    combined = " ".join(str(p.get("error", "")) + " " + str(p.get("hint", "")) for p in errors)
+    for hint in ("TERO_INDEX_PATH", "TERO_MCP_PROJECT", "../tero-mcp", "docs/TERO.md"):
+        assert hint in combined
+
+
 def test_provider_error_emits_and_refusal():
     """A3/A2: provider failures emit ERROR + return refusal (POC-8)."""
 

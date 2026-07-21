@@ -21,6 +21,14 @@ from cabal_devmelopner.core.types import EventType, Task
 from cabal_devmelopner.mcp.tero_client import TeroMCPClient
 from cabal_devmelopner.providers.base import Provider
 
+# E5.1: actionable hint appended to tero/facade ERROR events so a missing
+# index / binary / project surfaces the exact knobs to fix, not just a stack trace.
+_TERO_ERROR_HINT = (
+    "Tero context unavailable — check: TERO_INDEX_PATH (a built index.json), "
+    "TERO_MCP_PROJECT (or a sibling ../tero-mcp checkout with tero-mcp-lite installed). "
+    "See docs/TERO.md for cold-start."
+)
+
 
 def _verify_output_ok(vout: str) -> bool:
     """True when ToolHost.run_command reports success (no error/exit prefix)."""
@@ -126,8 +134,9 @@ class SimpleAgent:
                         )
                         self.event_bus.emit_simple(
                             EventType.ERROR,
-                            error=f"CommonMemory facade error: {err_msg}",
+                            error=f"CommonMemory facade error: {err_msg}. {_TERO_ERROR_HINT}",
                             source="facade",
+                            hint=_TERO_ERROR_HINT,
                             task_id=task.id,
                         )
                     elif not sresp.is_refusal() and sresp.citations:
@@ -151,8 +160,9 @@ class SimpleAgent:
                     # A2/POC-8 + C0 honesty: surface errors, never silent
                     self.event_bus.emit_simple(
                         EventType.ERROR,
-                        error=f"CommonMemory facade error: {e}",
+                        error=f"CommonMemory facade error: {e}. {_TERO_ERROR_HINT}",
                         source="facade",
+                        hint=_TERO_ERROR_HINT,
                         task_id=task.id,
                     )
             elif self.tero_client and not getattr(self, "facade", None):
@@ -178,8 +188,9 @@ class SimpleAgent:
                 except Exception as e:
                     self.event_bus.emit_simple(
                         EventType.ERROR,
-                        error=f"Tero client error: {e}",
+                        error=f"Tero client error: {e}. {_TERO_ERROR_HINT}",
                         source="tero",
+                        hint=_TERO_ERROR_HINT,
                         task_id=task.id,
                     )
 

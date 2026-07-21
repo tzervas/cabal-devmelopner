@@ -11,6 +11,7 @@ from cabal_devmelopner.core.agent import SimpleAgent
 from cabal_devmelopner.core.config import load_config, merge_cli_overrides
 from cabal_devmelopner.core.events import EventBus
 from cabal_devmelopner.core.schemas import StructuredResponse
+from cabal_devmelopner.core.session import SessionRecorder
 from cabal_devmelopner.core.types import EventType, Task
 from cabal_devmelopner.mcp.tero_client import TeroMCPClient
 from cabal_devmelopner.providers.base import LocalOllamaProvider, Provider
@@ -239,6 +240,10 @@ def main() -> None:
         max_iterations=cfg.max_iterations,
     )
 
+    # E5.3: record the full run (events + final answer) to .cabal/runs/<task_id>.jsonl
+    recorder = SessionRecorder(cfg.workspace_root, task.id)
+    recorder.attach(event_bus)
+
     tools_note = " +tools" if cfg.use_tools else ""
     verify_note = (
         f" +verify={cfg.tools.verify_command!r}"
@@ -264,6 +269,8 @@ def main() -> None:
             print(f"\n[stream error] {e}; falling back to non-stream agent path\n")
 
     structured: StructuredResponse = agent.run_structured(task)
+    recorder.record_final(structured.to_dict())
+    print(f"\n[session] recorded run → {recorder.path}")
     print("\n--- StructuredResponse (schema v1, answer + citations + optionals) ---")
     print("kind:", structured.kind)
     print("answer:", structured.answer[:800] if len(structured.answer) > 800 else structured.answer)
