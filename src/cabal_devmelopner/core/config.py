@@ -49,6 +49,8 @@ class ToolsConfig:
     verify_command: str | None = "uv run pytest -q"
     # How many times to re-prompt after a failing verify before giving up
     max_verify_rounds: int = 2
+    # E7.3: require operator approval before write_file / apply_patch
+    require_write_approval: bool = False
 
 
 @dataclass(frozen=True)
@@ -184,6 +186,7 @@ def parse_config_data(data: dict[str, Any], *, source_path: str | None = None) -
     allow = tools_t.get("allowlist")
     verify_cmd = tools_t.get("verify_command")
     max_vr = tools_t.get("max_verify_rounds")
+    hitl_writes = _as_bool(tools_t.get("require_write_approval"), False)
     if isinstance(allow, list) and allow:
         tools = ToolsConfig(
             allowlist=tuple(str(x) for x in allow),
@@ -191,6 +194,7 @@ def parse_config_data(data: dict[str, Any], *, source_path: str | None = None) -
                 str(verify_cmd) if verify_cmd is not None else ToolsConfig().verify_command
             ),
             max_verify_rounds=int(max_vr) if max_vr is not None else 2,
+            require_write_approval=hitl_writes,
         )
     else:
         tools = ToolsConfig(
@@ -198,6 +202,7 @@ def parse_config_data(data: dict[str, Any], *, source_path: str | None = None) -
                 str(verify_cmd) if verify_cmd is not None else ToolsConfig().verify_command
             ),
             max_verify_rounds=int(max_vr) if max_vr is not None else 2,
+            require_write_approval=hitl_writes,
         )
     if verify_cmd is not None and str(verify_cmd).strip() == "":
         tools = replace(tools, verify_command=None)
@@ -290,11 +295,19 @@ def apply_env(cfg: CabalConfig) -> CabalConfig:
         except ValueError:
             pass
 
+    tools = cfg.tools
+    hitl_env = os.getenv("CABAL_REQUIRE_WRITE_APPROVAL") or os.getenv("CABAL_HITL_WRITES")
+    if hitl_env is not None:
+        tools = replace(
+            tools, require_write_approval=_as_bool(hitl_env, tools.require_write_approval)
+        )
+
     return replace(
         cfg,
         workspace_root=workspace,
         max_wall_secs=max_wall,
         notify=notify,
+        tools=tools,
         profile=replace(
             profile,
             name=profile_name,

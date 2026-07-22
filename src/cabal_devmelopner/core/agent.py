@@ -66,6 +66,8 @@ class SimpleAgent:
         use_verify: bool = True,
         command_allowlist: tuple[str, ...] | None = None,
         max_wall_secs: float | None = None,
+        require_write_approval: bool = False,
+        approval_callback: Any | None = None,
     ) -> None:
         self.provider = provider
         self.event_bus = event_bus or EventBus()
@@ -91,6 +93,60 @@ class SimpleAgent:
         self._verify_rounds = 0
         # E3.2: soft wall-clock budget (None / <=0 disables)
         self.max_wall_secs = max_wall_secs if max_wall_secs and max_wall_secs > 0 else None
+        # E6.2: cooperative cancel (TUI/CLI set via request_cancel)
+        self._cancelled = False
+        # E7.3: HITL for write tools when require_write_approval
+        self.require_write_approval = require_write_approval
+        # Callable[[str, dict], bool] — True approves write. None → deny when HITL on.
+        self.approval_callback = approval_callback
+
+    def request_cancel(self) -> None:
+        """E6.2: request cooperative cancel at next safe point."""
+        self._cancelled = True
+        self.event_bus.emit_simple(
+            EventType.PROGRESS,
+            message="cancel requested — stopping at next safe point",
+            source="cancel",
+        )
+
+    def is_cancelled(self) -> bool:
+        return self._cancelled
+
+    def _maybe_approve_write(self, name: str, args: dict[str, Any]) -> bool:
+        """E7.3: gate write_file / apply_patch behind HITL when configured."""
+        if name not in ("write_file", "apply_patch"):
+            return True
+        if not self.require_write_approval:
+            return True
+        self.event_bus.emit_simple(
+            EventType.NEEDS_HUMAN_INPUT,
+            reason="write_approval",
+            tool=name,
+            args={k: (v if k != "content" else f"<{len(str(v))} chars>") for k, v in args.items()},
+        )
+        if self.approval_callback is None:
+            self.event_bus.emit_simple(
+                EventType.ERROR,
+                error=f"HITL write denied (no approval_callback): {name}",
+                source="hitl",
+            )
+            return False
+        try:
+            ok = bool(self.approval_callback(name, args))
+        except Exception as e:
+            self.event_bus.emit_simple(
+                EventType.ERROR,
+                error=f"HITL approval callback failed: {e}",
+                source="hitl",
+            )
+            return False
+        if not ok:
+            self.event_bus.emit_simple(
+                EventType.ERROR,
+                error=f"HITL write denied by operator: {name}",
+                source="hitl",
+            )
+        return ok
 
     def run(self, task: Task) -> str:
         """Run the agent loop. Returns raw text (compat). Prefer run_structured for schema use."""
@@ -117,6 +173,22 @@ class SimpleAgent:
         t0 = time.monotonic()
 
         for iteration in range(1, task.max_iterations + 1):
+            # E6.2 cooperative cancel
+            if self._cancelled:
+                self.event_bus.emit_simple(
+                    EventType.ERROR,
+                    error="task cancelled by operator",
+                    source="cancel",
+                    task_id=task.id,
+                )
+                self.event_bus.emit_simple(EventType.TASK_COMPLETE, task_id=task.id)
+                return StructuredResponse(
+                    kind="answer",
+                    answer=((last_resp.answer or "") + "\n\n[cancelled]").strip(),
+                    citations=last_resp.citations,
+                    extended={**(last_resp.extended or {}), "cancelled": True},
+                )
+
             # E3.2 soft wall-clock budget — clean stop with ERROR, never hang forever
             if self.max_wall_secs is not None:
                 elapsed = time.monotonic() - t0
@@ -301,6 +373,13 @@ class SimpleAgent:
                             "Tool step budget exceeded. Provide final answer based on context."
                         )
                         # re-prompt so the model can give a real final answer (not a tool call)
+                        continue
+                    if not self._maybe_approve_write(tc.name, tc.args):
+                        feedback.append(
+                            f"TOOL RESULT {tc.name}: success=False\n"
+                            "[hitl] write denied by operator — do not retry the same write "
+                            "without a safer plan or wait for approval"
+                        )
                         continue
                     tres = self.tool_host.execute(tc.name, tc.args)
                     feedback.append(

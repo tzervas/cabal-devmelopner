@@ -16,6 +16,8 @@
 | E5.3 | Session JSONL under `.cabal/runs/` | ☑ #33 |
 | E5.4 | No false RAG claims | ☑ docs |
 | E6.1 | TUI live log / task / error (minimum dogfood) | ☑ #34 |
+| E6.2 | TUI cancel | ☑ 0.3.0 |
+| E7.3 | HITL write approval | ☑ 0.3.0 |
 | E8.1 | Path confinement property tests | ☑ #31 |
 | E8.2 | Security review checklist filled | ☑ doc; sign-off still open |
 | E8.4 | Tag + release notes | ☑ **v0.2.0** interim; **v1.0.0** when E7+E3.2+sign-off |
@@ -23,7 +25,8 @@
 ### Interim release
 
 - **v0.2.0** (2026-07-21): ship leaf core without waiting for E7/E3.2.
-- **v1.0.0**: only after notify + soft budgets + checklist sign-off.
+- **v0.3.0** (2026-07-21): cancel + HITL writes.
+- **v1.0.0**: after remaining checklist sign-off (log redaction, reviewer) + green fleet CI.
 
 ### Honesty bar
 

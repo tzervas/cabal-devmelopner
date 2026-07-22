@@ -15,7 +15,7 @@ self-hosted CI**.
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| API keys only via env (`XAI_API_KEY`, `TERO_TOKENS`, …) — never committed | ☐ | Spot-check git history / gitleaks CI |
+| API keys only via env (`XAI_API_KEY`, `TERO_TOKENS`, …) — never committed | ☑ | Spot-check git history / gitleaks CI |
 | Tokens not placed on process argv for tools | ☐ | ToolHost uses argv for allowlisted cmds only; no secrets interpolated |
 | Logs/events redact token-like strings | ☐ | Prefer not logging TERO_TOKENS / API keys at all |
 | Session JSONL does not store raw provider API keys | ☐ | Events should carry task/tool metadata only |
@@ -24,16 +24,16 @@ self-hosted CI**.
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| `read_file` / `write_file` / `apply_patch` / `list_dir` confined to workspace_root | ☐ | Unit + property tests (E8.1) |
-| Path escape via `..`, absolute paths, symlink tricks blocked | ☐ | |
-| Writes under `.git/` refused | ☐ | |
-| Write size capped (`max_write_bytes`) | ☐ | |
+| `read_file` / `write_file` / `apply_patch` / `list_dir` confined to workspace_root | ☑ | Unit + property tests (E8.1) |
+| Path escape via `..`, absolute paths, symlink tricks blocked | ☑ | |
+| Writes under `.git/` refused | ☑ | |
+| Write size capped (`max_write_bytes`) | ☑ | |
 
 ### Command execution
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| `run_command` / verify: allowlist on basename, no shell | ☐ | `shell=False`, metachar block |
+| `run_command` / verify: allowlist on basename, no shell | ☑ | `shell=False`, metachar block |
 | Config allowlist cannot be empty-open by accident | ☐ | Default SAFE_COMMANDS / config list |
 | Verify command uses same allowlist as tools | ☐ | E2 path |
 
@@ -48,9 +48,9 @@ self-hosted CI**.
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| gitleaks + trivy on PRs | ☐ | fleet-security |
-| Lockfile committed (`uv.lock`) | ☐ | |
-| Self-hosted runners only for trusted repos | ☐ | |
+| gitleaks + trivy on PRs | ☑ | fleet-security |
+| Lockfile committed (`uv.lock`) | ☑ | |
+| Self-hosted runners only for trusted repos | ☑ | |
 
 ## Spot-check procedure
 
@@ -64,7 +64,7 @@ uv run pytest -q tests/ -k 'confinement or allowlist or escape or write_file'
 
 | Role | Name | Date | Notes |
 |------|------|------|-------|
-| Implementer | | | |
+| Implementer | Grok (automated) | 2026-07-21 | Partial — confinement/tests/fleet; log redaction still open | |
 | Reviewer | | | |
 
 When all boxes are ☑ and tests green, E8.2 is complete for 1.0 ship.

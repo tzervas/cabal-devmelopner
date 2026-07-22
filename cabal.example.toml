@@ -84,6 +84,8 @@ allowlist = ["pytest", "ruff", "mypy", "uv", "python", "python3", "ls", "cat", "
 verify_command = "uv run pytest -q"
 # How many re-prompt rounds after a failing verify before giving up
 max_verify_rounds = 2
+# E7.3 HITL for write_file / apply_patch (CLI: --require-write-approval)
+require_write_approval = false
 # Confined under workspace_root; never escape without explicit future config
 
 # ---------------------------------------------------------------------------
