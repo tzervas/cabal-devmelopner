@@ -9,9 +9,21 @@ versioning follows [SemVer](https://semver.org/).
 
 ### Planned toward 1.0.0
 
-- E7.3 HITL approve path; E6.2 cancel
 - Token soft budgets (beyond wall-clock)
-- E8.4 full security checklist sign-off + `v1.0.0` tag when bar met
+- E8 log redaction + reviewer security sign-off
+- Auto `v1.0.0` tag when RELEASE_1_0_0 bar fully met
+
+## [0.3.0] — 2026-07-21
+
+### Added
+- **E6.2 cancel:** `SimpleAgent.request_cancel()` cooperative stop; TUI **Cancel** button.
+- **E7.3 HITL writes:** `[tools] require_write_approval` / `--require-write-approval` /
+  `CABAL_REQUIRE_WRITE_APPROVAL`; emits `NEEDS_HUMAN_INPUT`; CLI stdin or `CABAL_HITL_AUTO`.
+- Tests: `tests/test_cancel_hitl.py`.
+
+### Changed
+- Version **0.2.1 → 0.3.0** (minor: cancel + HITL toward 1.0 bar).
+- 1.0.0 may auto-tag when RELEASE_1_0_0 checklist fully met (security sign-off remaining).
 
 ## [0.2.1] — 2026-07-21
 

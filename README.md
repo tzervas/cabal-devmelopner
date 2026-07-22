@@ -3,6 +3,8 @@
 <!-- FLEET-BADGES:BEGIN -->
 [![CI](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-ci.yml/badge.svg?branch=dev)](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-ci.yml?query=branch%3Adev)
 [![Security](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-security.yml/badge.svg?branch=dev)](https://github.com/tzervas/cabal-devmelopner/actions/workflows/fleet-security.yml?query=branch%3Adev)
+[![Runner](https://img.shields.io/badge/runs--on-self--hosted%20podman-informational)](https://github.com/tzervas/gha-runner-ctl)
+[![Version](https://img.shields.io/badge/version-0.3.0-blue)](CHANGELOG.md)
 <!-- FLEET-BADGES:END -->
 
 **cabal-devmelopner** is a **repo-agnostic leaf development agent**: CLI + TUI,
@@ -16,7 +18,7 @@ run), post-edit **verify loop**, and per-run **JSONL session** transcripts.
 | **What** | Event-driven agent with config-as-code profiles (`cabal.toml`) |
 | **Why** | Trustworthy single-agent co-dev: act → verify → remember (session), without silent RAG claims |
 
-**Status: v0.2.1** (usable leaf). **Not** a multi-agent production platform.
+**Status: v0.3.0** (usable leaf). **Not** a multi-agent production platform.
 **Not** legitimate RAG (context-mcp is session/embedder Wave 1 only).  
 1.0.0 bar: [docs/V1_0_0_GAP_ANALYSIS.md](docs/V1_0_0_GAP_ANALYSIS.md).
 
@@ -28,7 +30,7 @@ cd cabal-devmelopner
 ./setup.sh
 
 uv run cabal-devmelopner --version
-# expected: cabal-devmelopner 0.2.1
+# expected: cabal-devmelopner 0.3.0
 
 uv run pytest -q
 ./scripts/check.sh --quick

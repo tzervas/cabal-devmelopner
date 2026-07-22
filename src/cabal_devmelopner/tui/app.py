@@ -48,6 +48,7 @@ class CabalDevmelopnerTUI(App):
         self.log_widget = RichLog(highlight=True, markup=True, wrap=True, id="log")
         self.input_widget = Input(placeholder="Enter your task here...", id="task_input")
         self.run_button = Button("Run Task", variant="primary", id="run_button")
+        self.cancel_button = Button("Cancel", variant="error", id="cancel_button")
         self.status = Static("", id="status")
         self.event_bus: EventBus | None = None
         self.agent: SimpleAgent | None = None
@@ -56,9 +57,15 @@ class CabalDevmelopnerTUI(App):
 
     def compose(self) -> ComposeResult:
         yield Header(show_clock=True)
-        yield Static("cabal-devmelopner — TUI (tools / verify / session)", id="title")
+        yield Static("cabal-devmelopner — TUI (tools / verify / session / cancel)", id="title")
         yield self.status
-        yield Vertical(self.input_widget, self.run_button, self.log_widget, id="main_container")
+        yield Vertical(
+            self.input_widget,
+            self.run_button,
+            self.cancel_button,
+            self.log_widget,
+            id="main_container",
+        )
         yield Footer()
 
     def on_mount(self) -> None:
@@ -72,10 +79,20 @@ class CabalDevmelopnerTUI(App):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "run_button":
             self._run_task()
+        elif event.button.id == "cancel_button":
+            self._cancel_task()
 
     def on_input_submitted(self, event: Input.Submitted) -> None:
         if event.input.id == "task_input":
             self._run_task()
+
+    def _cancel_task(self) -> None:
+        """E6.2: cooperative cancel of in-flight agent."""
+        if self.agent is None:
+            self.log_widget.write("[dim]No running agent to cancel.[/]")
+            return
+        self.agent.request_cancel()
+        self.log_widget.write("[bold yellow]Cancel requested…[/]")
 
     def _make_provider(self) -> Provider:
         name = self.cfg.profile.provider
@@ -119,6 +136,19 @@ class CabalDevmelopnerTUI(App):
             if self.cfg.tero.index_path:
                 os.environ.setdefault("TERO_INDEX_PATH", self.cfg.tero.index_path)
             tero_client = TeroMCPClient() if self.cfg.profile.use_tero else None
+
+            def _tui_hitl(name: str, tool_args: dict) -> bool:
+                # TUI default: approve when HITL on (operator sees NEEDS_HUMAN_INPUT in log).
+                # Stricter gate: set CABAL_HITL_AUTO=0 to deny; =1 force approve.
+                auto = os.getenv("CABAL_HITL_AUTO", "1").strip().lower()
+                approved = auto not in {"0", "false", "no", "off", "deny"}
+                self.call_from_thread(
+                    self.log_widget.write,
+                    f"[yellow]HITL {name}: {'approved' if approved else 'denied'} "
+                    f"(CABAL_HITL_AUTO={auto}) args={list(tool_args.keys())}[/]",
+                )
+                return approved
+
             self.agent = SimpleAgent(
                 provider=provider,
                 event_bus=self.event_bus,
@@ -130,6 +160,9 @@ class CabalDevmelopnerTUI(App):
                 max_verify_rounds=self.cfg.tools.max_verify_rounds,
                 use_verify=self.cfg.use_verify and self.cfg.use_tools,
                 command_allowlist=self.cfg.tools.allowlist,
+                max_wall_secs=self.cfg.max_wall_secs,
+                require_write_approval=self.cfg.tools.require_write_approval,
+                approval_callback=_tui_hitl if self.cfg.tools.require_write_approval else None,
             )
             self.log_widget.write(
                 f"[dim]session → {self.recorder.path} · provider={provider.name()}[/]\n"
@@ -151,6 +184,7 @@ class CabalDevmelopnerTUI(App):
         bus.subscribe(EventType.TOOL_RESULT, self._on_tool_result)
         bus.subscribe(EventType.VERIFY_STARTED, self._on_verify_started)
         bus.subscribe(EventType.VERIFY_RESULT, self._on_verify_result)
+        bus.subscribe(EventType.NEEDS_HUMAN_INPUT, self._on_needs_human)
 
     def _execute_agent(self, task: Task) -> None:
         if not self.agent:
@@ -225,6 +259,14 @@ class CabalDevmelopnerTUI(App):
         color = "green" if ok else "red"
         self.call_from_thread(
             self.log_widget.write, f"[{color}]VERIFY {'ok' if ok else 'FAIL'}[/]: {out}"
+        )
+
+    def _on_needs_human(self, event: Event) -> None:
+        tool = event.payload.get("tool")
+        reason = event.payload.get("reason")
+        self.call_from_thread(
+            self.log_widget.write,
+            f"[bold yellow]HITL[/] needs human: tool={tool} reason={reason}",
         )
 
 

@@ -126,6 +126,12 @@ def main() -> None:
         default=None,
         help="Soft wall-clock budget seconds (E3.2; 0 disables)",
     )
+    parser.add_argument(
+        "--require-write-approval",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="E7.3 HITL: require approval before write_file/apply_patch",
+    )
     args = parser.parse_args()
 
     if not args.task:
@@ -155,6 +161,11 @@ def main() -> None:
     if args.max_wall_secs is not None:
         wall = None if args.max_wall_secs <= 0 else float(args.max_wall_secs)
         cfg = _replace(cfg, max_wall_secs=wall)
+    if args.require_write_approval is not None:
+        cfg = _replace(
+            cfg,
+            tools=_replace(cfg.tools, require_write_approval=args.require_write_approval),
+        )
 
     provider_name = cfg.profile.provider
     model = cfg.profile.model
@@ -230,6 +241,32 @@ def main() -> None:
     event_bus.subscribe(EventType.VERIFY_STARTED, on_verify_started)
     event_bus.subscribe(EventType.VERIFY_RESULT, on_verify_result)
 
+    def on_needs_human(event):  # type: ignore[no-untyped-def]
+        print(
+            f"[HITL] needs human input: tool={event.payload.get('tool')} "
+            f"reason={event.payload.get('reason')} args={event.payload.get('args')}"
+        )
+
+    event_bus.subscribe(EventType.NEEDS_HUMAN_INPUT, on_needs_human)
+
+    def _hitl_approval(name: str, tool_args: dict) -> bool:
+        """E7.3: approve writes. CABAL_HITL_AUTO=1 for CI; else stdin y/N."""
+        auto = os.getenv("CABAL_HITL_AUTO", "").strip().lower()
+        if auto in {"1", "true", "yes", "on"}:
+            print(f"[HITL] auto-approved {name} (CABAL_HITL_AUTO)")
+            return True
+        if auto in {"0", "false", "no", "off", "deny"}:
+            print(f"[HITL] auto-denied {name} (CABAL_HITL_AUTO)")
+            return False
+        if not sys.stdin.isatty():
+            print(f"[HITL] non-interactive stdin — denying {name} (set CABAL_HITL_AUTO=1)")
+            return False
+        try:
+            ans = input(f"[HITL] approve {name} {list(tool_args.keys())}? [y/N] ").strip().lower()
+        except EOFError:
+            return False
+        return ans in {"y", "yes"}
+
     # Apply optional tero path env from config (no mycelium automation)
     if cfg.tero.mcp_project:
         os.environ.setdefault("TERO_MCP_PROJECT", cfg.tero.mcp_project)
@@ -261,6 +298,8 @@ def main() -> None:
         use_verify=cfg.use_verify and cfg.use_tools,
         command_allowlist=cfg.tools.allowlist,
         max_wall_secs=cfg.max_wall_secs,
+        require_write_approval=cfg.tools.require_write_approval,
+        approval_callback=_hitl_approval if cfg.tools.require_write_approval else None,
     )
 
     task = Task(
